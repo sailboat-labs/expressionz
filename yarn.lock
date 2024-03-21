@@ -1579,6 +1579,7 @@ __metadata:
     prettier-plugin-tailwindcss: ^0.5.12
     react: ^18
     react-dom: ^18
+    react-fast-marquee: ^1.6.4
     react-icons: ^5.0.1
     tailwindcss: ^3.4.1
     typescript: ^5
@@ -3290,6 +3291,16 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 7d323310bea3a91be2965f9468d552f201b1c27891e45ddc2d6b8f717680c95a75ae0bc1e3f5cf41472446a2589a75aed4483aee8169287909fcd59ad149e8cc
+  languageName: node
+  linkType: hard
+
+"react-fast-marquee@npm:^1.6.4":
+  version: 1.6.4
+  resolution: "react-fast-marquee@npm:1.6.4"
+  peerDependencies:
+    react: ">= 16.8.0 || 18.0.0"
+    react-dom: ">= 16.8.0 || 18.0.0"
+  checksum: 30bb2c967b5162e7de130cccfcf51654ac1e29ecbf82116225a13958a05a79bc0ec11d72c49f172fa8c4d1f226b51cc93f9db5cb595c5a3529de8b41f60cbc2c
   languageName: node
   linkType: hard
 

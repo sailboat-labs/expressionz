@@ -10,10 +10,14 @@ function TokenMarquee() {
     "/images/samples/5.webp",
     "/images/samples/6.webp",
     "/images/samples/7.webp",
-    "/images/samples/8.webp",
+    "/images/samples/8.gif",
     "/images/samples/9.webp",
     "/images/samples/10.webp",
     "/images/samples/11.webp",
+    "/images/samples/12.gif",
+    "/images/samples/13.webp",
+    "/images/samples/14.webp",
+    "/images/samples/15.webp",
   ];
 
   return (

@@ -3,47 +3,63 @@ import React, { useEffect, useState } from "react";
 const emojis = [
   {
     img: "/images/samples/1.webp",
-    emoji: "/images/emojis/unamused_face.webp",
+    emoji: "/images/emojis/samples/1.webp",
   },
   {
     img: "/images/samples/2.webp",
-    emoji: "/images/emojis/heart_eyes.webp",
+    emoji: "/images/emojis/samples/2.webp",
   },
   {
     img: "/images/samples/3.webp",
-    emoji: "/images/emojis/smiley_face.webp",
+    emoji: "/images/emojis/samples/3.webp",
   },
   {
     img: "/images/samples/4.webp",
-    emoji: "/images/emojis/face_with_sunglasses.webp",
+    emoji: "/images/emojis/samples/4.webp",
   },
   {
     img: "/images/samples/5.webp",
-    emoji: "/images/emojis/sleeping.webp",
+    emoji: "/images/emojis/samples/5.webp",
   },
   {
     img: "/images/samples/6.webp",
-    emoji: "/images/emojis/nerd_face.webp",
+    emoji: "/images/emojis/samples/6.webp",
   },
   {
     img: "/images/samples/7.webp",
-    emoji: "/images/emojis/lfg.webp",
+    emoji: "/images/emojis/samples/7.webp",
   },
   {
-    img: "/images/samples/8.webp",
-    emoji: "/images/emojis/teary_face.webp",
+    img: "/images/samples/8.gif",
+    emoji: "/images/emojis/samples/8.webp",
   },
   {
     img: "/images/samples/9.webp",
-    emoji: "/images/emojis/tears_of_joy.webp",
+    emoji: "/images/emojis/samples/9.webp",
   },
   {
     img: "/images/samples/10.webp",
-    emoji: "/images/emojis/hushed_face.webp",
+    emoji: "/images/emojis/samples/10.webp",
   },
   {
     img: "/images/samples/11.webp",
-    emoji: "/images/emojis/tea_cup.webp",
+    emoji: "/images/emojis/samples/11.webp",
+  },
+  {
+    img: "/images/samples/12.gif",
+    emoji: "/images/emojis/samples/12.webp",
+  },
+  {
+    img: "/images/samples/13.webp",
+    emoji: "/images/emojis/samples/13.webp",
+  },
+  {
+    img: "/images/samples/14.webp",
+    emoji: "/images/emojis/samples/14.webp",
+  },
+  {
+    img: "/images/samples/15.webp",
+    emoji: "/images/emojis/samples/15.webp",
   },
 ];
 
@@ -62,7 +78,7 @@ function SelfExpression() {
     <section className="my-20 h-[80vh] w-full bg-darkPurple bg-[url('/images/home/left-pixel-bg.webp')] bg-cover bg-left bg-no-repeat lg:mt-32 lg:h-[53vh] lg:bg-contain 3xl:h-[60vh]">
       <div className="font-presstart mx-auto flex w-4/5 flex-col-reverse lg:h-full lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
         <div className="mt-9 w-full space-y-4 lg:mt-0 lg:w-1/2">
-          <h1 className="text-left text-3xl uppercase text-yellow 3xl:text-5xl">
+          <h1 className="text-left text-3xl uppercase text-yellow 3xl:text-5xl 3xl:leading-snug">
             A NEW WORLD OF <br />
             SELF-EXPRESSION
           </h1>
@@ -75,7 +91,7 @@ function SelfExpression() {
           <div className="flex flex-col items-center justify-center">
             <img
               src={emojis[current].emoji}
-              className="h-12 w-12 lg:h-20 lg:w-20"
+              className="mb-5 h-12 w-12 lg:h-20 lg:w-20"
             />
             <img
               src={emojis[current].img}

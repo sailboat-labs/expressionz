@@ -22,7 +22,7 @@ function SeamlessIntegration() {
           />
         </div>
         <div className="mt-8 w-11/12 space-y-4 text-left lg:ml-5 lg:mt-0 lg:w-full lg:text-right 3xl:space-y-7">
-          <h1 className="text-3xl uppercase text-yellow 3xl:text-5xl">
+          <h1 className="text-3xl uppercase text-yellow 3xl:text-5xl 3xl:leading-snug">
             SEAMLESS <br />
             INTEGRATION
           </h1>

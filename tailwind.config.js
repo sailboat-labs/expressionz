@@ -8,6 +8,9 @@ module.exports = {
         yellow: "#FFD702",
         darkGrey: "#30303C",
       },
+      zIndex: {
+        9999: 9999,
+      },
     },
   },
   plugins: [],

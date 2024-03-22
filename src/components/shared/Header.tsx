@@ -34,7 +34,7 @@ function Header({ showBack = false }: { showBack?: boolean }) {
           </ul>
 
           <div className="font-presstart hidden lg:flex">
-            <Link href="/about-us" className="">
+            <Link href="/#" className="">
               About Us
             </Link>
           </div>

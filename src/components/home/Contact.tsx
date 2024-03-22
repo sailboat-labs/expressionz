@@ -17,7 +17,7 @@ function Contact() {
         <button>
           <img
             src="/images/buttons/email.webp"
-            className="w-80 lg:w-96 3xl:w-[580px]"
+            className="w-80 3xl:w-[500px]"
           />
         </button>
       </div>

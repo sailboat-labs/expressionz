@@ -17,14 +17,14 @@ function TokenMarquee() {
   ];
 
   return (
-    <section className="w-full bg-yellow py-6 backdrop-blur">
+    <section className="w-full bg-yellow py-6 backdrop-blur 3xl:py-10">
       <Marquee className="flex flex-row" autoFill>
         {tokens.map((token, index) => (
           <img
             key={index}
             src={token}
             alt="token"
-            className="mr-6 h-auto w-20 object-contain"
+            className="mr-6 h-auto w-20 object-contain 3xl:w-32"
           />
         ))}
       </Marquee>

@@ -11,6 +11,9 @@ module.exports = {
       zIndex: {
         9999: 9999,
       },
+      screens: {
+        "3xl": "1600px",
+      },
     },
   },
   plugins: [],

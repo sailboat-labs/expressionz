@@ -59,24 +59,27 @@ function SelfExpression() {
   }, [current]);
 
   return (
-    <section className="my-20 h-[80vh] w-full bg-darkPurple bg-[url('/images/home/left-pixel-bg.webp')] bg-cover bg-left bg-no-repeat lg:mt-32 lg:h-[53vh] lg:bg-contain">
+    <section className="my-20 h-[80vh] w-full bg-darkPurple bg-[url('/images/home/left-pixel-bg.webp')] bg-cover bg-left bg-no-repeat lg:mt-32 lg:h-[53vh] lg:bg-contain 3xl:h-[60vh]">
       <div className="font-presstart mx-auto flex w-4/5 flex-col-reverse lg:h-full lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
-        <div className="w-full space-y-4 lg:w-1/2 mt-9 lg:mt-0">
-          <h1 className="text-left text-3xl uppercase text-yellow">
+        <div className="mt-9 w-full space-y-4 lg:mt-0 lg:w-1/2">
+          <h1 className="text-left text-3xl uppercase text-yellow 3xl:text-5xl">
             A NEW WORLD OF <br />
             SELF-EXPRESSION
           </h1>
-          <p className="text-left text-xs text-white">
+          <p className="text-left text-xs text-white lg:leading-relaxed 3xl:text-xl 3xl:leading-loose">
             Turn your PFPs into custom emotes to convey emotions, reactions, and
             sentiments in a way that's uniquely you
           </p>
         </div>
         <div className="-mt-10 self-end lg:mt-0 lg:self-center">
           <div className="flex flex-col items-center justify-center">
-            <img src={emojis[current].emoji} className="h-12 w-12 lg:h-20 lg:w-20" />
+            <img
+              src={emojis[current].emoji}
+              className="h-12 w-12 lg:h-20 lg:w-20"
+            />
             <img
               src={emojis[current].img}
-              className="h-36 w-36 object-contain lg:h-60 lg:w-60"
+              className="h-36 w-36 object-contain lg:h-60 lg:w-60 3xl:mr-10 3xl:h-80 3xl:w-80"
             />
           </div>
         </div>

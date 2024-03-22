@@ -4,7 +4,7 @@ function SeamlessIntegration() {
   return (
     <section className="-mt-16 h-[80vh] w-full bg-darkPurple bg-[url('/images/home/right-pixel-bg.webp')] bg-cover bg-right bg-no-repeat lg:my-40 lg:h-[53vh] lg:bg-contain">
       <div className="font-presstart mx-auto flex h-full w-full flex-col items-center justify-center lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
-        <div className="relative -mt-20 w-11/12 lg:-mt-0 lg:w-auto">
+        <div className="relative -mt-20 w-11/12 lg:-mt-0 lg:w-auto 3xl:w-[95%]">
           <video
             playsInline
             autoPlay
@@ -18,16 +18,16 @@ function SeamlessIntegration() {
           </video>
           <img
             src="/images/home/video-frame.webp"
-            className="z-50 absolute top-0 h-auto w-full object-cover"
+            className="absolute top-0 z-50 h-auto w-full object-cover"
           />
         </div>
-        <div className="mt-8 w-11/12 space-y-4 text-left lg:mt-0 lg:w-full lg:text-right lg:ml-5">
-          <h1 className="text-3xl uppercase text-yellow">
+        <div className="mt-8 w-11/12 space-y-4 text-left lg:ml-5 lg:mt-0 lg:w-full lg:text-right 3xl:space-y-7">
+          <h1 className="text-3xl uppercase text-yellow 3xl:text-5xl">
             SEAMLESS <br />
             INTEGRATION
           </h1>
-          <p className="text-xs text-white">
-            No fuss export into your favorite messenger platforms.
+          <p className="text-xs text-white lg:leading-relaxed 3xl:text-xl 3xl:leading-loose">
+            No fuss export into your favorite messenger platforms
           </p>
         </div>
       </div>

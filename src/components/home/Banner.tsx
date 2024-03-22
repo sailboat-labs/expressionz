@@ -10,13 +10,13 @@ function Banner() {
             className="h-auto w-2/5 object-contain lg:w-1/2"
             alt="Logo"
           />
-          <p className="font-presstart mb-8 mt-3 text-white text-xs xl:text-base">
+          <p className="font-presstart mb-8 mt-3 text-xs text-white xl:text-base 3xl:my-16 3xl:text-xl">
             I am my PFP and my PFP is me
           </p>
           <button className="">
             <img
               src="/images/buttons/try-it-now.webp"
-              className="w-40"
+              className="w-40 3xl:w-60"
               alt="Try it now"
             />
           </button>

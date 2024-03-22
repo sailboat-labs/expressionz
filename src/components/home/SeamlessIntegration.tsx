@@ -17,7 +17,7 @@ function SeamlessIntegration() {
             <source type="video/mp4" src="/videos/seamless-integration.mp4" />
           </video>
           <img
-            src="/images/home/video-frame.webp"
+            src="/videos/seamless-integration-frame.webp"
             className="absolute top-0 z-50 h-auto w-full object-cover"
           />
         </div>

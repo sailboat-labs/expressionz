@@ -22,7 +22,7 @@ function MobileMenu({ show, setShow }: MenuProps) {
         <FaXmark className="h-full w-full text-[#FF65DD]" />
       </button>
       <div className="font-presstart flex w-full flex-col items-center justify-center space-y-10 text-white">
-        <Link href="/#" onClick={() => setShow(false)}>
+        <Link href="/about-us" onClick={() => setShow(false)}>
           About Us
         </Link>
       </div>

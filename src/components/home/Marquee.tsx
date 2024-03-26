@@ -6,7 +6,7 @@ function TokenMarquee() {
     "/images/samples/1.webp",
     "/images/samples/2.webp",
     "/images/samples/3.webp",
-    "/images/samples/4.webp",
+    "/images/samples/4.gif",
     "/images/samples/5.webp",
     "/images/samples/6.webp",
     "/images/samples/7.webp",
@@ -18,6 +18,7 @@ function TokenMarquee() {
     "/images/samples/13.webp",
     "/images/samples/14.webp",
     "/images/samples/15.webp",
+    "/images/samples/16.gif",
   ];
 
   return (

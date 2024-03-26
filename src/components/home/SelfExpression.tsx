@@ -14,7 +14,7 @@ const emojis = [
     emoji: "/images/emojis/samples/3.webp",
   },
   {
-    img: "/images/samples/4.webp",
+    img: "/images/samples/4.gif",
     emoji: "/images/emojis/samples/4.webp",
   },
   {
@@ -61,6 +61,10 @@ const emojis = [
     img: "/images/samples/15.webp",
     emoji: "/images/emojis/samples/15.webp",
   },
+  {
+    img: "/images/samples/16.gif",
+    emoji: "/images/emojis/samples/16.webp",
+  },
 ];
 
 function SelfExpression() {
@@ -69,7 +73,7 @@ function SelfExpression() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev === emojis.length - 1 ? 0 : prev + 1));
-    }, 1000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [current]);

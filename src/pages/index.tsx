@@ -11,7 +11,7 @@ import Seo from "@/components/shared/Seo";
 
 export default function Home() {
   return (
-    <main className="min-h-screen w-screen bg-darkPurple">
+    <main className="min-h-screen w-screen bg-darkPurple overflow-x-hidden">
       <Seo title="Home" />
       <Header />
       <TokenMarquee />

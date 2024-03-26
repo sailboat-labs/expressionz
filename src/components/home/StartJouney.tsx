@@ -8,21 +8,17 @@ function StartJouney() {
       </p>
 
       <div className="flex flex-col items-center justify-center space-y-5 lg:flex-row lg:space-x-8 lg:space-y-0 3xl:space-x-14">
-        <button>
-          <img src="/images/buttons/collector.webp" className="w-48 3xl:w-80" />
-        </button>
-        <button>
-          <img
-            src="/images/buttons/project-team.webp"
-            className="w-48 3xl:w-80"
-          />
-        </button>
-        <button>
-          <img
-            src="/images/buttons/community-group.webp"
-            className="w-48 3xl:w-80"
-          />
-        </button>
+        <img src="/images/buttons/collector.webp" className="w-48 3xl:w-80" />
+
+        <img
+          src="/images/buttons/project-team.webp"
+          className="w-48 3xl:w-80"
+        />
+
+        <img
+          src="/images/buttons/community-group.webp"
+          className="w-48 3xl:w-80"
+        />
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ function UnlockAssets() {
   return (
     <section className="my-20 h-[80vh] w-full bg-darkPurple bg-[url('/images/home/right-pixel-bg.webp')] bg-cover bg-right bg-no-repeat lg:h-[53vh] lg:bg-contain 3xl:h-[60vh]">
       <div className="font-presstart mx-auto flex h-full w-4/5 flex-col items-start lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
-        <div className="relative -mt-20 h-60 w-60 self-start lg:-mt-16 lg:h-80 lg:w-80 3xl:h-96 3xl:w-96">
+        <div className="relative -mt-20 h-60 w-60 self-start lg:self-center lg:-mt-0 lg:h-80 lg:w-80 3xl:h-96 3xl:w-96">
           <video
             playsInline
             autoPlay

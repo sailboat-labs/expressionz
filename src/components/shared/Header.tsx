@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
+import Collections from "./CollectionsDropdown";
 
 function Header({ showBack = false }: { showBack?: boolean }) {
   const router = useRouter();
@@ -33,7 +34,8 @@ function Header({ showBack = false }: { showBack?: boolean }) {
             <Link href={"/"}>Expressionz.xyz</Link>
           </ul>
 
-          <div className="font-presstart hidden lg:flex">
+          <div className="font-presstart hidden lg:flex lg:space-x-8">
+            <Collections />
             <Link href="/about-us" className="">
               About Us
             </Link>

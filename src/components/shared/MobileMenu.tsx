@@ -12,7 +12,7 @@ function MobileMenu({ show, setShow }: MenuProps) {
     <nav
       className={`${
         show ? "fixed flex" : "hidden"
-      } bg-darkPurple z-9999 h-screen w-screen`}
+      } z-9999 h-screen w-screen bg-darkPurple`}
       style={{ zIndex: 99999 }}
     >
       <button
@@ -22,6 +22,16 @@ function MobileMenu({ show, setShow }: MenuProps) {
         <FaXmark className="h-full w-full text-[#FF65DD]" />
       </button>
       <div className="font-presstart flex w-full flex-col items-center justify-center space-y-10 text-white">
+        <Link href="/moonbirds" onClick={() => setShow(false)}>
+          Moonbirds
+        </Link>
+        <button
+          onClick={() => {
+            window.open(`https://twoo-staging.netlify.app/`);
+          }}
+        >
+          Wizards
+        </button>
         <Link href="/about-us" onClick={() => setShow(false)}>
           About Us
         </Link>

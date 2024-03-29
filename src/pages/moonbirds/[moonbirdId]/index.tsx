@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { METADATA } from "@/data/metadata";
 import MoonbirdGalleryImage from "@/components/gallery/moonbirds/gallery_image";
 
-export default function WizardPage() {
+export default function MoonbirdPage() {
   const router = useRouter();
   const { moonbirdId } = router.query;
   const moonbird = METADATA.find((m) => m.id === moonbirdId);

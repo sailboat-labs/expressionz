@@ -7,7 +7,11 @@ import { Switch } from "@headlessui/react";
 import { toast } from "sonner";
 import { useRouter } from "next/router";
 import { METADATA } from "@/data/metadata";
-import { ArrowDownIcon, Cross1Icon } from "@radix-ui/react-icons";
+import {
+  ArrowDownIcon,
+  ArrowLeftIcon,
+  Cross1Icon,
+} from "@radix-ui/react-icons";
 import { downloadImagesAsZip, downloadPfp } from "@/lib/utils/download";
 import { moonbirdEmojis } from "@/lib/utils/emojis";
 import { generateMoonbirdEmojis } from "@/lib/utils/generateEmojis";
@@ -208,7 +212,15 @@ export default function MoonbirdGenerated({
             <div className="mr-16 h-full w-full flex-1">
               <div className="z-[2] mr-5 flex flex-col gap-5 md:flex-row">
                 <div className="flex w-full flex-col items-center justify-center gap-5">
-                  <div className="flex w-full flex-col items-center justify-center gap-5 pt-5">
+                  <div className="relative flex w-full flex-col items-center justify-center gap-5 pt-5">
+                    <div
+                      className="absolute left-8 top-6 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-[#C1410B] text-[#C1410B]"
+                      onClick={() => {
+                        router.push(`/moonbirds/${index}`);
+                      }}
+                    >
+                      <ArrowLeftIcon className="h-6 w-6 rounded" />
+                    </div>
                     <div className="font-semibold text-black md:text-xl xl:text-3xl">
                       Moonbird #{index + 1}
                     </div>
@@ -293,7 +305,7 @@ export default function MoonbirdGenerated({
                     </div>
                     <div
                       onClick={() => {
-                        router.back();
+                        router.push("/moonbirds");
                       }}
                       className="ml-1 flex  h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
                     >

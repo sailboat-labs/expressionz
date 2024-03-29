@@ -1,22 +1,19 @@
-// Generate emojis
-export async function generateEmojis(tokenId: number) {
+export async function generateMoonbirdEmojis(
+  tokenId: number,
+  emoji_type: string,
+) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/emojis/generate?tokenId=${tokenId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/emojis/generateV2?tokenId=${tokenId}&emoji_type=${emoji_type}`,
     );
-
-    // const response = await fetch(
-    //   `http://localhost:3001/api/v1/emojis/generate?tokenId=${tokenId}`
-    // );
 
     const data = await response.json();
     console.log("API response:", data);
 
-    const images = data.images;
+    const colored = data.colored;
+    const transparent = data.transparent;
 
-    console.log({ images });
-
-    return { images };
+    return { colored, transparent };
   } catch (error) {
     console.error("Error fetching data:", error);
     return false;

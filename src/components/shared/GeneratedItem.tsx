@@ -50,7 +50,7 @@ export default function GeneratedItem({
           <div className="-mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#2C2C2C] bg-opacity-75">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`/images/emojis/${item.emoji_type}.webp`}
+              src={`/images/emojis/generated/${item.emoji_type}.webp`}
               alt="Generated emoji"
               className="h-6 w-6 lg:h-6 lg:w-6 2xl:h-7 2xl:w-7"
             />

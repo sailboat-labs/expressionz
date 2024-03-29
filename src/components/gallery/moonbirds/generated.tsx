@@ -5,9 +5,11 @@ import { toast } from "sonner";
 import { useRouter } from "next/router";
 import { METADATA } from "@/data/metadata";
 import { ArrowDownIcon, Cross1Icon } from "@radix-ui/react-icons";
-import { downloadPfp } from "@/lib/utils/download";
-import GeneratedItem from "@/components/shared/generatedItem";
+import { downloadImagesAsZip, downloadPfp } from "@/lib/utils/download";
+import { moonbirdEmojis } from "@/lib/utils/emojis";
+import GeneratedItem from "@/components/shared/GeneratedItem";
 import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
+import { generateMoonbirdEmojis } from "@/lib/utils/generateEmojis";
 
 const shareIcons = [
   {
@@ -58,6 +60,73 @@ export default function MoonbirdGenerated({
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
   }, []);
+
+  // Generate emojis
+  useEffect(() => {
+    setLoading(true);
+    if (!router.isReady) return;
+
+    generate();
+  }, [router.isReady]);
+
+  async function generate() {
+    try {
+      const _generated: any[] = [];
+      const _generatedTransparent: any[] = [];
+
+      for await (const emoji of moonbirdEmojis) {
+        const response = await generateMoonbirdEmojis(index, emoji.emoji_type);
+
+        if (response) {
+          _generated.push({
+            image: response.colored,
+            emoji_type: emoji.emoji_type,
+            type: "png",
+          });
+
+          // const transparentImage = response.transparentImages[0];
+          _generatedTransparent.push({
+            image: response.transparent,
+            emoji_type: emoji.emoji_type,
+            type: "png",
+          });
+        }
+
+        setProgress(_generated.length);
+
+        setGeneratedEmojis(_generated);
+        setGeneratedEmojisTransparent(_generatedTransparent);
+      }
+      setGeneratedEmojis(_generated);
+      setGeneratedEmojisTransparent(_generatedTransparent);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function downloadEmojis() {
+    if (selectedEmojis.length === 0) {
+      toast.error("Select at least one emoji to export!");
+      return;
+    }
+
+    const selected = hasBg
+      ? generatedEmojis.filter((_, i) => selectedEmojis.includes(i))
+      : generatedEmojisTransparent.filter((_, i) => selectedEmojis.includes(i));
+
+    // If none are selected, download all
+    if (selected.length === 0) {
+      downloadImagesAsZip(
+        hasBg ? generatedEmojis : generatedEmojisTransparent,
+        index,
+      );
+      return;
+    }
+
+    downloadImagesAsZip(selected, index);
+  }
 
   const onSelectEmojis = (index: number) => {
     if (selectedEmojis.includes(index)) {
@@ -163,7 +232,7 @@ export default function MoonbirdGenerated({
 
                   <div className="flex items-center gap-3">
                     <div
-                      //   onClick={downloadEmojis}
+                      onClick={downloadEmojis}
                       className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
                     >
                       <ArrowDownIcon className="h-5 w-5" />
@@ -180,7 +249,7 @@ export default function MoonbirdGenerated({
                 </div>
 
                 {/* Background */}
-                <div className="flex flex-row gap-3">
+                <div className="mb-2 flex flex-row gap-3">
                   <Switch
                     checked={hasBg}
                     onChange={(checked) => {
@@ -204,7 +273,7 @@ export default function MoonbirdGenerated({
                 </div>
 
                 <div className="">
-                  <div className="grid pt-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-1">
+                  <div className="grid h-[375px] overflow-scroll pr-5 pt-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-1">
                     {hasBg
                       ? generatedEmojis.map((emoji, i) => (
                           <GeneratedItem
@@ -232,7 +301,7 @@ export default function MoonbirdGenerated({
                   <div
                     className={`${
                       platform ? "flex " : "hidden "
-                    } justify-center`}
+                    } mt-3 justify-center`}
                   >
                     <img
                       src={`/images/share/export-${
@@ -375,7 +444,7 @@ export default function MoonbirdGenerated({
                 ))}
               </div>
               <div
-                // onClick={downloadEmojis}
+                onClick={downloadEmojis}
                 className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
               >
                 <ArrowDownIcon className="h-5 w-5" />
@@ -466,7 +535,11 @@ export default function MoonbirdGenerated({
       </div>
 
       {/* Loading */}
-      <MoonbirdsVideoLoader show={loading} progress={progress} total={1} />
+      <MoonbirdsVideoLoader
+        show={loading}
+        progress={progress}
+        total={moonbirdEmojis.length}
+      />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-export const moonbirdsEmojiMap = {
+export const emojiMap = {
   raised_eyebrow: "🤨",
   heart_eyes: "😍",
   nerd_face: "🤓",
@@ -24,15 +24,6 @@ export const moonbirdsEmojiMap = {
   sleeping: "😴",
   waving: "👋",
   face_in_palm: "🤦‍♂️",
-};
-
-export const wizardEmojisMap = {
-  heart_eyes: "😍",
-  enraged_face: "😡",
-  tears_of_joy: "😂",
-  tea_cup: "🍵",
-  crying: "😭",
-  sleeping: "😴",
   side_eye: "😒",
   smiley_face: "😊",
   sigh: "😮‍💨",

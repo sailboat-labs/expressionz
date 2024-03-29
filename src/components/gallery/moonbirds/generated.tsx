@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import GeneratedItem from "@/components/shared/GeneratedItem";
+import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
+import DoneModal from "@/components/shared/DoneModal";
 import { Switch } from "@headlessui/react";
 import { toast } from "sonner";
 import { useRouter } from "next/router";
@@ -7,9 +10,9 @@ import { METADATA } from "@/data/metadata";
 import { ArrowDownIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { downloadImagesAsZip, downloadPfp } from "@/lib/utils/download";
 import { moonbirdEmojis } from "@/lib/utils/emojis";
-import GeneratedItem from "@/components/shared/GeneratedItem";
-import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
 import { generateMoonbirdEmojis } from "@/lib/utils/generateEmojis";
+import { createDiscordEmojiPack } from "@/lib/utils/share/discord";
+import { createTelegramStickerPack } from "@/lib/utils/share/telegram";
 
 const shareIcons = [
   {
@@ -49,6 +52,10 @@ export default function MoonbirdGenerated({
   const [platform, setPlatform] = useState("");
 
   const [hasBg, setHasBg] = useState(true);
+
+  const [packId, setPackId] = useState<string>("ABCDEFGHIJKL");
+
+  const [showDoneModal, setShowDoneModal] = useState(false);
 
   //On click escape, go to homescreen
   useEffect(() => {
@@ -135,6 +142,53 @@ export default function MoonbirdGenerated({
       setSelectedEmojis([...selectedEmojis, index]);
     }
   };
+
+  async function exportStickers(platform: string) {
+    setLoading(true);
+
+    try {
+      console.log("Selected emojis", selectedEmojis.length);
+
+      if (platform === "discord") {
+        const id = await createDiscordEmojiPack(
+          "moonbirds",
+          index,
+          selectedEmojis,
+          hasBg,
+        );
+
+        if (!id) throw new Error("Error creating discord pack");
+
+        setPackId(id);
+        setShowDoneModal(true);
+
+        console.log("Discord pack created", id);
+        return;
+      }
+
+      if (platform === "telegram") {
+        const id = await createTelegramStickerPack(
+          "moonbirds",
+          index,
+          selectedEmojis,
+          hasBg,
+        );
+
+        if (!id) throw new Error("Error creating telegram pack");
+
+        setPackId(id);
+        setShowDoneModal(true);
+
+        console.log("Telegram pack created", id);
+
+        // TODO - export to telegram sticker pack (includes both png and gif(animated) images)
+      }
+    } catch (error) {
+      console.log("Error exporting stickers", error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="z-[2] flex h-screen w-screen items-center justify-center">
@@ -306,7 +360,7 @@ export default function MoonbirdGenerated({
                     <img
                       src={`/images/share/export-${
                         selectedEmojis.length == 0
-                          ? "active.webp"
+                          ? "pressed.webp"
                           : "active.webp"
                       }`}
                       alt="Export button"
@@ -317,11 +371,11 @@ export default function MoonbirdGenerated({
                       }`}
                       onClick={async () => {
                         if (selectedEmojis.length === 0) {
-                          toast.warning("Select at least one emoji to export!");
+                          toast.error("Select at least one emoji to export!");
                           return;
                         }
 
-                        // await exportStickers(platform)
+                        await exportStickers(platform);
                       }}
                     />
                   </div>
@@ -511,7 +565,7 @@ export default function MoonbirdGenerated({
               >
                 <img
                   src={`/images/share/export-${
-                    selectedEmojis.length == 0 ? "active.webp" : "active.webp"
+                    selectedEmojis.length == 0 ? "pressed.webp" : "active.webp"
                   }`}
                   alt="Export button"
                   className={`h-auto w-32 ${
@@ -521,11 +575,11 @@ export default function MoonbirdGenerated({
                   }`}
                   onClick={async () => {
                     if (selectedEmojis.length === 0) {
-                      toast.warning("Select at least one emoji to export!");
+                      toast.error("Select at least one emoji to export!");
                       return;
                     }
 
-                    //  await exportStickers(platform);
+                    await exportStickers(platform);
                   }}
                 />
               </div>
@@ -533,6 +587,14 @@ export default function MoonbirdGenerated({
           </div>
         </div>
       </div>
+
+      {/* Done Modal */}
+      <DoneModal
+        packId={packId}
+        setShow={setShowDoneModal}
+        show={showDoneModal}
+        platform={platform}
+      />
 
       {/* Loading */}
       <MoonbirdsVideoLoader

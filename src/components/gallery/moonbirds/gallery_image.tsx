@@ -181,7 +181,7 @@ export default function MoonbirdGalleryImage({
                       {/* Copy */}
                       <img src="/images/copy.webp" className="h-6 w-6" />
                     </div>
-                    <div className="hidden text-lg font-semibold uppercase md:block">{`#${moonbird.id.slice(
+                    <div className="hidden text-lg font-semibold uppercase text-black md:block">{`#${moonbird.id.slice(
                       0,
                       20,
                     )}...${moonbird.id.slice(

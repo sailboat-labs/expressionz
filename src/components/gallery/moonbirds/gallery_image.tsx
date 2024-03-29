@@ -15,7 +15,7 @@ export default function MoonbirdGalleryImage({
   const router = useRouter();
 
   function closeModal() {
-    router.back();
+    router.push("/moonbirds");
   }
 
   async function download(path: string) {

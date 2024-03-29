@@ -421,7 +421,7 @@ export default function MoonbirdGenerated({
               </div>
               <div
                 onClick={() => {
-                  router.back();
+                  router.push("/moonbirds");
                 }}
                 className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
               >

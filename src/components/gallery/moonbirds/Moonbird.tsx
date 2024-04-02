@@ -259,7 +259,7 @@ export default function Moonbird({
                                 ),
                               )}
                             </div>
-                            <div className="mt-5">
+                            <div className="hidden mt-5">
                               <div className="font-bold text-[#3E1600]">
                                 Inscription ID
                               </div>
@@ -413,7 +413,7 @@ export default function Moonbird({
                         </div>
 
                         {/* Inscription ID */}
-                        <div className="mt-5 px-5">
+                        <div className="hidden mt-5 px-5">
                           <div className="flex items-center justify-between">
                             <span className="text-lg font-bold">
                               Inscription ID

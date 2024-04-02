@@ -56,7 +56,7 @@ export default function FilterTraits() {
                             if (typeof selectedAttributes === "string") {
                               urlParams.delete("attributes");
                               router.push(
-                                `/?${urlParams.toString()}`,
+                                `/moonbirds/?${urlParams.toString()}`,
                                 undefined,
                                 { scroll: false },
                               );
@@ -75,7 +75,7 @@ export default function FilterTraits() {
                             );
                           }
 
-                          router.push(`/?${urlParams.toString()}`, undefined, {
+                          router.push(`/moonbirds/?${urlParams.toString()}`, undefined, {
                             scroll: false,
                           });
                         }}
@@ -98,7 +98,7 @@ export default function FilterTraits() {
 
                               if (typeof selectedAttributes === "string") {
                                 urlParams.delete("attributes");
-                                router.push(`/?${urlParams.toString()}`);
+                                router.push(`/moonbirds/?${urlParams.toString()}`);
                                 return;
                               }
 
@@ -110,7 +110,7 @@ export default function FilterTraits() {
                             }
 
                             router.push(
-                              `/?${urlParams.toString()}`,
+                              `/moonbirds/?${urlParams.toString()}`,
                               undefined,
                               { scroll: false },
                             );

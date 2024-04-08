@@ -51,7 +51,7 @@ export default function ContactModal({
           </p>
           <div className="mb-5 flex w-full flex-col items-center justify-between space-y-5 lg:flex-row lg:space-y-0">
             <div className="w-4/5 space-y-2 lg:w-2/5">
-              <p className="text-xs text-[#2E2E40]">Your Email</p>
+              <p className="text-xs text-[#2E2E40] uppercase">Your Email</p>
               <input
                 type="email"
                 name="email"
@@ -63,7 +63,7 @@ export default function ContactModal({
             </div>
             <p className="text-xs text-[#6565AD]">OR</p>
             <div className="w-4/5 space-y-2 lg:w-2/5">
-              <p className="flex items-center text-xs text-[#2E2E40]">
+              <p className="flex items-end text-xs text-[#2E2E40] uppercase">
                 <img src="/images/logos/x-dark.webp" className="mr-2 h-5 w-5" />
                 Handle
               </p>

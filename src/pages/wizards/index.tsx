@@ -1,6 +1,5 @@
 import Drawer from "@/components/gallery/Drawer";
-import MoonBirdsFilterTraits from "@/components/gallery/moonbirds/MoonBirdsFilterTraits";
-import Gallery from "@/components/gallery/moonbirds/gallery";
+import WizardsFilterTraits from "@/components/gallery/wizards/WizardsFilterTraits";
 import Seo from "@/components/shared/Seo";
 import { useRouter } from "next/router";
 
@@ -9,23 +8,23 @@ export default function HomePage() {
 
   return (
     <>
-      <Seo title="Moonbirds Collection" />
+      <Seo title="TWOO" />
       <img
         src="/images/background.webp"
         className="fixed z-[1] h-screen w-screen object-cover"
       />
-      <div className="font-pixelify flex w-full">
+      <div className="relative z-[2] flex w-full">
         <div className="z-[2] w-full gap-10 md:flex md:flex-row">
           <div className="flex h-fit flex-col gap-5 overflow-hidden px-5 pb-5 md:h-screen">
             <div className="mt-3 flex items-center gap-2 text-white">
-              <Drawer text="Moonbirds" />
+              <Drawer text="" />
               <img
-                src="/images/moonbirds-logo.webp"
+                src="/images/logos/twoo-logo.png"
                 className="ml-2 h-12 w-12 rounded-full md:h-20 md:w-20"
               />
               <div>
                 <div className="flex h-full items-center font-semibold md:text-2xl">
-                  Moonbirds
+                  The Wizards of Ord
                 </div>
               </div>
             </div>
@@ -33,7 +32,7 @@ export default function HomePage() {
               <input
                 value={router.query.search as string}
                 placeholder="Search for index..."
-                className="w-full rounded-md border border-gray-200 px-5 text-black"
+                className="w-full rounded-md border border-gray-200 px-5"
                 onChange={(e) => {
                   const search = e.target.value;
                   const urlParams = new URLSearchParams(window.location.search);
@@ -49,12 +48,12 @@ export default function HomePage() {
                 }}
               />
               <div className="mt-5 hidden md:block">
-                <MoonBirdsFilterTraits />
+                <WizardsFilterTraits />
               </div>
             </div>
           </div>
 
-          <Gallery />
+          {/* <Gallery /> */}
         </div>
       </div>
     </>

@@ -47,9 +47,7 @@ export default function Collections() {
                     className={`${
                       active ? "bg-yellow bg-opacity-25" : "bg-transparent"
                     } group flex w-full items-center rounded-md px-2 py-2 text-xs text-white`}
-                    onClick={() => {
-                      window.open(`https://twoo-staging.netlify.app/`);
-                    }}
+                    onClick={() => router.push("/wizards")}
                   >
                     Wizards
                   </button>

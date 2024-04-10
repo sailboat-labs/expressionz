@@ -56,7 +56,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
 
   return (
     <>
-      <button
+      <div
         onClick={() => {
           openModal();
           const urlParams = new URLSearchParams(window.location.search);
@@ -105,7 +105,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
             </button>
           </div>
         </div>
-      </button>
+      </div>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>

@@ -15,7 +15,7 @@ export default function Home() {
       <Seo title="Home" />
       <Header />
       <Banner />
-      <TokenMarquee />
+      <TokenMarquee className="mt-12" />
       <UnlockAssets />
       <SelfExpression />
       <SeamlessIntegration />

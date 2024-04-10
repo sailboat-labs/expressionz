@@ -4,6 +4,7 @@ import { MOONBIRD_FILTER_TRAITS } from "../filterTraits";
 const MoonBirdsFilterTraits = () => {
   return (
     <FilterTraits
+      theme="violet"
       collection="moonbirds"
       filterTraits={MOONBIRD_FILTER_TRAITS}
     />

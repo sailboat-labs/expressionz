@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils/cn";
 import { Disclosure } from "@headlessui/react";
 import { useRouter } from "next/router";
 import { ChangeEvent } from "react";
@@ -5,11 +6,13 @@ import { ChangeEvent } from "react";
 type TFilterTraitsProps = {
   filterTraits: TFilterTrait;
   collection: "moonbirds" | "wizards";
+  theme?: "orange" | "violet";
 };
 
 export default function FilterTraits({
   filterTraits,
   collection,
+  theme = "orange",
 }: Readonly<TFilterTraitsProps>) {
   const router = useRouter();
   const selectedAttributes = (router.query.attributes as string[]) || [];
@@ -50,6 +53,8 @@ export default function FilterTraits({
     };
   }
 
+  const themeClass = `justify-between rounded bg-${theme}-100  text-${theme}-700 hover:bg-${theme}-200`;
+
   return (
     <div className="h-full w-full overflow-auto">
       <div className="mx-auto flex max-h-[70vh] w-full max-w-md flex-col gap-2 overflow-auto rounded bg-purple-200 bg-opacity-20 p-2 backdrop-blur">
@@ -57,7 +62,18 @@ export default function FilterTraits({
           <Disclosure key={key}>
             {({ open }) => (
               <>
-                <Disclosure.Button className="flex w-full justify-between rounded bg-orange-100 px-4 py-2 text-left text-sm font-medium text-orange-700 hover:bg-orange-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75">
+                <Disclosure.Button
+                  className={cn(
+                    `flex w-full justify-between rounded  px-4 py-2 text-left text-sm `,
+                    "focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75",
+                    {
+                      ["bg-orange-100  text-orange-700 hover:bg-orange-200"]:
+                        theme === "orange",
+                      ["bg-violet-300  text-violet-800 hover:bg-violet-400"]:
+                        theme === "violet",
+                    },
+                  )}
+                >
                   <span>{key}</span>
                   Selected (
                   {

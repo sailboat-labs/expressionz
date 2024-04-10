@@ -1,7 +1,10 @@
-import React from "react";
+import { cn } from "@/lib/utils/cn";
+import { ComponentPropsWithoutRef } from "react";
 import Marquee from "react-fast-marquee";
 
-function TokenMarquee() {
+type TTokenMarqueeProps = ComponentPropsWithoutRef<"section">;
+
+function TokenMarquee({ className, ...props }: TTokenMarqueeProps) {
   const tokens = [
     "/images/samples/1.webp",
     "/images/samples/2.webp",
@@ -22,13 +25,17 @@ function TokenMarquee() {
   ];
 
   return (
-    <section className="w-full bg-yellow py-6 backdrop-blur 3xl:py-10">
+    <section
+      className={cn("w-full bg-yellow py-6 backdrop-blur 3xl:py-10", className)}
+      {...props}
+    >
       <Marquee className="flex flex-row" autoFill>
         {tokens.map((token, index) => (
           <img
             key={index}
             src={token}
             alt="token"
+            loading="lazy"
             className="mr-6 h-auto w-20 object-contain 3xl:w-32"
           />
         ))}

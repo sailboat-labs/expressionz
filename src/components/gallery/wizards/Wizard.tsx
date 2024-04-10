@@ -17,13 +17,12 @@ export interface Attribute {
   value: string;
 }
 
-export default function Wizard({
-  wizard,
-  index,
-}: {
+type TWizardProps = {
   wizard: IWizard;
   index: number;
-}) {
+};
+
+export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
@@ -31,7 +30,7 @@ export default function Wizard({
     setIsOpen(false);
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.delete("id");
-    router ? router.push({ search: urlParams.toString() }) : null;
+    router.push({ search: urlParams.toString() });
   }
 
   function openModal() {
@@ -57,14 +56,14 @@ export default function Wizard({
 
   return (
     <>
-      <div
+      <button
         onClick={() => {
           openModal();
           const urlParams = new URLSearchParams(window.location.search);
           urlParams.set("id", wizard.id);
-          router ? router.push({ search: urlParams.toString() }) : null;
+          router.push({ search: urlParams.toString() });
         }}
-        className="flex w-full cursor-pointer flex-col items-center p-2 md:ml-0 md:w-[11rem] "
+        className="flex w-full cursor-pointer flex-col items-center p-2 text-black md:ml-0 md:w-[11rem] "
       >
         <div className="bg-black bg-opacity-40 backdrop-blur-md">
           <Image
@@ -79,7 +78,7 @@ export default function Wizard({
         <div className="flex w-[40vw] justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
           <div className="text-black">#{index}</div>
           <div className="flex h-fit items-center gap-3">
-            <div
+            <button
               onClick={() => {
                 window.open(
                   `https://ordinals.com/inscription/${wizard.id}`,
@@ -89,22 +88,24 @@ export default function Wizard({
               className="cursor-pointer rounded-full border-2 border-black p-1"
             >
               <div className="h-2 w-2 rounded-full bg-black"></div>
-            </div>
-            <div>
+            </button>
+            <button
+              onClick={() => {
+                window.open(
+                  `https://magiceden.io/ordinals/item-details/${wizard.id}`,
+                  "_blank",
+                );
+              }}
+            >
               <img
-                onClick={() => {
-                  window.open(
-                    `https://magiceden.io/ordinals/item-details/${wizard.id}`,
-                    "_blank",
-                  );
-                }}
                 className="h-5 w-5 cursor-pointer rounded-md"
                 src="/images/logos/MELOGO.png"
+                alt="me logo"
               />
-            </div>
+            </button>
           </div>
         </div>
-      </div>
+      </button>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -166,7 +167,7 @@ export default function Wizard({
                                       wizard.id.length - 5,
                                       wizard.id.length,
                                     )}`}</div>
-                                    <div
+                                    <button
                                       onClick={() => {
                                         navigator.clipboard.writeText(
                                           wizard.id,
@@ -176,19 +177,19 @@ export default function Wizard({
                                       className="w-fit cursor-pointer rounded-md border border-orange-200 bg-orange-100 px-2 text-xs text-orange-500 transition-all hover:bg-blue-200"
                                     >
                                       Copy
-                                    </div>
+                                    </button>
                                   </div>
                                 </div>
 
                                 <div className="mb-5 mt-0 flex flex-col gap-5 md:flex md:gap-2 lg:flex-row">
-                                  <div
+                                  <button
                                     onClick={() => {
                                       download(`/images/gallery/${index}.webp`);
                                     }}
                                     className="w-fit cursor-pointer rounded-md border border-blue-200 bg-blue-100 px-2 py-1 text-blue-500 transition-all hover:bg-blue-200"
                                   >
                                     Download PFP
-                                  </div>
+                                  </button>
                                   {/* <div
                                     onClick={() => {
                                       alert('Coming soon');
@@ -206,7 +207,7 @@ export default function Wizard({
                           <div className="mt-5 flex flex-col gap-2 px-10">
                             <div className="z-[2] mb-3 flex h-fit items-center justify-between gap-3">
                               <div className="flex items-center gap-3">
-                                <div
+                                <button
                                   onClick={() => {
                                     window.open(
                                       `https://ordinals.com/inscription/${wizard.id}`,
@@ -216,20 +217,23 @@ export default function Wizard({
                                   className="cursor-pointer rounded-full border-2 border-black p-1"
                                 >
                                   <div className="h-5 w-5 rounded-full bg-black"></div>
-                                </div>
-                                <img
+                                </button>
+                                <button
                                   onClick={() => {
                                     window.open(
                                       `https://magiceden.io/ordinals/item-details/${wizard.id}`,
                                       "_blank",
                                     );
                                   }}
-                                  className="h-8 w-8 cursor-pointer rounded-md"
-                                  src="/images/MELOGO.png"
-                                />
+                                >
+                                  <img
+                                    className="h-8 w-8 cursor-pointer rounded-md"
+                                    src="/images/MELOGO.png"
+                                  />
+                                </button>
                               </div>
                               <div className="flex items-center gap-6">
-                                <div
+                                <button
                                   onClick={() => {
                                     navigator.clipboard.writeText(
                                       `https://twoo.expressionz.xyz/?id=${wizard.id}`,
@@ -239,15 +243,15 @@ export default function Wizard({
                                   className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
                                 >
                                   <ion-icon name="share-social"></ion-icon>
-                                </div>
-                                <div
+                                </button>
+                                <button
                                   onClick={() => {
                                     closeModal();
                                   }}
                                   className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
                                 >
                                   <ion-icon name="close"></ion-icon>
-                                </div>
+                                </button>
                               </div>
                             </div>
                             {wizard.meta.attributes.map((attribute, index) => (
@@ -296,7 +300,7 @@ export default function Wizard({
                       <div className="z-[2] h-[75%] w-[75vw] overflow-auto">
                         <div className="z-[2] mt-5 flex h-fit items-center justify-between gap-3 px-10">
                           <div className="flex gap-3">
-                            <div
+                            <button
                               onClick={() => {
                                 window.open(
                                   `https://ordinals.com/inscription/${wizard.id}`,
@@ -306,21 +310,26 @@ export default function Wizard({
                               className="cursor-pointer rounded-full border-2 border-black p-1"
                             >
                               <div className="h-5 w-5 rounded-full bg-black"></div>
-                            </div>
-                            <img
+                            </button>
+
+                            <button
                               onClick={() => {
                                 window.open(
                                   `https://magiceden.io/ordinals/item-details/${wizard.id}`,
                                   "_blank",
                                 );
                               }}
-                              className="h-8 w-8 cursor-pointer rounded-md"
-                              src="/images/MELOGO.png"
-                            />
+                            >
+                              <img
+                                className="h-8 w-8 cursor-pointer rounded-md"
+                                src="/images/MELOGO.png"
+                                alt="me logo"
+                              />
+                            </button>
                           </div>
 
                           <div className="flex items-center gap-5">
-                            <div
+                            <button
                               onClick={() => {
                                 navigator.clipboard.writeText(
                                   `https://twoo.expressionz.xyz/?id=${wizard.id}`,
@@ -330,15 +339,15 @@ export default function Wizard({
                               className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
                             >
                               <ion-icon name="share-social"></ion-icon>
-                            </div>
-                            <div
+                            </button>
+                            <button
                               onClick={() => {
                                 closeModal();
                               }}
                               className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
                             >
                               <ion-icon name="close"></ion-icon>
-                            </div>
+                            </button>
                           </div>
                         </div>
                         <div className="z-[2] mt-4  flex flex-col">
@@ -362,7 +371,7 @@ export default function Wizard({
                                       wizard.id.length - 5,
                                       wizard.id.length,
                                     )}`}</div>
-                                    <div
+                                    <button
                                       onClick={() => {
                                         navigator.clipboard.writeText(
                                           wizard.id,
@@ -372,19 +381,19 @@ export default function Wizard({
                                       className="w-fit cursor-pointer rounded-md border border-orange-200 bg-orange-100 px-2 text-xs text-orange-500 transition-all hover:bg-blue-200"
                                     >
                                       Copy
-                                    </div>
+                                    </button>
                                   </div>
                                 </div>
 
                                 <div className=" mt-0 flex gap-5 ">
-                                  <div
+                                  <button
                                     onClick={() => {
                                       download(`/images/gallery/${index}.webp`);
                                     }}
                                     className="w-fit cursor-pointer rounded-md border border-blue-200 bg-blue-100 px-2 py-1 text-blue-500 transition-all hover:bg-blue-200"
                                   >
                                     Download PFP
-                                  </div>
+                                  </button>
                                   {/* <div
                                     onClick={() => {
                                       alert('Coming soon');

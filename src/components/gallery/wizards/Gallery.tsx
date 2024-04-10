@@ -109,7 +109,7 @@ export default function Gallery() {
     const index = Number(item?.meta?.name?.split("#")[1]);
     return (
       <div style={style} className=" items-center justify-center">
-        <div
+        <button
           onClick={() => {
             router.push(`/${item.id}`, undefined, { shallow: true });
           }}
@@ -125,7 +125,7 @@ export default function Gallery() {
           <div className="flex w-[40vw] justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
             <div>#{index}</div>
             <div className="flex h-fit items-center gap-3">
-              <div
+              <button
                 onClick={() => {
                   window.open(
                     `https://ordinals.com/inscription/${item.id}`,
@@ -135,7 +135,7 @@ export default function Gallery() {
                 className="cursor-pointer rounded-full border-2 border-black p-1"
               >
                 <div className="h-2 w-2 rounded-full bg-black"></div>
-              </div>
+              </button>
               <div>
                 <img
                   onClick={() => {
@@ -150,7 +150,7 @@ export default function Gallery() {
               </div>
             </div>
           </div>
-        </div>
+        </button>
       </div>
     );
   };
@@ -193,7 +193,7 @@ export default function Gallery() {
                 onClick={() => {
                   const urlParams = new URLSearchParams(window.location.search);
                   urlParams.delete("attributes");
-                  router.push(`/?${urlParams.toString()}`, undefined, {
+                  router.push(`/wizards?${urlParams.toString()}`, undefined, {
                     scroll: false,
                   });
                 }}

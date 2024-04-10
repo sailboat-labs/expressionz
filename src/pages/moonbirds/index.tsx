@@ -11,10 +11,11 @@ export default function HomePage() {
   return (
     <>
       <Seo title="Moonbirds Collection" />
-      <img
+      {/* <img
         src="/images/background.webp"
         className="fixed z-[1] h-screen w-screen object-cover"
-      />
+        alt="pixilated night time image"
+      /> */}
       <div className="font-pixelify flex w-full">
         <div className="z-[2] w-full gap-10 md:flex md:flex-row">
           <div className="flex h-fit flex-col gap-5 overflow-hidden px-5 pb-5 md:h-screen">

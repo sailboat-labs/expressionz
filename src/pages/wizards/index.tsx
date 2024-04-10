@@ -28,6 +28,7 @@ export default function HomePage() {
                 <img
                   src="/images/logos/twoo-logo.png"
                   className="ml-2 h-12 w-12 rounded-full md:h-20 md:w-20"
+                  alt="wizards logo"
                 />
                 The Wizards of Ord
               </Link>

@@ -2,6 +2,7 @@ import Drawer from "@/components/gallery/Drawer";
 import MoonBirdsFilterTraits from "@/components/gallery/moonbirds/MoonBirdsFilterTraits";
 import Gallery from "@/components/gallery/moonbirds/gallery";
 import Seo from "@/components/shared/Seo";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function HomePage() {
@@ -19,15 +20,17 @@ export default function HomePage() {
           <div className="flex h-fit flex-col gap-5 overflow-hidden px-5 pb-5 md:h-screen">
             <div className="mt-3 flex items-center gap-2 text-white">
               <Drawer text="Moonbirds" />
-              <img
-                src="/images/moonbirds-logo.webp"
-                className="ml-2 h-12 w-12 rounded-full md:h-20 md:w-20"
-              />
-              <div>
-                <div className="flex h-full items-center font-semibold md:text-2xl">
-                  Moonbirds
-                </div>
-              </div>
+              <Link
+                href="/"
+                className="flex items-center gap-2 font-semibold md:text-2xl"
+              >
+                <img
+                  src="/images/moonbirds-logo.webp"
+                  className="ml-2 h-12 w-12 rounded-full md:h-20 md:w-20"
+                  alt="moon bird logo"
+                />
+                Moonbirds
+              </Link>
             </div>
             <div className="h-full w-full rounded-lg p-4 md:w-96">
               <input

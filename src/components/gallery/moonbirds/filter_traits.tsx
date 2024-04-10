@@ -1,8 +1,11 @@
-import { MOONBIRD_FILTER_TRAITS } from "./filterTraits";
 import { Disclosure } from "@headlessui/react";
 import { useRouter } from "next/router";
 
-export default function FilterTraits() {
+type TFilterTraitsProps = {
+  filterTraits: TFilterTrait;
+};
+
+export default function FilterTraits({ filterTraits }: TFilterTraitsProps) {
   const router = useRouter();
   const selectedAttributes = (router.query.attributes as string[]) || [];
 
@@ -18,7 +21,7 @@ export default function FilterTraits() {
   return (
     <div className="h-full w-full overflow-auto">
       <div className="mx-auto flex max-h-[70vh] w-full max-w-md flex-col gap-2 overflow-auto rounded bg-purple-200 bg-opacity-20 p-2 backdrop-blur">
-        {Object.keys(MOONBIRD_FILTER_TRAITS).map((key) => (
+        {Object.keys(filterTraits).map((key) => (
           <Disclosure key={key}>
             {({ open }) => (
               <>
@@ -34,11 +37,11 @@ export default function FilterTraits() {
                   )
                 </Disclosure.Button>
                 <Disclosure.Panel className="flex flex-col gap-2 px-4 pb-2 pt-4 text-sm text-white">
-                  {Object.keys((MOONBIRD_FILTER_TRAITS as any)[key])
+                  {Object.keys((filterTraits as any)[key])
                     .sort(
                       (a, b) =>
-                        (MOONBIRD_FILTER_TRAITS as any)[key][b] -
-                        (MOONBIRD_FILTER_TRAITS as any)[key][a],
+                        (filterTraits as any)[key][b] -
+                        (filterTraits as any)[key][a],
                     )
                     .map((valuesKey) => (
                       <div
@@ -56,7 +59,7 @@ export default function FilterTraits() {
                             if (typeof selectedAttributes === "string") {
                               urlParams.delete("attributes");
                               router.push(
-                                `/?${urlParams.toString()}`,
+                                `/moonbirds/?${urlParams.toString()}`,
                                 undefined,
                                 { scroll: false },
                               );
@@ -75,9 +78,13 @@ export default function FilterTraits() {
                             );
                           }
 
-                          router.push(`/?${urlParams.toString()}`, undefined, {
-                            scroll: false,
-                          });
+                          router.push(
+                            `/moonbirds/?${urlParams.toString()}`,
+                            undefined,
+                            {
+                              scroll: false,
+                            },
+                          );
                         }}
                       >
                         <input
@@ -98,7 +105,9 @@ export default function FilterTraits() {
 
                               if (typeof selectedAttributes === "string") {
                                 urlParams.delete("attributes");
-                                router.push(`/?${urlParams.toString()}`);
+                                router.push(
+                                  `/moonbirds/?${urlParams.toString()}`,
+                                );
                                 return;
                               }
 
@@ -110,13 +119,13 @@ export default function FilterTraits() {
                             }
 
                             router.push(
-                              `/?${urlParams.toString()}`,
+                              `/moonbirds/?${urlParams.toString()}`,
                               undefined,
                               { scroll: false },
                             );
                           }}
                         />
-                        {valuesKey} ({(MOONBIRD_FILTER_TRAITS as any)[key][valuesKey]})
+                        {valuesKey} ({(filterTraits as any)[key][valuesKey]})
                       </div>
                     ))}
                 </Disclosure.Panel>

@@ -168,7 +168,7 @@ export default function MoonbirdGalleryImage({
                     </div>
                   ))}
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 hidden">
                   <div className="font-bold text-[#3E1600]">Inscription ID</div>
                   <div className="mt-1 flex gap-2">
                     <div
@@ -309,7 +309,7 @@ export default function MoonbirdGalleryImage({
             </div>
 
             {/* Inscription ID */}
-            <div className="mt-5 px-5">
+            <div className="mt-5 hidden px-5">
               <div className="flex items-center justify-between">
                 <span className="text-lg font-bold text-black">
                   Inscription ID

@@ -1,11 +1,16 @@
 import { Disclosure } from "@headlessui/react";
 import { useRouter } from "next/router";
+import { ChangeEvent } from "react";
 
 type TFilterTraitsProps = {
   filterTraits: TFilterTrait;
+  collection: "moonbirds" | "wizards";
 };
 
-export default function FilterTraits({ filterTraits }: TFilterTraitsProps) {
+export default function FilterTraits({
+  filterTraits,
+  collection,
+}: Readonly<TFilterTraitsProps>) {
   const router = useRouter();
   const selectedAttributes = (router.query.attributes as string[]) || [];
 
@@ -16,6 +21,33 @@ export default function FilterTraits({ filterTraits }: TFilterTraitsProps) {
     return selectedAttributes.some(
       (selectedAttribute) => selectedAttribute === attribute,
     );
+  }
+
+  function onFilterItemSelected(key: string, value: string) {
+    return (e: ChangeEvent<HTMLInputElement>) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (e.target.checked) {
+        urlParams.append("attributes", `${key}:${value}`);
+      } else {
+        urlParams.delete("attributes");
+
+        if (typeof selectedAttributes === "string") {
+          urlParams.delete("attributes");
+          router.replace(`/${collection}/?${urlParams.toString()}`);
+          return;
+        }
+
+        selectedAttributes.forEach((attr) => {
+          if (attr !== `${key}:${value}`) {
+            urlParams.append("attributes", attr);
+          }
+        });
+      }
+
+      router.replace(`/${collection}/?${urlParams.toString()}`, undefined, {
+        scroll: false,
+      });
+    };
   }
 
   return (
@@ -44,89 +76,18 @@ export default function FilterTraits({ filterTraits }: TFilterTraitsProps) {
                         (filterTraits as any)[key][a],
                     )
                     .map((valuesKey) => (
-                      <div
+                      <label
                         key={valuesKey}
                         className="flex cursor-pointer items-center gap-2 text-start hover:text-orange-500"
-                        onClick={() => {
-                          const urlParams = new URLSearchParams(
-                            window.location.search,
-                          );
-                          if (
-                            selectedAttributes?.includes(`${key}:${valuesKey}`)
-                          ) {
-                            urlParams.delete("attributes");
-
-                            if (typeof selectedAttributes === "string") {
-                              urlParams.delete("attributes");
-                              router.push(
-                                `/moonbirds/?${urlParams.toString()}`,
-                                undefined,
-                                { scroll: false },
-                              );
-                              return;
-                            }
-
-                            selectedAttributes.forEach((attr) => {
-                              if (attr !== `${key}:${valuesKey}`) {
-                                urlParams.append("attributes", attr);
-                              }
-                            });
-                          } else {
-                            urlParams.append(
-                              "attributes",
-                              `${key}:${valuesKey}`,
-                            );
-                          }
-
-                          router.push(
-                            `/moonbirds/?${urlParams.toString()}`,
-                            undefined,
-                            {
-                              scroll: false,
-                            },
-                          );
-                        }}
                       >
                         <input
                           type="checkbox"
                           className="rounded"
                           checked={isAttributeIncluded(`${key}:${valuesKey}`)}
-                          onChange={(e) => {
-                            const urlParams = new URLSearchParams(
-                              window.location.search,
-                            );
-                            if (e.target.checked) {
-                              urlParams.append(
-                                "attributes",
-                                `${key}:${valuesKey}`,
-                              );
-                            } else {
-                              urlParams.delete("attributes");
-
-                              if (typeof selectedAttributes === "string") {
-                                urlParams.delete("attributes");
-                                router.push(
-                                  `/moonbirds/?${urlParams.toString()}`,
-                                );
-                                return;
-                              }
-
-                              selectedAttributes.forEach((attr) => {
-                                if (attr !== `${key}:${valuesKey}`) {
-                                  urlParams.append("attributes", attr);
-                                }
-                              });
-                            }
-
-                            router.push(
-                              `/moonbirds/?${urlParams.toString()}`,
-                              undefined,
-                              { scroll: false },
-                            );
-                          }}
+                          onChange={onFilterItemSelected(key, valuesKey)}
                         />
                         {valuesKey} ({(filterTraits as any)[key][valuesKey]})
-                      </div>
+                      </label>
                     ))}
                 </Disclosure.Panel>
               </>

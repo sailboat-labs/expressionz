@@ -200,7 +200,7 @@ export default function MoonbirdGenerated({
       <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto md:flex">
         <div className=" hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
           <Image
-            src="/images/book.webp"
+            src="/images/Big-Frame.webp"
             className="absolute h-[40vw] w-[40vw] rounded-t-md md:h-full md:w-full"
             height={2000}
             width={2000}

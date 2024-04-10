@@ -63,7 +63,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
           urlParams.set("id", wizard.id);
           router.push({ search: urlParams.toString() });
         }}
-        className="flex w-full cursor-pointer flex-col items-center p-2 text-black md:ml-0 md:w-[11rem] "
+        className="flex w-full cursor-pointer flex-col items-center p-2  md:ml-0 md:w-[11rem] "
       >
         <div className="bg-black bg-opacity-40 backdrop-blur-md">
           <Image
@@ -121,7 +121,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
             <div className="fixed inset-0 bg-black bg-opacity-60" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto">
+          <div className="fixed inset-0 overflow-y-auto !text-black">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}

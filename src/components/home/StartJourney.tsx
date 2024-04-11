@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ContactModal from "../shared/ContactModal";
 
-function StartJouney() {
+function StartJourney() {
   const [showContactModal, setShowContactModal] = useState<boolean>(false);
 
   return (
@@ -36,4 +36,4 @@ function StartJouney() {
   );
 }
 
-export default StartJouney;
+export default StartJourney;

@@ -71,7 +71,7 @@ export default function Moonbird({
           src={`/images/moonbirds/tokens/${index}.png`}
           className="w-[40vw] rounded-md object-contain md:h-[10rem] md:w-[12rem]"
         />
-        <div className="flex w-[40vw] items-center justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
+        {/* <div className="flex w-[40vw] items-center justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
           <div className="text-black">#{index}</div>
           <div className="flex h-fit items-center gap-1">
             <img
@@ -95,7 +95,7 @@ export default function Moonbird({
               src="/images/melogo.webp"
             />
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>

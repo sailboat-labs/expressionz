@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function LoadingProgress({
   show,
@@ -65,7 +65,7 @@ export default function MoonbirdsVideoLoader({
       } fixed h-screen w-screen bg-black bg-opacity-80`}
     >
       <div className="flex h-full w-full items-center justify-center space-y-5">
-        <div className="relative flex h-2/5 w-11/12 flex-col items-center justify-center rounded-lg bg-[#21212E] md:h-1/2 lg:h-1/2 lg:w-4/5 lg:bg-transparent lg:px-6 xl:w-1/2">
+        <div className="relative flex  w-11/12 flex-col items-center justify-center rounded-lg bg-[#21212E] lg:bg-transparent lg:px-6 xl:w-1/2">
           <video
             playsInline
             autoPlay
@@ -83,7 +83,7 @@ export default function MoonbirdsVideoLoader({
               src="/videos/loading/moonbirds-loading.mp4"
             />
           </video>
-          <div className="absolute bottom-8 flex w-full items-center justify-center lg:bottom-14">
+          <div className=" bottom-8 flex w-full items-center justify-center lg:bottom-14">
             <img
               src="/images/loading-logo.webp"
               alt="loading logo"

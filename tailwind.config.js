@@ -7,6 +7,12 @@ module.exports = {
         darkPurple: "#262630",
         yellow: "#FFD702",
         darkGrey: "#30303C",
+        lightBrown: "#FED7AA",
+        darkBrown: "#C1410B",
+        darkBrownText: "#3E1600",
+        lightViolet: "#BDBCFF",
+        darkViolet: "#6765A7",
+        darkVioletText: "#3E2A57",
       },
       zIndex: {
         9999: 9999,

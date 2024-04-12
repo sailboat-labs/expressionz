@@ -44,7 +44,7 @@ export default function MoonbirdGalleryImage({
     <>
       <div className="z-[2] flex h-screen w-screen items-center justify-center">
         {/* Desktop */}
-        <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto text-white md:flex">
+        <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto text-white lg:flex">
           <div className=" hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
             <Image
               src="/images/Big-Frame.webp"
@@ -172,9 +172,7 @@ export default function MoonbirdGalleryImage({
                     ))}
                   </div>
                   <div className="mt-5 hidden">
-                    <div className="font-bold text-[#3E1600]">
-                      Inscription ID
-                    </div>
+                    <div className="font-bold text-white">Inscription ID</div>
                     <div className="mt-1 flex gap-2">
                       <div
                         onClick={() => {
@@ -202,11 +200,11 @@ export default function MoonbirdGalleryImage({
         </div>
 
         {/* Mobile */}
-        <div className="fixed inset-0 block scale-95 overflow-y-hidden md:hidden">
-          <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all md:hidden">
+        <div className="fixed inset-0 block scale-95 overflow-y-hidden lg:hidden">
+          <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3  text-left align-middle transition-all">
             <Image
-              src="/images/scroll.webp"
-              className="absolute h-full w-full rounded-t-md md:h-full md:w-full"
+              src="/images/narrow-moonbird-frame.png"
+              className="absolute h-full w-full"
               height={1000}
               width={1000}
               alt="moonbird Background"
@@ -218,8 +216,8 @@ export default function MoonbirdGalleryImage({
               priority
             />
 
-            <div className="z-2 absolute top-6 flex w-4/5 items-center justify-between px-3">
-              <div className="mt-0 text-xl font-semibold text-[#3E1600]">
+            <div className="z-2 absolute top-6 flex w-4/5 items-center justify-between p-3">
+              <div className="mt-0 text-xl font-semibold text-white">
                 Moonbird #{index}
               </div>
               <div className="flex items-center gap-5">
@@ -245,7 +243,7 @@ export default function MoonbirdGalleryImage({
               </div>
             </div>
 
-            <div className="absolute z-[2] h-[70vh] w-[75vw] overflow-auto">
+            <div className="absolute z-[2] h-[80vh] w-full overflow-auto px-10">
               {/* moonbird */}
               <div className="flex flex-col items-center">
                 <div className="relative flex h-[50vw] w-[50vw] items-center justify-center">
@@ -286,7 +284,7 @@ export default function MoonbirdGalleryImage({
 
               {/* Traits */}
               <div className="mt-5 flex flex-col gap-2 px-5 ">
-                <div className="z-[2] mb-3 flex h-fit items-center justify-between gap-3 text-[#3E1600]">
+                <div className="z-[2] mb-3 flex h-fit items-center justify-between gap-3 text-white">
                   <div className="flex w-full items-center justify-between">
                     <span className="font-bold ">Traits</span>
                   </div>

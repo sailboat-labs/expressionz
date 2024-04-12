@@ -69,9 +69,9 @@ export default function Moonbird({
           alt="moonbird image"
           loading="lazy"
           src={`/images/moonbirds/tokens/${index}.png`}
-          className="w-[40vw] rounded-t-md object-contain md:h-[10rem] md:w-[12rem]"
+          className="w-[40vw] rounded-md object-contain md:h-[10rem] md:w-[12rem]"
         />
-        <div className="flex w-[40vw] items-center justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
+        {/* <div className="flex w-[40vw] items-center justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
           <div className="text-black">#{index}</div>
           <div className="flex h-fit items-center gap-1">
             <img
@@ -95,7 +95,7 @@ export default function Moonbird({
               src="/images/melogo.webp"
             />
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -259,7 +259,7 @@ export default function Moonbird({
                                 ),
                               )}
                             </div>
-                            <div className="mt-5">
+                            <div className="mt-5 hidden">
                               <div className="font-bold text-[#3E1600]">
                                 Inscription ID
                               </div>
@@ -413,7 +413,7 @@ export default function Moonbird({
                         </div>
 
                         {/* Inscription ID */}
-                        <div className="mt-5 px-5">
+                        <div className="mt-5 hidden px-5">
                           <div className="flex items-center justify-between">
                             <span className="text-lg font-bold">
                               Inscription ID

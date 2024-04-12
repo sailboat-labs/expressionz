@@ -5,21 +5,21 @@ import Banner from "@/components/home/Banner";
 import UnlockAssets from "@/components/home/UnlockAssets";
 import SelfExpression from "@/components/home/SelfExpression";
 import SeamlessIntegration from "@/components/home/SeamlessIntegration";
-import StartJouney from "@/components/home/StartJouney";
+import StartJourney from "@/components/home/StartJourney";
 import Contact from "@/components/home/Contact";
 import Seo from "@/components/shared/Seo";
 
 export default function Home() {
   return (
-    <main className="min-h-screen w-screen bg-darkPurple overflow-x-hidden">
+    <main className="min-h-screen w-screen overflow-x-hidden bg-darkPurple">
       <Seo title="Home" />
       <Header />
-      <TokenMarquee />
       <Banner />
+      <TokenMarquee className="mt-12" />
       <UnlockAssets />
       <SelfExpression />
       <SeamlessIntegration />
-      <StartJouney />
+      <StartJourney />
       <Contact />
       <Footer />
     </main>

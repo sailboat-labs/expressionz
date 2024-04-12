@@ -1,4 +1,3 @@
-import FilterTraits from "./moonbirds/filter_traits";
 import {
   Sheet,
   SheetContent,
@@ -9,13 +8,19 @@ import {
 } from "@/components/ui/sheet";
 
 import { Pixelify_Sans } from "next/font/google";
+import MoonBirdsFilterTraits from "./moonbirds/MoonBirdsFilterTraits";
 
 const PixelifySans = Pixelify_Sans({
   subsets: ["latin"],
   display: "swap",
 });
 
-export default function Drawer({ text }: { text: string }) {
+type TDrawerProps = { text: string; logo?: string };
+
+export default function Drawer({
+  text,
+  logo = "/images/moonbirds-logo.webp",
+}: TDrawerProps) {
   return (
     <Sheet>
       <SheetTrigger>
@@ -31,7 +36,7 @@ export default function Drawer({ text }: { text: string }) {
           <SheetTitle className="mb-5">
             <div className="mb-2 mt-5 flex items-center gap-2 text-white">
               <img
-                src="/images/moonbirds-logo.webp"
+                src={logo}
                 className="h-10 w-10 rounded-full md:h-20 md:w-20"
               />
               <div>
@@ -42,7 +47,7 @@ export default function Drawer({ text }: { text: string }) {
             </div>
           </SheetTitle>
           <SheetDescription className="flex w-full">
-            <FilterTraits />
+            <MoonBirdsFilterTraits />
           </SheetDescription>
         </SheetHeader>
       </SheetContent>

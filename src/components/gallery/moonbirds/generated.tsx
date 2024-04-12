@@ -17,17 +17,26 @@ import { moonbirdEmojis } from "@/lib/utils/emojis";
 import { generateMoonbirdEmojis } from "@/lib/utils/generateEmojis";
 import { createDiscordEmojiPack } from "@/lib/utils/share/discord";
 import { createTelegramStickerPack } from "@/lib/utils/share/telegram";
+import { PiTelegramLogo } from "react-icons/pi";
+import { RiDiscordLine } from "react-icons/ri";
+import IconButton from "@/components/ui/icon-button/IconButton";
+import { FaTelegramPlane } from "react-icons/fa";
+import { BiLogoDiscordAlt } from "react-icons/bi";
 
 const shareIcons = [
   {
     name: "Telegram",
     active: "/images/share/telegram-active.webp",
     inactive: "/images/share/telegram-inactive.webp",
+    activeIcon: <PiTelegramLogo className="h-6 w-6" />,
+    inactiveIcon: <FaTelegramPlane className="h-6 w-6" />,
     platform: "telegram",
   },
   {
     name: "Discord",
     active: "/images/share/discord-active.webp",
+    activeIcon: <RiDiscordLine className="h-6 w-6" />,
+    inactiveIcon: <BiLogoDiscordAlt className="h-6 w-6" />,
     inactive: "/images/share/discord-inactive.webp",
     platform: "discord",
   },
@@ -197,10 +206,10 @@ export default function MoonbirdGenerated({
   return (
     <div className="z-[2] flex h-screen w-screen items-center justify-center">
       {/* Desktop */}
-      <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto md:flex">
+      <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto lg:flex">
         <div className=" hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
           <Image
-            src="/images/book.webp"
+            src="/images/Big-Frame.webp"
             className="absolute h-[40vw] w-[40vw] rounded-t-md md:h-full md:w-full"
             height={2000}
             width={2000}
@@ -214,14 +223,14 @@ export default function MoonbirdGenerated({
                 <div className="flex w-full flex-col items-center justify-center gap-5">
                   <div className="relative flex w-full flex-col items-center justify-center gap-5 pt-5">
                     <div
-                      className="absolute left-8 top-6 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-[#C1410B] text-[#C1410B]"
+                      className="absolute left-8 top-6 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-violet-700 text-violet-700"
                       onClick={() => {
                         router.push(`/moonbirds/${index}`);
                       }}
                     >
                       <ArrowLeftIcon className="h-6 w-6 rounded" />
                     </div>
-                    <div className="font-semibold text-black md:text-xl xl:text-3xl">
+                    <div className="font-semibold text-white md:text-xl xl:text-3xl">
                       Moonbird #{index + 1}
                     </div>
                     <div className="relative flex h-[21vw] w-[21vw] items-center justify-center">
@@ -268,49 +277,90 @@ export default function MoonbirdGenerated({
 
             <div className="h-full w-1/2 flex-1">
               <div className="-mt-4 flex h-full flex-col gap-2 pl-0 pr-3 lg:gap-1">
-                <div className="z-[2] mb-2 mt-8 flex h-fit items-center justify-between">
+                <div className="z-[2] mb-4 mt-8 flex h-fit items-center justify-between">
                   <div className="flex items-center gap-4">
-                    {shareIcons.map((messenger, i) => (
-                      <div
-                        key={i}
-                        className="h-9 w-9 cursor-pointer"
-                        onClick={async () => {
-                          setSelectedEmojis([]);
+                    {/* {shareIcons.map((messenger, i) => (
+                      <React.Fragment key={i}>
+                        <IconButton
+                          key={i}
+                          theme="violet"
+                          className="h-9 w-9"
+                          onClick={async () => {
+                            setSelectedEmojis([]);
 
-                          if (platform === messenger.platform)
-                            return setPlatform("");
+                            if (platform === messenger.platform)
+                              return setPlatform("");
 
-                          setPlatform(messenger.platform);
-                        }}
-                      >
-                        <img
-                          src={
-                            platform == messenger.platform
-                              ? messenger.active
-                              : messenger.inactive
-                          }
-                          className="h-full w-full"
-                          alt={`${messenger.platform} icon`}
-                        />
-                      </div>
-                    ))}
+                            setPlatform(messenger.platform);
+                          }}
+                        >
+                          <div>
+                            {platform == messenger.platform
+                              ? messenger.activeIcon
+                              : messenger.inactiveIcon}
+                          </div>
+                        </IconButton>
+                        <div
+                          key={i}
+                          className="h-9 w-9 cursor-pointer"
+                          onClick={async () => {
+                            setSelectedEmojis([]);
+
+                            if (platform === messenger.platform)
+                              return setPlatform("");
+
+                            setPlatform(messenger.platform);
+                          }}
+                        >
+                          <img
+                            src={
+                              platform == messenger.platform
+                                ? messenger.active
+                                : messenger.inactive
+                            }
+                            className="h-full w-full"
+                            alt={`${messenger.platform} icon`}
+                          />
+                        </div>
+                      </React.Fragment>
+                    ))} */}
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <div
+                    <IconButton
+                      theme="violet"
+                      className="h-9 w-9"
                       onClick={downloadEmojis}
-                      className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
+                    >
+                      <div>
+                        <ArrowDownIcon className="h-5 w-5" />
+                      </div>
+                    </IconButton>
+
+                    <IconButton
+                      theme="violet"
+                      className="h-9 w-9"
+                      onClick={downloadEmojis}
+                    >
+                      <div>
+                        <Cross1Icon className="h-5 w-5" />
+                      </div>
+                    </IconButton>
+                    {/* <div
+                      onClick={downloadEmojis}
+                      className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-violet-700 bg-violet-200 text-violet-700"
                     >
                       <ArrowDownIcon className="h-5 w-5" />
                     </div>
+
                     <div
                       onClick={() => {
                         router.push("/moonbirds");
                       }}
-                      className="ml-1 flex  h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
+                      className="ml-1 flex  h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-violet-700 bg-violet-200 text-violet-700"
                     >
                       <Cross1Icon className="h-5 w-5" />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -322,18 +372,18 @@ export default function MoonbirdGenerated({
                       setHasBg(checked);
                     }}
                     className={`${
-                      hasBg ? "bg-[#C1410B]" : "bg-[#FED7AA]"
-                    } relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[#C1410B] transition-colors`}
+                      hasBg ? "bg-violet-700" : "bg-violet-200"
+                    } relative inline-flex h-6 w-11 items-center rounded-full border-2 border-violet-700 transition-colors`}
                   >
                     <span
                       className={`${
                         hasBg
-                          ? "translate-x-6 bg-[#FED7AA]"
-                          : "translate-x-1 bg-[#C1410B]"
+                          ? "translate-x-6 bg-violet-200"
+                          : "translate-x-1 bg-violet-700"
                       } inline-block h-4 w-4 transform rounded-full transition-transform`}
                     />
                   </Switch>
-                  <div className="text-base font-semibold text-black">
+                  <div className="text-base font-semibold text-white">
                     Background
                   </div>
                 </div>
@@ -399,10 +449,10 @@ export default function MoonbirdGenerated({
       </div>
 
       {/* Mobile */}
-      <div className="fixed inset-0 block scale-95 overflow-y-hidden md:hidden">
-        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all md:hidden">
+      <div className="fixed inset-0 block scale-95 overflow-y-hidden lg:hidden">
+        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all">
           <Image
-            src="/images/scroll.webp"
+            src="/images/narrow-moonbird-frame.webp"
             className="absolute h-full w-full rounded-t-md md:h-full md:w-full"
             height={1000}
             width={1000}
@@ -415,8 +465,8 @@ export default function MoonbirdGenerated({
             priority
           />
 
-          <div className="z-2 absolute top-6 flex w-4/5 items-center justify-between px-3">
-            <div className="mt-0 text-xl font-semibold text-[#3E1600]">
+          <div className="z-2 absolute top-6 flex items-center justify-between px-16 ">
+            <div className="mt-0 text-xl font-semibold text-white">
               Moonbird #{index}
             </div>
             <div className="flex items-center gap-5">
@@ -427,7 +477,7 @@ export default function MoonbirdGenerated({
                   );
                   toast.success("Copied link to clipboard");
                 }}
-                className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
+                className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-violet-700 bg-violet-200 text-violet-700"
               >
                 <ion-icon name="share-social"></ion-icon>
               </div>
@@ -435,7 +485,7 @@ export default function MoonbirdGenerated({
                 onClick={() => {
                   router.push("/moonbirds");
                 }}
-                className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
+                className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-violet-700 bg-violet-200 text-violet-700"
               >
                 <ion-icon name="close"></ion-icon>
               </div>
@@ -511,7 +561,7 @@ export default function MoonbirdGenerated({
               </div>
               <div
                 onClick={downloadEmojis}
-                className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
+                className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-violet-700 bg-violet-200 text-violet-700"
               >
                 <ArrowDownIcon className="h-5 w-5" />
               </div>
@@ -525,18 +575,18 @@ export default function MoonbirdGenerated({
                   setHasBg(checked);
                 }}
                 className={`${
-                  hasBg ? "bg-[#C1410B]" : "bg-[#FED7AA]"
-                } relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[#C1410B] transition-colors`}
+                  hasBg ? "bg-violet-700" : "bg-[#FED7AA]"
+                } relative inline-flex h-6 w-11 items-center rounded-full border-2 border-violet-700 transition-colors`}
               >
                 <span
                   className={`${
                     hasBg
                       ? "translate-x-6 bg-[#FED7AA]"
-                      : "translate-x-1 bg-[#C1410B]"
+                      : "translate-x-1 bg-violet-700"
                   } inline-block h-4 w-4 transform rounded-full transition-transform`}
                 />
               </Switch>
-              <div className="text-base font-semibold text-black">
+              <div className="text-base font-semibold text-white">
                 Background
               </div>
             </div>

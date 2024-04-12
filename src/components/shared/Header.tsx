@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import { useState } from "react";
 import MobileMenu from "./MobileMenu";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
 import Collections from "./CollectionsDropdown";
+import { cn } from "@/lib/utils/cn";
 
 function Header({ showBack = false }: { showBack?: boolean }) {
   const router = useRouter();
@@ -15,7 +16,12 @@ function Header({ showBack = false }: { showBack?: boolean }) {
   return (
     <>
       <MobileMenu show={showMenu} setShow={setShowMenu} />
-      <nav className="font-presstart sticky top-0 z-9999 h-16 bg-darkGrey py-[10px] text-xs text-white 3xl:h-20 3xl:text-sm">
+      <nav
+        className={cn(
+          "font-presstart sticky top-0 z-9999 h-16 bg-darkGrey",
+          "py-[10px] text-xs text-white 3xl:h-20 3xl:text-sm",
+        )}
+      >
         <div className="m-auto flex h-full w-11/12 items-center justify-between lg:w-4/5">
           <ul className="flex list-none items-center">
             <li className="flex flex-row items-center">

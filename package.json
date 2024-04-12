@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "branch": "git checkout dev && git pull && git checkout -b $1",
     "lint": "next lint"
   },
   "dependencies": {

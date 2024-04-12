@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 export default function Team() {
@@ -104,9 +103,9 @@ const teamInfo = [
         He will be leading the MCB team that will develop this project.
         <br />
         <br />
-        Access to Mark’s team composed of graphic designers, illustrators, and
-        developers (both blockchain-specific and general full-stack devs), all
-        the necessary skills and experiences to bring this project to life!
+        Access to Mark&apos;s team composed of graphic designers, illustrators,
+        and developers (both blockchain-specific and general full-stack devs),
+        all the necessary skills and experiences to bring this project to life!
       </span>
     ),
   },

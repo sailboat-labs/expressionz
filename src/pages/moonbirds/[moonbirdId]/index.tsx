@@ -11,7 +11,7 @@ export default function MoonbirdPage() {
 
   const index = Number(moonbird?.meta?.name?.split("#")[1]);
   return (
-    <>
+    <main className="bg-dark min-h-screen">
       <Seo title={`Moonbird ${index}`} />
       <div className="font-pixelify flex h-screen w-full flex-1 items-center justify-center overflow-hidden">
         {/* <img
@@ -20,6 +20,6 @@ export default function MoonbirdPage() {
         /> */}
         {moonbird && <MoonbirdGalleryImage moonbird={moonbird} index={index} />}
       </div>
-    </>
+    </main>
   );
 }

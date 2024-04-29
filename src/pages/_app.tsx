@@ -13,7 +13,6 @@ import {
 import { WagmiProvider, http } from "wagmi";
 import { mainnet, polygon, optimism, arbitrum, base, zora } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AuthContext } from "@/context/auth.context";
 import { useState } from "react";
 
 const wagmiConfig = getDefaultConfig({
@@ -47,9 +46,9 @@ export default function App({ Component, pageProps }: AppProps) {
             coolMode
           >
             <Toaster />
-            <AuthContext.Provider value={{ auth, setAuth }}>
-              <Component {...pageProps} />
-            </AuthContext.Provider>
+            {/* <AuthContext.Provider value={{ auth, setAuth }}> */}
+            <Component {...pageProps} />
+            {/* </AuthContext.Provider> */}
           </RainbowKitProvider>
         </QueryClientProvider>
       </WagmiProvider>

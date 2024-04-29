@@ -22,7 +22,7 @@ export default function HomePage() {
               <Drawer text="" />
 
               <Link
-                href="/"
+                href="/collections"
                 className="flex h-full items-center gap-2 font-semibold md:text-2xl"
               >
                 <img

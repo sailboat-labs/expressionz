@@ -3,8 +3,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/router";
 import Button, { TButtonColor } from "../shared/Button";
-import { useContext } from "react";
-import { AuthContext } from "@/context/auth.context";
 
 const CustomConnectButton = ({
   text,
@@ -18,7 +16,7 @@ const CustomConnectButton = ({
   color?: TButtonColor;
 }) => {
   const router = useRouter();
-  const { setAuth } = useContext(AuthContext);
+  // const { setAuth } = useContext(AuthContext);
 
   return (
     <ConnectButton.Custom>
@@ -40,24 +38,8 @@ const CustomConnectButton = ({
           chain &&
           (!authenticationStatus || authenticationStatus === "authenticated");
 
-        if (connected) {
+        if (connected)
           console.log({ account, chain, authenticationStatus, mounted });
-          if (setAuth) {
-            setAuth({
-              account,
-              chain,
-              authenticationStatus,
-              isConnected: authenticationStatus === "authenticated",
-            });
-          }
-
-          if (
-            authenticationStatus === "authenticated" &&
-            router.asPath == "/"
-          ) {
-            router.push("/collections");
-          }
-        }
 
         return (
           <div
@@ -95,7 +77,15 @@ const CustomConnectButton = ({
                 );
               }
 
-              return null;
+              return (
+                <Button
+                  text={text}
+                  color="purple"
+                  onClick={() => router.push("/collections")}
+                  id={id}
+                  classes={className}
+                />
+              );
             })()}
           </div>
         );

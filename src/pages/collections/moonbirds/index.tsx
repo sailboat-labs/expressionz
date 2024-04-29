@@ -22,7 +22,7 @@ export default function HomePage() {
             <div className="mt-3 flex items-center gap-2 text-white">
               <Drawer text="Moonbirds" />
               <Link
-                href="/"
+                href="/collections"
                 className="flex items-center gap-2 font-semibold md:text-2xl"
               >
                 <img

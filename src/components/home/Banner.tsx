@@ -1,9 +1,9 @@
-import React from "react";
+import CustomConnectButton from "./CustomConnectButton";
 
 function Banner() {
   return (
     <>
-      <section className="hidden h-[20vh] w-full flex-row bg-darkPurple bg-[url('/images/home/big-bird2.webp')] bg-contain bg-right-top bg-no-repeat mb-20 md:flex md:h-[50vh] lg:h-[60vh] xl:h-[75vh]">
+      <section className="mb-20 hidden h-[20vh] w-full flex-row bg-darkPurple bg-[url('/images/home/big-bird2.webp')] bg-contain bg-right-top bg-no-repeat md:flex md:h-[50vh] lg:h-[60vh] xl:h-[75vh]">
         <div className="mx-auto -mt-32 flex w-11/12 flex-col justify-center lg:w-4/5">
           <img
             src="/images/logos/logo.webp"
@@ -13,6 +13,7 @@ function Banner() {
           <p className="font-presstart mb-8 mt-3 text-xs text-white xl:text-base 3xl:my-16 3xl:text-xl">
             Emote your NFT
           </p>
+          <CustomConnectButton text="Try it now" />
           <button className="">
             <img
               src="/images/buttons/try-it-now.webp"

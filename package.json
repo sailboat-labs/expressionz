@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "branch": "git checkout dev && git pull && git checkout -b $1",
+    "bn": "git rev-parse --abbrev-ref HEAD",
     "lint": "next lint"
   },
   "dependencies": {

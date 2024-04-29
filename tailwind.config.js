@@ -3,6 +3,10 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
+      fontFamily: {
+        turretroad: ["TurretRoad"],
+        presstart: ["PressStart2P"],
+      },
       colors: {
         darkPurple: "#262630",
         yellow: "#FFD702",

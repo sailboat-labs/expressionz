@@ -69,7 +69,7 @@ export default function MoonbirdGalleryImage({
                           className=" h-[18vw] w-[18vw] rounded"
                         />
                         <img
-                          src="/images/frame.webp"
+                          src="/images/moonbird-frame.webp"
                           className="absolute top-0 rounded"
                         />
                       </div>
@@ -252,7 +252,7 @@ export default function MoonbirdGalleryImage({
                     className="h-[45vw] w-[45vw] rounded"
                   />
                   <img
-                    src="/images/frame.webp"
+                    src="/images/moonbird-frame.webp"
                     className="absolute top-0 rounded"
                   />
                 </div>

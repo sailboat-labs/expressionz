@@ -175,7 +175,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      {selectedAttributes && (
+      {selectedAttributes.length > 0 && (
         <div className="flex w-screen flex-col justify-center gap-5 overflow-x-auto md:ml-5 md:justify-start">
           <div className="mb-5 flex gap-2 px-4 md:px-0">
             {selectedAttributes.map((attr, index) => (
@@ -227,7 +227,7 @@ export default function Gallery() {
         }}
       </AutoSizer> */}
 
-      <div className="flex w-fit flex-wrap justify-center  gap-5">
+      <div className="flex w-fit flex-wrap  gap-5">
         {gallery.map((wizard, index) => (
           <LazyLoadedDiv
             key={index + 1}

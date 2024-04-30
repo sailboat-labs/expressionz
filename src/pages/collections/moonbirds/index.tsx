@@ -9,7 +9,7 @@ export default function HomePage() {
   const router = useRouter();
 
   return (
-    <>
+    <main className="bg-dark min-h-screen">
       <Seo title="Moonbirds Collection" />
       {/* <img
         src="/images/background.webp"
@@ -61,6 +61,6 @@ export default function HomePage() {
           <Gallery />
         </div>
       </div>
-    </>
+    </main>
   );
 }

@@ -14,7 +14,7 @@ const DummyPage = () => {
             <button
               onClick={() => {
                 navigator.clipboard.writeText(
-                  `${window.location.origin}/moonbirds/${moonbird.id}`,
+                  `${window.location.origin}/collections/moonbirds/${moonbird.id}`,
                 );
                 toast.success("Copied link to clipboard");
               }}
@@ -88,7 +88,7 @@ const DummyPage = () => {
                     <button
                       // onClick={() => {
                       //   navigator.clipboard.writeText(
-                      //     `${window.location.origin}/moonbirds/${moonbird.id}`,
+                      //     `${window.location.origin}/collections/moonbirds/${moonbird.id}`,
                       //   );
                       //   toast.success("Copied link to clipboard");
                       // }}

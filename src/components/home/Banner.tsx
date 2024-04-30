@@ -1,4 +1,4 @@
-import CustomConnectButton from "./CustomConnectButton";
+import Link from "next/link";
 
 function Banner() {
   return (
@@ -13,14 +13,14 @@ function Banner() {
           <p className="font-presstart mb-8 mt-3 text-xs text-white xl:text-base 3xl:my-16 3xl:text-xl">
             Emote your NFT
           </p>
-          <CustomConnectButton text="Try it now" />
-          <button className="">
+
+          <Link href="/collections">
             <img
               src="/images/buttons/try-it-now.webp"
               className="w-40 3xl:w-60"
               alt="Try it now"
             />
-          </button>
+          </Link>
         </div>
       </section>
 

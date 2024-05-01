@@ -1,8 +1,8 @@
 function UnlockAssets() {
   return (
-    <section className="my-20 h-[80vh] w-full bg-darkPurple bg-[url('/images/home/right-pixel-bg.webp')] bg-cover bg-right bg-no-repeat lg:h-[53vh] lg:bg-contain 3xl:h-[60vh]">
-      <div className="font-presstart mx-auto flex h-full w-4/5 flex-col items-start lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
-        <div className="relative -mt-10 h-52 w-52 self-start lg:-mt-0 lg:h-80 lg:w-80 lg:self-center 3xl:h-96 3xl:w-96">
+    <section className="my-20 h-[70vh] w-full bg-darkPurple bg-[url('/images/home/right-pixel-bg.webp')] bg-cover bg-right bg-no-repeat py-16 lg:h-[50vh] lg:bg-contain 3xl:h-[60vh]">
+      <div className="mx-auto flex h-full w-4/5 flex-col items-start justify-center font-presstart  lg:flex-row lg:items-center lg:justify-between">
+        <div className="relative -mt-10  h-36 w-36 self-start lg:-mt-0  lg:h-80 lg:w-60  lg:self-center 3xl:h-80 3xl:w-80">
           <video
             playsInline
             autoPlay
@@ -20,11 +20,11 @@ function UnlockAssets() {
           />
         </div>
         <div className="mt-12 space-y-4 lg:mt-0 3xl:-mr-10">
-          <h1 className="text-right text-3xl uppercase text-yellow 3xl:text-5xl 3xl:leading-snug">
+          <h1 className="text-left text-2xl uppercase text-yellow lg:text-right 3xl:text-4xl 3xl:leading-snug">
             UNLOCK YOUR <br />
             DIGITAL ASSETS
           </h1>
-          <p className="text-right text-xs text-white 3xl:text-xl 3xl:leading-snug">
+          <p className="text-left text-xs text-white lg:text-right 3xl:text-xl 3xl:leading-snug">
             Free them from the confines <br className="hidden 3xl:flex" />
             of your digital gallery
           </p>

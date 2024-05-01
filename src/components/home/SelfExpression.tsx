@@ -80,8 +80,8 @@ function SelfExpression() {
 
   return (
     <section className="my-20 h-[80vh] w-full bg-darkPurple bg-[url('/images/home/left-pixel-bg.webp')] bg-cover bg-left bg-no-repeat lg:mt-32 lg:h-[53vh] lg:bg-contain 3xl:h-[60vh]">
-      <div className="font-presstart mx-auto flex w-4/5 flex-col-reverse lg:h-full lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
-        <div className="mt-9 w-full space-y-4 lg:mt-0 lg:w-2/3">
+      <div className="mx-auto flex w-1/2 flex-col-reverse font-presstart lg:h-full lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mt-9 w-full max-w-xl space-y-4 lg:mt-0 lg:w-2/3">
           <h1 className="text-left text-3xl uppercase text-yellow 3xl:text-5xl 3xl:leading-snug">
             A NEW WORLD OF <br />
             SELF-EXPRESSION

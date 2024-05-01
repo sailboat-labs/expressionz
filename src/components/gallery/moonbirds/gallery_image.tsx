@@ -15,7 +15,7 @@ export default function MoonbirdGalleryImage({
   const router = useRouter();
 
   function closeModal() {
-    router.push("/moonbirds");
+    router.push("/collections/moonbirds");
   }
 
   async function download(path: string) {
@@ -132,7 +132,7 @@ export default function MoonbirdGalleryImage({
                         <button
                           onClick={() => {
                             navigator.clipboard.writeText(
-                              `${window.location.origin}/moonbirds/${moonbird.id}`,
+                              `${window.location.origin}/collections/moonbirds/${moonbird.id}`,
                             );
                             toast.success("Copied link to clipboard");
                           }}
@@ -224,7 +224,7 @@ export default function MoonbirdGalleryImage({
                 <div
                   onClick={() => {
                     navigator.clipboard.writeText(
-                      `${router.basePath}/moonbirds/${moonbird.id}`,
+                      `${router.basePath}/collections/moonbirds/${moonbird.id}`,
                     );
                     toast.success("Copied link to clipboard");
                   }}

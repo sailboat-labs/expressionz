@@ -59,7 +59,7 @@ export default function Moonbird({
     <>
       <div
         onClick={() => {
-          router.push(`/moonbirds/${moonbird.id}`);
+          router.push(`/collections/moonbirds/${moonbird.id}`);
         }}
         className="flex w-full cursor-pointer flex-col items-center p-2 md:ml-0 md:w-[11rem] "
       >
@@ -317,7 +317,7 @@ export default function Moonbird({
                           <div
                             onClick={() => {
                               navigator.clipboard.writeText(
-                                `${router.basePath}/moonbirds/${moonbird.id}`,
+                                `${router.basePath}/collections/moonbirds/${moonbird.id}`,
                               );
                               toast.success("Copied link to clipboard");
                             }}

@@ -225,7 +225,7 @@ export default function MoonbirdGenerated({
                     <div
                       className="absolute left-8 top-6 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-violet-700 text-violet-700"
                       onClick={() => {
-                        router.push(`/moonbirds/${index}`);
+                        router.push(`/collections/moonbirds/${index}`);
                       }}
                     >
                       <ArrowLeftIcon className="h-6 w-6 rounded" />
@@ -473,7 +473,7 @@ export default function MoonbirdGenerated({
               <div
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `${router.basePath}/moonbirds/${moonbird.id}`,
+                    `${router.basePath}/collections/moonbirds/${moonbird.id}`,
                   );
                   toast.success("Copied link to clipboard");
                 }}
@@ -483,7 +483,7 @@ export default function MoonbirdGenerated({
               </div>
               <div
                 onClick={() => {
-                  router.push("/moonbirds");
+                  router.push("/collections/moonbirds");
                 }}
                 className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-violet-700 bg-violet-200 text-violet-700"
               >

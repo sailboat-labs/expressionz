@@ -7,15 +7,15 @@ export async function generateGifs(
 ) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_WIZARDS_BACKEND_URL}/api/v1/gifs/generate?tokenId=${tokenId}&emoji_type=${emoji_type}&platform=${platform}`,
+      `${process.env.NEXT_PUBLIC_WIZARDS_GENERATOR_URL}/api/v1/gifs/generate?tokenId=${tokenId}&emoji_type=${emoji_type}${platform === undefined ? "" : `&platform=${platform}`}`,
     );
 
     const data = await response.json();
 
     console.log("Gif API response:", data);
 
-    const colored = data.colored;
-    const transparent = data.transparent;
+    const colored = data?.colored;
+    const transparent = data?.transparent;
 
     return { colored, transparent };
   } catch (error) {

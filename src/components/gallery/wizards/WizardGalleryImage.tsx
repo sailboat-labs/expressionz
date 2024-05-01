@@ -2,8 +2,10 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 import { GALLERY } from "@/data/gallery";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 export default function GalleryImage({
   wizard,
@@ -59,9 +61,22 @@ export default function GalleryImage({
               <div className="z-[2] mr-5 flex flex-col gap-5 md:flex-row">
                 <div className="flex w-full flex-col items-center justify-center gap-5">
                   <div className="flex w-full flex-col items-center justify-center gap-5 pt-5">
-                    <div className="font-semibold md:text-xl xl:text-3xl">
-                      Wizard #{index}
+                    <div className="relative ml-12 flex items-center gap-4 self-stretch">
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 1 }}
+                        className="absolute left-0 top-0 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-[#C1410B] text-[#C1410B]"
+                        onClick={() => {
+                          router.push(`/collections/wizards/`);
+                        }}
+                      >
+                        <ArrowLeftIcon className="h-6 w-6 rounded" />
+                      </motion.button>
+                      <div className="flex-1 text-center font-presstart md:text-2xl">
+                        Wizard #{index}
+                      </div>
                     </div>
+
                     <div className="relative flex h-[21vw] w-[21vw] items-center justify-center">
                       <img
                         src={`/images/gallery/${index}.webp`}

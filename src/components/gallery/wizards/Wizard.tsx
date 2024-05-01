@@ -56,12 +56,13 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
 
   return (
     <>
-      <div
+      <button
         onClick={() => {
-          openModal();
-          const urlParams = new URLSearchParams(window.location.search);
-          urlParams.set("id", wizard.id);
-          router.push({ search: urlParams.toString() });
+          router.replace(`/collections/wizards/${wizard.id}`);
+          // openModal();
+          // const urlParams = new URLSearchParams(window.location.search);
+          // urlParams.set("id", wizard.id);
+          // router.push({ search: urlParams.toString() });
         }}
         className="flex w-full cursor-pointer flex-col items-center p-2  md:ml-0 md:w-[11rem] "
       >
@@ -105,7 +106,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
             </button>
           </div>
         </div>
-      </div>
+      </button>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>

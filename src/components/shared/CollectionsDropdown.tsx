@@ -35,7 +35,7 @@ export default function Collections() {
                     className={`${
                       active ? "bg-yellow bg-opacity-25" : "bg-transparent"
                     } group flex w-full items-center rounded-md px-2 py-2 text-xs text-white`}
-                    onClick={() => router.push("/moonbirds")}
+                    onClick={() => router.push("/collections/moonbirds")}
                   >
                     Moonbirds
                   </button>
@@ -47,7 +47,7 @@ export default function Collections() {
                     className={`${
                       active ? "bg-yellow bg-opacity-25" : "bg-transparent"
                     } group flex w-full items-center rounded-md px-2 py-2 text-xs text-white`}
-                    onClick={() => router.push("/wizards")}
+                    onClick={() => router.push("/collections/wizards")}
                   >
                     Wizards
                   </button>

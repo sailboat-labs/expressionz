@@ -193,9 +193,13 @@ export default function Gallery() {
                 onClick={() => {
                   const urlParams = new URLSearchParams(window.location.search);
                   urlParams.delete("attributes");
-                  router.push(`/wizards?${urlParams.toString()}`, undefined, {
-                    scroll: false,
-                  });
+                  router.push(
+                    `/collections/wizards?${urlParams.toString()}`,
+                    undefined,
+                    {
+                      scroll: false,
+                    },
+                  );
                 }}
                 className="rounded-md bg-red-100 px-2 py-1 text-red-500"
               >

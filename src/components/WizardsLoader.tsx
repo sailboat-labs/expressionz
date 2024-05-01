@@ -37,14 +37,14 @@ export function WizardsLoader({
       )}
     >
       <div className="flex h-full w-fit items-center justify-center space-y-5 ">
-        <div className="relative flex w-11/12 flex-col items-center justify-center rounded-lg bg-[#444444]  lg:w-4/5  lg:px-6 xl:w-1/2">
+        <div className="relative flex w-11/12 flex-1 flex-col items-center justify-center rounded-lg bg-[#444444]  lg:w-4/5  lg:px-6 xl:w-1/2">
           <video
             playsInline
             autoPlay
             loop
             muted
             poster="/images/wizards-loading-poster.webp"
-            className="mb-7 h-auto rounded-lg object-cover lg:mb-2"
+            className="mb-7 h-auto w-full rounded-lg object-cover lg:mb-2"
           >
             <source
               type="video/webm"
@@ -54,7 +54,10 @@ export function WizardsLoader({
               type="video/mp4"
               src="/videos/loading/wizards-loading.mp4"
             />
-            <img src="/images/wizards-loading-poster.webp" alt="loading poster" />
+            <img
+              src="/images/wizards-loading-poster.webp"
+              alt="loading poster"
+            />
           </video>
           <div className=" flex w-full -translate-y-8 items-center justify-center">
             <img

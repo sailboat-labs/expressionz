@@ -59,7 +59,7 @@ export default function Moonbird({
     <>
       <div
         onClick={() => {
-          router.push(`/collections/moonbirds/${moonbird.id}`);
+          router.replace(`/collections/moonbirds/${moonbird.id}`);
         }}
         className="flex w-full cursor-pointer flex-col items-center p-2 md:ml-0 md:w-[11rem] "
       >

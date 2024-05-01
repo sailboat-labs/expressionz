@@ -58,7 +58,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
     <>
       <button
         onClick={() => {
-          router.push(`/wizards/${wizard.id}`);
+          router.replace(`/collections/wizards/${wizard.id}`);
           // openModal();
           // const urlParams = new URLSearchParams(window.location.search);
           // urlParams.set("id", wizard.id);

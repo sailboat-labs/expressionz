@@ -65,7 +65,7 @@ export default function GeneratedWizards({
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        router.replace(`/${wizard.id}`);
+        router.replace(`/collections/wizards/${wizard.id}`);
       }
     }
     window.addEventListener("keydown", handleEscape);
@@ -273,7 +273,7 @@ export default function GeneratedWizards({
             className="absolute h-[40vw] w-[40vw] rounded-t-md md:h-full md:w-full"
             alt="Wizard Background Image"
           />
-          <div className=" z-[2] -mt-10 flex h-[70%] w-[80%] md:-mt-20">
+          <div className=" z-[2] -mt-10 flex h-[75%] w-[80%] md:-mt-20">
             <div className="relative mr-10 mt-8 flex h-full w-1/2 flex-1 items-start  justify-center">
               <div className="z-[2] mr-5 flex w-full flex-1 flex-col gap-5  md:flex-row">
                 <div className="flex w-full flex-col items-center justify-center gap-5 ">
@@ -396,7 +396,8 @@ export default function GeneratedWizards({
                     </div>
                     <div
                       onClick={() => {
-                        router.replace("/");
+                        // router.replace("/");
+                        router.back();
                       }}
                       className="ml-1 flex  h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
                     >

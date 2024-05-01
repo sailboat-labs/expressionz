@@ -35,7 +35,7 @@ export default function GalleryImage({
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        router.replace("/");
+        router.replace("/collections/wizards");
       }
     }
     window.addEventListener("keydown", handleEscape);

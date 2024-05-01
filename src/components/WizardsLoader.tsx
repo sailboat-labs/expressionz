@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 export function WizardsLoader({
   show,
   progress,
@@ -29,12 +31,13 @@ export function WizardsLoader({
 
   return (
     <section
-      className={`${
-        show ? "left-0 top-0 z-9999 flex" : "z-0 hidden"
-      } fixed h-screen w-screen bg-black bg-opacity-80`}
+      className={cn(
+        "fixed h-screen w-screen bg-black bg-opacity-80",
+        show ? "left-0 top-0 z-9999 flex" : "z-0 hidden",
+      )}
     >
-      <div className="flex h-full w-full items-center justify-center space-y-5">
-        <div className="relative flex h-2/5 w-11/12 flex-col items-center justify-center rounded-lg bg-[#3C3C3C] md:h-1/2 lg:h-1/2 lg:w-4/5 lg:bg-transparent lg:px-6 xl:w-1/2">
+      <div className="flex h-full w-fit items-center justify-center space-y-5 ">
+        <div className="relative flex w-11/12 flex-col items-center justify-center rounded-lg bg-[#444444]  lg:w-4/5  lg:px-6 xl:w-1/2">
           <video
             playsInline
             autoPlay
@@ -43,18 +46,24 @@ export function WizardsLoader({
             poster="/images/wizards-loading-poster.webp"
             className="mb-7 h-auto rounded-lg object-cover lg:mb-2"
           >
-            <source type="video/webm" src="/videos/wizards-loading.webm" />
-            <source type="video/mp4" src="/videos/wizards-loading.mp4" />
+            <source
+              type="video/webm"
+              src="/videos/loading/wizards-loading.webm"
+            />
+            <source
+              type="video/mp4"
+              src="/videos/loading/wizards-loading.mp4"
+            />
           </video>
-          <div className="absolute bottom-6 flex w-full items-center justify-center lg:bottom-10">
+          <div className=" flex w-full -translate-y-8 items-center justify-center">
             <img
               src="/images/loading-logo.webp"
               alt="loading logo"
               className="mr-2 h-5 w-auto object-contain lg:mr-4 lg:h-8"
             />
-            <p className="text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
+            <p className="-mt-1 flex items-center gap-2 text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
               {/* {texts[current]} */}
-              Generating
+              Generating emojis
               <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
             </p>
           </div>

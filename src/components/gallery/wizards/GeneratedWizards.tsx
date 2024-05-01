@@ -261,7 +261,7 @@ export default function GeneratedWizards({
   return (
     <div className="z-[2] flex h-screen w-screen items-center justify-center text-black">
       {/* Desktop */}
-      <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto md:flex">
+      <div className="fixed inset-0 hidden scale-90 items-start justify-center overflow-y-auto md:flex">
         <div className="hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
           <img
             src="/images/desktop_wizard_background.webp"
@@ -269,27 +269,27 @@ export default function GeneratedWizards({
             alt="Wizard Background Image"
           />
           <div className=" z-[2] -mt-10 flex h-[70%] w-[80%] md:-mt-20">
-            <div className="relative mr-10 flex h-full w-1/2 flex-1 items-center justify-center">
-              <div className="z-[2] mr-5 flex w-full flex-col gap-5 md:flex-row">
-                <div className="flex w-full flex-col items-center justify-center gap-5">
-                  <div className="relative flex w-full flex-col items-center justify-center gap-5 pt-5">
+            <div className="relative mr-10 mt-8 flex h-full w-1/2 flex-1 items-start  justify-center">
+              <div className="z-[2] mr-5 flex w-full flex-1 flex-col gap-5  md:flex-row">
+                <div className="flex w-full flex-col items-center justify-center gap-5 ">
+                  <div className="relative flex w-full flex-col items-center justify-center gap-5">
                     <div className="relative flex w-full items-center justify-center">
                       <div
                         className="absolute left-8 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-[#C1410B] text-[#C1410B]"
                         onClick={() => {
-                          router.push(`/${wizard.id}`);
+                          router.push(`/wizards/${wizard.id}`);
                         }}
                       >
                         <ArrowLeftIcon className="h-6 w-6 rounded" />
                       </div>
-                      <div className="font-semibold md:text-xl xl:text-3xl">
+                      <div className=" font-presstart md:text-2xl">
                         Wizard #{index}
                       </div>
                     </div>
-                    <div className="relative flex h-[21vw] w-[21vw] items-center justify-center">
+                    <div className="relative mt-8 flex h-[30vw] max-h-[350px] w-[30vw] max-w-[350px] items-center justify-center">
                       <img
                         src={`/images/gallery/${index}.webp`}
-                        className=" h-[18vw] w-[18vw] rounded"
+                        className="h-[25.71vw] max-h-[300px] w-[25.71vw] max-w-[300px] rounded"
                         alt={`Wizard ${index} image`}
                       />
                       <img
@@ -311,14 +311,14 @@ export default function GeneratedWizards({
                           alt="Download pfp button"
                         />
                       </div>
-                      <div className="w-fit cursor-not-allowed">
+                      {/* <div className="w-fit cursor-not-allowed">
                         <img
                           // src='/images/expressionz-btn-disabled.webp'
                           src="/images/generate-pressed-btn.webp"
                           className="w-48"
                           alt="Generate button"
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -326,7 +326,7 @@ export default function GeneratedWizards({
             </div>
 
             <div className="h-full w-1/2 flex-1">
-              <div className="-mt-4 flex h-full flex-col gap-2 pl-0 pr-3 lg:gap-1">
+              <div className=" flex h-full flex-col gap-2 pl-0 pr-3 lg:gap-1">
                 <div className="z-[2] mb-2 mt-8 flex h-fit items-center justify-between">
                   <div className="flex items-center gap-4">
                     {shareIcons.map((messenger, i) => (
@@ -356,7 +356,29 @@ export default function GeneratedWizards({
                     ))}
                   </div>
 
-                  <div className="text-center">{getText()}</div>
+                  <div className="text-center">
+                    {/* Background */}
+                    <div className="flex flex-row gap-3">
+                      <Switch
+                        checked={hasBg}
+                        onChange={(checked) => {
+                          setHasBg(checked);
+                        }}
+                        className={`${
+                          hasBg ? "bg-[#C1410B]" : "bg-[#FED7AA]"
+                        } relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[#C1410B] transition-colors`}
+                      >
+                        <span
+                          className={`${
+                            hasBg
+                              ? "translate-x-6 bg-[#FED7AA]"
+                              : "translate-x-1 bg-[#C1410B]"
+                          } inline-block h-4 w-4 transform rounded-full transition-transform`}
+                        />
+                      </Switch>
+                      <div className="text-base font-semibold">Background</div>
+                    </div>
+                  </div>
 
                   <div className="flex items-center gap-3">
                     <div
@@ -377,7 +399,7 @@ export default function GeneratedWizards({
                 </div>
 
                 {/* Background */}
-                <div className="flex flex-row gap-3">
+                {/* <div className="flex flex-row gap-3">
                   <Switch
                     checked={hasBg}
                     onChange={(checked) => {
@@ -396,10 +418,10 @@ export default function GeneratedWizards({
                     />
                   </Switch>
                   <div className="text-base font-semibold">Background</div>
-                </div>
+                </div> */}
 
-                <div className="">
-                  <div className="grid pt-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-1">
+                <div className="flex-1 overflow-y-auto">
+                  <div className="grid gap-1 pt-4  md:grid-cols-3">
                     {hasBg
                       ? generatedEmojis.map((emoji, i) => (
                           <GeneratedItem
@@ -499,7 +521,7 @@ export default function GeneratedWizards({
               <div
                 className="flex h-7 w-7 cursor-pointer items-center justify-center rounded border border-[#C1410B] bg-[#FED7AA] text-[#C1410B]"
                 onClick={() => {
-                  router.push(`/?id=${wizard.id}`);
+                  router.push(`/wizards/${wizard.id}`);
                 }}
               >
                 <ArrowLeftIcon className="h-5 w-5 rounded" />
@@ -558,7 +580,7 @@ export default function GeneratedWizards({
                     alt="Download button"
                   />
                 </div>
-                <div
+                {/* <div
                   className="w-fit cursor-pointer"
                   onClick={() => {
                     router.push(`${wizard.id}/generated`);
@@ -569,7 +591,7 @@ export default function GeneratedWizards({
                     className="w-48"
                     alt="Generate button disabled"
                   />
-                </div>
+                </div> */}
               </div>
             </div>
 

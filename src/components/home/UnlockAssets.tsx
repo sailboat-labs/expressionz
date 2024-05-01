@@ -1,8 +1,8 @@
 function UnlockAssets() {
   return (
     <section className="my-20 h-[80vh] w-full bg-darkPurple bg-[url('/images/home/right-pixel-bg.webp')] bg-cover bg-right bg-no-repeat lg:h-[53vh] lg:bg-contain 3xl:h-[60vh]">
-      <div className="font-presstart mx-auto flex h-full w-4/5 flex-col items-start lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
-        <div className="relative -mt-10 h-52 w-52 self-start lg:-mt-0 lg:h-80 lg:w-80 lg:self-center 3xl:h-96 3xl:w-96">
+      <div className="mx-auto flex h-full w-4/5 flex-col items-start font-presstart lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
+        <div className="relative -mt-10 h-36 h-36 lg:w-60 lg:w-80 self-start lg:-mt-0  lg:self-center 3xl:h-80 3xl:w-80">
           <video
             playsInline
             autoPlay

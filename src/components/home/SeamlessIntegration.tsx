@@ -1,6 +1,6 @@
 function SeamlessIntegration() {
   return (
-    <section className="-mt-16 h-[80vh] w-full bg-darkPurple bg-[url('/images/home/right-pixel-bg.webp')] bg-cover bg-right bg-no-repeat lg:my-40 lg:h-[53vh] lg:bg-contain">
+    <section className="-mt-16 w-full bg-darkPurple bg-[url('/images/home/right-pixel-bg.webp')] bg-cover bg-right bg-no-repeat py-16 lg:my-40 lg:h-[53vh]  lg:bg-contain">
       <div className="mx-auto flex h-full w-full flex-col items-center justify-center font-presstart lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
         <div className="relative -mt-20 w-11/12 lg:-mt-0 lg:w-auto 3xl:w-[95%]">
           <video
@@ -9,7 +9,7 @@ function SeamlessIntegration() {
             loop={true}
             muted
             poster="/videos/seamless-integration-poster"
-            className=" h-auto w-36  object-contain  p-2  lg:w-60  2xl:w-96"
+            className=" h-auto w-96  object-contain  p-2"
           >
             <source type="video/webm" src="/videos/seamless-integration.webm" />
             <source type="video/mp4" src="/videos/seamless-integration.mp4" />

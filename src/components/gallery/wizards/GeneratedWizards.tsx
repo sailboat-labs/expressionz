@@ -65,7 +65,7 @@ export default function GeneratedWizards({
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        router.replace(`/${wizard.id}`);
+        router.replace(`/collections/wizards/${wizard.id}`);
       }
     }
     window.addEventListener("keydown", handleEscape);
@@ -396,7 +396,8 @@ export default function GeneratedWizards({
                     </div>
                     <div
                       onClick={() => {
-                        router.replace("/");
+                        // router.replace("/");
+                        router.back();
                       }}
                       className="ml-1 flex  h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
                     >

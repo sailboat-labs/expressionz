@@ -79,14 +79,14 @@ function SelfExpression() {
   }, [current]);
 
   return (
-    <section className="my-20 h-[80vh] w-full bg-darkPurple bg-[url('/images/home/left-pixel-bg.webp')] bg-cover bg-left bg-no-repeat lg:mt-32 lg:h-[53vh] lg:bg-contain 3xl:h-[60vh]">
-      <div className="font-presstart mx-auto flex w-4/5 flex-col-reverse lg:h-full lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
-        <div className="mt-9 w-full space-y-4 lg:mt-0 lg:w-2/3">
-          <h1 className="text-left text-3xl uppercase text-yellow 3xl:text-5xl 3xl:leading-snug">
+    <section className="my-20 h-[70vh] w-full bg-darkPurple bg-[url('/images/home/left-pixel-bg.webp')] bg-cover bg-left bg-no-repeat py-16 lg:mt-32 lg:h-[50vh] lg:bg-contain 3xl:h-[60vh]">
+      <div className="mx-auto flex w-4/5 flex-col-reverse justify-center font-presstart lg:h-full lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mt-9 w-full space-y-4 text-right lg:mt-0 lg:w-2/3 lg:max-w-xl lg:text-left">
+          <h1 className=" text-2xl uppercase text-yellow 3xl:text-4xl 3xl:leading-snug">
             A NEW WORLD OF <br />
             SELF-EXPRESSION
           </h1>
-          <p className="text-left text-xs text-white lg:leading-relaxed 3xl:text-xl 3xl:leading-loose">
+          <p className=" text-xs text-white lg:leading-relaxed 3xl:text-xl 3xl:leading-loose">
             Turn your PFPs into custom emotes to convey emotions, reactions, and
             sentiments in a way that's uniquely you
           </p>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   gifArrayBufferToBase64,
   arrayBufferToBase64,
@@ -39,15 +39,15 @@ export default function GeneratedItem({
   return (
     <div className="p-0 pt-10 text-white lg:p-5 xl:p-3">
       <div
-        className="relative h-28 w-28 lg:h-24 lg:w-24"
+        className="relative "
         onClick={() => {
           if (!selectEnabled) return;
 
           onSelect();
         }}
       >
-        <div className="absolute z-50 flex w-28 justify-center lg:w-24">
-          <div className="-mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#2C2C2C] bg-opacity-75">
+        <div className="absolute z-50 flex w-full justify-center">
+          <div className="-mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#2C2C2C]  bg-opacity-75">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`/images/emojis/generated/${item.emoji_type}.webp`}

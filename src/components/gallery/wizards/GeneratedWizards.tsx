@@ -57,11 +57,8 @@ export default function GeneratedWizards({
 
   // Generate emojis
   useEffect(() => {
-    setLoading(true);
-    if (!router.isReady) return;
-
     generate();
-  }, [router.isReady]);
+  }, []);
 
   // On click escape, go to wizard screen
   useEffect(() => {
@@ -75,6 +72,8 @@ export default function GeneratedWizards({
   }, []);
 
   async function generate() {
+    setLoading(true);
+
     try {
       const _generated: any[] = [];
       const _generatedTransparent: any[] = [];
@@ -136,6 +135,11 @@ export default function GeneratedWizards({
       setLoading(false);
     }
   }
+
+  const isGenerating =
+    loading ||
+    generatedEmojis.length == 0 ||
+    generatedEmojisTransparent.length == 0;
 
   async function downloadEmojis() {
     // if (selectedEmojis.length === 0) {
@@ -741,7 +745,7 @@ export default function GeneratedWizards({
       />
 
       {/* Loading */}
-      <WizardsLoader show={loading} progress={progress} total={12} />
+      <WizardsLoader show={isGenerating} progress={progress} total={12} />
     </div>
   );
 }

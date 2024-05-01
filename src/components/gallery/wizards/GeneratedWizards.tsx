@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable @next/next/no-img-element */
 import { Switch } from "@headlessui/react";
+import { motion } from "framer-motion";
 import {
   ArrowDownIcon,
   ArrowLeftIcon,
@@ -278,14 +279,16 @@ export default function GeneratedWizards({
                 <div className="flex w-full flex-col items-center justify-center gap-5 ">
                   <div className="relative flex w-full flex-col items-center justify-center gap-5">
                     <div className="relative flex w-full items-center justify-center">
-                      <div
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 1 }}
                         className="absolute left-8 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-[#C1410B] text-[#C1410B]"
                         onClick={() => {
-                          router.push(`/wizards/${wizard.id}`);
+                          router.push(`/collections/wizards/${wizard.id}`);
                         }}
                       >
                         <ArrowLeftIcon className="h-6 w-6 rounded" />
-                      </div>
+                      </motion.button>
                       <div className=" font-presstart md:text-2xl">
                         Wizard #{index}
                       </div>
@@ -525,7 +528,7 @@ export default function GeneratedWizards({
               <div
                 className="flex h-7 w-7 cursor-pointer items-center justify-center rounded border border-[#C1410B] bg-[#FED7AA] text-[#C1410B]"
                 onClick={() => {
-                  router.push(`/wizards/${wizard.id}`);
+                  router.push(`/collections/wizards/${wizard.id}`);
                 }}
               >
                 <ArrowLeftIcon className="h-5 w-5 rounded" />

@@ -88,7 +88,7 @@ export default function MoonbirdsVideoLoader({
               src="/videos/loading/moonbirds-loading.mp4"
             />
           </video>
-          <p className="text-center text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
+          <p className="-translate-y-8 text-center text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
             {/* {texts[current]} */}
             Generating emojis&nbsp;
             <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>

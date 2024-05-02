@@ -8,7 +8,7 @@ export async function generateEmojis(
 ) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_WIZARDS_BACKEND_URL}/api/v1/emojis/generate?tokenId=${tokenId}&emoji_type=${emoji_type}${platform === undefined ? "" : `&platform=${platform}`}`,
+      `${process.env.NEXT_PUBLIC_WIZARDS_GENERATOR_URL}/api/v1/emojis/generate?tokenId=${tokenId}&emoji_type=${emoji_type}${platform === undefined ? "" : `&platform=${platform}`}`,
     );
 
     const data = await response.json();

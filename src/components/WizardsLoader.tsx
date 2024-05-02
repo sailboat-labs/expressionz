@@ -36,8 +36,8 @@ export function WizardsLoader({
         show ? "left-0 top-0 z-9999 flex" : "z-0 hidden",
       )}
     >
-      <div className="flex h-full w-fit items-center justify-center space-y-5 ">
-        <div className="relative flex w-11/12 flex-1 flex-col items-center justify-center rounded-lg bg-[#444444]  lg:w-4/5  lg:px-6 xl:w-1/2">
+      <div className="flex h-full w-full items-center justify-center space-y-5 ">
+        <div className="relative mx-auto flex max-w-2xl flex-1 flex-col items-center justify-center rounded-lg bg-[#444444]  ">
           <video
             playsInline
             autoPlay

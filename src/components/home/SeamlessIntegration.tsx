@@ -2,14 +2,14 @@ function SeamlessIntegration() {
   return (
     <section className="-mt-16 h-[70vh] w-full bg-darkPurple bg-[url('/images/home/right-pixel-bg.webp')] bg-cover bg-right bg-no-repeat py-16 lg:my-40 lg:h-[53vh]  lg:bg-contain">
       <div className="mx-auto flex h-full w-full flex-col items-center justify-center font-presstart lg:w-4/5 lg:flex-row lg:items-center lg:justify-between">
-        <div className="relative -mt-20 w-11/12 lg:-mt-0 lg:w-auto 3xl:w-[95%]">
+        <div className="relative mx-auto -mt-20 mr-auto w-11/12  px-4 lg:mx-0 lg:-mt-0 lg:mr-0 lg:w-1/2">
           <video
             playsInline
             autoPlay
             loop={true}
             muted
             poster="/videos/seamless-integration-poster"
-            className=" h-auto w-96  object-contain  p-2"
+            className=" w-full   object-contain  p-2"
           >
             <source type="video/webm" src="/videos/seamless-integration.webm" />
             <source type="video/mp4" src="/videos/seamless-integration.mp4" />
@@ -19,7 +19,7 @@ function SeamlessIntegration() {
             />
           </video>
         </div>
-        <div className="mt-8 w-11/12 space-y-4 text-left lg:ml-5 lg:mt-0 lg:w-full lg:max-w-2xl lg:text-right 3xl:space-y-7">
+        <div className="mt-8 w-11/12 space-y-4 text-left lg:ml-5 lg:mt-0 lg:w-1/2 lg:max-w-2xl lg:text-right 3xl:space-y-7">
           <h1 className="text-xl uppercase text-yellow xl:text-4xl 3xl:leading-snug">
             SEAMLESS <br />
             INTEGRATION

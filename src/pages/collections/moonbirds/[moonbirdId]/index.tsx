@@ -94,7 +94,9 @@ export default function MoonbirdPage() {
                   <div
                     className="w-fit cursor-pointer"
                     onClick={() => {
-                      router.push(`${moonbird?.id}/generated`);
+                      router.push(
+                        `/collections/moonbirds/${moonbird?.id}/generated`,
+                      );
                     }}
                   >
                     <img

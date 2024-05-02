@@ -302,8 +302,8 @@ export default function MoonbirdGenerated({
           </React.Fragment>,
           <React.Fragment key="right-content">
             {/* RIGHT CONTENT */}
-            <div className=" mb-8 flex h-full flex-col gap-2">
-              <div className="z-[2] flex h-fit items-center justify-between border-2 !border-red-400">
+            <div className=" mb-8 flex h-full flex-col gap-2  ">
+              <div className="z-[2] flex items-center justify-between">
                 {/* <div className="flex items-center gap-4">
                   {shareIcons.map((messenger, i) => (
                       <React.Fragment key={i}>
@@ -352,7 +352,7 @@ export default function MoonbirdGenerated({
                     ))}
                 </div> */}
 
-                <div className="hidden items-center gap-2 lg:flex">
+                <div className="my-6 flex w-full items-center gap-2 lg:mt-0">
                   <ThemedIconButton
                     className={cn("text-2xl font-semibold ", {
                       "!border-transparent !bg-yellow !text-black":
@@ -381,6 +381,44 @@ export default function MoonbirdGenerated({
                     variant="violet"
                     icon={<FaDiscord className="h-5 w-5" />}
                   />
+                  <div className="ml-auto flex items-center gap-5 lg:hidden">
+                    {/* Background */}
+                    <div className="mb-2 flex flex-row gap-3">
+                      <Switch
+                        checked={hasBg}
+                        onChange={(checked) => {
+                          setHasBg(checked);
+                        }}
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors`}
+                      >
+                        <span
+                          className={`${
+                            hasBg ? "translate-x-6 " : "translate-x-1 "
+                          } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
+                        />
+                      </Switch>
+                      <div className="text-base font-semibold text-white">
+                        Background
+                      </div>
+                    </div>
+                    {/* Select all */}
+                    <div className="mb-2 flex flex-row gap-3">
+                      <Switch
+                        checked={allSelected}
+                        onChange={(checked) => selectAll()}
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors`}
+                      >
+                        <span
+                          className={`${
+                            allSelected ? "translate-x-6 " : "translate-x-1  "
+                          } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
+                        />
+                      </Switch>
+                      <div className="text-base font-semibold text-white">
+                        Select all
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="hidden items-center gap-2 lg:flex">
@@ -414,8 +452,8 @@ export default function MoonbirdGenerated({
                 </div>
               </div>
 
-              <div className="  flex flex-1 flex-col">
-                <div className="my-4">
+              <div className="  flex flex-col">
+                <div className="my-4 hidden lg:block">
                   {/* Background */}
                   <div className="mb-2 flex flex-row gap-3">
                     <Switch
@@ -453,7 +491,8 @@ export default function MoonbirdGenerated({
                     </div>
                   </div>
                 </div>
-                <div className="grid h-[70%] flex-1 grid-cols-2 gap-4  overflow-y-auto overflow-x-visible sm:grid-cols-3 md:grid-cols-4">
+
+                <div className="grid grid-cols-2 gap-4 overflow-y-auto overflow-x-visible  sm:grid-cols-3 md:grid-cols-4 lg:h-[470px]">
                   {hasBg
                     ? generatedEmojis.map((emoji, i) => (
                         <GeneratedItem

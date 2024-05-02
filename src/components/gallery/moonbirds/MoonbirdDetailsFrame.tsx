@@ -24,9 +24,7 @@ const MoonbirdDetailsFrame = ({ children }: TMoonbirdDetailsFrameProps) => {
         >
           <div className="h-full w-full px-8 lg:py-12">{children[0]}</div>
 
-          <div className="h-full w-full px-8 lg:overflow-y-auto lg:py-12">
-            {children[1]}
-          </div>
+          <div className="h-full w-full px-8 lg:py-12">{children[1]}</div>
         </div>
       </div>
     </div>

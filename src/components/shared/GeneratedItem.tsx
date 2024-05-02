@@ -1,9 +1,11 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   gifArrayBufferToBase64,
   arrayBufferToBase64,
 } from "@/lib/utils/bufferToBase64";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export default function GeneratedItem({
   item,
@@ -37,17 +39,23 @@ export default function GeneratedItem({
   };
 
   return (
-    <div className="p-0 pt-10 text-white lg:p-5 xl:p-3">
+    <motion.div
+      whileHover={{ scale: platform == "" ? 1 : 1.05 }}
+      whileTap={{ scale: 1 }}
+      className={cn("h-fit w-fit pt-5 text-white", {
+        " cursor-pointer": platform !== "",
+      })}
+    >
       <div
-        className="relative h-28 w-28 lg:h-24 lg:w-24"
+        className="relative "
         onClick={() => {
           if (!selectEnabled) return;
 
           onSelect();
         }}
       >
-        <div className="absolute z-50 flex w-28 justify-center lg:w-24">
-          <div className="-mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#2C2C2C] bg-opacity-75">
+        <div className="absolute z-50 flex w-full justify-center">
+          <div className="-mt-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#2C2C2C]  bg-opacity-75">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`/images/emojis/generated/${item.emoji_type}.webp`}
@@ -59,26 +67,33 @@ export default function GeneratedItem({
         {/* Option to select */}
         <div
           className={`
-            ${selectEnabled ? "block " : "hidden "}
-            absolute left-0 top-0 z-50 -ml-2 -mt-2
+            ${selectEnabled ? "invisible " : "hidden "}
+            absolute left-0 top-0 z-50 
           `}
         >
           <input
             type="checkbox"
             name="selected"
             id="selected"
-            className="h-5 w-5"
+            // className="h-4 w-4"
             checked={selected}
             onChange={() => onSelect()}
           />
         </div>
-        <Image
-          src={src}
-          alt="Generated emoji"
-          className="h-full w-full rounded-md object-cover"
-          width={176}
-          height={176}
-        />
+        <div className="relative h-fit w-fit overflow-clip rounded-md ">
+          <Image
+            src={src}
+            alt="Generated emoji"
+            className="h-full w-full  object-cover"
+            width={176}
+            height={176}
+          />
+          <div
+            className={cn("absolute inset-0 bg-black bg-opacity-0", {
+              "bg-opacity-50": platform !== "" && !selected,
+            })}
+          ></div>
+        </div>
 
         {/* Grey overlay  */}
         {platform == "telegram" && (
@@ -93,6 +108,6 @@ export default function GeneratedItem({
           ></div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

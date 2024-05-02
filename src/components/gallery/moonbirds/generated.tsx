@@ -476,9 +476,14 @@ export default function MoonbirdGenerated({
                   {/* Select all */}
                   <div className="mb-2 flex flex-row gap-3">
                     <Switch
+                      disabled={platform === ""}
                       checked={allSelected}
                       onChange={(checked) => selectAll()}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors`}
+                      className={cn(
+                        `relative inline-flex h-6 w-11 items-center rounded-full `,
+                        "border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors",
+                        "disabled:cursor-not-allowed disabled:opacity-60",
+                      )}
                     >
                       <span
                         className={`${

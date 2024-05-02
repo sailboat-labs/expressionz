@@ -29,11 +29,11 @@ const ThemedIconButton = ({
     <motion.div
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="h-fit w-fit"
+      className="h-8 w-8"
     >
       <button
         className={clsx(
-          "flex h-8 w-8 scale-90 items-center justify-center rounded",
+          "flex h-full w-full items-center justify-center rounded",
           variant === "custom" && theme,
           variant === "violet" && [
             "border-2 border-[#BDBCFF] bg-[#6765A7] text-white",

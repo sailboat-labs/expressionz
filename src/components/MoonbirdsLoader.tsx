@@ -64,6 +64,13 @@ export default function MoonbirdsVideoLoader({
     >
       <div className="flex h-full w-full items-center justify-center space-y-5">
         <div className="relative flex  w-11/12 flex-col items-center justify-center rounded-lg bg-[#222331]    lg:px-6 xl:w-1/2">
+          <div className=" flex w-full translate-y-8 items-center justify-center">
+            <img
+              src="/images/loading-logo.webp"
+              alt="loading logo"
+              className="mr-2 h-5 w-auto object-contain lg:mr-4 lg:h-8"
+            />
+          </div>
           <video
             playsInline
             autoPlay
@@ -81,18 +88,11 @@ export default function MoonbirdsVideoLoader({
               src="/videos/loading/moonbirds-loading.mp4"
             />
           </video>
-          <div className="flex w-full items-center justify-center  pb-8">
-            <img
-              src="/images/loading-logo.webp"
-              alt="loading logo"
-              className="mr-2 h-5 w-auto object-contain lg:mr-4 lg:h-8"
-            />
-            <p className="text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
-              {/* {texts[current]} */}
-              Generating emojis&nbsp;
-              <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
-            </p>
-          </div>
+          <p className="text-center text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
+            {/* {texts[current]} */}
+            Generating emojis&nbsp;
+            <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
+          </p>
         </div>
       </div>
     </section>

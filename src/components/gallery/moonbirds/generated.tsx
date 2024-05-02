@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import GeneratedItem from "@/components/shared/GeneratedItem";
-import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
 import DoneModal from "@/components/shared/DoneModal";
 import { toast } from "sonner";
 import { useRouter } from "next/router";
@@ -20,6 +19,7 @@ import MoonbirdDetailsFrame from "./MoonbirdDetailsFrame";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import { cn } from "@/lib/utils";
 import { Switch } from "@headlessui/react";
+import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
 
 const shareIcons = [
   {
@@ -476,9 +476,14 @@ export default function MoonbirdGenerated({
                   {/* Select all */}
                   <div className="mb-2 flex flex-row gap-3">
                     <Switch
+                      disabled={platform === ""}
                       checked={allSelected}
                       onChange={(checked) => selectAll()}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors`}
+                      className={cn(
+                        `relative inline-flex h-6 w-11 items-center rounded-full `,
+                        "border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors",
+                        "disabled:cursor-not-allowed disabled:opacity-60",
+                      )}
                     >
                       <span
                         className={`${

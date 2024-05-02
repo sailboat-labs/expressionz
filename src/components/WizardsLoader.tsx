@@ -38,6 +38,13 @@ export function WizardsLoader({
     >
       <div className="flex h-full w-full items-center justify-center space-y-5 ">
         <div className="relative mx-auto flex max-w-2xl flex-1 flex-col items-center justify-center rounded-lg bg-[#444444]  ">
+          <div className=" flex w-full translate-y-8 items-center justify-center">
+            <img
+              src="/images/loading-logo.webp"
+              alt="loading logo"
+              className="mr-2 h-5 w-auto object-contain lg:mr-4 lg:h-8"
+            />
+          </div>
           <video
             playsInline
             autoPlay
@@ -59,18 +66,12 @@ export function WizardsLoader({
               alt="loading poster"
             />
           </video>
-          <div className=" flex w-full -translate-y-8 items-center justify-center">
-            <img
-              src="/images/loading-logo.webp"
-              alt="loading logo"
-              className="mr-2 h-5 w-auto object-contain lg:mr-4 lg:h-8"
-            />
-            <p className="-mt-1 flex items-center gap-2 text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
-              {/* {texts[current]} */}
-              Generating emojis
-              <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
-            </p>
-          </div>
+
+          <p className="-mt-1 flex -translate-y-8 items-center gap-2 text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
+            {/* {texts[current]} */}
+            Generating emojis
+            <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
+          </p>
         </div>
       </div>
     </section>

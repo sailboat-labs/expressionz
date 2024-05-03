@@ -234,7 +234,7 @@ export default function MoonbirdGenerated({
                     variant="violet"
                     icon={<ArrowLeftIcon className="h-6 w-6 rounded" />}
                   />
-                  <h1 className="flex-1  text-center font-semibold md:text-xl xl:text-3xl">
+                  <h1 className="font-pixelify-b  flex-1 text-center  text-white md:text-xl xl:text-3xl">
                     Moonbird #{index + 1}
                   </h1>
 

@@ -44,7 +44,7 @@ export default function MoonbirdPage() {
                     variant="violet"
                     icon={<ArrowLeftIcon className="h-6 w-6 rounded" />}
                   />
-                  <h1 className="flex-1  text-center font-semibold md:text-xl xl:text-3xl">
+                  <h1 className="font-pixelify-b flex-1 text-center text-white md:text-xl xl:text-3xl">
                     Moonbird #{index + 1}
                   </h1>
 
@@ -112,7 +112,7 @@ export default function MoonbirdPage() {
               <div className="flex  flex-col gap-2 pr-5 lg:mt-5">
                 <div className="z-[2] mb-3 flex h-fit items-center justify-between">
                   <div className="flex w-full items-center justify-between">
-                    <span className="font-semibold  md:text-lg xl:text-2xl">
+                    <span className="font-pixelify-b  text-white  md:text-lg xl:text-2xl">
                       Traits
                     </span>
                     <div className="mt-4 hidden items-center gap-1.5 lg:flex">
@@ -169,7 +169,7 @@ export default function MoonbirdPage() {
                         />
                       </div>
 
-                      <div className="flex-1">
+                      <div className="flex-1 text-white">
                         <div>{attribute.trait_type}</div>
                         <div className="font-bold">{attribute.value}</div>
                       </div>

@@ -4,14 +4,18 @@ import { METADATA } from "@/data/metadata";
 import Seo from "@/components/shared/Seo";
 import MoonbirdDetailsFrame from "@/components/gallery/moonbirds/MoonbirdDetailsFrame";
 import { toast } from "sonner";
-import React from "react";
+import React, { useMemo } from "react";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
 
 export default function MoonbirdPage() {
   const router = useRouter();
+
   const { moonbirdId } = router.query;
-  const moonbird = METADATA.find((m) => m.id === moonbirdId);
+  const moonbird = useMemo(
+    () => METADATA.find((m) => m.id === moonbirdId),
+    [moonbirdId],
+  );
 
   async function download(path: string) {
     const response = await fetch(path);

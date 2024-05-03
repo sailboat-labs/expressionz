@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         turretroad: ["TurretRoad"],
         presstart: ["PressStart2P"],
+        "pixelify-b": ["PixelifySansBold"],
+        "pixelify-r": ["PixelifySansRegular"],
+        "pixelify-l": ["PixelifySansLight"],
       },
       colors: {
         darkPurple: "#262630",

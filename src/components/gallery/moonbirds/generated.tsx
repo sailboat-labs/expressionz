@@ -49,24 +49,18 @@ export default function MoonbirdGenerated({
 }) {
   const router = useRouter();
 
+  const [progress, setProgress] = useState(0);
+  const [platform, setPlatform] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const [hasBg, setHasBg] = useState(true);
+  const [showDoneModal, setShowDoneModal] = useState(false);
+  const [packId, setPackId] = useState<string>("ABCDEFGHIJKL");
   const [generatedEmojis, setGeneratedEmojis] = useState<any[]>([]);
+  const [selectedEmojis, setSelectedEmojis] = useState<number[]>([]);
   const [generatedEmojisTransparent, setGeneratedEmojisTransparent] = useState<
     any[]
   >([]);
-
-  const [selectedEmojis, setSelectedEmojis] = useState<number[]>([]);
-
-  const [progress, setProgress] = useState(0);
-
-  const [platform, setPlatform] = useState("");
-
-  const [hasBg, setHasBg] = useState(true);
-
-  const [packId, setPackId] = useState<string>("ABCDEFGHIJKL");
-
-  const [showDoneModal, setShowDoneModal] = useState(false);
 
   //On click escape, go to homescreen
   useEffect(() => {
@@ -230,7 +224,9 @@ export default function MoonbirdGenerated({
                 <div className="flex w-full flex-1 items-center justify-between ">
                   <ThemedIconButton
                     className="text-2xl font-semibold"
-                    onClick={() => router.replace(`/collections/moonbirds`)}
+                    onClick={() =>
+                      router.replace(`/collections/moonbirds/${moonbird.id}`)
+                    }
                     variant="violet"
                     icon={<ArrowLeftIcon className="h-6 w-6 rounded" />}
                   />
@@ -452,76 +448,79 @@ export default function MoonbirdGenerated({
                 </div>
               </div>
 
-              <div className="  flex flex-col">
-                <div className="my-4 hidden lg:block">
-                  {/* Background */}
-                  <div className="mb-2 flex flex-row gap-3">
-                    <Switch
-                      checked={hasBg}
-                      onChange={(checked) => {
-                        setHasBg(checked);
-                      }}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors`}
-                    >
-                      <span
-                        className={`${
-                          hasBg ? "translate-x-6 " : "translate-x-1 "
-                        } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
-                      />
-                    </Switch>
-                    <div className="text-base font-semibold text-white">
-                      Background
-                    </div>
-                  </div>
-                  {/* Select all */}
-                  <div className="mb-2 flex flex-row gap-3">
-                    <Switch
-                      disabled={platform === ""}
-                      checked={allSelected}
-                      onChange={(checked) => selectAll()}
-                      className={cn(
-                        `relative inline-flex h-6 w-11 items-center rounded-full `,
-                        "border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors",
-                        "disabled:cursor-not-allowed disabled:opacity-60",
-                      )}
-                    >
-                      <span
-                        className={`${
-                          allSelected ? "translate-x-6 " : "translate-x-1  "
-                        } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
-                      />
-                    </Switch>
-                    <div className="text-base font-semibold text-white">
-                      Select all
-                    </div>
+              <div className="my-4 hidden lg:block">
+                {/* Background */}
+                <div className="mb-2 flex flex-row gap-3">
+                  <Switch
+                    checked={hasBg}
+                    onChange={(checked) => {
+                      setHasBg(checked);
+                    }}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors`}
+                  >
+                    <span
+                      className={`${
+                        hasBg ? "translate-x-6 " : "translate-x-1 "
+                      } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
+                    />
+                  </Switch>
+                  <div className="text-base font-semibold text-white">
+                    Background
                   </div>
                 </div>
+                {/* Select all */}
+                <div className="mb-2 flex flex-row gap-3">
+                  <Switch
+                    disabled={platform === ""}
+                    checked={allSelected}
+                    onChange={(checked) => selectAll()}
+                    className={cn(
+                      `relative inline-flex h-6 w-11 items-center rounded-full `,
+                      "border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors",
+                      "disabled:cursor-not-allowed disabled:opacity-60",
+                    )}
+                  >
+                    <span
+                      className={`${
+                        allSelected ? "translate-x-6 " : "translate-x-1  "
+                      } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
+                    />
+                  </Switch>
+                  <div className="text-base font-semibold text-white">
+                    Select all
+                  </div>
+                </div>
+              </div>
 
-                <div className="grid grid-cols-2 gap-4 overflow-y-auto overflow-x-visible  sm:grid-cols-3 md:grid-cols-4 lg:h-[470px]">
-                  {hasBg
-                    ? generatedEmojis.map((emoji, i) => (
-                        <GeneratedItem
-                          key={i}
-                          item={emoji}
-                          selectedType="png"
-                          platform={platform}
-                          selected={selectedEmojis.includes(i)}
-                          onSelect={() => onSelectEmojis(i)}
-                          selectEnabled={platform ? true : false}
-                        />
-                      ))
-                    : generatedEmojisTransparent.map((emoji, i) => (
-                        <GeneratedItem
-                          key={i}
-                          item={emoji}
-                          platform={platform}
-                          selectedType="png"
-                          selected={selectedEmojis.includes(i)}
-                          onSelect={() => onSelectEmojis(i)}
-                          selectEnabled={platform ? true : false}
-                        />
-                      ))}
-                </div>
+              <div
+                className={cn(
+                  "grid grid-cols-2 gap-4 overflow-y-auto overflow-x-visible  sm:grid-cols-3 md:grid-cols-4 ",
+                  "flex-1",
+                )}
+              >
+                {hasBg
+                  ? generatedEmojis.map((emoji, i) => (
+                      <GeneratedItem
+                        key={i}
+                        item={emoji}
+                        selectedType="png"
+                        platform={platform}
+                        selected={selectedEmojis.includes(i)}
+                        onSelect={() => onSelectEmojis(i)}
+                        selectEnabled={platform ? true : false}
+                      />
+                    ))
+                  : generatedEmojisTransparent.map((emoji, i) => (
+                      <GeneratedItem
+                        key={i}
+                        item={emoji}
+                        platform={platform}
+                        selectedType="png"
+                        selected={selectedEmojis.includes(i)}
+                        onSelect={() => onSelectEmojis(i)}
+                        selectEnabled={platform ? true : false}
+                      />
+                    ))}
               </div>
               <div
                 className={`${

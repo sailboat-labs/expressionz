@@ -7,7 +7,6 @@ import { METADATA } from "@/data/metadata";
 import { ArrowDownIcon, ArrowLeftIcon } from "@radix-ui/react-icons";
 import { downloadImagesAsZip, downloadPfp } from "@/lib/utils/download";
 import { moonbirdEmojis } from "@/lib/utils/emojis";
-import { generateMoonbirdEmojis } from "@/lib/utils/generateEmojis";
 import { createDiscordEmojiPack } from "@/lib/utils/share/discord";
 import { createTelegramStickerPack } from "@/lib/utils/share/telegram";
 import { PiTelegramLogo } from "react-icons/pi";
@@ -20,6 +19,7 @@ import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import { cn } from "@/lib/utils";
 import { Switch } from "@headlessui/react";
 import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
+import { generateMoonbirdEmojis } from "@/lib/utils/generateEmojis";
 
 const shareIcons = [
   {
@@ -58,6 +58,7 @@ export default function MoonbirdGenerated({
   const [packId, setPackId] = useState<string>("ABCDEFGHIJKL");
   const [generatedEmojis, setGeneratedEmojis] = useState<any[]>([]);
   const [selectedEmojis, setSelectedEmojis] = useState<number[]>([]);
+
   const [generatedEmojisTransparent, setGeneratedEmojisTransparent] = useState<
     any[]
   >([]);
@@ -78,6 +79,48 @@ export default function MoonbirdGenerated({
     generate();
   }, []);
 
+  // async function generate() {
+  //   setLoading(true);
+  //   let promises = [];
+  //   for (const emoji of moonbirdEmojis) {
+  //     let promise = fetch(
+  //       `${process.env.NEXT_PUBLIC_MOONBIRDS_GENERATOR_URL}/api/v1/emojis/generateV2?tokenId=${index}&emoji_type=${emoji.emoji_type}`,
+  //     );
+
+  //     promise
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         let result = {
+  //           colored: data.colored,
+  //           transparent: data.transparent,
+  //           emojiType: emoji.emoji_type,
+  //         };
+
+  //         setGeneratedEmojis((prev) => [
+  //           ...prev,
+  //           {
+  //             image: result.colored,
+  //             emoji_type: result.emojiType,
+  //             type: "png",
+  //           },
+  //         ]);
+  //         setGeneratedEmojisTransparent((prev) => [
+  //           ...prev,
+  //           {
+  //             image: result.transparent,
+  //             emoji_type: result.emojiType,
+  //             type: "png",
+  //           },
+  //         ]);
+  //         setProgress(generatedEmojis.length);
+  //       })
+  //       .catch((error) => console.log(error));
+
+  //     promises.push(promise);
+  //   }
+
+  //   Promise.all(promises).finally(() => setLoading(false));
+  // }
   async function generate() {
     setLoading(true);
 
@@ -230,7 +273,7 @@ export default function MoonbirdGenerated({
                     variant="violet"
                     icon={<ArrowLeftIcon className="h-6 w-6 rounded" />}
                   />
-                  <h1 className="font-pixelify-b  flex-1 text-center  text-white md:text-xl xl:text-3xl">
+                  <h1 className="flex-1  text-center font-pixelify-b  text-white md:text-xl xl:text-3xl">
                     Moonbird #{index + 1}
                   </h1>
 

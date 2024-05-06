@@ -55,6 +55,7 @@ export default function MoonbirdGenerated({
 
   const [hasBg, setHasBg] = useState(true);
   const [showDoneModal, setShowDoneModal] = useState(false);
+  const [allEmojisSelected, setAllEmojisSelected] = useState(false);
   const [packId, setPackId] = useState<string>("ABCDEFGHIJKL");
   const [generatedEmojis, setGeneratedEmojis] = useState<any[]>([]);
   const [selectedEmojis, setSelectedEmojis] = useState<number[]>([]);
@@ -194,13 +195,10 @@ export default function MoonbirdGenerated({
     }
   }
 
-  const allSelected = loading
-    ? false
-    : selectedEmojis.length === generatedEmojis.length;
-
   function selectAll() {
-    if (allSelected) {
+    if (allEmojisSelected) {
       setSelectedEmojis([]);
+      setAllEmojisSelected(false);
       return;
     }
 
@@ -210,6 +208,7 @@ export default function MoonbirdGenerated({
     }
 
     setSelectedEmojis(selectedIndices);
+    setAllEmojisSelected(true);
   }
 
   return (
@@ -230,7 +229,7 @@ export default function MoonbirdGenerated({
                     variant="violet"
                     icon={<ArrowLeftIcon className="h-6 w-6 rounded" />}
                   />
-                  <h1 className="font-pixelify-b  flex-1 text-center  text-white md:text-xl xl:text-3xl">
+                  <h1 className="flex-1  text-center font-pixelify-b  text-white md:text-xl xl:text-3xl">
                     Moonbird #{index + 1}
                   </h1>
 
@@ -398,15 +397,22 @@ export default function MoonbirdGenerated({
                       </div>
                     </div>
                     {/* Select all */}
-                    <div className="mb-2 flex flex-row gap-3">
+                    <div
+                      className={cn("mb-2 flex flex-row gap-3", {
+                        // invisible: platform === "",
+                      })}
+                    >
                       <Switch
-                        checked={allSelected}
+                        checked={allEmojisSelected}
+                        disabled={platform === ""}
                         onChange={(checked) => selectAll()}
                         className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors`}
                       >
                         <span
                           className={`${
-                            allSelected ? "translate-x-6 " : "translate-x-1  "
+                            allEmojisSelected
+                              ? "translate-x-6 "
+                              : "translate-x-1  "
                           } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
                         />
                       </Switch>
@@ -468,21 +474,22 @@ export default function MoonbirdGenerated({
                     Background
                   </div>
                 </div>
+
                 {/* Select all */}
-                <div className="mb-2 flex flex-row gap-3">
+                <div
+                  className={cn("mb-2 flex flex-row gap-3", {
+                    // invisible: platform === "",
+                  })}
+                >
                   <Switch
+                    checked={allEmojisSelected}
                     disabled={platform === ""}
-                    checked={allSelected}
                     onChange={(checked) => selectAll()}
-                    className={cn(
-                      `relative inline-flex h-6 w-11 items-center rounded-full `,
-                      "border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors",
-                      "disabled:cursor-not-allowed disabled:opacity-60",
-                    )}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors`}
                   >
                     <span
                       className={`${
-                        allSelected ? "translate-x-6 " : "translate-x-1  "
+                        allEmojisSelected ? "translate-x-6 " : "translate-x-1  "
                       } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
                     />
                   </Switch>

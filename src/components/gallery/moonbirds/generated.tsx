@@ -501,8 +501,8 @@ export default function MoonbirdGenerated({
 
               <div
                 className={cn(
-                  "grid grid-cols-2 gap-4 overflow-y-auto overflow-x-visible  sm:grid-cols-3 md:grid-cols-4 ",
-                  "flex-1",
+                  "grid grid-cols-2 gap-4 overflow-y-auto overflow-x-clip  sm:grid-cols-3 md:grid-cols-4 ",
+                  "flex-1 pr-1",
                 )}
               >
                 {hasBg

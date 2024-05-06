@@ -77,7 +77,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
           />
         </div>
         <div className="flex w-[40vw] justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
-          <div className="text-black">#{index}</div>
+          <div className="text-xs text-black">#{index}</div>
           <div className="flex h-fit items-center gap-3">
             <button
               onClick={() => {

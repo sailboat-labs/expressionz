@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import { GALLERY } from "@/data/gallery";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
 
 export default function GalleryImage({
   wizard,
@@ -15,10 +16,6 @@ export default function GalleryImage({
   index: number;
 }) {
   const router = useRouter();
-
-  function closeModal() {
-    router.push("/");
-  }
 
   async function download(path: string) {
     const response = await fetch(path);
@@ -31,7 +28,10 @@ export default function GalleryImage({
     URL.revokeObjectURL(url);
   }
 
-  //On click escape, go to homescreen
+  function goToPreviousPage() {
+    router.replace(`/collections/wizards/`);
+  }
+
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -45,7 +45,7 @@ export default function GalleryImage({
   return (
     <div className="z-[2] flex h-screen w-screen items-center justify-center text-black">
       {/* Desktop */}
-      <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto md:flex">
+      <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto lg:flex">
         <div className=" hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
           <Image
             src="/images/desktop_wizard_background.webp"
@@ -66,9 +66,7 @@ export default function GalleryImage({
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 1 }}
                         className="absolute left-0 top-0 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-[#C1410B] text-[#C1410B]"
-                        onClick={() => {
-                          router.push(`/collections/wizards/`);
-                        }}
+                        onClick={() => goToPreviousPage()}
                       >
                         <ArrowLeftIcon className="h-6 w-6 rounded" />
                       </motion.button>
@@ -114,7 +112,7 @@ export default function GalleryImage({
               </div>
             </div>
             <div className=" -ml-4 h-full w-full flex-1">
-              <div className="mt-10 flex flex-col gap-2 pr-5">
+              <div className="mt-10 flex flex-col gap-2 pr-5 lg:mt-6">
                 <div className="z-[2] mb-3 flex h-fit items-center justify-between">
                   <div className="flex w-full items-center justify-between">
                     <span className="font-bold text-[#3E1600]">Traits</span>
@@ -152,9 +150,7 @@ export default function GalleryImage({
                         <ion-icon name="share-social"></ion-icon>
                       </div>
                       <div
-                        onClick={() => {
-                          closeModal();
-                        }}
+                        onClick={() => goToPreviousPage()}
                         className="ml-1 flex h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
                       >
                         <ion-icon name="close"></ion-icon>
@@ -162,7 +158,7 @@ export default function GalleryImage({
                     </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid gap-5 xl:grid-cols-2">
                   {wizard.meta.attributes.map((attribute, index) => (
                     <div
                       key={attribute.trait_type}
@@ -176,8 +172,12 @@ export default function GalleryImage({
                       </div>
 
                       <div className="flex-1">
-                        <div>{attribute.trait_type}</div>
-                        <div className="font-bold">{attribute.value}</div>
+                        <div className={cn("text-xs")}>
+                          {attribute.trait_type}
+                        </div>
+                        <div className="text-xxs font-bold">
+                          {attribute.value}
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -195,7 +195,7 @@ export default function GalleryImage({
                       {/* Copy */}
                       <img src="/images/copy.webp" className="h-6 w-6" />
                     </div>
-                    <div className="hidden text-lg font-semibold uppercase md:block">{`#${wizard.id.slice(
+                    <div className="hidden text-sm font-semibold uppercase md:block">{`#${wizard.id.slice(
                       0,
                       20,
                     )}...${wizard.id.slice(
@@ -211,8 +211,8 @@ export default function GalleryImage({
       </div>
 
       {/* Mobile */}
-      <div className="fixed inset-0 block scale-95 overflow-y-hidden md:hidden">
-        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all md:hidden">
+      <div className="fixed inset-0 block scale-95 overflow-y-hidden lg:hidden">
+        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all ">
           <Image
             src="/images/mobile_wizard_background.webp"
             className="absolute h-full w-full rounded-t-md md:h-full md:w-full"
@@ -242,9 +242,7 @@ export default function GalleryImage({
                 <ion-icon name="share-social"></ion-icon>
               </div>
               <div
-                onClick={() => {
-                  closeModal();
-                }}
+                onClick={() => goToPreviousPage()}
                 className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
               >
                 <ion-icon name="close"></ion-icon>
@@ -306,8 +304,12 @@ export default function GalleryImage({
                     </div>
 
                     <div className="flex-1">
-                      <div>{attribute.trait_type}</div>
-                      <div className="font-bold">{attribute.value}</div>
+                      <div className={cn("text-xs")}>
+                        {attribute.trait_type}
+                      </div>
+                      <div className="text-xxs font-bold">
+                        {attribute.value}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -317,7 +319,7 @@ export default function GalleryImage({
             {/* Inscription ID */}
             <div className="mt-5 px-5">
               <div className="flex items-center justify-between">
-                <span className="text-lg font-bold">Inscription ID</span>
+                <span className="text-sm font-bold">Inscription ID</span>
                 <div className="flex gap-3">
                   <div
                     onClick={() => {
@@ -353,7 +355,7 @@ export default function GalleryImage({
                   {/* Copy */}
                   <img src="/images/copy.webp" className="h-6 w-6" />
                 </div>
-                <div className="block text-xs font-semibold uppercase md:hidden">{`#${wizard.id.slice(
+                <div className="block text-xs font-semibold uppercase lg:hidden">{`#${wizard.id.slice(
                   0,
                   15,
                 )}...${wizard.id.slice(

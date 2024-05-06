@@ -12,7 +12,7 @@ export default function WizardPage() {
   return (
     <>
       <Seo title={`${wizard?.meta.name}`} />
-      <main className="flex h-screen w-full flex-1 items-center justify-center overflow-hidden">
+      <main className="flex h-screen w-full flex-1 items-center justify-center overflow-hidden font-presstart">
         <img
           src="/images/background.png"
           className="fixed z-[1] h-screen w-screen object-cover"

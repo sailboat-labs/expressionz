@@ -16,10 +16,6 @@ export default function GalleryImage({
 }) {
   const router = useRouter();
 
-  function closeModal() {
-    router.push("/");
-  }
-
   async function download(path: string) {
     const response = await fetch(path);
     const blob = await response.blob();
@@ -31,7 +27,10 @@ export default function GalleryImage({
     URL.revokeObjectURL(url);
   }
 
-  //On click escape, go to homescreen
+  function goToPreviousPage() {
+    router.replace(`/collections/wizards/`);
+  }
+
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -66,9 +65,7 @@ export default function GalleryImage({
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 1 }}
                         className="absolute left-0 top-0 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-[#C1410B] text-[#C1410B]"
-                        onClick={() => {
-                          router.push(`/collections/wizards/`);
-                        }}
+                        onClick={() => goToPreviousPage()}
                       >
                         <ArrowLeftIcon className="h-6 w-6 rounded" />
                       </motion.button>
@@ -152,9 +149,7 @@ export default function GalleryImage({
                         <ion-icon name="share-social"></ion-icon>
                       </div>
                       <div
-                        onClick={() => {
-                          closeModal();
-                        }}
+                        onClick={() => goToPreviousPage()}
                         className="ml-1 flex h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
                       >
                         <ion-icon name="close"></ion-icon>
@@ -242,9 +237,7 @@ export default function GalleryImage({
                 <ion-icon name="share-social"></ion-icon>
               </div>
               <div
-                onClick={() => {
-                  closeModal();
-                }}
+                onClick={() => goToPreviousPage()}
                 className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
               >
                 <ion-icon name="close"></ion-icon>

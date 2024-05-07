@@ -92,7 +92,7 @@ export default function MoonbirdPage() {
                   >
                     <img
                       src="/images/buttons/download_pfp.webp"
-                      className="w-40"
+                      className="w-48"
                     />
                   </button>
                   <button
@@ -114,7 +114,7 @@ export default function MoonbirdPage() {
             </React.Fragment>,
             <React.Fragment key="right-item">
               {/* RIGHT CONTENT */}
-              <div className="flex  flex-col gap-2 pr-5 lg:mt-5">
+              <div className="mt-5  flex flex-col gap-2 pr-5">
                 <div className="z-[2] mb-3 flex h-fit items-center justify-between">
                   <div className="flex w-full items-center justify-between">
                     <span className="font-pixelify-b  text-white  md:text-lg xl:text-2xl">

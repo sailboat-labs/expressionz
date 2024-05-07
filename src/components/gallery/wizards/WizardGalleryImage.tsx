@@ -92,7 +92,7 @@ export default function GalleryImage({
                         }}
                         className="w-fit cursor-pointer"
                       >
-                        <img src="/images/download_pfp.webp" className="w-40" />
+                        <img src="/images/download_pfp.webp" className="w-48" />
                       </button>
                       <button
                         className="w-fit cursor-pointer"
@@ -270,7 +270,7 @@ export default function GalleryImage({
                   }}
                   className="w-fit cursor-pointer"
                 >
-                  <img src="/images/download_pfp.webp" className="w-36" />
+                  <img src="/images/download_pfp.webp" className="w-44" />
                 </button>
                 <button
                   className="w-fit cursor-pointer"

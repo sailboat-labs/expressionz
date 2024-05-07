@@ -32,6 +32,8 @@ const wagmiConfig = getDefaultConfig({
 
 const queryClient = new QueryClient();
 
+// new TraitUpdater("moonbirds").update();
+
 export default function App({ Component, pageProps }: AppProps) {
   const [auth, setAuth] = useState();
   return (

@@ -10,6 +10,9 @@ module.exports = {
         "pixelify-r": ["PixelifySansRegular"],
         "pixelify-l": ["PixelifySansLight"],
       },
+      fontSize: {
+        xxs: "10px",
+      },
       colors: {
         darkPurple: "#262630",
         yellow: "#FFD702",

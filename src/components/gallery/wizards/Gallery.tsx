@@ -169,19 +169,19 @@ export default function Gallery() {
 
   return (
     <div className="h-screen w-full flex-1  overflow-x-hidden md:overflow-y-auto">
-      <div className="flex justify-center md:justify-start">
-        <div className="mb-3 mt-5 w-fit text-3xl text-white">
+      <div className="flex justify-center px-2 md:justify-start">
+        <div className="mb-3 mt-5 w-fit text-xl text-white">
           Gallery ({gallery.length})
         </div>
       </div>
 
       {selectedAttributes.length > 0 && (
-        <div className="flex w-screen flex-col justify-center gap-5 overflow-x-auto md:ml-5 md:justify-start">
-          <div className="mb-5 flex gap-2 px-4 md:px-0">
+        <div className="flex w-screen flex-col justify-center gap-5 overflow-x-auto  px-2 md:justify-start">
+          <div className="mb-5 flex gap-2 text-sm md:px-0">
             {selectedAttributes.map((attr, index) => (
               <div
                 key={index}
-                className="flex w-fit rounded-md bg-orange-100 px-2 py-1 text-orange-500"
+                className="text-xxs flex w-fit rounded-md bg-orange-100 px-2 py-1 text-orange-500"
               >
                 <div className="truncate">{attr.split(":")[0]}</div>:
                 <div>{attr.split(":")[1]}</div>
@@ -201,7 +201,7 @@ export default function Gallery() {
                     },
                   );
                 }}
-                className="rounded-md bg-red-100 px-2 py-1 text-red-500"
+                className="text-xxs rounded-md bg-red-100 px-2 py-1 text-red-500"
               >
                 Clear
               </button>

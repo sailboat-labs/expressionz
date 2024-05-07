@@ -399,7 +399,7 @@ export default function MoonbirdGenerated({
                     {/* Select all */}
                     <div
                       className={cn("mb-2 flex flex-row gap-3", {
-                        // invisible: platform === "",
+                        invisible: platform === "",
                       })}
                     >
                       <Switch
@@ -478,7 +478,7 @@ export default function MoonbirdGenerated({
                 {/* Select all */}
                 <div
                   className={cn("mb-2 flex flex-row gap-3", {
-                    // invisible: platform === "",
+                    invisible: platform === "",
                   })}
                 >
                   <Switch

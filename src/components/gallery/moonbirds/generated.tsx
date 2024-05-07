@@ -387,9 +387,11 @@ export default function MoonbirdGenerated({
                         className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors`}
                       >
                         <span
-                          className={`${
-                            hasBg ? "translate-x-6 " : "translate-x-1 "
-                          } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
+                          className={cn(
+                            "inline-block h-4 w-4 transform rounded-full  transition-transform",
+                            hasBg ? "!bg-[#3E2A57]" : "!bg-white",
+                            hasBg ? "translate-x-6 " : "translate-x-1 ",
+                          )}
                         />
                       </Switch>
                       <div className="text-base font-semibold text-white">
@@ -409,11 +411,13 @@ export default function MoonbirdGenerated({
                         className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors`}
                       >
                         <span
-                          className={`${
+                          className={cn(
+                            "inline-block h-4 w-4 transform rounded-full  transition-transform",
+                            allEmojisSelected ? "!bg-[#3E2A57]" : "!bg-white",
                             allEmojisSelected
                               ? "translate-x-6 "
-                              : "translate-x-1  "
-                          } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
+                              : "translate-x-1 ",
+                          )}
                         />
                       </Switch>
                       <div className="text-base font-semibold text-white">
@@ -465,9 +469,11 @@ export default function MoonbirdGenerated({
                     className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors`}
                   >
                     <span
-                      className={`${
-                        hasBg ? "translate-x-6 " : "translate-x-1 "
-                      } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
+                      className={cn(
+                        "inline-block h-4 w-4 transform rounded-full  transition-transform",
+                        hasBg ? "!bg-[#3E2A57]" : "!bg-white",
+                        hasBg ? "translate-x-6 " : "translate-x-1 ",
+                      )}
                     />
                   </Switch>
                   <div className="text-base font-semibold text-white">
@@ -488,9 +494,11 @@ export default function MoonbirdGenerated({
                     className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors`}
                   >
                     <span
-                      className={`${
-                        allEmojisSelected ? "translate-x-6 " : "translate-x-1  "
-                      } inline-block h-4 w-4 transform rounded-full !bg-[#3E2A57] transition-transform`}
+                      className={cn(
+                        "inline-block h-4 w-4 transform rounded-full  transition-transform",
+                        allEmojisSelected ? "!bg-[#3E2A57]" : "!bg-white",
+                        allEmojisSelected ? "translate-x-6 " : "translate-x-1 ",
+                      )}
                     />
                   </Switch>
                   <div className="text-base font-semibold text-white">

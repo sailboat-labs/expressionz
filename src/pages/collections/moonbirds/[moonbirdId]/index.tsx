@@ -48,7 +48,7 @@ export default function MoonbirdPage() {
                     variant="violet"
                     icon={<ArrowLeftIcon className="h-6 w-6 rounded" />}
                   />
-                  <h1 className="font-pixelify-b flex-1 text-center text-white md:text-xl xl:text-3xl">
+                  <h1 className="flex-1 text-center font-pixelify-b text-white md:text-xl xl:text-3xl">
                     Moonbird #{index + 1}
                   </h1>
 
@@ -84,7 +84,7 @@ export default function MoonbirdPage() {
                   />
                 </div>
                 <div className="mb-5 mt-2 flex flex-col items-center gap-5 md:flex md:gap-4">
-                  <div
+                  <button
                     onClick={() => {
                       download(`/images/moonbirds/tokens/${index}.png`);
                     }}
@@ -94,8 +94,8 @@ export default function MoonbirdPage() {
                       src="/images/buttons/download_pfp.webp"
                       className="w-40"
                     />
-                  </div>
-                  <div
+                  </button>
+                  <button
                     className="w-fit cursor-pointer"
                     onClick={() => {
                       router.push(
@@ -104,10 +104,11 @@ export default function MoonbirdPage() {
                     }}
                   >
                     <img
-                      src="/images/buttons/generate-btn.webp"
+                      src="/images/buttons/expressionz_active.webp"
+                      // src="/images/generate-btn.webp"
                       className="w-48"
                     />
-                  </div>
+                  </button>
                 </div>
               </div>
             </React.Fragment>,

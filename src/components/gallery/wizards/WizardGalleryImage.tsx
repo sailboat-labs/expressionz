@@ -86,26 +86,26 @@ export default function GalleryImage({
                       />
                     </div>
                     <div className="mb-5 mt-2 flex flex-col items-center gap-5 md:flex md:gap-4">
-                      <div
+                      <button
                         onClick={() => {
                           download(`/images/gallery/${index}.webp`);
                         }}
                         className="w-fit cursor-pointer"
                       >
                         <img src="/images/download_pfp.webp" className="w-40" />
-                      </div>
-                      <div
+                      </button>
+                      <button
                         className="w-fit cursor-pointer"
                         onClick={() => {
                           router.push(`${wizard.id}/generated`);
                         }}
                       >
                         <img
-                          // src='/images/expressionz-btn.webp'
-                          src="/images/generate-btn.webp"
+                          src="/images/buttons/expressionz_active.webp"
+                          // src="/images/generate-btn.webp"
                           className="w-48"
                         />
-                      </div>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -264,22 +264,26 @@ export default function GalleryImage({
                 />
               </div>
               <div className="mb-5 mt-10 flex flex-col items-center gap-5 md:flex md:gap-4">
-                <div
+                <button
                   onClick={() => {
                     download(`/images/gallery/${index}.webp`);
                   }}
                   className="w-fit cursor-pointer"
                 >
                   <img src="/images/download_pfp.webp" className="w-36" />
-                </div>
-                <div
+                </button>
+                <button
                   className="w-fit cursor-pointer"
                   onClick={() => {
                     router.push(`${wizard.id}/generated`);
                   }}
                 >
-                  <img src="/images/generate-btn.webp" className="w-44" />
-                </div>
+                  <img
+                    src="/images/buttons/expressionz_active.webp"
+                    // src="/images/generate-btn.webp"
+                    className="w-44"
+                  />
+                </button>
               </div>
             </div>
 

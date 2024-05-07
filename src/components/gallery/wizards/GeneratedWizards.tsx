@@ -264,14 +264,14 @@ export default function GeneratedWizards({
     switch (platform) {
       case "telegram":
         return (
-          <p>
+          <p className="text-xs">
             Select either animated or <br />
             static stickers to export.
           </p>
         );
       case "discord":
         return (
-          <p>
+          <p className="text-xs">
             You can choose both animated <br />
             and static stickers to export.
           </p>
@@ -279,7 +279,7 @@ export default function GeneratedWizards({
 
       default:
         return (
-          <p>
+          <p className="text-xs">
             Choose a platform to <br />
             export your stickers to
           </p>
@@ -290,8 +290,8 @@ export default function GeneratedWizards({
   return (
     <div className="z-[2] flex h-screen w-screen items-center justify-center text-black">
       {/* Desktop */}
-      <div className="fixed inset-0 hidden scale-90 items-start justify-center overflow-y-auto md:flex">
-        <div className="hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
+      <div className="fixed inset-0 hidden scale-90 items-start justify-center overflow-y-auto lg:flex">
+        <div className=" flex h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all">
           <img
             src="/images/desktop_wizard_background.webp"
             className="absolute h-[40vw] w-[40vw] rounded-t-md md:h-full md:w-full"
@@ -452,8 +452,8 @@ export default function GeneratedWizards({
                   <div className="text-base font-semibold">Background</div>
                 </div> */}
 
-                <div className="flex-1 overflow-y-auto">
-                  <div className="grid gap-1 pt-4  md:grid-cols-3">
+                <div className="flex-1 overflow-y-auto overflow-x-clip">
+                  <div className="grid gap-4 pt-4  md:grid-cols-3">
                     {hasBg
                       ? generatedEmojis.map((emoji, i) => (
                           <GeneratedItem
@@ -478,31 +478,32 @@ export default function GeneratedWizards({
                           />
                         ))}
                   </div>
-                  <div
-                    className={cn(
-                      "mt-4 justify-center",
-                      platform ? "flex " : "hidden ",
-                    )}
+                </div>
+
+                <div
+                  className={cn(
+                    "mt-4 justify-center",
+                    platform ? "flex " : "invisible ",
+                  )}
+                >
+                  <button
+                    className="h-fit w-fit"
+                    onClick={() => exportEmojis()}
                   >
-                    <button
-                      className="h-fit w-fit"
-                      onClick={() => exportEmojis()}
-                    >
-                      <img
-                        src={`/images/share/export-${
-                          selectedEmojis.length == 0
-                            ? "pressed.webp"
-                            : "active.webp"
-                        }`}
-                        alt="Export button"
-                        className={`h-auto w-40 ${
-                          selectedEmojis.length == 0
-                            ? "cursor-not-allowed"
-                            : "cursor-pointer"
-                        }`}
-                      />
-                    </button>
-                  </div>
+                    <img
+                      src={`/images/share/export-${
+                        selectedEmojis.length == 0
+                          ? "pressed.webp"
+                          : "active.webp"
+                      }`}
+                      alt="Export button"
+                      className={`h-auto w-40 ${
+                        selectedEmojis.length == 0
+                          ? "cursor-not-allowed"
+                          : "cursor-pointer"
+                      }`}
+                    />
+                  </button>
                 </div>
               </div>
             </div>
@@ -511,8 +512,8 @@ export default function GeneratedWizards({
       </div>
 
       {/* Mobile */}
-      <div className="fixed inset-0 block scale-95 overflow-y-hidden md:hidden">
-        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all md:hidden">
+      <div className="fixed inset-0 block scale-95 overflow-y-hidden lg:hidden">
+        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-y-auto overflow-x-clip rounded p-3 text-left align-middle transition-all ">
           <Image
             src="/images/mobile_wizard_background.webp"
             className="absolute h-full w-full rounded-t-md md:h-full md:w-full"
@@ -562,7 +563,7 @@ export default function GeneratedWizards({
             </div>
           </div>
 
-          <div className="absolute z-[2] mt-5 h-[72vh] w-[75vw] overflow-auto">
+          <div className="absolute z-[2] mt-5 box-border h-[72vh] w-[78vw] overflow-y-auto  pr-3">
             {/* Wizard */}
             <div className="flex flex-col items-center">
               <div className="relative flex h-[50vw] w-[50vw] items-center justify-center">
@@ -661,14 +662,14 @@ export default function GeneratedWizards({
                   } inline-block h-4 w-4 transform rounded-full transition-transform`}
                 />
               </Switch>
-              <div className="text-base font-semibold">Background</div>
+              <div className="text-sm font-semibold">Background</div>
             </div>
 
             <div className="mx-2 mt-2 text-left">{getText()}</div>
 
             {/* Generated Emojis */}
             <div className="pb-10">
-              <div className="grid grid-cols-2 place-items-center gap-3 px-2">
+              <div className="mt-4 grid grid-cols-3 place-items-center gap-3 px-2">
                 {hasBg
                   ? generatedEmojis.map((emoji, i) => (
                       <GeneratedItem
@@ -730,7 +731,7 @@ export default function GeneratedWizards({
       />
 
       {/* Loading */}
-      <WizardsLoader show={isGenerating} progress={progress} total={12} />
+      <WizardsLoader show={false} progress={progress} total={12} />
     </div>
   );
 }

@@ -24,6 +24,7 @@ import DoneModal from "@/components/shared/DoneModal";
 import { WizardsLoader } from "@/components/WizardsLoader";
 import { createDiscordEmojiPack } from "@/lib/utils/share/wizards/discord";
 import { createTelegramStickerPack } from "@/lib/utils/share/wizards/telegram";
+import { cn } from "@/lib/utils";
 
 export default function GeneratedWizards({
   wizard,
@@ -306,7 +307,7 @@ export default function GeneratedWizards({
                       />
                     </div>
                     <div className="mb-5 mt-4 flex flex-col items-center gap-5 md:flex md:gap-4">
-                      <div
+                      <button
                         onClick={() => {
                           download(`/images/gallery/${index}.webp`, index);
                         }}
@@ -317,15 +318,15 @@ export default function GeneratedWizards({
                           className="w-40"
                           alt="Download pfp button"
                         />
-                      </div>
-                      {/* <div className="w-fit cursor-not-allowed">
+                      </button>
+                      {/* <button className="w-fit cursor-not-allowed">
                         <img
                           // src='/images/expressionz-btn-disabled.webp'
                           src="/images/generate-pressed-btn.webp"
                           className="w-48"
                           alt="Generate button"
                         />
-                      </div> */}
+                      </button> */}
                     </div>
                   </div>
                 </div>
@@ -388,13 +389,13 @@ export default function GeneratedWizards({
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <div
+                    <button
                       onClick={downloadEmojis}
                       className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
                     >
                       <ArrowDownIcon className="h-5 w-5" />
-                    </div>
-                    <div
+                    </button>
+                    <button
                       onClick={() => {
                         // router.replace("/");
                         router.back();
@@ -402,7 +403,7 @@ export default function GeneratedWizards({
                       className="ml-1 flex  h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
                     >
                       <Cross1Icon className="h-5 w-5" />
-                    </div>
+                    </button>
                   </div>
                 </div>
 
@@ -455,14 +456,15 @@ export default function GeneratedWizards({
                         ))}
                   </div>
                   <div
-                    className={`${
-                      platform ? "flex " : "hidden "
-                    } justify-center`}
+                    className={cn(
+                      "mt-4 justify-center",
+                      platform ? "flex " : "hidden ",
+                    )}
                   >
                     <img
                       src={`/images/share/export-${
                         selectedEmojis.length == 0
-                          ? "active.webp"
+                          ? "pressed.webp"
                           : "active.webp"
                       }`}
                       alt="Export button"

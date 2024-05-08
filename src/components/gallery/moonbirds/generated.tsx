@@ -79,7 +79,9 @@ export default function MoonbirdGenerated({
   useEffect(() => {
     generate();
   }, []);
-
+  /**
+   * Promises implementation
+   */
   // async function generate() {
   //   setLoading(true);
   //   let promises = [];
@@ -122,6 +124,11 @@ export default function MoonbirdGenerated({
 
   //   Promise.all(promises).finally(() => setLoading(false));
   // }
+
+  /**
+   * Todo: uncomment
+   * - Initial implementation
+   */
   async function generate() {
     setLoading(true);
 

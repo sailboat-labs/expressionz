@@ -43,7 +43,7 @@ export default function GalleryImage({
   }, []);
 
   return (
-    <div className="z-[2] flex h-screen w-screen items-center justify-center text-black">
+    <div className="z-[2] flex h-screen w-screen items-center justify-center font-pixelify-r  text-black">
       {/* Desktop */}
       <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto lg:flex">
         <div className=" hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
@@ -70,15 +70,15 @@ export default function GalleryImage({
                       >
                         <ArrowLeftIcon className="h-6 w-6 rounded" />
                       </motion.button>
-                      <div className="flex-1 text-center font-presstart md:text-2xl">
+                      <div className="flex-1 text-center font-pixelify-b md:text-xl xl:text-3xl">
                         Wizard #{index}
                       </div>
                     </div>
 
-                    <div className="relative flex h-[21vw] w-[21vw] items-center justify-center">
+                    <div className="relative flex h-[18vw] w-[18vw] items-center justify-center">
                       <img
                         src={`/images/gallery/${index}.webp`}
-                        className=" h-[18vw] w-[18vw] rounded"
+                        className=" h-[15vw] w-[15vw] rounded"
                       />
                       <img
                         src="/images/frame.webp"
@@ -92,7 +92,7 @@ export default function GalleryImage({
                         }}
                         className="w-fit cursor-pointer"
                       >
-                        <img src="/images/download_pfp.webp" className="w-40" />
+                        <img src="/images/download_pfp.webp" className="w-48" />
                       </button>
                       <button
                         className="w-fit cursor-pointer"
@@ -115,9 +115,11 @@ export default function GalleryImage({
               <div className="mt-10 flex flex-col gap-2 pr-5 lg:mt-6">
                 <div className="z-[2] mb-3 flex h-fit items-center justify-between">
                   <div className="flex w-full items-center justify-between">
-                    <span className="font-bold text-[#3E1600]">Traits</span>
+                    <span className=" font-pixelify-b font-bold  text-[#3E1600]  md:text-lg xl:text-2xl">
+                      Traits
+                    </span>
                     <div className="flex items-center gap-4">
-                      <div
+                      <button
                         onClick={() => {
                           window.open(
                             `https://ordinals.com/inscription/${wizard.id}`,
@@ -127,18 +129,22 @@ export default function GalleryImage({
                         className="-mr-2 cursor-pointer rounded-full border-2 border-black p-1"
                       >
                         <div className="h-5 w-5 rounded-full bg-black"></div>
-                      </div>
-                      <img
+                      </button>
+                      <button
+                        className="h-fit w-fit"
                         onClick={() => {
                           window.open(
                             `https://magiceden.io/ordinals/item-details/${wizard.id}`,
                             "_blank",
                           );
                         }}
-                        className="h-8 w-8 cursor-pointer rounded-md"
-                        src="/images/MELOGO.png"
-                      />
-                      <div
+                      >
+                        <img
+                          className="h-8 w-8 cursor-pointer rounded-md"
+                          src="/images/MELOGO.png"
+                        />
+                      </button>
+                      <button
                         onClick={() => {
                           navigator.clipboard.writeText(
                             `https://twoo.expressionz.xyz/?id=${wizard.id}`,
@@ -148,17 +154,17 @@ export default function GalleryImage({
                         className="flex h-5 w-5 scale-150 cursor-pointer items-center justify-center rounded border border-orange-700 bg-orange-200 text-orange-700"
                       >
                         <ion-icon name="share-social"></ion-icon>
-                      </div>
-                      <div
+                      </button>
+                      <button
                         onClick={() => goToPreviousPage()}
                         className="ml-1 flex h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
                       >
                         <ion-icon name="close"></ion-icon>
-                      </div>
+                      </button>
                     </div>
                   </div>
                 </div>
-                <div className="grid gap-5 xl:grid-cols-2">
+                <div className="grid gap-5 lg:grid-cols-2">
                   {wizard.meta.attributes.map((attribute, index) => (
                     <div
                       key={attribute.trait_type}
@@ -172,10 +178,8 @@ export default function GalleryImage({
                       </div>
 
                       <div className="flex-1">
-                        <div className={cn("text-xs")}>
-                          {attribute.trait_type}
-                        </div>
-                        <div className="text-xxs font-bold">
+                        <div>{attribute.trait_type}</div>
+                        <div className={cn("font-pixelify-b font-bold")}>
                           {attribute.value}
                         </div>
                       </div>
@@ -183,9 +187,11 @@ export default function GalleryImage({
                   ))}
                 </div>
                 <div className="mt-5">
-                  <div className="font-bold text-[#3E1600]">Inscription ID</div>
+                  <div className="font-pixelify-b font-bold text-[#3E1600]">
+                    Inscription ID
+                  </div>
                   <div className="mt-1 flex gap-2">
-                    <div
+                    <button
                       onClick={() => {
                         navigator.clipboard.writeText(wizard.id);
                         toast.success("Copied to clipboard");
@@ -194,8 +200,8 @@ export default function GalleryImage({
                     >
                       {/* Copy */}
                       <img src="/images/copy.webp" className="h-6 w-6" />
-                    </div>
-                    <div className="hidden text-sm font-semibold uppercase md:block">{`#${wizard.id.slice(
+                    </button>
+                    <div className="hidden text-lg font-normal uppercase md:block">{`#${wizard.id.slice(
                       0,
                       20,
                     )}...${wizard.id.slice(
@@ -230,7 +236,7 @@ export default function GalleryImage({
           <div className="z-2 absolute top-6 flex w-4/5 items-center justify-between px-3">
             <div className="mt-0 text-xl font-semibold">Wizard #{index}</div>
             <div className="flex items-center gap-5">
-              <div
+              <button
                 onClick={() => {
                   navigator.clipboard.writeText(
                     `https://twoo.expressionz.xyz/?id=${wizard.id}`,
@@ -240,13 +246,13 @@ export default function GalleryImage({
                 className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
               >
                 <ion-icon name="share-social"></ion-icon>
-              </div>
-              <div
+              </button>
+              <button
                 onClick={() => goToPreviousPage()}
                 className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
               >
                 <ion-icon name="close"></ion-icon>
-              </div>
+              </button>
             </div>
           </div>
 
@@ -270,7 +276,7 @@ export default function GalleryImage({
                   }}
                   className="w-fit cursor-pointer"
                 >
-                  <img src="/images/download_pfp.webp" className="w-36" />
+                  <img src="/images/download_pfp.webp" className="w-44" />
                 </button>
                 <button
                   className="w-fit cursor-pointer"
@@ -291,10 +297,12 @@ export default function GalleryImage({
             <div className="mt-5 flex flex-col gap-2 px-5">
               <div className="z-[2] mb-3 flex h-fit items-center justify-between gap-3">
                 <div className="flex w-full items-center justify-between">
-                  <span className="font-bold text-[#3E1600]">Traits</span>
+                  <span className="text-xl font-bold text-[#3E1600]">
+                    Traits
+                  </span>
                 </div>
               </div>
-              <div className="grid grid-cols-1 gap-5">
+              <div className="grid grid-cols-2 gap-5">
                 {wizard.meta.attributes.map((attribute, index) => (
                   <div
                     key={attribute.trait_type}
@@ -308,12 +316,8 @@ export default function GalleryImage({
                     </div>
 
                     <div className="flex-1">
-                      <div className={cn("text-xs")}>
-                        {attribute.trait_type}
-                      </div>
-                      <div className="text-xxs font-bold">
-                        {attribute.value}
-                      </div>
+                      <div className={cn("")}>{attribute.trait_type}</div>
+                      <div className=" font-bold">{attribute.value}</div>
                     </div>
                   </div>
                 ))}
@@ -323,9 +327,9 @@ export default function GalleryImage({
             {/* Inscription ID */}
             <div className="mt-5 px-5">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-bold">Inscription ID</span>
+                <span className="text-xl font-bold">Inscription ID</span>
                 <div className="flex gap-3">
-                  <div
+                  <button
                     onClick={() => {
                       window.open(
                         `https://ordinals.com/inscription/${wizard.id}`,
@@ -335,31 +339,35 @@ export default function GalleryImage({
                     className="cursor-pointer rounded-full border-2 border-black p-1"
                   >
                     <div className="h-5 w-5 rounded-full bg-black"></div>
-                  </div>
-                  <img
+                  </button>
+                  <button
+                    className="h-fit w-fit"
                     onClick={() => {
                       window.open(
                         `https://magiceden.io/ordinals/item-details/${wizard.id}`,
                         "_blank",
                       );
                     }}
-                    className="h-8 w-8 cursor-pointer rounded-md"
-                    src="/images/MELOGO.png"
-                  />
+                  >
+                    <img
+                      className="h-8 w-8 cursor-pointer rounded-md"
+                      src="/images/MELOGO.png"
+                    />
+                  </button>
                 </div>
               </div>
               <div className="mt-3 flex items-center gap-2">
-                <div
+                <button
                   onClick={() => {
                     navigator.clipboard.writeText(wizard.id);
                     toast.success("Copied to clipboard");
                   }}
-                  className="w-fit cursor-pointer rounded-md px-2 text-xs text-orange-500 transition-all"
+                  className="w-fit cursor-pointer rounded-md px-2 text-lg text-orange-500 transition-all"
                 >
                   {/* Copy */}
                   <img src="/images/copy.webp" className="h-6 w-6" />
-                </div>
-                <div className="block text-xs font-semibold uppercase lg:hidden">{`#${wizard.id.slice(
+                </button>
+                <div className="block text-lg font-semibold uppercase lg:hidden">{`#${wizard.id.slice(
                   0,
                   15,
                 )}...${wizard.id.slice(

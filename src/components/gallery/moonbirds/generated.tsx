@@ -9,10 +9,8 @@ import { downloadImagesAsZip, downloadPfp } from "@/lib/utils/download";
 import { moonbirdEmojis } from "@/lib/utils/emojis";
 import { createDiscordEmojiPack } from "@/lib/utils/share/discord";
 import { createTelegramStickerPack } from "@/lib/utils/share/telegram";
-import { PiTelegramLogo } from "react-icons/pi";
-import { RiDiscordLine } from "react-icons/ri";
-import { FaDiscord, FaTelegramPlane } from "react-icons/fa";
-import { BiLogoDiscordAlt, BiLogoTelegram } from "react-icons/bi";
+import { FaDiscord } from "react-icons/fa";
+import { BiLogoTelegram } from "react-icons/bi";
 import Seo from "@/components/shared/Seo";
 import MoonbirdDetailsFrame from "./MoonbirdDetailsFrame";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
@@ -21,24 +19,24 @@ import { Switch } from "@headlessui/react";
 import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
 import { generateMoonbirdEmojis } from "@/lib/utils/generateEmojis";
 
-const shareIcons = [
-  {
-    name: "Telegram",
-    active: "/images/share/telegram-active.webp",
-    inactive: "/images/share/telegram-inactive.webp",
-    activeIcon: <PiTelegramLogo className="h-6 w-6" />,
-    inactiveIcon: <FaTelegramPlane className="h-6 w-6" />,
-    platform: "telegram",
-  },
-  {
-    name: "Discord",
-    active: "/images/share/discord-active.webp",
-    activeIcon: <RiDiscordLine className="h-6 w-6" />,
-    inactiveIcon: <BiLogoDiscordAlt className="h-6 w-6" />,
-    inactive: "/images/share/discord-inactive.webp",
-    platform: "discord",
-  },
-];
+// const shareIcons = [
+//   {
+//     name: "Telegram",
+//     active: "/images/share/telegram-active.webp",
+//     inactive: "/images/share/telegram-inactive.webp",
+//     activeIcon: <PiTelegramLogo className="h-6 w-6" />,
+//     inactiveIcon: <FaTelegramPlane className="h-6 w-6" />,
+//     platform: "telegram",
+//   },
+//   {
+//     name: "Discord",
+//     active: "/images/share/discord-active.webp",
+//     activeIcon: <RiDiscordLine className="h-6 w-6" />,
+//     inactiveIcon: <BiLogoDiscordAlt className="h-6 w-6" />,
+//     inactive: "/images/share/discord-inactive.webp",
+//     platform: "discord",
+//   },
+// ];
 
 export default function MoonbirdGenerated({
   moonbird,

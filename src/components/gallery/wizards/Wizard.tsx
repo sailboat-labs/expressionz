@@ -1,8 +1,6 @@
-import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
-import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 export interface IWizard {
   id: string;
@@ -77,7 +75,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
           />
         </div>
         <div className="flex w-[40vw] justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
-          <div className="text-xs text-black">#{index}</div>
+          <div className="t text-black">#{index}</div>
           <div className="flex h-fit items-center gap-3">
             <button
               onClick={() => {
@@ -108,7 +106,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
         </div>
       </button>
 
-      <Transition appear show={isOpen} as={Fragment}>
+      {/* <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -134,7 +132,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="h-[100vh]  w-full transform overflow-hidden p-6 text-left align-middle shadow-xl transition-all">
-                  {/* Desktop */}
+
                   <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto md:flex">
                     <div className=" hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
                       <Image
@@ -191,14 +189,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
                                   >
                                     Download PFP
                                   </button>
-                                  {/* <div
-                                    onClick={() => {
-                                      alert('Coming soon');
-                                    }}
-                                    className='w-fit cursor-pointer rounded-md border border-blue-200 bg-blue-100 px-2 py-1 text-blue-500 transition-all hover:bg-blue-200'
-                                  >
-                                    Expressionz
-                                  </div> */}
+                                 
                                 </div>
                               </div>
                             </div>
@@ -281,7 +272,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
                     </div>
                   </div>
 
-                  {/* Mobile */}
+
                   <div className="fixed inset-0 block scale-95 overflow-y-hidden md:hidden">
                     <div className="flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all md:hidden">
                       <Image
@@ -395,14 +386,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
                                   >
                                     Download PFP
                                   </button>
-                                  {/* <div
-                                    onClick={() => {
-                                      alert('Coming soon');
-                                    }}
-                                    className='w-fit cursor-pointer rounded-md border border-blue-200 bg-blue-100 px-2 py-1 text-blue-500 transition-all hover:bg-blue-200'
-                                  >
-                                    Expressionz
-                                  </div> */}
+
                                 </div>
                                 <div className=" h-full w-full flex-1">
                                   <div className="flex flex-col gap-2 px-2">
@@ -444,7 +428,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
             </div>
           </div>
         </Dialog>
-      </Transition>
+      </Transition> */}
     </>
   );
 }

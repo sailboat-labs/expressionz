@@ -70,7 +70,6 @@ export default function FilterTraits({
 
                     "focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75",
                     {
-                      "!text-xs": collection === "wizards",
                       ["bg-orange-100  text-orange-700 hover:bg-orange-200"]:
                         theme === "orange",
                       ["bg-violet-300  text-violet-800 hover:bg-violet-400"]:
@@ -91,7 +90,6 @@ export default function FilterTraits({
                 <Disclosure.Panel
                   className={cn(
                     "flex flex-col gap-2 px-4 pb-2 pt-4  text-white",
-                    { "text-xxs": collection === "wizards" },
                   )}
                 >
                   {Object.keys((filterTraits as any)[key])

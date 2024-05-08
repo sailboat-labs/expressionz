@@ -92,7 +92,7 @@ export default function MoonbirdPage() {
                   >
                     <img
                       src="/images/buttons/download_pfp.webp"
-                      className="w-40"
+                      className="w-48"
                     />
                   </button>
                   <button
@@ -114,7 +114,7 @@ export default function MoonbirdPage() {
             </React.Fragment>,
             <React.Fragment key="right-item">
               {/* RIGHT CONTENT */}
-              <div className="flex  flex-col gap-2 pr-5 lg:mt-5">
+              <div className="mt-5  flex flex-col gap-2 pr-5">
                 <div className="z-[2] mb-3 flex h-fit items-center justify-between">
                   <div className="flex w-full items-center justify-between">
                     <span className="font-pixelify-b  text-white  md:text-lg xl:text-2xl">
@@ -184,7 +184,7 @@ export default function MoonbirdPage() {
                 <div className="mt-5 hidden">
                   <div className="font-bold text-white">Inscription ID</div>
                   <div className="mt-1 flex gap-2">
-                    <div
+                    <button
                       onClick={() => {
                         navigator.clipboard.writeText(moonbird.id);
                         toast.success("Copied to clipboard");
@@ -193,7 +193,7 @@ export default function MoonbirdPage() {
                     >
                       {/* Copy */}
                       <img src="/images/copy.webp" className="h-6 w-6" />
-                    </div>
+                    </button>
                     <div className="hidden text-lg font-semibold uppercase  md:block">{`#${moonbird.id.slice(
                       0,
                       20,

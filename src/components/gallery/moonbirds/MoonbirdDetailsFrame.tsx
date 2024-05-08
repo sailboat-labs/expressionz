@@ -28,11 +28,11 @@ const MoonbirdDetailsFrame = forwardRef(
               "grid overflow-y-auto py-12 lg:grid-cols-2 lg:overflow-y-clip lg:py-0",
             )}
           >
-            <div className="box-border h-[87vh] w-full px-8 lg:py-8">
+            <div className="box-border w-full px-8 lg:h-[87vh] lg:py-8">
               {children[0]}
             </div>
 
-            <div className="box-border h-[87vh] w-full px-8 lg:py-8">
+            <div className="box-border w-full px-8 lg:h-[87vh] lg:py-8">
               {children[1]}
             </div>
           </div>

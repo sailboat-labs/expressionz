@@ -34,13 +34,13 @@ const CollectionsPage = () => {
               >
                 <strong
                   className={cn(
-                    "font-presstart translate-y-4 text-lg uppercase text-yellow",
+                    "translate-y-4 font-presstart text-lg uppercase text-yellow",
                   )}
                 >
                   Moonbirds
                 </strong>
                 <img
-                  className="h-auto w-[200px]"
+                  className="h-auto min-h-[168px] w-[200px]"
                   src="/images/moonbird.png"
                   alt="moonbird"
                 />
@@ -63,7 +63,7 @@ const CollectionsPage = () => {
                   Wizards
                 </strong>
                 <img
-                  className="h-auto w-[200px]"
+                  className="h-auto min-h-[168px] w-[200px]"
                   src="/images/wizard.png"
                   alt="moonbird"
                 />

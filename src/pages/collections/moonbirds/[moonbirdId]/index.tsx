@@ -184,7 +184,7 @@ export default function MoonbirdPage() {
                 <div className="mt-5 hidden">
                   <div className="font-bold text-white">Inscription ID</div>
                   <div className="mt-1 flex gap-2">
-                    <div
+                    <button
                       onClick={() => {
                         navigator.clipboard.writeText(moonbird.id);
                         toast.success("Copied to clipboard");
@@ -193,7 +193,7 @@ export default function MoonbirdPage() {
                     >
                       {/* Copy */}
                       <img src="/images/copy.webp" className="h-6 w-6" />
-                    </div>
+                    </button>
                     <div className="hidden text-lg font-semibold uppercase  md:block">{`#${moonbird.id.slice(
                       0,
                       20,

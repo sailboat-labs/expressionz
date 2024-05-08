@@ -288,7 +288,7 @@ export default function GeneratedWizards({
   }
 
   return (
-    <div className="z-[2] flex h-screen w-screen items-center justify-center text-black">
+    <div className="z-[2] flex h-screen w-screen items-center justify-center font-pixelify-r text-black">
       {/* Desktop */}
       <div className="fixed inset-0 hidden scale-90 items-start justify-center overflow-y-auto lg:flex">
         <div className=" flex h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all">
@@ -313,7 +313,7 @@ export default function GeneratedWizards({
                       >
                         <ArrowLeftIcon className="h-6 w-6 rounded" />
                       </motion.button>
-                      <div className=" font-presstart md:text-2xl">
+                      <div className=" text-center font-pixelify-b   md:text-xl xl:text-3xl">
                         Wizard #{index}
                       </div>
                     </div>

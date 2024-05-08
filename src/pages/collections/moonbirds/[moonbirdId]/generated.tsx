@@ -9,7 +9,7 @@ export default function MoonbirdPage() {
   const moonbird = METADATA.find((m) => m.id === moonbirdId);
 
   return (
-    <div className="font-pixelify bg-dark flex h-screen min-h-screen w-full flex-1 items-center justify-center overflow-hidden">
+    <div className="font-pixelify-r bg-dark flex h-screen min-h-screen w-full flex-1 items-center justify-center overflow-hidden">
       {/* <img
         src="/images/background.webp"
         className="fixed z-[1] h-screen w-screen object-cover"

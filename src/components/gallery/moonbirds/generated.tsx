@@ -17,7 +17,8 @@ import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import { cn } from "@/lib/utils";
 import { Switch } from "@headlessui/react";
 import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
-import { generateMoonbirdEmojis } from "@/lib/utils/generateEmojis";
+import { TMoonBirdGenerationRequestPayload } from "@/types/moonbird.type";
+import { generateMoonBirdEmojis } from "@/lib/utils/generateEmojis";
 
 // const shareIcons = [
 //   {
@@ -48,6 +49,8 @@ export default function MoonbirdGenerated({
   const router = useRouter();
 
   const [progress, setProgress] = useState(0);
+  const [totalSizeOfGeneratedImages, setTotalSizeOfGeneratedImages] =
+    useState(1);
   const [platform, setPlatform] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -131,40 +134,61 @@ export default function MoonbirdGenerated({
     setLoading(true);
 
     try {
-      const _generated: any[] = [];
-      const _generatedTransparent: any[] = [];
+      // const _generated: any[] = [];
+      // const _generatedTransparent: any[] = [];
 
-      for await (const emoji of moonbirdEmojis) {
-        const response = await generateMoonbirdEmojis(index, emoji.emoji_type);
+      // for await (const emoji of moonbirdEmojis) {
+      //   const response = await generateMoonBirdEmojis(index, emoji.emoji_type);
 
-        if (response) {
-          _generated.push({
-            image: response.colored,
-            emoji_type: emoji.emoji_type,
-            type: "png",
-          });
+      //   if (response) {
+      //     _generated.push({
+      //       image: response.colored,
+      //       emoji_type: emoji.emoji_type,
+      //       type: "png",
+      //     });
 
-          // const transparentImage = response.transparentImages[0];
-          _generatedTransparent.push({
-            image: response.transparent,
-            emoji_type: emoji.emoji_type,
-            type: "png",
-          });
-        }
+      //     // const transparentImage = response.transparentImages[0];
+      //     _generatedTransparent.push({
+      //       image: response.transparent,
+      //       emoji_type: emoji.emoji_type,
+      //       type: "png",
+      //     });
+      //   }
 
-        setProgress(_generated.length);
+      //   setProgress(_generated.length);
 
-        setGeneratedEmojis(_generated);
-        setGeneratedEmojisTransparent(_generatedTransparent);
+      //   setGeneratedEmojis(_generated);
+      //   setGeneratedEmojisTransparent(_generatedTransparent);
+      // }
+      // setGeneratedEmojis(_generated);
+      // setGeneratedEmojisTransparent(_generatedTransparent);
+
+      const payload: TMoonBirdGenerationRequestPayload = {
+        tokenId: index,
+        platform,
+        emojiTypes: [],
+      };
+      for (const emoji of moonbirdEmojis) {
+        payload.emojiTypes.push(emoji.emoji_type);
       }
-      setGeneratedEmojis(_generated);
-      setGeneratedEmojisTransparent(_generatedTransparent);
+
+      let images = await generateMoonBirdEmojis(
+        payload,
+        (progress: number, total: number) => {
+          setProgress(progress);
+          setTotalSizeOfGeneratedImages(total);
+        },
+      );
+      setGeneratedEmojis(images.colored);
+      setGeneratedEmojis(images.transparent);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
   }
+
+  console.log(`Progress: ${progress}/${totalSizeOfGeneratedImages}`);
 
   async function downloadEmojis() {
     if (selectedEmojis.length === 0) {
@@ -627,7 +651,8 @@ export default function MoonbirdGenerated({
       <MoonbirdsVideoLoader
         show={loading}
         progress={progress}
-        total={moonbirdEmojis.length}
+        // total={moonbirdEmojis.length}
+        total={totalSizeOfGeneratedImages}
       />
     </>
   );

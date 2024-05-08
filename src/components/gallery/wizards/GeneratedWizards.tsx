@@ -669,7 +669,7 @@ export default function GeneratedWizards({
 
             {/* Generated Emojis */}
             <div className="pb-10">
-              <div className="mt-4 grid grid-cols-3 place-items-center gap-3 px-2">
+              <div className="mt-4 grid grid-cols-3 place-items-center gap-4 px-2">
                 {hasBg
                   ? generatedEmojis.map((emoji, i) => (
                       <GeneratedItem
@@ -731,7 +731,7 @@ export default function GeneratedWizards({
       />
 
       {/* Loading */}
-      <WizardsLoader show={false} progress={progress} total={12} />
+      <WizardsLoader show={isGenerating} progress={progress} total={12} />
     </div>
   );
 }

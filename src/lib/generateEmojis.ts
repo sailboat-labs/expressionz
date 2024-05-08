@@ -12,7 +12,7 @@ export async function generateEmojis(
     );
 
     const data = await response.json();
-    console.log("API response:", data);
+    // console.log("API response:", data);
 
     const colored = data.colored;
     const transparent = data.transparent;

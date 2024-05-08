@@ -22,21 +22,27 @@ export default function GeneratedItem({
   platform: string;
   selectEnabled: boolean;
 }) {
-  useEffect(() => {
-    getSource();
-  }, [item]);
+  // useEffect(() => {
+  //   getSource();
+  // }, [item]);
 
-  const [src, setSrc] = useState("");
+  // const [src, setSrc] = useState("");
 
-  const getSource = () => {
-    if (item.type === "gif") {
-      const src = gifArrayBufferToBase64(item.image.data);
-      setSrc(src);
-    } else {
-      const src = arrayBufferToBase64(item.image.data);
-      setSrc(src);
-    }
-  };
+  // const getSource = () => {
+  //   if (item.type === "gif") {
+  //     const src = gifArrayBufferToBase64(item.image?.data ?? []);
+  //     setSrc(src);
+  //   } else {
+  //     const src = arrayBufferToBase64(item.image?.data ?? []);
+  //     setSrc(src);
+  //   }
+  // };
+
+  const src =
+    item.type === "gif"
+      ? gifArrayBufferToBase64(item.image?.data ?? [])
+      : arrayBufferToBase64(item.image?.data ?? []);
+
 
   return (
     <motion.div

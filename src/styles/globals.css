@@ -106,6 +106,26 @@ body {
       format("truetype");
     font-weight: 200;
   }
+  @font-face {
+    font-family: PixelifySansRegular;
+    src: url(../../public/fonts/Pixelify_Sans/PixelifySans-Regular.ttf)
+      format("truetype");
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: PixelifySansBold;
+    src: url(../../public/fonts/Pixelify_Sans/PixelifySans-Bold.ttf)
+      format("truetype");
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: PixelifySansLight;
+    src: url(../../public/fonts//Pixelify_Sans/PixelifySans-VariableFont_wght.ttf)
+      format("truetype");
+    font-weight: 200;
+  }
 }
 
 @layer utilities {

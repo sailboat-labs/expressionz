@@ -16,7 +16,7 @@ export default function HomePage() {
         className="fixed z-[1] h-screen w-screen object-cover"
         alt="pixilated night time image"
       /> */}
-      <div className="font-pixelify flex w-full">
+      <div className="font-pixelify-r flex w-full">
         <div className="z-[2] w-full gap-10 md:flex md:flex-row">
           <div className="flex h-fit flex-col gap-5 overflow-hidden px-5 pb-5 md:h-screen">
             <div className="mt-3 flex items-center gap-2 text-white">

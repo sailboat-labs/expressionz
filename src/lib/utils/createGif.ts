@@ -10,7 +10,7 @@ export async function generateGifs(
 
     const data = await response.json();
 
-    console.log('Gif API response:', data);
+    // console.log('Gif API response:', data);
 
     const colored = data.colored;
     const transparent = data.transparent;

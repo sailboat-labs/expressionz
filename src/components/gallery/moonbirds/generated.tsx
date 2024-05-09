@@ -134,35 +134,7 @@ export default function MoonbirdGenerated({
     setLoading(true);
 
     try {
-      // const _generated: any[] = [];
-      // const _generatedTransparent: any[] = [];
-
-      // for await (const emoji of moonbirdEmojis) {
-      //   const response = await generateMoonBirdEmojis(index, emoji.emoji_type);
-
-      //   if (response) {
-      //     _generated.push({
-      //       image: response.colored,
-      //       emoji_type: emoji.emoji_type,
-      //       type: "png",
-      //     });
-
-      //     // const transparentImage = response.transparentImages[0];
-      //     _generatedTransparent.push({
-      //       image: response.transparent,
-      //       emoji_type: emoji.emoji_type,
-      //       type: "png",
-      //     });
-      //   }
-
-      //   setProgress(_generated.length);
-
-      //   setGeneratedEmojis(_generated);
-      //   setGeneratedEmojisTransparent(_generatedTransparent);
-      // }
-      // setGeneratedEmojis(_generated);
-      // setGeneratedEmojisTransparent(_generatedTransparent);
-
+     
       const payload: TMoonBirdGenerationRequestPayload = {
         tokenId: index,
         platform,
@@ -180,15 +152,13 @@ export default function MoonbirdGenerated({
         },
       );
       setGeneratedEmojis(images.colored);
-      setGeneratedEmojis(images.transparent);
+      setGeneratedEmojisTransparent(images.transparent);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
   }
-
-  console.log(`Progress: ${progress}/${totalSizeOfGeneratedImages}`);
 
   async function downloadEmojis() {
     if (selectedEmojis.length === 0) {

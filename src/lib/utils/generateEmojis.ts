@@ -47,7 +47,7 @@ export async function generateMoonBirdEmojis(
 
     return {
       colored: response.data.colored ?? [],
-      transparent: response.data.colored ?? [],
+      transparent: response.data.transparent ?? [],
     };
   } catch (error) {
     console.error("Error fetching data:", error);

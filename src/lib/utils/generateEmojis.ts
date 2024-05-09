@@ -1,3 +1,6 @@
+import { TMoonBirdGenerationRequestPayload } from "@/types/moonbird.type";
+import axios from "axios";
+
 // export async function generateMoonbirdEmojis(
 //   tokenId: number,
 //   emoji_type: string,
@@ -6,10 +9,6 @@
 //     const response = await fetch(
 //       `${process.env.NEXT_PUBLIC_MOONBIRDS_GENERATOR_URL}/api/v1/emojis/generateV2?tokenId=${tokenId}&emoji_type=${emoji_type}`,
 //     );
-
-import { TMoonBirdGenerationRequestPayload } from "@/types/moonbird.type";
-import axios from "axios";
-
 //     const data = await response.json();
 //     console.log("API response:", data);
 
@@ -24,6 +23,16 @@ import axios from "axios";
 //   }
 // }
 
+/**
+ * Generates a set of moon bird emojis based
+ * - for a given platform specified by @param payload 'platform' field
+ * - token specified by @param payload 'tokenId' field
+ * - emoji types specified by @param payload 'emojiTypes' field
+ *
+ * @param {TMoonBirdGenerationRequestPayload} payload - request payload
+ * @param {Function} handleProgress - updates progress of request
+ * @returns {Promise<{colored: any[];transparent: any[];}>|Error}
+ */
 export async function generateMoonBirdEmojis(
   payload: TMoonBirdGenerationRequestPayload,
   handleProgress: (loaded: number, total: number) => void,
@@ -34,12 +43,6 @@ export async function generateMoonBirdEmojis(
       payload,
       {
         onUploadProgress(progressEvent) {
-          console.table({
-            loaded: progressEvent.loaded,
-            total: progressEvent.total,
-            progress: progressEvent.progress,
-            bytes: progressEvent.bytes,
-          });
           handleProgress(progressEvent.loaded, progressEvent.total ?? 0);
         },
       },

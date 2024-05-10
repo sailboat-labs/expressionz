@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils/cn";
+
+import { cn } from "@/lib/misc.lib";
 import { TFilterTrait } from "@/types/misc.type";
 import { Disclosure } from "@headlessui/react";
 import { useRouter } from "next/router";

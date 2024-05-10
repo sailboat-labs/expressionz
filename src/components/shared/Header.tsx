@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
 import Collections from "./CollectionsDropdown";
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@/lib/misc.lib";
 
 function Header({ showBack = false }: { showBack?: boolean }) {
   const router = useRouter();
@@ -18,7 +18,7 @@ function Header({ showBack = false }: { showBack?: boolean }) {
       <MobileMenu show={showMenu} setShow={setShowMenu} />
       <nav
         className={cn(
-          "font-presstart sticky top-0 z-9999 h-16 bg-darkGrey",
+          "sticky top-0 z-9999 h-16 bg-darkGrey font-presstart",
           "py-[10px] text-xs text-white 3xl:h-20 3xl:text-sm",
         )}
       >
@@ -40,7 +40,7 @@ function Header({ showBack = false }: { showBack?: boolean }) {
             <Link href={"/"}>Expressionz.xyz</Link>
           </ul>
 
-          <div className="font-presstart hidden lg:flex lg:space-x-8">
+          <div className="hidden font-presstart lg:flex lg:space-x-8">
             <Collections />
             <Link href="/about-us" className="">
               About Us

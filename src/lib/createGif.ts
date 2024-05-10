@@ -1,4 +1,4 @@
-import { EmojiTypes } from "./interface";
+import { EmojiTypes } from "@/types/emoji.type";
 
 export async function generateGifs(
   tokenId: number,

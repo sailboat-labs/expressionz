@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/misc.lib";
 import StripedLoader from "./shared/StripedLoader";
 
 export function WizardsLoader({

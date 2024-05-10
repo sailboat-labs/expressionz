@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 import { GALLERY } from "@/data/gallery";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/misc.lib";
 
 export default function GalleryImage({
   wizard,

@@ -5,20 +5,23 @@ import { toast } from "sonner";
 import { useRouter } from "next/router";
 import { METADATA } from "@/data/metadata";
 import { ArrowDownIcon, ArrowLeftIcon } from "@radix-ui/react-icons";
-import { downloadImagesAsZip, downloadPfp } from "@/lib/utils/download";
-import { moonbirdEmojis } from "@/lib/utils/emojis";
-import { createDiscordEmojiPack } from "@/lib/utils/share/discord";
-import { createTelegramStickerPack } from "@/lib/utils/share/telegram";
+import { downloadImagesAsZip, downloadPfp } from "@/lib/download.lib";
+
+import { createDiscordEmojiPack } from "@/http/discord.http";
+import { createTelegramStickerPack } from "@/http/telegram.http";
 import { FaDiscord } from "react-icons/fa";
 import { BiLogoTelegram } from "react-icons/bi";
 import Seo from "@/components/shared/Seo";
 import MoonbirdDetailsFrame from "./MoonbirdDetailsFrame";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/misc.lib";
 import { Switch } from "@headlessui/react";
 import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
 import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
-import { generateMoonBirdEmojis } from "@/lib/utils/generateEmojis";
+
+import consoleLog from "@/lib/logger";
+import { moonbirdEmojis } from "@/data/emoji.data";
+import { generateMoonBirdEmojis } from "@/lib/generateEmojis";
 
 // const shareIcons = [
 //   {
@@ -65,20 +68,22 @@ export default function MoonbirdGenerated({
     any[]
   >([]);
 
-  //On click escape, go to homescreen
+  /**
+   * Go to homescreen with Escape key
+   *
+   */
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        router.replace("/");
+        router.replace(`/collections/moonbirds/${index}`);
       }
     }
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
   }, []);
 
-  // Generate emojis
   useEffect(() => {
-    generate();
+    generateMoonBirdsCollection();
   }, []);
   /**
    * Promises implementation
@@ -126,8 +131,7 @@ export default function MoonbirdGenerated({
   //   Promise.all(promises).finally(() => setLoading(false));
   // }
 
-
-  async function generate() {
+  async function generateMoonBirdsCollection() {
     setLoading(true);
 
     try {
@@ -150,7 +154,7 @@ export default function MoonbirdGenerated({
       setGeneratedEmojis(images.colored);
       setGeneratedEmojisTransparent(images.transparent);
     } catch (error) {
-      console.log(error);
+      consoleLog(error);
     } finally {
       setLoading(false);
     }
@@ -190,7 +194,7 @@ export default function MoonbirdGenerated({
     setLoading(true);
 
     try {
-      console.log("Selected emojis", selectedEmojis.length);
+      consoleLog("Selected emojis " + selectedEmojis.length);
 
       if (platform === "discord") {
         const id = await createDiscordEmojiPack(
@@ -227,7 +231,7 @@ export default function MoonbirdGenerated({
         // TODO - export to telegram sticker pack (includes both png and gif(animated) images)
       }
     } catch (error) {
-      console.log("Error exporting stickers", error);
+      console.error("Error exporting stickers", error);
     } finally {
       setLoading(false);
     }

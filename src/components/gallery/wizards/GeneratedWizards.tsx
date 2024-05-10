@@ -9,15 +9,15 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { emojis, shareIcons } from "@/lib/data";
-import { download, downloadImagesAsZip } from "@/lib/download";
+import { download, downloadImagesAsZip } from "@/lib/download.lib";
 
 import { GALLERY } from "@/data/gallery";
 import GeneratedItem from "@/components/shared/GeneratedItem";
 import DoneModal from "@/components/shared/DoneModal";
 import { WizardsLoader } from "@/components/WizardsLoader";
-import { createDiscordEmojiPack } from "@/lib/utils/share/wizards/discord";
-import { createTelegramStickerPack } from "@/lib/utils/share/wizards/telegram";
-import { cn } from "@/lib/utils";
+import { createDiscordEmojiPack } from "@/http/discord.http";
+import { createTelegramStickerPack } from "@/http/telegram.http";
+import { cn } from "@/lib/misc.lib";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 import { EPlatform } from "@/types/misc.type";
 import { generateWizards } from "@/http/wizard.http";
@@ -55,13 +55,14 @@ export default function GeneratedWizards({
 
   const [showDoneModal, setShowDoneModal] = useState(false);
 
-  // Generate emojis
   useEffect(() => {
-    // generate();
     generateWizardsCollection();
   }, []);
 
-  // On click escape, go to wizard screen
+  /**
+   * Go to home page with Escape key press
+   *
+   */
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -208,6 +209,7 @@ export default function GeneratedWizards({
 
       if (platform === EPlatform.DISCORD) {
         const id = await createDiscordEmojiPack(
+          "wizards",
           index - 1,
           selectedEmojis,
           hasBg,
@@ -226,6 +228,7 @@ export default function GeneratedWizards({
 
       if (platform === EPlatform.TELEGRAM) {
         const id = await createTelegramStickerPack(
+          "wizards",
           index - 1,
           selectedEmojis,
           hasBg,

@@ -5,19 +5,23 @@ import { toast } from "sonner";
 import { useRouter } from "next/router";
 import { METADATA } from "@/data/metadata";
 import { ArrowDownIcon, ArrowLeftIcon } from "@radix-ui/react-icons";
-import { downloadImagesAsZip, downloadPfp } from "@/lib/utils/download";
-import { moonbirdEmojis } from "@/lib/utils/emojis";
-import { generateMoonbirdEmojis } from "@/lib/utils/generateEmojis";
-import { createDiscordEmojiPack } from "@/lib/utils/share/discord";
-import { createTelegramStickerPack } from "@/lib/utils/share/telegram";
+import { downloadImagesAsZip, downloadPfp } from "@/lib/download.lib";
+
+import { createDiscordEmojiPack } from "@/http/discord.http";
+import { createTelegramStickerPack } from "@/http/telegram.http";
 import { FaDiscord } from "react-icons/fa";
 import { BiLogoTelegram } from "react-icons/bi";
 import Seo from "@/components/shared/Seo";
 import MoonbirdDetailsFrame from "./MoonbirdDetailsFrame";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/misc.lib";
 import { Switch } from "@headlessui/react";
 import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
+import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
+
+import consoleLog from "@/lib/logger";
+import { moonbirdEmojis } from "@/data/emoji.data";
+import { generateMoonBirdEmojis } from "@/lib/generateEmojis";
 
 // const shareIcons = [
 //   {
@@ -48,6 +52,8 @@ export default function MoonbirdGenerated({
   const router = useRouter();
 
   const [progress, setProgress] = useState(0);
+  const [totalSizeOfGeneratedImages, setTotalSizeOfGeneratedImages] =
+    useState(1);
   const [platform, setPlatform] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -57,60 +63,98 @@ export default function MoonbirdGenerated({
   const [packId, setPackId] = useState<string>("ABCDEFGHIJKL");
   const [generatedEmojis, setGeneratedEmojis] = useState<any[]>([]);
   const [selectedEmojis, setSelectedEmojis] = useState<number[]>([]);
+
   const [generatedEmojisTransparent, setGeneratedEmojisTransparent] = useState<
     any[]
   >([]);
 
-  //On click escape, go to homescreen
+  /**
+   * Go to homescreen with Escape key
+   *
+   */
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        router.replace("/");
+        router.replace(`/collections/moonbirds/${index}`);
       }
     }
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
   }, []);
 
-  // Generate emojis
   useEffect(() => {
-    generate();
+    generateMoonBirdsCollection();
   }, []);
+  /**
+   * Promises implementation
+   */
+  // async function generate() {
+  //   setLoading(true);
+  //   let promises = [];
+  //   for (const emoji of moonbirdEmojis) {
+  //     let promise = fetch(
+  //       `${process.env.NEXT_PUBLIC_MOONBIRDS_GENERATOR_URL}/api/v1/emojis/generateV2?tokenId=${index}&emoji_type=${emoji.emoji_type}`,
+  //     );
 
-  async function generate() {
+  //     promise
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         let result = {
+  //           colored: data.colored,
+  //           transparent: data.transparent,
+  //           emojiType: emoji.emoji_type,
+  //         };
+
+  //         setGeneratedEmojis((prev) => [
+  //           ...prev,
+  //           {
+  //             image: result.colored,
+  //             emoji_type: result.emojiType,
+  //             type: "png",
+  //           },
+  //         ]);
+  //         setGeneratedEmojisTransparent((prev) => [
+  //           ...prev,
+  //           {
+  //             image: result.transparent,
+  //             emoji_type: result.emojiType,
+  //             type: "png",
+  //           },
+  //         ]);
+  //         setProgress(generatedEmojis.length);
+  //       })
+  //       .catch((error) => console.log(error));
+
+  //     promises.push(promise);
+  //   }
+
+  //   Promise.all(promises).finally(() => setLoading(false));
+  // }
+
+  async function generateMoonBirdsCollection() {
     setLoading(true);
 
     try {
-      const _generated: any[] = [];
-      const _generatedTransparent: any[] = [];
-
-      for await (const emoji of moonbirdEmojis) {
-        const response = await generateMoonbirdEmojis(index, emoji.emoji_type);
-
-        if (response) {
-          _generated.push({
-            image: response.colored,
-            emoji_type: emoji.emoji_type,
-            type: "png",
-          });
-
-          // const transparentImage = response.transparentImages[0];
-          _generatedTransparent.push({
-            image: response.transparent,
-            emoji_type: emoji.emoji_type,
-            type: "png",
-          });
-        }
-
-        setProgress(_generated.length);
-
-        setGeneratedEmojis(_generated);
-        setGeneratedEmojisTransparent(_generatedTransparent);
+      const payload: TMoonBirdGeneratorAPIPayload = {
+        tokenId: index,
+        platform,
+        emojiTypes: [],
+      };
+      for (const emoji of moonbirdEmojis) {
+        payload.emojiTypes.push(emoji.emoji_type);
       }
-      setGeneratedEmojis(_generated);
-      setGeneratedEmojisTransparent(_generatedTransparent);
+
+      let images = await generateMoonBirdEmojis(
+        payload,
+        (progress: number, total: number) => {
+          setProgress(progress);
+          setTotalSizeOfGeneratedImages(total);
+        },
+      );
+      setGeneratedEmojis(images.colored);
+      setGeneratedEmojisTransparent(images.transparent);
     } catch (error) {
-      console.log(error);
+      consoleLog(error);
     } finally {
       setLoading(false);
     }
@@ -150,7 +194,7 @@ export default function MoonbirdGenerated({
     setLoading(true);
 
     try {
-      console.log("Selected emojis", selectedEmojis.length);
+      consoleLog("Selected emojis " + selectedEmojis.length);
 
       if (platform === "discord") {
         const id = await createDiscordEmojiPack(
@@ -187,7 +231,7 @@ export default function MoonbirdGenerated({
         // TODO - export to telegram sticker pack (includes both png and gif(animated) images)
       }
     } catch (error) {
-      console.log("Error exporting stickers", error);
+      console.error("Error exporting stickers", error);
     } finally {
       setLoading(false);
     }
@@ -577,7 +621,8 @@ export default function MoonbirdGenerated({
       <MoonbirdsVideoLoader
         show={loading}
         progress={progress}
-        total={moonbirdEmojis.length}
+        // total={moonbirdEmojis.length}
+        total={totalSizeOfGeneratedImages}
       />
     </>
   );

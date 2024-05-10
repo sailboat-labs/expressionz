@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@/lib/misc.lib";
 import { ComponentPropsWithoutRef } from "react";
 import Marquee from "react-fast-marquee";
 

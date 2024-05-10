@@ -6,6 +6,9 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  --stripe-tone-1: gray;
+  --stripe-tone-2: transparent;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -65,58 +68,6 @@
   }
 }
 
-@layer base {
-  /* Press start font definition */
-  @font-face {
-    font-family: PressStart2P;
-    src: url(../../public/fonts/Press_Start_2P/PressStart2P-Regular.ttf);
-  }
-
-  /* Turret Road font definition */
-  @font-face {
-    font-family: TurretRoad;
-    src: url(../../public/fonts/Turret_Road/TurretRoad-Regular.ttf)
-      format("truetype");
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: TurretRoad;
-    src: url(../../public/fonts/Turret_Road/TurretRoad-ExtraBold.ttf)
-      format("truetype");
-    font-weight: 700;
-  }
-
-  @font-face {
-    font-family: TurretRoad;
-    src: url(../../public/fonts/Turret_Road/TurretRoad-Light.ttf)
-      format("truetype");
-    font-weight: 200;
-  }
-
-  /* Pixelify Sans font definitions */
-  @font-face {
-    font-family: PixelifySansRegular;
-    src: url(../../public/fonts/Pixelify_Sans/PixelifySans-Regular.ttf)
-      format("truetype");
-    font-weight: 400;
-  }
-
-  @font-face {
-    font-family: PixelifySansBold;
-    src: url(../../public/fonts/Pixelify_Sans/PixelifySans-Bold.ttf)
-      format("truetype");
-    font-weight: 700;
-  }
-
-  @font-face {
-    font-family: PixelifySansLight;
-    src: url(../../public/fonts//Pixelify_Sans/PixelifySans-VariableFont_wght.ttf)
-      format("truetype");
-    font-weight: 200;
-  }
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -154,4 +105,25 @@ body {
 
 .hide-scrollbar::-webkit-scrollbar {
   width: 0px;
+}
+
+.striped-loader {
+  background-image: repeating-linear-gradient(
+    to bottom right,
+    var(--stripe-tone-1),
+    var(--stripe-tone-1) 25%,
+    var(--stripe-tone-2) 25%,
+    var(--stripe-tone-2) 50%
+  );
+  background-size: 10px 100%;
+  animation: stripe-move 1s linear infinite;
+}
+
+@keyframes stripe-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 0;
+  }
 }

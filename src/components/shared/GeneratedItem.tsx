@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+
 import {
-  gifArrayBufferToBase64,
   arrayBufferToBase64,
-} from "@/lib/utils/bufferToBase64";
-import { cn } from "@/lib/utils";
+  cn,
+  gifArrayBufferToBase64,
+} from "@/lib/misc.lib";
 import { motion } from "framer-motion";
 
 export default function GeneratedItem({
@@ -42,7 +42,6 @@ export default function GeneratedItem({
     item.type === "gif"
       ? gifArrayBufferToBase64(item.image?.data ?? [])
       : arrayBufferToBase64(item.image?.data ?? []);
-
 
   return (
     <motion.div

@@ -6,13 +6,14 @@ import StartJourney from "@/components/home/StartJourney";
 import Contact from "@/components/home/Contact";
 import Seo from "@/components/shared/Seo";
 import BaseLayout from "@/components/shared/BaseLayout";
+import Banner from "@/components/home/Banner";
 
 export default function Home() {
   return (
     <>
       <Seo title="Home" />
       <BaseLayout>
-        {/* <Banner /> */}
+        <Banner />
         <TokenMarquee className="mt-12" />
         <UnlockAssets />
         <SelfExpression />

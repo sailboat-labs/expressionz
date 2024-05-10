@@ -15,6 +15,7 @@ function StartJourney() {
         <div className="flex flex-col items-center justify-center space-y-5 lg:flex-row lg:space-x-8 lg:space-y-0 3xl:space-x-14">
           <button onClick={() => setShowContactModal(true)}>
             <img
+              loading="lazy"
               src="/images/buttons/collector.webp"
               className="w-48 cursor-pointer 3xl:w-80"
               alt="button with 'collector' text"
@@ -23,6 +24,7 @@ function StartJourney() {
 
           <button onClick={() => setShowContactModal(true)}>
             <img
+              loading="lazy"
               src="/images/buttons/project-team.webp"
               className="w-48 cursor-pointer 3xl:w-80"
               onClick={() => setShowContactModal(true)}
@@ -30,12 +32,14 @@ function StartJourney() {
             />
           </button>
 
-          <img
-            src="/images/buttons/community-group.webp"
-            className="w-48 cursor-pointer 3xl:w-80"
-            onClick={() => setShowContactModal(true)}
-            alt="button with 'community group' text"
-          />
+          <button onClick={() => setShowContactModal(true)}>
+            <img
+              loading="lazy"
+              src="/images/buttons/community-group.webp"
+              className="w-48 cursor-pointer 3xl:w-80"
+              alt="button with 'community group' text"
+            />
+          </button>
         </div>
       </section>
     </>

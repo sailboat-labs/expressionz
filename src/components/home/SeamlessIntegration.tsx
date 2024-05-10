@@ -16,6 +16,7 @@ function SeamlessIntegration() {
             <img
               src="/videos/seamless-integration-frame.webp"
               className="absolute top-0 z-50 h-auto w-full object-cover"
+              alt="a chat using expression-generated emojis"
             />
           </video>
         </div>

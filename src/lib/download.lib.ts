@@ -1,17 +1,29 @@
-import JSZip from 'jszip';
+import JSZip from "jszip";
 
-import { arrayBufferToBase64, gifArrayBufferToBase64 } from './utils';
+import { arrayBufferToBase64, gifArrayBufferToBase64 } from "./misc.lib";
 
 export async function download(path: string, index: number) {
   const response = await fetch(path);
   const blob = await response.blob();
   const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
   link.download = `wizard_${index}.webp`;
   link.click();
   URL.revokeObjectURL(url);
 }
+
+export async function downloadPfp(path: string, index: number) {
+  const response = await fetch(path);
+  const blob = await response.blob();
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `moonbird_${index}.webp`;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
 export async function downloadImagesAsZip(files: any[], token: number) {
   const zip = new JSZip();
 
@@ -19,7 +31,7 @@ export async function downloadImagesAsZip(files: any[], token: number) {
   for (let i = 0; i < files.length; i++) {
     const image = files[i];
 
-    if (image.type === 'gif') {
+    if (image.type === "gif") {
       const gif = image.image.data;
       const response = await fetch(gifArrayBufferToBase64(gif));
       const blob = await response.blob();
@@ -32,9 +44,9 @@ export async function downloadImagesAsZip(files: any[], token: number) {
     }
   }
 
-  const zipBlob = await zip.generateAsync({ type: 'blob' });
+  const zipBlob = await zip.generateAsync({ type: "blob" });
   const url = URL.createObjectURL(zipBlob);
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
   link.download = `Wizard of Ord #${token}`;
   link.click();

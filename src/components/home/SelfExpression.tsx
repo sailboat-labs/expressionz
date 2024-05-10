@@ -96,10 +96,14 @@ function SelfExpression() {
             <img
               src={emojis[current].emoji}
               className="mb-5 h-12 w-12 lg:h-20 lg:w-20"
+              alt="emoji"
+              loading="lazy"
             />
             <img
               src={emojis[current].img}
               className="h-36 w-36 object-contain lg:h-60 lg:w-60 3xl:mr-10 3xl:h-80 3xl:w-80"
+              alt="sticker depicting image"
+              loading="lazy"
             />
           </div>
         </div>

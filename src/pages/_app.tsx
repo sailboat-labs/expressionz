@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import "@/styles/styles.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Toaster } from "sonner";
 

@@ -8,19 +8,19 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-import { generateGifs } from "@/lib/createGif";
 import { emojis, shareIcons } from "@/lib/data";
-import { download, downloadImagesAsZip } from "@/lib/download";
-import { generateEmojis } from "@/lib/generateEmojis";
-import { EmojiTypes } from "@/lib/interface";
+import { download, downloadImagesAsZip } from "@/lib/download.lib";
 
 import { GALLERY } from "@/data/gallery";
 import GeneratedItem from "@/components/shared/GeneratedItem";
 import DoneModal from "@/components/shared/DoneModal";
 import { WizardsLoader } from "@/components/WizardsLoader";
-import { createDiscordEmojiPack } from "@/lib/utils/share/wizards/discord";
-import { createTelegramStickerPack } from "@/lib/utils/share/wizards/telegram";
-import { cn } from "@/lib/utils";
+import { createDiscordEmojiPack } from "@/http/discord.http";
+import { createTelegramStickerPack } from "@/http/telegram.http";
+import { cn } from "@/lib/misc.lib";
+import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
+import { EPlatform } from "@/types/misc.type";
+import { generateWizards } from "@/http/wizard.http";
 
 type GeneratedWizardsProps = {
   wizard: (typeof GALLERY)[0];
@@ -42,25 +42,27 @@ export default function GeneratedWizards({
 
   const [selectedEmojis, setSelectedEmojis] = useState<number[]>([]);
 
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedType, setSelectedType] = useState<"png" | "gif" | "">("");
 
   const [hasBg, setHasBg] = useState(true);
 
   // For progress bar
   const [progress, setProgress] = useState(0);
 
-  const [platform, setPlatform] = useState("");
+  const [platform, setPlatform] = useState<EPlatform>(EPlatform.NONE);
 
   const [packId, setPackId] = useState<string>("ABCDEFGHIJKL");
 
   const [showDoneModal, setShowDoneModal] = useState(false);
 
-  // Generate emojis
   useEffect(() => {
-    generate();
+    generateWizardsCollection();
   }, []);
 
-  // On click escape, go to wizard screen
+  /**
+   * Go to home page with Escape key press
+   *
+   */
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -71,70 +73,106 @@ export default function GeneratedWizards({
     return () => window.removeEventListener("keydown", handleEscape);
   }, []);
 
-  async function generate() {
-    setLoading(true);
+  async function generateWizardsCollection() {
+    // if (selectedType == '') {
+    //   console.error("select a type");
+    //   return;
+    // }
+
+    const payload: TWizardGeneratorAPIPayload = {
+      tokenId: index - 1,
+      platform,
+      emojis: [],
+    };
+
+    for (const emoji of emojis) {
+      payload.emojis.push({
+        name: emoji.emoji_type,
+        type: emoji.type as "gif" | "png",
+      });
+    }
 
     try {
-      const _generated: any[] = [];
-      const _generatedTransparent: any[] = [];
-
-      for await (const emoji of emojis) {
-        if (emoji.type == "gif") {
-          const response = await generateGifs(
-            index - 1,
-            emoji.emoji_type as EmojiTypes,
-          );
-
-          if (response) {
-            _generated.push({
-              image: response.colored,
-              emoji_type: emoji.emoji_type,
-              type: "gif",
-            });
-
-            _generatedTransparent.push({
-              image: response.transparent,
-              emoji_type: emoji.emoji_type,
-              type: "gif",
-            });
-          }
-        } else {
-          const response = await generateEmojis(
-            index - 1,
-            emoji.emoji_type as EmojiTypes,
-          );
-
-          if (response) {
-            _generated.push({
-              image: response.colored,
-              emoji_type: emoji.emoji_type,
-              type: "png",
-            });
-
-            // const transparentImage = response.transparentImages[0];
-            _generatedTransparent.push({
-              image: response.transparent,
-              emoji_type: emoji.emoji_type,
-              type: "png",
-            });
-          }
-        }
-
-        setProgress(_generated.length);
-
-        setGeneratedEmojis(_generated);
-        setGeneratedEmojisTransparent(_generatedTransparent);
-      }
-      setGeneratedEmojis(_generated);
-      setGeneratedEmojisTransparent(_generatedTransparent);
-
-      // setSelectedEmojis(Array.from({ length: _generated.length }, (_, i) => i));
+      let images = await generateWizards(
+        payload,
+        (progress: number, total: number) => {
+          // setProgress(progress);
+          // setTotalSizeOfGeneratedImages(total);
+        },
+      );
+      setGeneratedEmojis(images.colored);
+      setGeneratedEmojisTransparent(images.transparent);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
   }
+
+  // async function generate() {
+  //   setLoading(true);
+
+  //   try {
+  //     const _generated: any[] = [];
+  //     const _generatedTransparent: any[] = [];
+
+  //     for await (const emoji of emojis) {
+  //       if (emoji.type == "gif") {
+  //         const response = await generateGifs(
+  //           index - 1,
+  //           emoji.emoji_type as EmojiTypes,
+  //         );
+
+  //         if (response) {
+  //           _generated.push({
+  //             image: response.colored,
+  //             emoji_type: emoji.emoji_type,
+  //             type: "gif",
+  //           });
+
+  //           _generatedTransparent.push({
+  //             image: response.transparent,
+  //             emoji_type: emoji.emoji_type,
+  //             type: "gif",
+  //           });
+  //         }
+  //       } else {
+  //         const response = await generateEmojis(
+  //           index - 1,
+  //           emoji.emoji_type as EmojiTypes,
+  //         );
+
+  //         if (response) {
+  //           _generated.push({
+  //             image: response.colored,
+  //             emoji_type: emoji.emoji_type,
+  //             type: "png",
+  //           });
+
+  //           // const transparentImage = response.transparentImages[0];
+  //           _generatedTransparent.push({
+  //             image: response.transparent,
+  //             emoji_type: emoji.emoji_type,
+  //             type: "png",
+  //           });
+  //         }
+  //       }
+
+  //       setProgress(_generated.length);
+
+  //       setGeneratedEmojis(_generated);
+  //       setGeneratedEmojisTransparent(_generatedTransparent);
+  //     }
+  //     setGeneratedEmojis(_generated);
+  //     setGeneratedEmojisTransparent(_generatedTransparent);
+
+  //     // setSelectedEmojis(Array.from({ length: _generated.length }, (_, i) => i));
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
   const isGenerating =
     loading ||
@@ -167,10 +205,11 @@ export default function GeneratedWizards({
     setLoading(true);
 
     try {
-      console.log("Selected emojis", selectedEmojis.length);
+      // console.log("Selected emojis", selectedEmojis.length);
 
-      if (platform === "discord") {
+      if (platform === EPlatform.DISCORD) {
         const id = await createDiscordEmojiPack(
+          "wizards",
           index - 1,
           selectedEmojis,
           hasBg,
@@ -181,14 +220,15 @@ export default function GeneratedWizards({
         setPackId(id);
         setShowDoneModal(true);
 
-        console.log("Discord pack created", id);
+        // console.log("Discord pack created", id);
 
         // TODO - export to discord emoji/sticker pack (includes both png and gif(animated) images)
         return;
       }
 
-      if (platform === "telegram") {
+      if (platform === EPlatform.TELEGRAM) {
         const id = await createTelegramStickerPack(
+          "wizards",
           index - 1,
           selectedEmojis,
           hasBg,
@@ -199,12 +239,13 @@ export default function GeneratedWizards({
         setPackId(id);
         setShowDoneModal(true);
 
-        console.log("Telegram pack created", id);
+        // console.log("Telegram pack created", id);
 
         // TODO - export to telegram sticker pack (includes both png and gif(animated) images)
       }
     } catch (error) {
-      console.log("Error exporting stickers", error);
+      // console.log("Error exporting stickers", error);
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -213,7 +254,7 @@ export default function GeneratedWizards({
   function onSelectEmojis(emoji: any, i: number) {
     setSelectedType(emoji.type);
 
-    if (platform == "telegram") {
+    if (platform == EPlatform.TELEGRAM) {
       if (selectedType === emoji.type) {
         if (selectedEmojis.includes(i)) {
           const _selectedEmojis = selectedEmojis.filter((j) => j !== i);
@@ -241,7 +282,7 @@ export default function GeneratedWizards({
       return;
     }
 
-    if (platform == "telegram") {
+    if (platform == EPlatform.TELEGRAM) {
       // Check if included stickers are animated or static
       const selected = generatedEmojis.filter((_, i) =>
         selectedEmojis.includes(i),
@@ -262,14 +303,14 @@ export default function GeneratedWizards({
 
   function getText() {
     switch (platform) {
-      case "telegram":
+      case EPlatform.TELEGRAM:
         return (
           <p className="text-xs">
             Select either animated or <br />
             static stickers to export.
           </p>
         );
-      case "discord":
+      case EPlatform.DISCORD:
         return (
           <p className="text-xs">
             You can choose both animated <br />
@@ -369,7 +410,7 @@ export default function GeneratedWizards({
                           setSelectedType("");
 
                           if (platform === messenger.platform)
-                            return setPlatform("");
+                            return setPlatform(EPlatform.NONE);
 
                           setPlatform(messenger.platform);
                         }}
@@ -617,8 +658,10 @@ export default function GeneratedWizards({
                       setSelectedEmojis([]);
                       setSelectedType("");
 
-                      if (platform === messenger.platform)
-                        return setPlatform("");
+                      if (platform === messenger.platform) {
+                        setPlatform(EPlatform.NONE);
+                        return;
+                      }
 
                       setPlatform(messenger.platform);
                     }}

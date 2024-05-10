@@ -1,6 +1,6 @@
 import BaseLayout from "@/components/shared/BaseLayout";
 import Seo from "@/components/shared/Seo";
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@/lib/misc.lib";
 import Link from "next/link";
 import { motion } from "framer-motion";
 

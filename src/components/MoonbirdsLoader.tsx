@@ -1,3 +1,6 @@
+import { cn } from "@/lib/misc.lib";
+import StripedLoader from "./shared/StripedLoader";
+
 export function LoadingProgress({
   show,
   progress,
@@ -88,11 +91,22 @@ export default function MoonbirdsVideoLoader({
               src="/videos/loading/moonbirds-loading.mp4"
             />
           </video>
-          <p className="absolute bottom-4 text-center text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
-            {/* {texts[current]} */}
+
+          <div
+            className={cn(
+              "absolute bottom-6 flex w-full flex-col items-center ",
+              "text-xs font-bold text-[#FFD702] lg:text-lg",
+            )}
+          >
+            Generating emojis...
+            <StripedLoader className="mx-2 max-w-sm" />
+          </div>
+          {/* <p className="-translate-y-8 text-center text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
+            {texts[current]}
+
             Generating emojis&nbsp;
             <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
-          </p>
+          </p> */}
         </div>
       </div>
     </section>

@@ -17,6 +17,7 @@ function UnlockAssets() {
           <img
             src="/videos/bird-with-chain-frame.webp"
             className="absolute top-0 z-50 h-auto w-full object-cover"
+            alt="framed moonbird locked with chains"
           />
         </div>
         <div className="mt-12 space-y-4 lg:mt-0 3xl:-mr-10">

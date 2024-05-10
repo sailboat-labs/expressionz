@@ -17,7 +17,7 @@ import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import { cn } from "@/lib/utils";
 import { Switch } from "@headlessui/react";
 import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
-import { TMoonBirdGenerationRequestPayload } from "@/types/moonbird.type";
+import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
 import { generateMoonBirdEmojis } from "@/lib/utils/generateEmojis";
 
 // const shareIcons = [
@@ -126,16 +126,12 @@ export default function MoonbirdGenerated({
   //   Promise.all(promises).finally(() => setLoading(false));
   // }
 
-  /**
-   * Todo: uncomment
-   * - Initial implementation
-   */
+
   async function generate() {
     setLoading(true);
 
     try {
-     
-      const payload: TMoonBirdGenerationRequestPayload = {
+      const payload: TMoonBirdGeneratorAPIPayload = {
         tokenId: index,
         platform,
         emojiTypes: [],

@@ -36,7 +36,7 @@ function TokenMarquee({ className, ...props }: TTokenMarqueeProps) {
             src={token}
             alt="token"
             loading="lazy"
-            className="mr-6 h-auto w-20 object-contain 3xl:w-32"
+            className="mr-6 h-auto w-20 object-contain lg:w-32"
           />
         ))}
       </Marquee>

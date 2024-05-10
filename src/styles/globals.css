@@ -6,6 +6,9 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  --stripe-tone-1: gray;
+  --stripe-tone-2: transparent;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -150,4 +153,25 @@ body {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.striped-loader {
+  background-image: repeating-linear-gradient(
+    to bottom right,
+    var(--stripe-tone-1),
+    var(--stripe-tone-1) 25%,
+    var(--stripe-tone-2) 25%,
+    var(--stripe-tone-2) 50%
+  );
+  background-size: 10px 100%;
+  animation: stripe-move 1s linear infinite;
+}
+
+@keyframes stripe-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 0;
+  }
 }

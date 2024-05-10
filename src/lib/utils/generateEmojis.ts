@@ -1,4 +1,5 @@
-import { TMoonBirdGenerationRequestPayload } from "@/types/moonbird.type";
+import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
+import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 import axios from "axios";
 
 // export async function generateMoonbirdEmojis(
@@ -29,12 +30,12 @@ import axios from "axios";
  * - token specified by @param payload 'tokenId' field
  * - emoji types specified by @param payload 'emojiTypes' field
  *
- * @param {TMoonBirdGenerationRequestPayload} payload - request payload
+ * @param {TMoonBirdGeneratorAPIPayload} payload - request payload
  * @param {Function} handleProgress - updates progress of request
  * @returns {Promise<{colored: any[];transparent: any[];}>|Error}
  */
 export async function generateMoonBirdEmojis(
-  payload: TMoonBirdGenerationRequestPayload,
+  payload: TMoonBirdGeneratorAPIPayload,
   handleProgress: (loaded: number, total: number) => void,
 ) {
   try {
@@ -100,25 +101,52 @@ export async function generateMoonBirdEmoji(
   // }
 }
 
+// export async function generateWizardsEmojis(
+//   tokenId: number,
+//   emoji_type: string,
+// ) {
+//   try {
+//     const response = await fetch(
+//       `${process.env.NEXT_PUBLIC_WIZARDS_GENERATOR_URL}/api/v1/emojis/generateV2?tokenId=${tokenId}&emoji_type=${emoji_type}`,
+//     );
+
+//     const data = await response.json();
+//     console.log("API response:", data);
+
+//     const colored = data.colored;
+//     const transparent = data.transparent;
+
+//     return { colored, transparent };
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     return false;
+//   } finally {
+//   }
+// }
+
+
 export async function generateWizardsEmojis(
-  tokenId: number,
-  emoji_type: string,
+  payload: TWizardGeneratorAPIPayload,
+  handleProgress: (loaded: number, total: number) => void,
 ) {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_WIZARDS_GENERATOR_URL}/api/v1/emojis/generateV2?tokenId=${tokenId}&emoji_type=${emoji_type}`,
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_WIZARDS_GENERATOR_URL}/api/v1/emojis/generateV3`,
+      payload,
+      {
+        onUploadProgress(progressEvent) {
+          handleProgress(progressEvent.loaded, progressEvent.total ?? 0);
+        },
+      },
     );
 
-    const data = await response.json();
-    console.log("API response:", data);
-
-    const colored = data.colored;
-    const transparent = data.transparent;
-
-    return { colored, transparent };
+    return {
+      colored: response.data.colored ?? [],
+      transparent: response.data.transparent ?? [],
+    };
   } catch (error) {
     console.error("Error fetching data:", error);
-    return false;
-  } finally {
+    throw error;
+    // return false;
   }
 }

@@ -1,5 +1,4 @@
 import TokenMarquee from "@/components/home/Marquee";
-import Banner from "@/components/home/Banner";
 import UnlockAssets from "@/components/home/UnlockAssets";
 import SelfExpression from "@/components/home/SelfExpression";
 import SeamlessIntegration from "@/components/home/SeamlessIntegration";
@@ -13,7 +12,7 @@ export default function Home() {
     <>
       <Seo title="Home" />
       <BaseLayout>
-        <Banner />
+        {/* <Banner /> */}
         <TokenMarquee className="mt-12" />
         <UnlockAssets />
         <SelfExpression />

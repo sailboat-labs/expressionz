@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import StripedLoader from "./shared/StripedLoader";
 
 export function WizardsLoader({
   show,
@@ -67,6 +68,7 @@ export function WizardsLoader({
             />
           </video>
 
+          <StripedLoader className="mx-2 max-w-sm" />
           <p className="-mt-1 flex -translate-y-8 items-center gap-2 text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
             {/* {texts[current]} */}
             Generating emojis

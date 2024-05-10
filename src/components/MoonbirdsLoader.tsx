@@ -66,12 +66,12 @@ export default function MoonbirdsVideoLoader({
       } fixed h-screen w-screen bg-black bg-opacity-80`}
     >
       <div className="flex h-full w-full items-center justify-center space-y-5">
-        <div className="relative flex  w-11/12 flex-col items-center justify-center rounded-lg bg-[#222331]    lg:px-6 xl:w-1/2">
-          <div className=" flex w-full translate-y-8 items-center justify-center">
+        <div className="relative flex  w-11/12 flex-col items-center justify-center rounded-lg    xl:w-1/2">
+          <div className=" absolute top-5 flex w-full items-center justify-center">
             <img
               src="/images/loading-logo.webp"
               alt="loading logo"
-              className="mr-2 h-5 w-auto object-contain lg:mr-4 lg:h-8"
+              className=" h-5 w-auto object-contain  lg:h-8"
             />
           </div>
           <video
@@ -80,7 +80,7 @@ export default function MoonbirdsVideoLoader({
             loop
             muted
             poster="/videos/loading/moonbirds-loading-poster.webp"
-            className="mb-7 h-auto rounded-lg object-cover lg:mb-2"
+            className="h-auto rounded-lg object-cover "
           >
             <source
               type="video/webm"
@@ -103,6 +103,7 @@ export default function MoonbirdsVideoLoader({
           </div>
           {/* <p className="-translate-y-8 text-center text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
             {texts[current]}
+
             Generating emojis&nbsp;
             <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
           </p> */}

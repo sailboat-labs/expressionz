@@ -68,27 +68,14 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  /* background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb)); */
-  @apply bg-darkPurple;
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  width: 0px;
-}
-
 @layer base {
+  /* Press start font definition */
   @font-face {
     font-family: PressStart2P;
     src: url(../../public/fonts/Press_Start_2P/PressStart2P-Regular.ttf);
   }
 
+  /* Turret Road font definition */
   @font-face {
     font-family: TurretRoad;
     src: url(../../public/fonts/Turret_Road/TurretRoad-Regular.ttf)
@@ -109,6 +96,8 @@ body {
       format("truetype");
     font-weight: 200;
   }
+
+  /* Pixelify Sans font definitions */
   @font-face {
     font-family: PixelifySansRegular;
     src: url(../../public/fonts/Pixelify_Sans/PixelifySans-Regular.ttf)

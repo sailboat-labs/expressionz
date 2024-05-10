@@ -6,11 +6,11 @@ type TBaseLayout = { children: React.ReactNode };
 
 const BaseLayout = ({ children }: TBaseLayout) => {
   return (
-    <div className="flex min-h-screen flex-col">
+    <main className="flex min-h-screen flex-col">
       <Header />
       <div className="box-border flex-1">{children}</div>
       <Footer />
-    </div>
+    </main>
   );
 };
 

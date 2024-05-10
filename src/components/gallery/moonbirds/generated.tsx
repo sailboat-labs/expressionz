@@ -427,7 +427,7 @@ export default function MoonbirdGenerated({
                         <span
                           className={cn(
                             "inline-block h-4 w-4 transform rounded-full  transition-transform",
-                            hasBg ? "!bg-[#3E2A57]" : "!bg-white",
+                            hasBg ? "!bg-[#3E2A57]" : " !bg-white",
                             hasBg ? "translate-x-6 " : "translate-x-1 ",
                           )}
                         />
@@ -451,7 +451,7 @@ export default function MoonbirdGenerated({
                         <span
                           className={cn(
                             "inline-block h-4 w-4 transform rounded-full  transition-transform",
-                            allEmojisSelected ? "!bg-[#3E2A57]" : "!bg-white",
+                            allEmojisSelected ? " !bg-[#3E2A57]" : "!bg-white",
                             allEmojisSelected
                               ? "translate-x-6 "
                               : "translate-x-1 ",
@@ -509,7 +509,7 @@ export default function MoonbirdGenerated({
                     <span
                       className={cn(
                         "inline-block h-4 w-4 transform rounded-full  transition-transform",
-                        hasBg ? "!bg-[#3E2A57]" : "!bg-white",
+                        hasBg ? "!bg-[#3E2A57]" : " !bg-white",
                         hasBg ? "translate-x-6 " : "translate-x-1 ",
                       )}
                     />
@@ -534,7 +534,7 @@ export default function MoonbirdGenerated({
                     <span
                       className={cn(
                         "inline-block h-4 w-4 transform rounded-full  transition-transform",
-                        allEmojisSelected ? "!bg-[#3E2A57]" : "!bg-white",
+                        allEmojisSelected ? " !bg-[#3E2A57]" : "!bg-white",
                         allEmojisSelected ? "translate-x-6 " : "translate-x-1 ",
                       )}
                     />

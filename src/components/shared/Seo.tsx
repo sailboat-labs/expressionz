@@ -1,9 +1,10 @@
-import React from "react";
 import Head from "next/head";
 
 type SeoProps = { title: string; description?: string; url?: string };
 
-function Seo({ title, description, url }: SeoProps) {
+const DEFAULT_PAGE_DESCRIPTION = `An emoji generation tool that enables users to emote their NFTs and consequently enriching their digital gallery`;
+
+function Seo({ title, description = DEFAULT_PAGE_DESCRIPTION, url }: SeoProps) {
   return (
     <Head>
       {/* Basic Meta Tags */}

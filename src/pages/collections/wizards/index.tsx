@@ -20,7 +20,7 @@ export default function HomePage() {
       <BaseLayout
         hideFooter
         variant="flexed-minimized"
-        childrenClass="md:h-[calc(100vh-64px)]"
+        childrenClass="md:h-[calc(100vh-64px)] !font-pixelify-r"
         logo={
           <Link
             href="/collections"

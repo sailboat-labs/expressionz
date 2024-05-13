@@ -22,7 +22,8 @@ function Generated() {
       <BaseLayout
         hideFooter
         variant="flexed-minimized"
-        childrenClass="h-[calc(100vh-64px)] flex  w-full flex-1 items-center justify-center overflow-hidden font-pixelify-r"
+        wrapperClass="relative z-[10]"
+        childrenClass="h-[calc(100vh-64px)] flex  w-full items-center justify-center overflow-hidden font-pixelify-r"
         logo={
           <Link
             href={`/collections/wizards/${wizardId}`}

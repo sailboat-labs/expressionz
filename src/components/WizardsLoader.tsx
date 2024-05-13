@@ -62,10 +62,10 @@ export function WizardsLoader({
               type="video/mp4"
               src="/videos/loading/wizards-loading.mp4"
             />
-            <img
+            {/* <img
               src="/images/wizards-loading-poster.webp"
               alt="loading poster"
-            />
+            /> */}
           </video>
 
           <div

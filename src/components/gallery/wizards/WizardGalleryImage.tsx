@@ -101,7 +101,7 @@ export default function GalleryImage({
                         }}
                       >
                         <img
-                          src="/images/buttons/expressionz_active.webp"
+                          src="/images/buttons/generate-btn.webp"
                           // src="/images/generate-btn.webp"
                           className="w-48"
                         />
@@ -285,7 +285,7 @@ export default function GalleryImage({
                   }}
                 >
                   <img
-                    src="/images/buttons/expressionz_active.webp"
+                    src="/images/buttons/generate-btn.webp"
                     // src="/images/generate-btn.webp"
                     className="w-44"
                   />

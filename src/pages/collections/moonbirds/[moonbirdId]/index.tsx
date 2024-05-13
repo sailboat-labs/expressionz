@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import React, { useMemo } from "react";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
+import Link from "next/link";
+import BaseLayout from "@/components/shared/BaseLayout";
 
 export default function MoonbirdPage() {
   const router = useRouter();
@@ -35,7 +37,25 @@ export default function MoonbirdPage() {
   return (
     <>
       <Seo title={`Moonbird ${index}`} />
-      <main className="min-h-screen bg-dark">
+      <BaseLayout
+        hideFooter
+        variant="flexed-minimized"
+        childrenClass="md:h-[calc(100vh-64px)]"
+        wrapperClass="bg-dark"
+        logo={
+          <Link
+            href={`/collections/moonbirds`}
+            className="flex items-center gap-2 text-base font-semibold"
+          >
+            <img
+              src="/images/moonbirds-logo.webp"
+              className="ml-2 h-12 w-12 rounded-full "
+              alt="moon bird logo"
+            />
+            Moonbirds
+          </Link>
+        }
+      >
         <MoonbirdDetailsFrame>
           {[
             <React.Fragment key="left-item">
@@ -114,7 +134,7 @@ export default function MoonbirdPage() {
             </React.Fragment>,
             <React.Fragment key="right-item">
               {/* RIGHT CONTENT */}
-              <div className="mt-5  flex flex-col gap-2 pr-5">
+              <div className="mt-5  flex flex-col gap-2 pr-5 font-pixelify-r">
                 <div className="z-[2] mb-3 flex h-fit items-center justify-between">
                   <div className="flex w-full items-center justify-between">
                     <span className="font-pixelify-b  text-white  md:text-lg xl:text-2xl">
@@ -207,7 +227,8 @@ export default function MoonbirdPage() {
             </React.Fragment>,
           ]}
         </MoonbirdDetailsFrame>
-      </main>
+      </BaseLayout>
+      {/* <main className="min-h-screen bg-dark"></main> */}
     </>
   );
 }

@@ -34,7 +34,7 @@ export function WizardsLoader({
     <section
       className={cn(
         "fixed h-screen w-screen bg-black bg-opacity-80",
-        show ? "left-0 top-0 z-9999 flex" : "z-0 hidden",
+        show ? "left-0 top-0 !z-[99999] flex" : "z-0 hidden",
       )}
     >
       <div className="flex h-full w-full items-center justify-center space-y-5 ">
@@ -62,10 +62,10 @@ export function WizardsLoader({
               type="video/mp4"
               src="/videos/loading/wizards-loading.mp4"
             />
-            <img
+            {/* <img
               src="/images/wizards-loading-poster.webp"
               alt="loading poster"
-            />
+            /> */}
           </video>
 
           <div

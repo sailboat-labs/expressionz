@@ -43,9 +43,9 @@ export default function GalleryImage({
   }, []);
 
   return (
-    <div className="z-[2] flex h-screen w-screen items-center justify-center font-pixelify-r  text-black">
+    <div className="z-[2] mt-1 flex h-[calc(100vh-64px)] w-screen items-center justify-center font-pixelify-r  text-black">
       {/* Desktop */}
-      <div className="fixed inset-0 hidden scale-90 items-center justify-center overflow-y-auto lg:flex">
+      <div className=" inset-0 hidden scale-90 items-center justify-center overflow-y-auto lg:flex">
         <div className=" hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
           <Image
             src="/images/desktop_wizard_background.webp"

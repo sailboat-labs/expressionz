@@ -1,6 +1,7 @@
 import Drawer from "@/components/gallery/Drawer";
-import Gallery from "@/components/gallery/wizards/Gallery";
+
 import WizardsFilterTraits from "@/components/gallery/wizards/WizardsFilterTraits";
+import WizardsGallery from "@/components/gallery/wizards/WizardsGallery";
 import Seo from "@/components/shared/Seo";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -58,7 +59,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <Gallery />
+          <WizardsGallery />
         </div>
       </div>
     </>

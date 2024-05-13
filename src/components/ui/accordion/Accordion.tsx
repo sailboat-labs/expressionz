@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { AccordionItem } from "./AccordionItem";
+import AccordionItem from "./AccordionItem";
 import { AccordionWrapper } from "./AccordionWrapper";
 
 interface AccordionContextType {

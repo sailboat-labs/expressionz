@@ -329,9 +329,9 @@ export default function GeneratedWizards({
   }
 
   return (
-    <div className="z-[2] flex h-screen w-screen items-center justify-center font-pixelify-r text-black">
+    <div className=" flex h-[calc(100vh-64px)] w-screen items-center justify-center font-pixelify-r text-black">
       {/* Desktop */}
-      <div className="fixed inset-0 hidden scale-90 items-start justify-center overflow-y-auto lg:flex">
+      <div className="inset-0 hidden scale-90 items-start justify-center overflow-y-auto lg:flex">
         <div className=" flex h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all">
           <img
             src="/images/desktop_wizard_background.webp"

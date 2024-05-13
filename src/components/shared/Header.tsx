@@ -8,7 +8,36 @@ import { IoMenu } from "react-icons/io5";
 import Collections from "./CollectionsDropdown";
 import { cn } from "@/lib/misc.lib";
 
-function Header({ showBack = false }: { showBack?: boolean }) {
+export type THeaderProps = {
+  variant?: "base" | "flexed-minimized";
+  showBack?: boolean;
+  logo?: React.ReactNode;
+};
+
+function BaseLogo({ showBack = false }) {
+  const router = useRouter();
+
+  return (
+    <ul className="flex list-none items-center">
+      <li className="flex flex-row items-center">
+        {showBack ? (
+          <a
+            onClick={() => router.back()}
+            className="w-8"
+            style={{ cursor: "pointer" }}
+          >
+            <FaArrowLeft className="h-5 w-5" />
+          </a>
+        ) : (
+          <div className="w-8" />
+        )}
+      </li>
+      <Link href={"/"}>Expressionz.xyz</Link>
+    </ul>
+  );
+}
+
+function Header({ showBack = false, variant = "base", logo }: THeaderProps) {
   const router = useRouter();
 
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -18,27 +47,20 @@ function Header({ showBack = false }: { showBack?: boolean }) {
       <MobileMenu show={showMenu} setShow={setShowMenu} />
       <nav
         className={cn(
-          "sticky top-0 z-9999 h-16 bg-darkGrey font-presstart",
-          "py-[10px] text-xs text-white 3xl:h-20 3xl:text-sm",
+          "sticky top-0 !z-[100] h-16 bg-darkGrey font-presstart",
+          "py-[10px] text-xs text-white  3xl:text-sm",
+          {
+            "3xl:h-20": variant === "base",
+          },
         )}
       >
-        <div className="m-auto flex h-full w-11/12 items-center justify-between lg:w-4/5">
-          <ul className="flex list-none items-center">
-            <li className="flex flex-row items-center">
-              {showBack ? (
-                <a
-                  onClick={() => router.back()}
-                  className="w-8"
-                  style={{ cursor: "pointer" }}
-                >
-                  <FaArrowLeft className="h-5 w-5" />
-                </a>
-              ) : (
-                <div className="w-8" />
-              )}
-            </li>
-            <Link href={"/"}>Expressionz.xyz</Link>
-          </ul>
+        <div
+          className={cn("m-auto flex h-full  items-center justify-between", {
+            "w-11/12 lg:w-4/5": variant === "base",
+            "px-4": variant === "flexed-minimized",
+          })}
+        >
+          {logo ? logo : <BaseLogo showBack={showBack} />}
 
           <div className="hidden font-presstart lg:flex lg:space-x-8">
             <Collections />

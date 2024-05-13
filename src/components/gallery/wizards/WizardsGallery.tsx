@@ -1,7 +1,6 @@
 import { GALLERY } from "@/data/gallery";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import { LazyLoadedDiv } from "../LazyLoadedDiv";
 import Wizard from "./Wizard";
 
@@ -103,72 +102,72 @@ export default function WizardsGallery() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const Cell = ({ columnIndex, rowIndex, style }: any) => {
-    const item = gallery[rowIndex * columnCount + columnIndex];
-    if (!item) return null;
-    const index = Number(item?.meta?.name?.split("#")[1]);
-    return (
-      <div style={style} className=" items-center justify-center">
-        <button
-          onClick={() => {
-            router.push(`/${item.id}`, undefined, { shallow: true });
-          }}
-          className="flex h-[45vw] w-full cursor-pointer flex-col items-center  p-2 md:ml-0 md:w-[11rem] "
-        >
-          <Image
-            height={2000}
-            width={2000}
-            alt="wizard image"
-            src={`/images/gallery/${index}.webp`}
-            className="h-[40vw] w-[40vw] rounded-t-md object-contain md:h-[10rem] md:w-[12rem]"
-          />
-          <div className="flex w-[40vw] justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
-            <div>#{index}</div>
-            <div className="flex h-fit items-center gap-3">
-              <button
-                onClick={() => {
-                  window.open(
-                    `https://ordinals.com/inscription/${item.id}`,
-                    "_blank",
-                  );
-                }}
-                className="cursor-pointer rounded-full border-2 border-black p-1"
-              >
-                <div className="h-2 w-2 rounded-full bg-black"></div>
-              </button>
-              <div>
-                <img
-                  onClick={() => {
-                    window.open(
-                      `https://magiceden.io/ordinals/item-details/${item.id}`,
-                      "_blank",
-                    );
-                  }}
-                  className="h-5 w-5 cursor-pointer rounded-md"
-                  src="/images/MELOGO.png"
-                />
-              </div>
-            </div>
-          </div>
-        </button>
-      </div>
-    );
-  };
-  const columnCount =
-    windowWidth < 640
-      ? 2
-      : windowWidth < 1024
-        ? 2
-        : windowWidth < 1280
-          ? 3
-          : windowWidth < 1536
-            ? 5
-            : windowWidth < 1920
-              ? 6
-              : 7;
+  // const Cell = ({ columnIndex, rowIndex, style }: any) => {
+  //   const item = gallery[rowIndex * columnCount + columnIndex];
+  //   if (!item) return null;
+  //   const index = Number(item?.meta?.name?.split("#")[1]);
+  //   return (
+  //     <div style={style} className=" items-center justify-center">
+  //       <button
+  //         onClick={() => {
+  //           router.push(`/${item.id}`, undefined, { shallow: true });
+  //         }}
+  //         className="flex h-[45vw] w-full cursor-pointer flex-col items-center  p-2 md:ml-0 md:w-[11rem] "
+  //       >
+  //         <Image
+  //           height={2000}
+  //           width={2000}
+  //           alt="wizard image"
+  //           src={`/images/gallery/${index}.webp`}
+  //           className="h-[40vw] w-[40vw] rounded-t-md object-contain md:h-[10rem] md:w-[12rem]"
+  //         />
+  //         <div className="flex w-[40vw] justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
+  //           <div>#{index}</div>
+  //           <div className="flex h-fit items-center gap-3">
+  //             <button
+  //               onClick={() => {
+  //                 window.open(
+  //                   `https://ordinals.com/inscription/${item.id}`,
+  //                   "_blank",
+  //                 );
+  //               }}
+  //               className="cursor-pointer rounded-full border-2 border-black p-1"
+  //             >
+  //               <div className="h-2 w-2 rounded-full bg-black"></div>
+  //             </button>
+  //             <div>
+  //               <img
+  //                 onClick={() => {
+  //                   window.open(
+  //                     `https://magiceden.io/ordinals/item-details/${item.id}`,
+  //                     "_blank",
+  //                   );
+  //                 }}
+  //                 className="h-5 w-5 cursor-pointer rounded-md"
+  //                 src="/images/MELOGO.png"
+  //               />
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </button>
+  //     </div>
+  //   );
+  // };
+  // const columnCount =
+  //   windowWidth < 640
+  //     ? 2
+  //     : windowWidth < 1024
+  //       ? 2
+  //       : windowWidth < 1280
+  //         ? 3
+  //         : windowWidth < 1536
+  //           ? 5
+  //           : windowWidth < 1920
+  //             ? 6
+  //             : 7;
 
   return (
-    <div className="h-screen w-full flex-1  overflow-x-hidden md:overflow-y-auto">
+    <div className="h-[calc(100vh-64px)] w-full flex-1  overflow-x-hidden md:overflow-y-auto">
       <div className="flex justify-center px-2 md:justify-start">
         <div className="mb-3 mt-5 w-fit text-3xl text-white">
           Gallery ({gallery.length})

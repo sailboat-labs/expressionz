@@ -1,6 +1,7 @@
 import Drawer from "@/components/gallery/Drawer";
 import MoonBirdsFilterTraits from "@/components/gallery/moonbirds/MoonBirdsFilterTraits";
-import Gallery from "@/components/gallery/moonbirds/gallery";
+import MoonbirdsGallery from "@/components/gallery/moonbirds/MoonbirdsGallery";
+
 import Seo from "@/components/shared/Seo";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -9,14 +10,14 @@ export default function HomePage() {
   const router = useRouter();
 
   return (
-    <main className="bg-dark min-h-screen">
+    <main className="min-h-screen bg-dark">
       <Seo title="Moonbirds Collection" />
       {/* <img
         src="/images/background.webp"
         className="fixed z-[1] h-screen w-screen object-cover"
         alt="pixilated night time image"
       /> */}
-      <div className="font-pixelify-r flex w-full">
+      <div className="flex w-full font-pixelify-r">
         <div className="z-[2] w-full gap-10 md:flex md:flex-row">
           <div className="flex h-fit flex-col gap-5 overflow-hidden px-5 pb-5 md:h-screen">
             <div className="mt-3 flex items-center gap-2 text-white">
@@ -58,7 +59,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <Gallery />
+          <MoonbirdsGallery />
         </div>
       </div>
     </main>

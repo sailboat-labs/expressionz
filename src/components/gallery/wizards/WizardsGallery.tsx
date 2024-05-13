@@ -5,7 +5,7 @@ import Image from "next/image";
 import { LazyLoadedDiv } from "../LazyLoadedDiv";
 import Wizard from "./Wizard";
 
-export default function Gallery() {
+export default function WizardsGallery() {
   const router = useRouter();
   const [windowWidth, setWindowWidth] = useState<number>(0);
   let selectedAttributes = (router.query.attributes as string[]) || [];

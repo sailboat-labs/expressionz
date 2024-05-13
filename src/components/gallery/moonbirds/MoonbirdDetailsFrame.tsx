@@ -11,7 +11,7 @@ const MoonbirdDetailsFrame = forwardRef(
     ref: LegacyRef<HTMLDivElement>,
   ) => {
     return (
-      <div className="box-border flex h-screen w-screen items-center justify-center p-8">
+      <div className="box-border flex h-[calc(100vh-64px)] w-screen items-center justify-center p-8">
         <div
           ref={ref}
           className={cn(

@@ -163,10 +163,10 @@ export default function MoonbirdGenerated({
   }
 
   async function downloadEmojis() {
-    if (selectedEmojis.length === 0) {
-      toast.error("Select at least one emoji to export!");
-      return;
-    }
+    // if (selectedEmojis.length === 0) {
+    //   toast.error("Select at least one emoji to export!");
+    //   return;
+    // }
 
     const selected = hasBg
       ? generatedEmojis.filter((_, i) => selectedEmojis.includes(i))

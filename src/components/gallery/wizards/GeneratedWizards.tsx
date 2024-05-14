@@ -2,7 +2,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { Switch } from "@headlessui/react";
 import { motion } from "framer-motion";
-import { ArrowDownIcon, ArrowLeftIcon } from "@radix-ui/react-icons";
+import {
+  ArrowDownIcon,
+  ArrowLeftIcon,
+  Cross1Icon,
+} from "@radix-ui/react-icons";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -21,6 +25,7 @@ import { cn } from "@/lib/misc.lib";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 import { EPlatform } from "@/types/misc.type";
 import { generateWizards } from "@/http/wizard.http";
+import ThemedIconButton from "@/components/shared/ThemedIconButton";
 
 type GeneratedWizardsProps = {
   wizard: (typeof GALLERY)[0];
@@ -33,7 +38,8 @@ export default function GeneratedWizards({
 }: Readonly<GeneratedWizardsProps>) {
   const router = useRouter();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [isExportingStickers, setIsExportingStickers] = useState(false);
 
   const [generatedEmojis, setGeneratedEmojis] = useState<any[]>([]);
   const [generatedEmojisTransparent, setGeneratedEmojisTransparent] = useState<
@@ -104,6 +110,12 @@ export default function GeneratedWizards({
       setGeneratedEmojisTransparent(images.transparent);
     } catch (error) {
       console.error(error);
+      setLoading(false);
+
+      toast.dismiss();
+      toast.error("Error generating emojis", {
+        position: "bottom-right",
+      });
     } finally {
       setLoading(false);
     }
@@ -175,8 +187,8 @@ export default function GeneratedWizards({
   // }
 
   const isGenerating =
-    loading ||
-    generatedEmojis.length == 0 ||
+    loading &&
+    generatedEmojis.length == 0 &&
     generatedEmojisTransparent.length == 0;
 
   async function downloadEmojis() {
@@ -202,11 +214,10 @@ export default function GeneratedWizards({
   }
 
   async function exportStickers(platform: string) {
-    setLoading(true);
+    toast.loading("Generating emoji pack");
+    setIsExportingStickers(true);
 
     try {
-      // console.log("Selected emojis", selectedEmojis.length);
-
       if (platform === EPlatform.DISCORD) {
         const id = await createDiscordEmojiPack(
           "wizards",
@@ -219,35 +230,28 @@ export default function GeneratedWizards({
 
         setPackId(id);
         setShowDoneModal(true);
-
-        // console.log("Discord pack created", id);
-
-        // TODO - export to discord emoji/sticker pack (includes both png and gif(animated) images)
         return;
       }
 
-      if (platform === EPlatform.TELEGRAM) {
-        const id = await createTelegramStickerPack(
-          "wizards",
-          index - 1,
-          selectedEmojis,
-          hasBg,
-        );
+      /**
+       * Generates telegram sticker packs
+       */
+      const id = await createTelegramStickerPack(
+        "wizards",
+        index - 1,
+        selectedEmojis,
+        hasBg,
+      );
 
-        if (!id) throw new Error("Error creating telegram pack");
+      if (!id) throw new Error("Error creating telegram pack");
 
-        setPackId(id);
-        setShowDoneModal(true);
-
-        // console.log("Telegram pack created", id);
-
-        // TODO - export to telegram sticker pack (includes both png and gif(animated) images)
-      }
-    } catch (error) {
-      // console.log("Error exporting stickers", error);
-      throw error;
+      setPackId(id);
+      setShowDoneModal(true);
+    } catch (error: any) {
+      console.error("Error exporting stickers", error);
+      toast.error(error.message);
     } finally {
-      setLoading(false);
+      setIsExportingStickers(false);
     }
   }
 
@@ -301,30 +305,17 @@ export default function GeneratedWizards({
     }
   }
 
-  function getText() {
+  function getInstruction() {
     switch (platform) {
       case EPlatform.TELEGRAM:
-        return (
-          <p className="text-xs">
-            Select either animated or <br />
-            static stickers to export.
-          </p>
-        );
+        return <p>Select either animated or static stickers to export.</p>;
       case EPlatform.DISCORD:
         return (
-          <p className="text-xs">
-            You can choose both animated <br />
-            and static stickers to export.
-          </p>
+          <p>You can choose both animated and static stickers to export.</p>
         );
 
       default:
-        return (
-          <p className="text-xs">
-            Choose a platform to <br />
-            export your stickers to
-          </p>
-        );
+        return <p>Choose a platform to export your stickers to</p>;
     }
   }
 
@@ -399,12 +390,12 @@ export default function GeneratedWizards({
 
             <div className="h-full w-1/2 flex-1">
               <div className=" flex h-full flex-col gap-2 pl-0 pr-3 lg:gap-1">
-                <div className="z-[2] mb-2 mt-8 flex h-fit items-center justify-between">
-                  <div className="flex items-center gap-4">
+                <div className="z-[2] mb-3 mt-8 flex h-fit items-center justify-between gap-4 2xl:gap-10">
+                  <div className="flex items-center gap-2">
                     {shareIcons.map((messenger, i) => (
-                      <button
+                      <ThemedIconButton
                         key={i}
-                        className="h-9 w-9 cursor-pointer"
+                        wrapperClass="h-9 w-9"
                         onClick={async () => {
                           setSelectedEmojis([]);
                           setSelectedType("");
@@ -414,65 +405,41 @@ export default function GeneratedWizards({
 
                           setPlatform(messenger.platform);
                         }}
-                      >
-                        <img
-                          src={
-                            platform == messenger.platform
-                              ? messenger.active
-                              : messenger.inactive
-                          }
-                          className="h-full w-full"
-                          alt={`${messenger.platform} icon`}
-                        />
-                      </button>
+                        icon={
+                          <img
+                            src={
+                              platform == messenger.platform
+                                ? messenger.active
+                                : messenger.inactive
+                            }
+                            className="h-full w-full"
+                            alt={`${messenger.platform} icon`}
+                          />
+                        }
+                      />
                     ))}
                   </div>
 
-                  <div className="text-center">
-                    {/* Background */}
-                    <div className="flex flex-row gap-3">
-                      <Switch
-                        checked={hasBg}
-                        onChange={(checked) => {
-                          setHasBg(checked);
-                        }}
-                        className={`${
-                          hasBg ? "bg-[#C1410B]" : "bg-[#FED7AA]"
-                        } relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[#C1410B] transition-colors`}
-                      >
-                        <span
-                          className={`${
-                            hasBg
-                              ? "translate-x-6 bg-[#FED7AA]"
-                              : "translate-x-1 bg-[#C1410B]"
-                          } inline-block h-4 w-4 transform rounded-full transition-transform`}
-                        />
-                      </Switch>
-                      <div className="text-base font-semibold">Background</div>
-                    </div>
-                  </div>
+                  <div className=" flex-1">{getInstruction()}</div>
 
-                  <div className="flex items-center gap-3">
-                    <button
+                  <div className="flex items-center gap-2">
+                    <ThemedIconButton
                       onClick={downloadEmojis}
-                      className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
-                    >
-                      <ArrowDownIcon className="h-5 w-5" />
-                    </button>
-                    {/* <button
-                      onClick={() => {
-                        router.replace(`/collections/wizards/${index}`);
-               
-                      }}
-                      className="ml-1 flex  h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
-                    >
-                      <Cross1Icon className="h-5 w-5" />
-                    </button> */}
+                      variant="gold"
+                      icon={<ArrowDownIcon className="h-5 w-5" />}
+                    />
+                    <ThemedIconButton
+                      variant="gold"
+                      onClick={() =>
+                        router.replace(`/collections/wizards/${index}`)
+                      }
+                      icon={<Cross1Icon className="h-5 w-5" />}
+                    />
                   </div>
                 </div>
 
                 {/* Background */}
-                {/* <div className="flex flex-row gap-3">
+                <div className="flex flex-row gap-3">
                   <Switch
                     checked={hasBg}
                     onChange={(checked) => {
@@ -491,7 +458,7 @@ export default function GeneratedWizards({
                     />
                   </Switch>
                   <div className="text-base font-semibold">Background</div>
-                </div> */}
+                </div>
 
                 <div className="flex-1 overflow-y-auto overflow-x-clip">
                   <div className="grid gap-4 pt-4  md:grid-cols-3">
@@ -533,13 +500,13 @@ export default function GeneratedWizards({
                   >
                     <img
                       src={`/images/share/export-${
-                        selectedEmojis.length == 0
+                        selectedEmojis.length == 0 || isExportingStickers
                           ? "pressed.webp"
                           : "active.webp"
                       }`}
                       alt="Export button"
                       className={`h-auto w-40 ${
-                        selectedEmojis.length == 0
+                        selectedEmojis.length == 0 || isExportingStickers
                           ? "cursor-not-allowed"
                           : "cursor-pointer"
                       }`}
@@ -553,7 +520,7 @@ export default function GeneratedWizards({
       </div>
 
       {/* Mobile */}
-      <div className="fixed inset-0 block scale-95 overflow-y-hidden lg:hidden">
+      <div className="scale-60 block h-[calc(100vh-80px)] flex-1 overflow-y-hidden lg:hidden">
         <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-y-auto overflow-x-clip rounded p-3 text-left align-middle transition-all ">
           <Image
             src="/images/mobile_wizard_background.webp"
@@ -708,7 +675,7 @@ export default function GeneratedWizards({
               <div className="text-sm font-semibold">Background</div>
             </div>
 
-            <div className="mx-2 mt-2 text-left">{getText()}</div>
+            <div className="mx-2 mt-2 text-left">{getInstruction()}</div>
 
             {/* Generated Emojis */}
             <div className="pb-10">

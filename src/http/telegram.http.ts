@@ -27,7 +27,7 @@ export async function createTelegramStickerPack(
       hasBackground,
     );
 
-    console.log("Generated stickers:", generated);
+    // console.log("Generated stickers:", generated);
 
     // Upload stickers to firebase
     const packData = await saveStickerToFirebase(
@@ -41,7 +41,7 @@ export async function createTelegramStickerPack(
 
     return id;
   } catch (error) {
-    console.log("Error generating telegram stickers", error);
+    console.error("Error generating telegram stickers", error);
   }
 }
 
@@ -87,12 +87,8 @@ async function generateTelegramStickers(
   }
 
   try {
-    // const generateCollection =
-    //   collection === "moonbirds"
-    //     ? generateMoonBirdEmojis
-    // : generateWizardsEmojis;
-
     const response = await generateCollection(payload, () => {});
+
     if (response) {
       const imagesToIncludeInExport = hasBackground
         ? response.colored

@@ -59,6 +59,7 @@ export default function MoonbirdGenerated({
     useState(1);
   const [platform, setPlatform] = useState<EPlatform>(EPlatform.NONE);
   const [loading, setLoading] = useState(true);
+  const [isExportingStickers, setIsExportingStickers] = useState(false);
 
   const [hasBg, setHasBg] = useState(true);
   const [showDoneModal, setShowDoneModal] = useState(false);
@@ -194,6 +195,7 @@ export default function MoonbirdGenerated({
   };
 
   async function exportStickers(platform: string) {
+    setIsExportingStickers(true);
     toast.loading("Exporting stickers...");
 
     try {
@@ -211,9 +213,6 @@ export default function MoonbirdGenerated({
 
         setPackId(id);
         setShowDoneModal(true);
-
-        toast.dismiss();
-        toast.success("Export successful");
         return;
       }
 
@@ -228,13 +227,11 @@ export default function MoonbirdGenerated({
 
       setPackId(id);
       setShowDoneModal(true);
-
-      toast.dismiss();
-      toast.success("Export successful");
-    } catch (error) {
+    } catch (error: any) {
+      toast.error(error.message);
       console.error("Error exporting stickers", error);
     } finally {
-      setLoading(false);
+      setIsExportingStickers(false);
     }
   }
 
@@ -618,13 +615,13 @@ export default function MoonbirdGenerated({
                 >
                   <img
                     src={`/images/share/export-${
-                      selectedEmojis.length == 0
+                      selectedEmojis.length == 0 || isExportingStickers
                         ? "pressed.webp"
                         : "active.webp"
                     }`}
                     alt="Export button"
                     className={`h-auto w-40 ${
-                      selectedEmojis.length == 0
+                      selectedEmojis.length == 0 || isExportingStickers
                         ? "cursor-not-allowed"
                         : "cursor-pointer"
                     }`}

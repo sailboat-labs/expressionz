@@ -213,9 +213,7 @@ export default function GeneratedWizards({
   }
 
   async function exportStickers(platform: string) {
-    toast.loading("Generating emoji pack", {
-      position: "bottom-right",
-    });
+    toast.loading("Generating emoji pack");
 
     try {
       if (platform === EPlatform.DISCORD) {

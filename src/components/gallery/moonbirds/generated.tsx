@@ -24,6 +24,7 @@ import { moonbirdEmojis } from "@/data/emoji.data";
 import { generateMoonBirdEmojis } from "@/lib/generateEmojis";
 import BaseLayout from "@/components/shared/BaseLayout";
 import Link from "next/link";
+import { EPlatform } from "@/types/misc.type";
 
 // const shareIcons = [
 //   {
@@ -56,7 +57,7 @@ export default function MoonbirdGenerated({
   const [progress, setProgress] = useState(0);
   const [totalSizeOfGeneratedImages, setTotalSizeOfGeneratedImages] =
     useState(1);
-  const [platform, setPlatform] = useState("");
+  const [platform, setPlatform] = useState<EPlatform>(EPlatform.NONE);
   const [loading, setLoading] = useState(true);
 
   const [hasBg, setHasBg] = useState(true);
@@ -71,7 +72,7 @@ export default function MoonbirdGenerated({
   >([]);
 
   /**
-   * Go to homescreen with Escape key
+   * Go to home  screen with Escape key
    *
    */
   useEffect(() => {
@@ -193,12 +194,12 @@ export default function MoonbirdGenerated({
   };
 
   async function exportStickers(platform: string) {
-    setLoading(true);
+    toast.loading("Exporting stickers...");
 
     try {
       consoleLog("Selected emojis " + selectedEmojis.length);
 
-      if (platform === "discord") {
+      if (platform === EPlatform.DISCORD) {
         const id = await createDiscordEmojiPack(
           "moonbirds",
           index,
@@ -211,27 +212,25 @@ export default function MoonbirdGenerated({
         setPackId(id);
         setShowDoneModal(true);
 
-        console.log("Discord pack created", id);
+        toast.dismiss();
+        toast.success("Export successful");
         return;
       }
 
-      if (platform === "telegram") {
-        const id = await createTelegramStickerPack(
-          "moonbirds",
-          index,
-          selectedEmojis,
-          hasBg,
-        );
+      const id = await createTelegramStickerPack(
+        "moonbirds",
+        index,
+        selectedEmojis,
+        hasBg,
+      );
 
-        if (!id) throw new Error("Error creating telegram pack");
+      if (!id) throw new Error("Error creating telegram pack");
 
-        setPackId(id);
-        setShowDoneModal(true);
+      setPackId(id);
+      setShowDoneModal(true);
 
-        console.log("Telegram pack created", id);
-
-        // TODO - export to telegram sticker pack (includes both png and gif(animated) images)
-      }
+      toast.dismiss();
+      toast.success("Export successful");
     } catch (error) {
       console.error("Error exporting stickers", error);
     } finally {
@@ -414,13 +413,17 @@ export default function MoonbirdGenerated({
                     <ThemedIconButton
                       className={cn("text-2xl font-semibold ", {
                         "!border-transparent !bg-yellow !text-black":
-                          platform == "telegram",
+                          platform == EPlatform.TELEGRAM,
                       })}
                       onClick={() => {
                         if (platform === "") {
                           setSelectedEmojis([]);
                         }
-                        setPlatform(platform === "telegram" ? "" : "telegram");
+                        setPlatform(
+                          platform === EPlatform.TELEGRAM
+                            ? EPlatform.NONE
+                            : EPlatform.TELEGRAM,
+                        );
                       }}
                       variant="violet"
                       icon={<BiLogoTelegram className="h-5 w-5" />}
@@ -428,13 +431,17 @@ export default function MoonbirdGenerated({
                     <ThemedIconButton
                       className={cn("text-2xl font-semibold", {
                         "!border-transparent !bg-yellow !text-black":
-                          platform == "discord",
+                          platform == EPlatform.DISCORD,
                       })}
                       onClick={() => {
                         if (platform === "") {
                           setSelectedEmojis([]);
                         }
-                        setPlatform(platform === "discord" ? "" : "discord");
+                        setPlatform(
+                          platform === EPlatform.DISCORD
+                            ? EPlatform.NONE
+                            : EPlatform.DISCORD,
+                        );
                       }}
                       variant="violet"
                       icon={<FaDiscord className="h-5 w-5" />}

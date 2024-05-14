@@ -39,6 +39,7 @@ export default function GeneratedWizards({
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
+  const [isExportingStickers, setIsExportingStickers] = useState(false);
 
   const [generatedEmojis, setGeneratedEmojis] = useState<any[]>([]);
   const [generatedEmojisTransparent, setGeneratedEmojisTransparent] = useState<
@@ -214,6 +215,7 @@ export default function GeneratedWizards({
 
   async function exportStickers(platform: string) {
     toast.loading("Generating emoji pack");
+    setIsExportingStickers(true);
 
     try {
       if (platform === EPlatform.DISCORD) {
@@ -248,6 +250,8 @@ export default function GeneratedWizards({
     } catch (error: any) {
       console.error("Error exporting stickers", error);
       toast.error(error.message);
+    } finally {
+      setIsExportingStickers(false);
     }
   }
 
@@ -496,13 +500,13 @@ export default function GeneratedWizards({
                   >
                     <img
                       src={`/images/share/export-${
-                        selectedEmojis.length == 0
+                        selectedEmojis.length == 0 || isExportingStickers
                           ? "pressed.webp"
                           : "active.webp"
                       }`}
                       alt="Export button"
                       className={`h-auto w-40 ${
-                        selectedEmojis.length == 0
+                        selectedEmojis.length == 0 || isExportingStickers
                           ? "cursor-not-allowed"
                           : "cursor-pointer"
                       }`}

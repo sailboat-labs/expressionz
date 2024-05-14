@@ -18,7 +18,7 @@ export async function createTelegramStickerPack(
   hasBackground: boolean,
 ) {
   try {
-    const id = randomId();
+    const id = collection === "wizards" ? "W_" : "M_" + randomId();
 
     const generated = await generateTelegramStickers(
       collection,
@@ -37,7 +37,7 @@ export async function createTelegramStickerPack(
     );
 
     // Save pack data to firebase
-    await saveStickerPackData(id, tokenId, packData);
+    await saveStickerPackData(collection, id, tokenId, packData);
 
     return id;
   } catch (error) {

@@ -38,7 +38,7 @@ export default function GeneratedWizards({
 }: Readonly<GeneratedWizardsProps>) {
   const router = useRouter();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [generatedEmojis, setGeneratedEmojis] = useState<any[]>([]);
   const [generatedEmojisTransparent, setGeneratedEmojisTransparent] = useState<
@@ -109,6 +109,12 @@ export default function GeneratedWizards({
       setGeneratedEmojisTransparent(images.transparent);
     } catch (error) {
       console.error(error);
+      setLoading(false);
+
+      toast.dismiss();
+      toast.error("Error generating emojis", {
+        position: "bottom-right",
+      });
     } finally {
       setLoading(false);
     }
@@ -180,8 +186,8 @@ export default function GeneratedWizards({
   // }
 
   const isGenerating =
-    loading ||
-    generatedEmojis.length == 0 ||
+    loading &&
+    generatedEmojis.length == 0 &&
     generatedEmojisTransparent.length == 0;
 
   async function downloadEmojis() {
@@ -207,11 +213,11 @@ export default function GeneratedWizards({
   }
 
   async function exportStickers(platform: string) {
-    setLoading(true);
+    toast.loading("Generating emoji pack", {
+      position: "bottom-right",
+    });
 
     try {
-      // console.log("Selected emojis", selectedEmojis.length);
-
       if (platform === EPlatform.DISCORD) {
         const id = await createDiscordEmojiPack(
           "wizards",
@@ -224,35 +230,26 @@ export default function GeneratedWizards({
 
         setPackId(id);
         setShowDoneModal(true);
-
-        // console.log("Discord pack created", id);
-
-        // TODO - export to discord emoji/sticker pack (includes both png and gif(animated) images)
         return;
       }
 
-      if (platform === EPlatform.TELEGRAM) {
-        const id = await createTelegramStickerPack(
-          "wizards",
-          index - 1,
-          selectedEmojis,
-          hasBg,
-        );
+      /**
+       * Generates telegram sticker packs
+       */
+      const id = await createTelegramStickerPack(
+        "wizards",
+        index - 1,
+        selectedEmojis,
+        hasBg,
+      );
 
-        if (!id) throw new Error("Error creating telegram pack");
+      if (!id) throw new Error("Error creating telegram pack");
 
-        setPackId(id);
-        setShowDoneModal(true);
-
-        // console.log("Telegram pack created", id);
-
-        // TODO - export to telegram sticker pack (includes both png and gif(animated) images)
-      }
-    } catch (error) {
+      setPackId(id);
+      setShowDoneModal(true);
+    } catch (error: any) {
       console.error("Error exporting stickers", error);
-      throw error;
-    } finally {
-      setLoading(false);
+      toast.error(error.message);
     }
   }
 

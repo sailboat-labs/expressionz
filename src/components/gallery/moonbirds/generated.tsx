@@ -24,6 +24,7 @@ import { moonbirdEmojis } from "@/data/emoji.data";
 import { generateMoonBirdEmojis } from "@/lib/generateEmojis";
 import BaseLayout from "@/components/shared/BaseLayout";
 import Link from "next/link";
+import { EPlatform } from "@/types/misc.type";
 
 // const shareIcons = [
 //   {
@@ -56,8 +57,9 @@ export default function MoonbirdGenerated({
   const [progress, setProgress] = useState(0);
   const [totalSizeOfGeneratedImages, setTotalSizeOfGeneratedImages] =
     useState(1);
-  const [platform, setPlatform] = useState("");
+  const [platform, setPlatform] = useState<EPlatform>(EPlatform.NONE);
   const [loading, setLoading] = useState(true);
+  const [isExportingStickers, setIsExportingStickers] = useState(false);
 
   const [hasBg, setHasBg] = useState(true);
   const [showDoneModal, setShowDoneModal] = useState(false);
@@ -71,7 +73,7 @@ export default function MoonbirdGenerated({
   >([]);
 
   /**
-   * Go to homescreen with Escape key
+   * Go to home  screen with Escape key
    *
    */
   useEffect(() => {
@@ -163,10 +165,10 @@ export default function MoonbirdGenerated({
   }
 
   async function downloadEmojis() {
-    if (selectedEmojis.length === 0) {
-      toast.error("Select at least one emoji to export!");
-      return;
-    }
+    // if (selectedEmojis.length === 0) {
+    //   toast.error("Select at least one emoji to export!");
+    //   return;
+    // }
 
     const selected = hasBg
       ? generatedEmojis.filter((_, i) => selectedEmojis.includes(i))
@@ -193,12 +195,13 @@ export default function MoonbirdGenerated({
   };
 
   async function exportStickers(platform: string) {
-    setLoading(true);
+    setIsExportingStickers(true);
+    setShowDoneModal(true);
 
     try {
       consoleLog("Selected emojis " + selectedEmojis.length);
 
-      if (platform === "discord") {
+      if (platform === EPlatform.DISCORD) {
         const id = await createDiscordEmojiPack(
           "moonbirds",
           index,
@@ -209,33 +212,26 @@ export default function MoonbirdGenerated({
         if (!id) throw new Error("Error creating discord pack");
 
         setPackId(id);
-        setShowDoneModal(true);
-
-        console.log("Discord pack created", id);
+        // setShowDoneModal(true);
         return;
       }
 
-      if (platform === "telegram") {
-        const id = await createTelegramStickerPack(
-          "moonbirds",
-          index,
-          selectedEmojis,
-          hasBg,
-        );
+      const id = await createTelegramStickerPack(
+        "moonbirds",
+        index,
+        selectedEmojis,
+        hasBg,
+      );
 
-        if (!id) throw new Error("Error creating telegram pack");
+      if (!id) throw new Error("Error creating telegram pack");
 
-        setPackId(id);
-        setShowDoneModal(true);
-
-        console.log("Telegram pack created", id);
-
-        // TODO - export to telegram sticker pack (includes both png and gif(animated) images)
-      }
-    } catch (error) {
+      setPackId(id);
+      // setShowDoneModal(true);
+    } catch (error: any) {
+      toast.error(error.message);
       console.error("Error exporting stickers", error);
     } finally {
-      setLoading(false);
+      setIsExportingStickers(false);
     }
   }
 
@@ -414,13 +410,17 @@ export default function MoonbirdGenerated({
                     <ThemedIconButton
                       className={cn("text-2xl font-semibold ", {
                         "!border-transparent !bg-yellow !text-black":
-                          platform == "telegram",
+                          platform == EPlatform.TELEGRAM,
                       })}
                       onClick={() => {
                         if (platform === "") {
                           setSelectedEmojis([]);
                         }
-                        setPlatform(platform === "telegram" ? "" : "telegram");
+                        setPlatform(
+                          platform === EPlatform.TELEGRAM
+                            ? EPlatform.NONE
+                            : EPlatform.TELEGRAM,
+                        );
                       }}
                       variant="violet"
                       icon={<BiLogoTelegram className="h-5 w-5" />}
@@ -428,13 +428,17 @@ export default function MoonbirdGenerated({
                     <ThemedIconButton
                       className={cn("text-2xl font-semibold", {
                         "!border-transparent !bg-yellow !text-black":
-                          platform == "discord",
+                          platform == EPlatform.DISCORD,
                       })}
                       onClick={() => {
                         if (platform === "") {
                           setSelectedEmojis([]);
                         }
-                        setPlatform(platform === "discord" ? "" : "discord");
+                        setPlatform(
+                          platform === EPlatform.DISCORD
+                            ? EPlatform.NONE
+                            : EPlatform.DISCORD,
+                        );
                       }}
                       variant="violet"
                       icon={<FaDiscord className="h-5 w-5" />}
@@ -611,13 +615,13 @@ export default function MoonbirdGenerated({
                 >
                   <img
                     src={`/images/share/export-${
-                      selectedEmojis.length == 0
+                      selectedEmojis.length == 0 || isExportingStickers
                         ? "pressed.webp"
                         : "active.webp"
                     }`}
                     alt="Export button"
                     className={`h-auto w-40 ${
-                      selectedEmojis.length == 0
+                      selectedEmojis.length == 0 || isExportingStickers
                         ? "cursor-not-allowed"
                         : "cursor-pointer"
                     }`}

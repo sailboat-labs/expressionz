@@ -18,7 +18,7 @@ export async function createTelegramStickerPack(
   hasBackground: boolean,
 ) {
   try {
-    const id = randomId();
+    const id = collection === "wizards" ? "W_" : "M_" + randomId();
 
     const generated = await generateTelegramStickers(
       collection,
@@ -27,7 +27,7 @@ export async function createTelegramStickerPack(
       hasBackground,
     );
 
-    console.log("Generated stickers:", generated);
+    // console.log("Generated stickers:", generated);
 
     // Upload stickers to firebase
     const packData = await saveStickerToFirebase(
@@ -37,11 +37,11 @@ export async function createTelegramStickerPack(
     );
 
     // Save pack data to firebase
-    await saveStickerPackData(id, tokenId, packData);
+    await saveStickerPackData(collection, id, tokenId, packData);
 
     return id;
   } catch (error) {
-    console.log("Error generating telegram stickers", error);
+    console.error("Error generating telegram stickers", error);
   }
 }
 
@@ -87,12 +87,8 @@ async function generateTelegramStickers(
   }
 
   try {
-    // const generateCollection =
-    //   collection === "moonbirds"
-    //     ? generateMoonBirdEmojis
-    // : generateWizardsEmojis;
-
     const response = await generateCollection(payload, () => {});
+
     if (response) {
       const imagesToIncludeInExport = hasBackground
         ? response.colored

@@ -4,6 +4,7 @@ import { firestore } from "./config";
 import { InputSticker } from "@/types/emoji.type";
 
 export async function saveStickerPackData(
+  collection: "wizards" | "moonbirds",
   id: string,
   token: number,
   data: InputSticker[],

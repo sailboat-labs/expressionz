@@ -1,10 +1,12 @@
 import clsx from "clsx";
 import React, { ComponentPropsWithoutRef } from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/misc.lib";
 
 type TThemedIconButtonProps = {
   icon: React.ReactNode;
   theme?: TIconButtonTheme;
+  wrapperClass?: string;
   variant?: "violet" | "gold" | "custom";
 } & Omit<ComponentPropsWithoutRef<"button">, "children">;
 
@@ -17,6 +19,7 @@ type TIconButtonTheme = {
 const ThemedIconButton = ({
   icon,
   className,
+  wrapperClass,
   variant = "custom",
   theme = {
     bgClass: "transparent",
@@ -29,7 +32,7 @@ const ThemedIconButton = ({
     <motion.div
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="h-8 w-8"
+      className={cn("h-8 w-8", wrapperClass)}
     >
       <button
         className={clsx(
@@ -38,7 +41,9 @@ const ThemedIconButton = ({
           variant === "violet" && [
             "border-2 border-[#BDBCFF] bg-[#6765A7] text-white",
           ],
-          variant === "gold" && [],
+          variant === "gold" && [
+            "border-2 border-orange-700 bg-orange-200 text-orange-700",
+          ],
           className,
         )}
         {...rest}

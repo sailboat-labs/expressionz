@@ -1,5 +1,5 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function bufferToImageSource(
   bufferData: number[],
-  type: 'png' | 'webp'
+  type: "png" | "webp",
 ) {
   // Convert the Buffer data (Uint8Array) to a base64-encoded string
   const base64String = btoa(String.fromCharCode.apply(null, bufferData));
@@ -17,8 +17,8 @@ export function bufferToImageSource(
 
 export function randomId() {
   const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_';
-  let result = '';
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
 
   // Ensure that the first character is a letter
   result += characters.charAt(Math.floor(Math.random() * 52));
@@ -26,13 +26,13 @@ export function randomId() {
   for (let i = 1; i < 10; i++) {
     // Avoid consecutive underscores
     let nextCharacter = characters.charAt(
-      Math.floor(Math.random() * characters.length)
+      Math.floor(Math.random() * characters.length),
     );
-    while (nextCharacter === '_' && result.charAt(i - 1) === '_') {
-      nextCharacter = characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-    }
+    // while (nextCharacter === '_' && result.charAt(i - 1) === '_') {
+    //   nextCharacter = characters.charAt(
+    //     Math.floor(Math.random() * characters.length)
+    //   );
+    // }
     result += nextCharacter;
   }
 
@@ -40,7 +40,7 @@ export function randomId() {
 }
 
 export function arrayBufferToBase64(buffer: number[]) {
-  let binary = '';
+  let binary = "";
   const bytes = new Uint8Array(buffer);
   const len = bytes.byteLength;
   for (let i = 0; i < len; i++) {
@@ -50,7 +50,7 @@ export function arrayBufferToBase64(buffer: number[]) {
 }
 
 export function gifArrayBufferToBase64(buffer: number[]) {
-  let binary = '';
+  let binary = "";
   const bytes = new Uint8Array(buffer);
   const len = bytes.byteLength;
   for (let i = 0; i < len; i++) {

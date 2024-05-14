@@ -10,7 +10,7 @@ const CollectionsPage = () => {
       <Seo title="Collections" />
       <BaseLayout>
         <img
-          className=" mx-auto my-16 max-w-sm lg:max-w-lg"
+          className="pointer-events-none mx-auto my-16 h-auto max-w-[250px] lg:max-w-lg"
           src="/images/collections-heading.webp"
           alt="text 'collection'"
         />
@@ -28,7 +28,7 @@ const CollectionsPage = () => {
               <Link
                 className={cn(
                   "flex flex-col items-center",
-                  "max-w-[300px] cursor-pointer  border-4 border-yellow p-4 pb-0",
+                  "h-full max-w-[300px] cursor-pointer  border-4 border-yellow p-4 pb-0",
                 )}
                 href="/collections/moonbirds"
               >
@@ -40,7 +40,7 @@ const CollectionsPage = () => {
                   Moonbirds
                 </strong>
                 <img
-                  className="h-auto min-h-[168px] w-[200px]"
+                  className="pointer-events-none h-auto min-h-[168px] w-[200px]"
                   src="/images/moonbird.png"
                   alt="moonbird"
                 />

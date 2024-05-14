@@ -17,7 +17,7 @@ export async function createDiscordEmojiPack(
   selected: number[],
   hasBackground: boolean,
 ) {
-  const id = randomId();
+  const id = collection === 'wizards' ? 'W_' : 'M_' + randomId();
 
   const generated = await generateDiscordEmojis(
     collection,
@@ -31,7 +31,7 @@ export async function createDiscordEmojiPack(
   const packData = await saveStickerToFirebase(tokenId, generated, "discord");
 
   // Save pack data to firebase
-  await saveStickerPackData(id, tokenId, packData);
+  await saveStickerPackData(collection, id, tokenId, packData);
 
   return id;
 }

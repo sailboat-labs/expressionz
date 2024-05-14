@@ -214,8 +214,8 @@ export default function GeneratedWizards({
   }
 
   async function exportStickers(platform: string) {
-    toast.loading("Generating emoji pack");
     setIsExportingStickers(true);
+    setShowDoneModal(true);
 
     try {
       if (platform === EPlatform.DISCORD) {
@@ -229,7 +229,7 @@ export default function GeneratedWizards({
         if (!id) throw new Error("Error creating discord pack");
 
         setPackId(id);
-        setShowDoneModal(true);
+        // setShowDoneModal(true);
         return;
       }
 
@@ -246,7 +246,7 @@ export default function GeneratedWizards({
       if (!id) throw new Error("Error creating telegram pack");
 
       setPackId(id);
-      setShowDoneModal(true);
+      // setShowDoneModal(true);
     } catch (error: any) {
       console.error("Error exporting stickers", error);
       toast.error(error.message);

@@ -196,7 +196,7 @@ export default function MoonbirdGenerated({
 
   async function exportStickers(platform: string) {
     setIsExportingStickers(true);
-    toast.loading("Exporting stickers...");
+    setShowDoneModal(true);
 
     try {
       consoleLog("Selected emojis " + selectedEmojis.length);
@@ -212,7 +212,7 @@ export default function MoonbirdGenerated({
         if (!id) throw new Error("Error creating discord pack");
 
         setPackId(id);
-        setShowDoneModal(true);
+        // setShowDoneModal(true);
         return;
       }
 
@@ -226,7 +226,7 @@ export default function MoonbirdGenerated({
       if (!id) throw new Error("Error creating telegram pack");
 
       setPackId(id);
-      setShowDoneModal(true);
+      // setShowDoneModal(true);
     } catch (error: any) {
       toast.error(error.message);
       console.error("Error exporting stickers", error);

@@ -1,4 +1,5 @@
 import { Menu, Transition } from "@headlessui/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 import { IoIosArrowDown } from "react-icons/io";
@@ -9,9 +10,9 @@ export default function Collections() {
   return (
     <div className="w-52 text-right">
       <Menu as="div" className="relative inline-block text-left">
-        <div>
+        <div className="flex items-center gap-2">
+          <Link href="/collections" className="hover:text-yellow active:text-yellow">Collections</Link>
           <Menu.Button className="inline-flex w-full items-center justify-center rounded-md text-xs font-medium text-white">
-            Collections
             <IoIosArrowDown
               className="-mr-1 ml-1 h-5 w-5 text-white"
               aria-hidden="true"

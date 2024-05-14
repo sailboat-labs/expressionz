@@ -21,18 +21,34 @@ function MobileMenu({ show, setShow }: MenuProps) {
       >
         <FaXmark className="h-full w-full text-[#FF65DD]" />
       </button>
-      <div className="font-presstart flex w-full flex-col items-center justify-center space-y-10 text-white">
-        <Link href="/collections/moonbirds" onClick={() => setShow(false)}>
+      <div className="flex w-full flex-col items-center justify-center space-y-10 font-presstart text-white">
+        <Link
+          href="/collections"
+          onClick={() => setShow(false)}
+          className="hover:text-yellow active:text-yellow"
+        >
+          Collections
+        </Link>
+        <Link
+          href="/collections/moonbirds"
+          onClick={() => setShow(false)}
+          className="hover:text-yellow active:text-yellow"
+        >
           Moonbirds
         </Link>
-        <button
-          onClick={() => {
-            window.open(`https://twoo-staging.netlify.app/`);
-          }}
+        <Link
+          href="/collections/wizards"
+          onClick={() => setShow(false)}
+          className="hover:text-yellow active:text-yellow"
         >
           Wizards
-        </button>
-        <Link href="/about-us" onClick={() => setShow(false)}>
+        </Link>
+
+        <Link
+          href="/about-us"
+          onClick={() => setShow(false)}
+          className="hover:text-yellow active:text-yellow"
+        >
           About Us
         </Link>
       </div>

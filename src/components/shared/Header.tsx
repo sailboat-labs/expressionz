@@ -64,7 +64,10 @@ function Header({ showBack = false, variant = "base", logo }: THeaderProps) {
 
           <div className="hidden font-presstart lg:flex lg:space-x-8">
             <Collections />
-            <Link href="/about-us" className="">
+            <Link
+              href="/about-us"
+              className="hover:text-yellow active:text-yellow"
+            >
               About Us
             </Link>
           </div>

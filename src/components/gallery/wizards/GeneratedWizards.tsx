@@ -26,6 +26,7 @@ import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 import { EPlatform } from "@/types/misc.type";
 import { generateWizards } from "@/http/wizard.http";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
+import { LiaSpinnerSolid } from "react-icons/lia";
 
 type GeneratedWizardsProps = {
   wizard: (typeof GALLERY)[0];
@@ -215,7 +216,6 @@ export default function GeneratedWizards({
 
   async function exportStickers(platform: string) {
     setIsExportingStickers(true);
-    setShowDoneModal(true);
 
     try {
       if (platform === EPlatform.DISCORD) {
@@ -229,7 +229,7 @@ export default function GeneratedWizards({
         if (!id) throw new Error("Error creating discord pack");
 
         setPackId(id);
-        // setShowDoneModal(true);
+        setShowDoneModal(true);
         return;
       }
 
@@ -246,7 +246,7 @@ export default function GeneratedWizards({
       if (!id) throw new Error("Error creating telegram pack");
 
       setPackId(id);
-      // setShowDoneModal(true);
+      setShowDoneModal(true);
     } catch (error: any) {
       console.error("Error exporting stickers", error);
       toast.error(error.message);
@@ -711,7 +711,10 @@ export default function GeneratedWizards({
                   mt-5 justify-center
                   `}
               >
-                <button className="h-fit w-fit" onClick={() => exportEmojis()}>
+                <button
+                  className="relative h-fit w-fit"
+                  onClick={() => exportEmojis()}
+                >
                   <img
                     src={`/images/share/export-${
                       selectedEmojis.length == 0
@@ -725,6 +728,11 @@ export default function GeneratedWizards({
                         : "cursor-pointer"
                     }`}
                   />
+                  {isExportingStickers && (
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                      <LiaSpinnerSolid className="h-5 w-5 animate-spin" />
+                    </div>
+                  )}
                 </button>
               </div>
             </div>

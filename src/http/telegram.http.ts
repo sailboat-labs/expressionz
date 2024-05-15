@@ -1,4 +1,3 @@
-import { saveStickerPackData } from "@/firebase/stickers";
 import { uploadStickerToFirebase } from "@/firebase/uploadStickerToFirebase";
 
 import {
@@ -10,6 +9,7 @@ import { EmojiTypes, InputSticker } from "@/types/emoji.type";
 import { emojiMap, moonbirdEmojis, wizardEmojis } from "@/data/emoji.data";
 import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
+import { saveStickerPackData } from "@/firebase/stickers";
 
 export async function createTelegramStickerPack(
   collection: "wizards" | "moonbirds",
@@ -18,7 +18,7 @@ export async function createTelegramStickerPack(
   hasBackground: boolean,
 ) {
   try {
-    const id = collection === "wizards" ? "W_" : "M_" + randomId();
+    const id = (collection === "wizards" ? "W_" : "M_") + randomId();
 
     const generated = await generateTelegramStickers(
       collection,
@@ -38,10 +38,10 @@ export async function createTelegramStickerPack(
 
     // Save pack data to firebase
     await saveStickerPackData(collection, id, tokenId, packData);
-
     return id;
   } catch (error) {
     console.error("Error generating telegram stickers", error);
+    throw error;
   }
 }
 

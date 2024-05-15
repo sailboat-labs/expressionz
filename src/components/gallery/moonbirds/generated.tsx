@@ -11,7 +11,6 @@ import { downloadImagesAsZip, downloadPfp } from "@/lib/download.lib";
 import { createDiscordEmojiPack } from "@/http/discord.http";
 import { createTelegramStickerPack } from "@/http/telegram.http";
 import { FaDiscord } from "react-icons/fa";
-import { LiaSpinnerSolid } from "react-icons/lia";
 import { BiLogoTelegram } from "react-icons/bi";
 import Seo from "@/components/shared/Seo";
 import MoonbirdDetailsFrame from "./MoonbirdDetailsFrame";
@@ -198,9 +197,10 @@ export default function MoonbirdGenerated({
 
   async function exportStickers(platform: string) {
     setIsExportingStickers(true);
+    const toastId = toast.loading("Preparing emojis...");
 
     try {
-      consoleLog("Selected emojis " + selectedEmojis.length);
+      // consoleLog("Selected emojis " + selectedEmojis.length);
 
       if (platform === EPlatform.DISCORD) {
         const id = await createDiscordEmojiPack(
@@ -213,6 +213,7 @@ export default function MoonbirdGenerated({
         if (!id) throw new Error("Error creating discord pack");
 
         setPackId(id);
+        toast.dismiss(toastId);
         setShowDoneModal(true);
         return;
       }
@@ -227,11 +228,13 @@ export default function MoonbirdGenerated({
       if (!id) throw new Error("Error creating telegram pack");
 
       setPackId(id);
+      toast.dismiss(toastId);
       setShowDoneModal(true);
     } catch (error: any) {
       toast.error(error.message);
       console.error("Error exporting stickers", error);
     } finally {
+      toast.dismiss(toastId);
       setIsExportingStickers(false);
     }
   }
@@ -614,9 +617,10 @@ export default function MoonbirdGenerated({
                     scale: 0.95,
                   }}
                   className={cn(
-                    "relative mt-3 justify-center",
+                    "relative mt-3 justify-center disabled:cursor-not-allowed disabled:opacity-80",
                     platform ? "flex" : "invisible",
                   )}
+                  disabled={isExportingStickers}
                   onClick={async () => {
                     if (selectedEmojis.length === 0) {
                       toast.error("Select at least one emoji to export!");
@@ -640,11 +644,11 @@ export default function MoonbirdGenerated({
                     }`}
                   />
 
-                  {isExportingStickers && (
+                  {/* {isExportingStickers && (
                     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                       <LiaSpinnerSolid className="h-5 w-5 animate-spin" />
                     </div>
-                  )}
+                  )} */}
                 </motion.button>
               </div>
             </React.Fragment>,

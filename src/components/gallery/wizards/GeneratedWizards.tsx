@@ -26,7 +26,6 @@ import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 import { EPlatform } from "@/types/misc.type";
 import { generateWizards } from "@/http/wizard.http";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
-import { LiaSpinnerSolid } from "react-icons/lia";
 
 type GeneratedWizardsProps = {
   wizard: (typeof GALLERY)[0];
@@ -214,8 +213,9 @@ export default function GeneratedWizards({
     downloadImagesAsZip(selected, index);
   }
 
-  async function exportStickers(platform: string) {
+  async function exportStickers(platform: EPlatform) {
     setIsExportingStickers(true);
+    const loadingToastID = toast.loading("Preparing emojis...");
 
     try {
       if (platform === EPlatform.DISCORD) {
@@ -226,9 +226,10 @@ export default function GeneratedWizards({
           hasBg,
         );
 
-        if (!id) throw new Error("Error creating discord pack");
+        if (id.length <= 2) throw new Error("Error creating discord pack");
 
         setPackId(id);
+        toast.dismiss(loadingToastID);
         setShowDoneModal(true);
         return;
       }
@@ -243,14 +244,16 @@ export default function GeneratedWizards({
         hasBg,
       );
 
-      if (!id) throw new Error("Error creating telegram pack");
+      if (id.length <= 2) throw new Error("Error creating telegram pack");
 
       setPackId(id);
+      toast.dismiss(loadingToastID);
       setShowDoneModal(true);
     } catch (error: any) {
       console.error("Error exporting stickers", error);
       toast.error(error.message);
     } finally {
+      toast.dismiss(loadingToastID);
       setIsExportingStickers(false);
     }
   }
@@ -495,8 +498,9 @@ export default function GeneratedWizards({
                   )}
                 >
                   <button
-                    className="h-fit w-fit"
+                    className="h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
                     onClick={() => exportEmojis()}
+                    disabled={isExportingStickers}
                   >
                     <img
                       src={`/images/share/export-${
@@ -712,27 +716,28 @@ export default function GeneratedWizards({
                   `}
               >
                 <button
-                  className="relative h-fit w-fit"
+                  className="relative h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
                   onClick={() => exportEmojis()}
+                  disabled={isExportingStickers}
                 >
                   <img
                     src={`/images/share/export-${
-                      selectedEmojis.length == 0
+                      selectedEmojis.length == 0 || isExportingStickers
                         ? "pressed.webp"
                         : "active.webp"
                     }`}
                     alt="Export button"
                     className={`h-auto w-32 ${
-                      selectedEmojis.length == 0
+                      selectedEmojis.length == 0 || isExportingStickers
                         ? "cursor-not-allowed"
                         : "cursor-pointer"
                     }`}
                   />
-                  {isExportingStickers && (
+                  {/* {isExportingStickers && (
                     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                       <LiaSpinnerSolid className="h-5 w-5 animate-spin" />
                     </div>
-                  )}
+                  )} */}
                 </button>
               </div>
             </div>

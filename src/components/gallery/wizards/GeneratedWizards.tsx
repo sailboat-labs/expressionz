@@ -216,7 +216,13 @@ export default function GeneratedWizards({
 
   async function exportStickers(platform: EPlatform) {
     setIsExportingStickers(true);
-    const loadingToastID = toast.loading("Preparing emojis...");
+    const loadingToastID = toast.loading("Preparing emojis...", {
+      unstyled: true,
+      classNames: {
+        toast: "bg-white rounded-md shadow flex items-center gap-2 px-4 py-2",
+        title: "font-pixelify-r text-black",
+      },
+    });
 
     try {
       if (platform === EPlatform.DISCORD) {

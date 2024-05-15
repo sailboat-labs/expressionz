@@ -198,7 +198,13 @@ export default function MoonbirdGenerated({
 
   async function exportStickers(platform: string) {
     setIsExportingStickers(true);
-    const toastId = toast.loading("Preparing emojis...");
+    const toastId = toast.loading("Preparing emojis...", {
+      unstyled: true,
+      classNames: {
+        toast: "bg-white rounded-md shadow flex items-center gap-2 px-4 py-2",
+        title: "font-pixelify-r text-black",
+      },
+    });
 
     try {
       // consoleLog("Selected emojis " + selectedEmojis.length);

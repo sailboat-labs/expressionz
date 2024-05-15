@@ -204,13 +204,14 @@ export default function GeneratedWizards({
     // If none are selected, download all
     if (selected.length === 0) {
       downloadImagesAsZip(
+        "wizard",
         hasBg ? generatedEmojis : generatedEmojisTransparent,
         index,
       );
       return;
     }
 
-    downloadImagesAsZip(selected, index);
+    downloadImagesAsZip("wizard", selected, index);
   }
 
   async function exportStickers(platform: EPlatform) {

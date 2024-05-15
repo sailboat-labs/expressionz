@@ -9,11 +9,11 @@ export interface AccordionItemProps {
   triggerContent?: string;
 }
 
-interface TriggerRendererPayload {
+export interface TriggerRendererPayload {
   handleToggle: () => void;
 }
 
-export const AccordionItem: React.FC<AccordionItemProps> = ({
+const AccordionItem: React.FC<AccordionItemProps> = ({
   index,
   children,
   renderTrigger,
@@ -31,7 +31,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   };
 
   const height = contentRef.current?.clientHeight;
-  console.log(height);
+  // console.log(height);
 
   return (
     <div>
@@ -62,3 +62,5 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     </div>
   );
 };
+
+export default AccordionItem;

@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/misc.lib";
+import StripedLoader from "./shared/StripedLoader";
 
 export function WizardsLoader({
   show,
@@ -33,18 +34,25 @@ export function WizardsLoader({
     <section
       className={cn(
         "fixed h-screen w-screen bg-black bg-opacity-80",
-        show ? "left-0 top-0 z-9999 flex" : "z-0 hidden",
+        show ? "left-0 top-0 !z-[99999] flex" : "z-0 hidden",
       )}
     >
       <div className="flex h-full w-full items-center justify-center space-y-5 ">
-        <div className="relative mx-auto flex max-w-2xl flex-1 flex-col items-center justify-center rounded-lg bg-[#444444]  ">
+        <div className="relative mx-auto flex max-w-2xl flex-1 flex-col items-center justify-center rounded-lg   ">
+          {/* <div className=" flex w-full translate-y-8 items-center justify-center">
+            <img
+              src="/images/loading-logo.webp"
+              alt="loading logo"
+              className="mr-2 h-5 w-auto object-contain lg:mr-4 lg:h-8"
+            />
+          </div> */}
           <video
             playsInline
             autoPlay
             loop
             muted
             poster="/images/wizards-loading-poster.webp"
-            className="mb-7 h-auto w-full rounded-lg object-cover lg:mb-2"
+            className="h-auto w-full rounded-lg object-cover"
           >
             <source
               type="video/webm"
@@ -54,23 +62,27 @@ export function WizardsLoader({
               type="video/mp4"
               src="/videos/loading/wizards-loading.mp4"
             />
-            <img
+            {/* <img
               src="/images/wizards-loading-poster.webp"
               alt="loading poster"
-            />
+            /> */}
           </video>
-          <div className=" flex w-full -translate-y-8 items-center justify-center">
-            <img
-              src="/images/loading-logo.webp"
-              alt="loading logo"
-              className="mr-2 h-5 w-auto object-contain lg:mr-4 lg:h-8"
-            />
-            <p className="-mt-1 flex items-center gap-2 text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
-              {/* {texts[current]} */}
-              Generating emojis
-              <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
-            </p>
+
+          <div
+            className={cn(
+              "absolute bottom-6 flex w-full flex-col items-center ",
+              "text-xs font-bold text-[#FFD702] lg:text-lg",
+            )}
+          >
+            Generating emojis...
+            <StripedLoader className="mx-2 max-w-sm" />
           </div>
+          {/* <p className="-mt-1 flex -translate-y-8 items-center gap-2 text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
+            {texts[current]}
+
+            Generating emojis
+            <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
+          </p> */}
         </div>
       </div>
     </section>

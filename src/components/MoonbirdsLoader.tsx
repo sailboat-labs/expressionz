@@ -1,3 +1,6 @@
+import { cn } from "@/lib/misc.lib";
+import StripedLoader from "./shared/StripedLoader";
+
 export function LoadingProgress({
   show,
   progress,
@@ -63,14 +66,21 @@ export default function MoonbirdsVideoLoader({
       } fixed h-screen w-screen bg-black bg-opacity-80`}
     >
       <div className="flex h-full w-full items-center justify-center space-y-5">
-        <div className="relative flex  w-11/12 flex-col items-center justify-center rounded-lg bg-[#222331]    lg:px-6 xl:w-1/2">
+        <div className="relative flex  w-11/12 flex-col items-center justify-center rounded-lg    xl:w-1/2">
+          <div className=" absolute top-5 flex w-full items-center justify-center">
+            <img
+              src="/images/loading-logo.webp"
+              alt="loading logo"
+              className=" h-5 w-auto object-contain  lg:h-8"
+            />
+          </div>
           <video
             playsInline
             autoPlay
             loop
             muted
             poster="/videos/loading/moonbirds-loading-poster.webp"
-            className="mb-7 h-auto rounded-lg object-cover lg:mb-2"
+            className="h-auto rounded-lg object-cover "
           >
             <source
               type="video/webm"
@@ -81,18 +91,22 @@ export default function MoonbirdsVideoLoader({
               src="/videos/loading/moonbirds-loading.mp4"
             />
           </video>
-          <div className="flex w-full items-center justify-center  pb-8">
-            <img
-              src="/images/loading-logo.webp"
-              alt="loading logo"
-              className="mr-2 h-5 w-auto object-contain lg:mr-4 lg:h-8"
-            />
-            <p className="text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
-              {/* {texts[current]} */}
-              Generating emojis&nbsp;
-              <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
-            </p>
+
+          <div
+            className={cn(
+              "absolute bottom-6 flex w-full flex-col items-center ",
+              "text-xs font-bold text-[#FFD702] lg:text-lg",
+            )}
+          >
+            Generating emojis...
+            <StripedLoader className="mx-2 max-w-sm" />
           </div>
+          {/* <p className="-translate-y-8 text-center text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
+            {texts[current]}
+
+            Generating emojis&nbsp;
+            <span>{`${((progress / total) * 100).toFixed(0)}%`}</span>
+          </p> */}
         </div>
       </div>
     </section>

@@ -1,9 +1,11 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+
 import {
-  gifArrayBufferToBase64,
   arrayBufferToBase64,
-} from "@/lib/utils/bufferToBase64";
+  cn,
+  gifArrayBufferToBase64,
+} from "@/lib/misc.lib";
+import { motion } from "framer-motion";
 
 export default function GeneratedItem({
   item,
@@ -20,24 +22,35 @@ export default function GeneratedItem({
   platform: string;
   selectEnabled: boolean;
 }) {
-  useEffect(() => {
-    getSource();
-  }, [item]);
+  // useEffect(() => {
+  //   getSource();
+  // }, [item]);
 
-  const [src, setSrc] = useState("");
+  // const [src, setSrc] = useState("");
 
-  const getSource = () => {
-    if (item.type === "gif") {
-      const src = gifArrayBufferToBase64(item.image.data);
-      setSrc(src);
-    } else {
-      const src = arrayBufferToBase64(item.image.data);
-      setSrc(src);
-    }
-  };
+  // const getSource = () => {
+  //   if (item.type === "gif") {
+  //     const src = gifArrayBufferToBase64(item.image?.data ?? []);
+  //     setSrc(src);
+  //   } else {
+  //     const src = arrayBufferToBase64(item.image?.data ?? []);
+  //     setSrc(src);
+  //   }
+  // };
+
+  const src =
+    item.type === "gif"
+      ? gifArrayBufferToBase64(item.image?.data ?? [])
+      : arrayBufferToBase64(item.image?.data ?? []);
 
   return (
-    <div className="p-0 pt-10 text-white lg:p-5 xl:p-3">
+    <motion.div
+      whileHover={{ scale: platform == "" ? 1 : 1.05 }}
+      whileTap={{ scale: 1 }}
+      className={cn("h-fit w-fit pt-5 text-white", {
+        " cursor-pointer": platform !== "",
+      })}
+    >
       <div
         className="relative "
         onClick={() => {
@@ -59,26 +72,33 @@ export default function GeneratedItem({
         {/* Option to select */}
         <div
           className={`
-            ${selectEnabled ? "block " : "hidden "}
-            absolute left-0 top-0 z-50 -ml-2 -mt-2
+            ${selectEnabled ? "invisible " : "hidden "}
+            absolute left-0 top-0 z-50 
           `}
         >
           <input
             type="checkbox"
             name="selected"
             id="selected"
-            className="h-5 w-5"
+            // className="h-4 w-4"
             checked={selected}
             onChange={() => onSelect()}
           />
         </div>
-        <Image
-          src={src}
-          alt="Generated emoji"
-          className="h-full w-full rounded-md object-cover"
-          width={176}
-          height={176}
-        />
+        <div className="relative h-fit w-fit overflow-clip rounded-md ">
+          <Image
+            src={src}
+            alt="Generated emoji"
+            className="h-full w-full  object-cover"
+            width={176}
+            height={176}
+          />
+          <div
+            className={cn("absolute inset-0 bg-black bg-opacity-0", {
+              "bg-opacity-50": platform !== "" && !selected,
+            })}
+          ></div>
+        </div>
 
         {/* Grey overlay  */}
         {platform == "telegram" && (
@@ -93,6 +113,6 @@ export default function GeneratedItem({
           ></div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

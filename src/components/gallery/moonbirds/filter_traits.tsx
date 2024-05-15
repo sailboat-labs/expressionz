@@ -1,4 +1,6 @@
-import { cn } from "@/lib/utils/cn";
+
+import { cn } from "@/lib/misc.lib";
+import { TFilterTrait } from "@/types/misc.type";
 import { Disclosure } from "@headlessui/react";
 import { useRouter } from "next/router";
 import { ChangeEvent } from "react";
@@ -36,7 +38,7 @@ export default function FilterTraits({
 
         if (typeof selectedAttributes === "string") {
           urlParams.delete("attributes");
-          router.replace(`/${collection}/?${urlParams.toString()}`);
+          router.replace(`/collections/${collection}/?${urlParams.toString()}`);
           return;
         }
 
@@ -47,13 +49,15 @@ export default function FilterTraits({
         });
       }
 
-      router.replace(`/${collection}/?${urlParams.toString()}`, undefined, {
-        scroll: false,
-      });
+      router.replace(
+        `/collections/${collection}/?${urlParams.toString()}`,
+        undefined,
+        {
+          scroll: false,
+        },
+      );
     };
   }
-
-  const themeClass = `justify-between rounded bg-${theme}-100  text-${theme}-700 hover:bg-${theme}-200`;
 
   return (
     <div className="h-full w-full overflow-auto">
@@ -64,7 +68,8 @@ export default function FilterTraits({
               <>
                 <Disclosure.Button
                   className={cn(
-                    `flex w-full justify-between rounded  px-4 py-2 text-left text-sm `,
+                    `flex w-full justify-between rounded  px-4 py-2 text-left`,
+
                     "focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75",
                     {
                       ["bg-orange-100  text-orange-700 hover:bg-orange-200"]:
@@ -84,7 +89,11 @@ export default function FilterTraits({
                   }
                   )
                 </Disclosure.Button>
-                <Disclosure.Panel className="flex flex-col gap-2 px-4 pb-2 pt-4 text-sm text-white">
+                <Disclosure.Panel
+                  className={cn(
+                    "flex flex-col gap-2 px-4 pb-2 pt-4  text-white",
+                  )}
+                >
                   {Object.keys((filterTraits as any)[key])
                     .sort(
                       (a, b) =>

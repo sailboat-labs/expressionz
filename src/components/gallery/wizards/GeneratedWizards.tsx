@@ -12,29 +12,34 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-import { generateGifs } from "@/lib/createGif";
 import { emojis, shareIcons } from "@/lib/data";
-import { download, downloadImagesAsZip } from "@/lib/download";
-import { generateEmojis } from "@/lib/generateEmojis";
-import { EmojiTypes } from "@/lib/interface";
+import { download, downloadImagesAsZip } from "@/lib/download.lib";
 
 import { GALLERY } from "@/data/gallery";
 import GeneratedItem from "@/components/shared/GeneratedItem";
 import DoneModal from "@/components/shared/DoneModal";
 import { WizardsLoader } from "@/components/WizardsLoader";
-import { createDiscordEmojiPack } from "@/lib/utils/share/wizards/discord";
-import { createTelegramStickerPack } from "@/lib/utils/share/wizards/telegram";
+import { createDiscordEmojiPack } from "@/http/discord.http";
+import { createTelegramStickerPack } from "@/http/telegram.http";
+import { cn } from "@/lib/misc.lib";
+import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
+import { EPlatform } from "@/types/misc.type";
+import { generateWizards } from "@/http/wizard.http";
+import ThemedIconButton from "@/components/shared/ThemedIconButton";
+
+type GeneratedWizardsProps = {
+  wizard: (typeof GALLERY)[0];
+  index: number;
+};
 
 export default function GeneratedWizards({
   wizard,
   index,
-}: {
-  wizard: (typeof GALLERY)[0];
-  index: number;
-}) {
+}: Readonly<GeneratedWizardsProps>) {
   const router = useRouter();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [isExportingStickers, setIsExportingStickers] = useState(false);
 
   const [generatedEmojis, setGeneratedEmojis] = useState<any[]>([]);
   const [generatedEmojisTransparent, setGeneratedEmojisTransparent] = useState<
@@ -43,25 +48,27 @@ export default function GeneratedWizards({
 
   const [selectedEmojis, setSelectedEmojis] = useState<number[]>([]);
 
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedType, setSelectedType] = useState<"png" | "gif" | "">("");
 
   const [hasBg, setHasBg] = useState(true);
 
   // For progress bar
   const [progress, setProgress] = useState(0);
 
-  const [platform, setPlatform] = useState("");
+  const [platform, setPlatform] = useState<EPlatform>(EPlatform.NONE);
 
   const [packId, setPackId] = useState<string>("ABCDEFGHIJKL");
 
   const [showDoneModal, setShowDoneModal] = useState(false);
 
-  // Generate emojis
   useEffect(() => {
-    generate();
+    generateWizardsCollection();
   }, []);
 
-  // On click escape, go to wizard screen
+  /**
+   * Go to home page with Escape key press
+   *
+   */
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -72,74 +79,116 @@ export default function GeneratedWizards({
     return () => window.removeEventListener("keydown", handleEscape);
   }, []);
 
-  async function generate() {
-    setLoading(true);
+  async function generateWizardsCollection() {
+    // if (selectedType == '') {
+    //   console.error("select a type");
+    //   return;
+    // }
+
+    const payload: TWizardGeneratorAPIPayload = {
+      tokenId: index - 1,
+      platform,
+      emojis: [],
+    };
+
+    for (const emoji of emojis) {
+      payload.emojis.push({
+        name: emoji.emoji_type,
+        type: emoji.type as "gif" | "png",
+      });
+    }
 
     try {
-      const _generated: any[] = [];
-      const _generatedTransparent: any[] = [];
-
-      for await (const emoji of emojis) {
-        if (emoji.type == "gif") {
-          const response = await generateGifs(
-            index - 1,
-            emoji.emoji_type as EmojiTypes,
-          );
-
-          if (response) {
-            _generated.push({
-              image: response.colored,
-              emoji_type: emoji.emoji_type,
-              type: "gif",
-            });
-
-            _generatedTransparent.push({
-              image: response.transparent,
-              emoji_type: emoji.emoji_type,
-              type: "gif",
-            });
-          }
-        } else {
-          const response = await generateEmojis(
-            index - 1,
-            emoji.emoji_type as EmojiTypes,
-          );
-
-          if (response) {
-            _generated.push({
-              image: response.colored,
-              emoji_type: emoji.emoji_type,
-              type: "png",
-            });
-
-            // const transparentImage = response.transparentImages[0];
-            _generatedTransparent.push({
-              image: response.transparent,
-              emoji_type: emoji.emoji_type,
-              type: "png",
-            });
-          }
-        }
-
-        setProgress(_generated.length);
-
-        setGeneratedEmojis(_generated);
-        setGeneratedEmojisTransparent(_generatedTransparent);
-      }
-      setGeneratedEmojis(_generated);
-      setGeneratedEmojisTransparent(_generatedTransparent);
-
-      // setSelectedEmojis(Array.from({ length: _generated.length }, (_, i) => i));
+      let images = await generateWizards(
+        payload,
+        (progress: number, total: number) => {
+          // setProgress(progress);
+          // setTotalSizeOfGeneratedImages(total);
+        },
+      );
+      setGeneratedEmojis(images.colored);
+      setGeneratedEmojisTransparent(images.transparent);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      setLoading(false);
+
+      toast.dismiss();
+      toast.error("Error generating emojis", {
+        position: "bottom-right",
+      });
     } finally {
       setLoading(false);
     }
   }
 
+  // async function generate() {
+  //   setLoading(true);
+
+  //   try {
+  //     const _generated: any[] = [];
+  //     const _generatedTransparent: any[] = [];
+
+  //     for await (const emoji of emojis) {
+  //       if (emoji.type == "gif") {
+  //         const response = await generateGifs(
+  //           index - 1,
+  //           emoji.emoji_type as EmojiTypes,
+  //         );
+
+  //         if (response) {
+  //           _generated.push({
+  //             image: response.colored,
+  //             emoji_type: emoji.emoji_type,
+  //             type: "gif",
+  //           });
+
+  //           _generatedTransparent.push({
+  //             image: response.transparent,
+  //             emoji_type: emoji.emoji_type,
+  //             type: "gif",
+  //           });
+  //         }
+  //       } else {
+  //         const response = await generateEmojis(
+  //           index - 1,
+  //           emoji.emoji_type as EmojiTypes,
+  //         );
+
+  //         if (response) {
+  //           _generated.push({
+  //             image: response.colored,
+  //             emoji_type: emoji.emoji_type,
+  //             type: "png",
+  //           });
+
+  //           // const transparentImage = response.transparentImages[0];
+  //           _generatedTransparent.push({
+  //             image: response.transparent,
+  //             emoji_type: emoji.emoji_type,
+  //             type: "png",
+  //           });
+  //         }
+  //       }
+
+  //       setProgress(_generated.length);
+
+  //       setGeneratedEmojis(_generated);
+  //       setGeneratedEmojisTransparent(_generatedTransparent);
+  //     }
+  //     setGeneratedEmojis(_generated);
+  //     setGeneratedEmojisTransparent(_generatedTransparent);
+
+  //     // setSelectedEmojis(Array.from({ length: _generated.length }, (_, i) => i));
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
+
   const isGenerating =
-    loading ||
-    generatedEmojis.length == 0 ||
+    loading &&
+    generatedEmojis.length == 0 &&
     generatedEmojisTransparent.length == 0;
 
   async function downloadEmojis() {
@@ -164,57 +213,55 @@ export default function GeneratedWizards({
     downloadImagesAsZip(selected, index);
   }
 
-  async function exportStickers(platform: string) {
-    setLoading(true);
+  async function exportStickers(platform: EPlatform) {
+    setIsExportingStickers(true);
+    const loadingToastID = toast.loading("Preparing emojis...");
 
     try {
-      console.log("Selected emojis", selectedEmojis.length);
-
-      if (platform === "discord") {
+      if (platform === EPlatform.DISCORD) {
         const id = await createDiscordEmojiPack(
+          "wizards",
           index - 1,
           selectedEmojis,
           hasBg,
         );
 
-        if (!id) throw new Error("Error creating discord pack");
+        if (id.length <= 2) throw new Error("Error creating discord pack");
 
         setPackId(id);
+        toast.dismiss(loadingToastID);
         setShowDoneModal(true);
-
-        console.log("Discord pack created", id);
-
-        // TODO - export to discord emoji/sticker pack (includes both png and gif(animated) images)
         return;
       }
 
-      if (platform === "telegram") {
-        const id = await createTelegramStickerPack(
-          index - 1,
-          selectedEmojis,
-          hasBg,
-        );
+      /**
+       * Generates telegram sticker packs
+       */
+      const id = await createTelegramStickerPack(
+        "wizards",
+        index - 1,
+        selectedEmojis,
+        hasBg,
+      );
 
-        if (!id) throw new Error("Error creating telegram pack");
+      if (id.length <= 2) throw new Error("Error creating telegram pack");
 
-        setPackId(id);
-        setShowDoneModal(true);
-
-        console.log("Telegram pack created", id);
-
-        // TODO - export to telegram sticker pack (includes both png and gif(animated) images)
-      }
-    } catch (error) {
-      console.log("Error exporting stickers", error);
+      setPackId(id);
+      toast.dismiss(loadingToastID);
+      setShowDoneModal(true);
+    } catch (error: any) {
+      console.error("Error exporting stickers", error);
+      toast.error(error.message);
     } finally {
-      setLoading(false);
+      toast.dismiss(loadingToastID);
+      setIsExportingStickers(false);
     }
   }
 
   function onSelectEmojis(emoji: any, i: number) {
     setSelectedType(emoji.type);
 
-    if (platform == "telegram") {
+    if (platform == EPlatform.TELEGRAM) {
       if (selectedType === emoji.type) {
         if (selectedEmojis.includes(i)) {
           const _selectedEmojis = selectedEmojis.filter((j) => j !== i);
@@ -236,38 +283,50 @@ export default function GeneratedWizards({
     }
   }
 
-  function getText() {
-    switch (platform) {
-      case "telegram":
-        return (
-          <p>
-            Select either animated or <br />
-            static stickers to export.
-          </p>
+  async function exportEmojis() {
+    if (selectedEmojis.length === 0) {
+      toast.warning("Select at least one emoji to export!");
+      return;
+    }
+
+    if (platform == EPlatform.TELEGRAM) {
+      // Check if included stickers are animated or static
+      const selected = generatedEmojis.filter((_, i) =>
+        selectedEmojis.includes(i),
+      );
+
+      if (selected.some((emoji) => emoji.type !== selectedType)) {
+        toast.error(
+          "Telegram sticker pack cannot include both animated and static stickers!",
         );
-      case "discord":
+        return;
+      }
+
+      await exportStickers(platform);
+    } else {
+      await exportStickers(platform);
+    }
+  }
+
+  function getInstruction() {
+    switch (platform) {
+      case EPlatform.TELEGRAM:
+        return <p>Select either animated or static stickers to export.</p>;
+      case EPlatform.DISCORD:
         return (
-          <p>
-            You can choose both animated <br />
-            and static stickers to export.
-          </p>
+          <p>You can choose both animated and static stickers to export.</p>
         );
 
       default:
-        return (
-          <p>
-            Choose a platform to <br />
-            export your stickers to
-          </p>
-        );
+        return <p>Choose a platform to export your stickers to</p>;
     }
   }
 
   return (
-    <div className="z-[2] flex h-screen w-screen items-center justify-center text-black">
+    <div className=" flex h-[calc(100vh-64px)]  w-screen items-center justify-center font-pixelify-r text-black">
       {/* Desktop */}
-      <div className="fixed inset-0 hidden scale-90 items-start justify-center overflow-y-auto md:flex">
-        <div className="hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
+      <div className="inset-0 hidden h-full scale-90 items-start justify-center overflow-y-auto lg:flex">
+        <div className=" flex h-[calc(100vh-64px)] w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all">
           <img
             src="/images/desktop_wizard_background.webp"
             className="absolute h-[40vw] w-[40vw] rounded-t-md md:h-full md:w-full"
@@ -289,7 +348,7 @@ export default function GeneratedWizards({
                       >
                         <ArrowLeftIcon className="h-6 w-6 rounded" />
                       </motion.button>
-                      <div className=" font-presstart md:text-2xl">
+                      <div className=" text-center font-pixelify-b   md:text-xl xl:text-3xl">
                         Wizard #{index}
                       </div>
                     </div>
@@ -306,26 +365,26 @@ export default function GeneratedWizards({
                       />
                     </div>
                     <div className="mb-5 mt-4 flex flex-col items-center gap-5 md:flex md:gap-4">
-                      <div
+                      <button
                         onClick={() => {
                           download(`/images/gallery/${index}.webp`, index);
                         }}
-                        className="w-fit cursor-pointer"
+                        className="h-fit w-fit cursor-pointer"
                       >
                         <img
                           src="/images/download_pfp.webp"
                           className="w-40"
                           alt="Download pfp button"
                         />
-                      </div>
-                      {/* <div className="w-fit cursor-not-allowed">
+                      </button>
+                      {/* <button className="w-fit cursor-not-allowed">
                         <img
                           // src='/images/expressionz-btn-disabled.webp'
                           src="/images/generate-pressed-btn.webp"
                           className="w-48"
                           alt="Generate button"
                         />
-                      </div> */}
+                      </button> */}
                     </div>
                   </div>
                 </div>
@@ -334,80 +393,56 @@ export default function GeneratedWizards({
 
             <div className="h-full w-1/2 flex-1">
               <div className=" flex h-full flex-col gap-2 pl-0 pr-3 lg:gap-1">
-                <div className="z-[2] mb-2 mt-8 flex h-fit items-center justify-between">
-                  <div className="flex items-center gap-4">
+                <div className="z-[2] mb-3 mt-8 flex h-fit items-center justify-between gap-4 2xl:gap-10">
+                  <div className="flex items-center gap-2">
                     {shareIcons.map((messenger, i) => (
-                      <div
+                      <ThemedIconButton
                         key={i}
-                        className="h-9 w-9 cursor-pointer"
+                        wrapperClass="h-9 w-9"
                         onClick={async () => {
                           setSelectedEmojis([]);
                           setSelectedType("");
 
                           if (platform === messenger.platform)
-                            return setPlatform("");
+                            return setPlatform(EPlatform.NONE);
 
                           setPlatform(messenger.platform);
                         }}
-                      >
-                        <img
-                          src={
-                            platform == messenger.platform
-                              ? messenger.active
-                              : messenger.inactive
-                          }
-                          className="h-full w-full"
-                          alt={`${messenger.platform} icon`}
-                        />
-                      </div>
+                        icon={
+                          <img
+                            src={
+                              platform == messenger.platform
+                                ? messenger.active
+                                : messenger.inactive
+                            }
+                            className="h-full w-full"
+                            alt={`${messenger.platform} icon`}
+                          />
+                        }
+                      />
                     ))}
                   </div>
 
-                  <div className="text-center">
-                    {/* Background */}
-                    <div className="flex flex-row gap-3">
-                      <Switch
-                        checked={hasBg}
-                        onChange={(checked) => {
-                          setHasBg(checked);
-                        }}
-                        className={`${
-                          hasBg ? "bg-[#C1410B]" : "bg-[#FED7AA]"
-                        } relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[#C1410B] transition-colors`}
-                      >
-                        <span
-                          className={`${
-                            hasBg
-                              ? "translate-x-6 bg-[#FED7AA]"
-                              : "translate-x-1 bg-[#C1410B]"
-                          } inline-block h-4 w-4 transform rounded-full transition-transform`}
-                        />
-                      </Switch>
-                      <div className="text-base font-semibold">Background</div>
-                    </div>
-                  </div>
+                  <div className=" flex-1">{getInstruction()}</div>
 
-                  <div className="flex items-center gap-3">
-                    <div
+                  <div className="flex items-center gap-2">
+                    <ThemedIconButton
                       onClick={downloadEmojis}
-                      className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
-                    >
-                      <ArrowDownIcon className="h-5 w-5" />
-                    </div>
-                    <div
-                      onClick={() => {
-                        // router.replace("/");
-                        router.back();
-                      }}
-                      className="ml-1 flex  h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
-                    >
-                      <Cross1Icon className="h-5 w-5" />
-                    </div>
+                      variant="gold"
+                      icon={<ArrowDownIcon className="h-5 w-5" />}
+                    />
+                    <ThemedIconButton
+                      variant="gold"
+                      onClick={() =>
+                        router.replace(`/collections/wizards/${index}`)
+                      }
+                      icon={<Cross1Icon className="h-5 w-5" />}
+                    />
                   </div>
                 </div>
 
                 {/* Background */}
-                {/* <div className="flex flex-row gap-3">
+                <div className="flex flex-row gap-3">
                   <Switch
                     checked={hasBg}
                     onChange={(checked) => {
@@ -426,10 +461,10 @@ export default function GeneratedWizards({
                     />
                   </Switch>
                   <div className="text-base font-semibold">Background</div>
-                </div> */}
+                </div>
 
-                <div className="flex-1 overflow-y-auto">
-                  <div className="grid gap-1 pt-4  md:grid-cols-3">
+                <div className="flex-1 overflow-y-auto overflow-x-clip">
+                  <div className="grid gap-4 pt-4  md:grid-cols-3">
                     {hasBg
                       ? generatedEmojis.map((emoji, i) => (
                           <GeneratedItem
@@ -439,7 +474,7 @@ export default function GeneratedWizards({
                             platform={platform}
                             selected={selectedEmojis.includes(i)}
                             onSelect={() => onSelectEmojis(emoji, i)}
-                            selectEnabled={platform ? true : false}
+                            selectEnabled={!!platform}
                           />
                         ))
                       : generatedEmojisTransparent.map((emoji, i) => (
@@ -450,57 +485,37 @@ export default function GeneratedWizards({
                             selectedType={selectedType}
                             selected={selectedEmojis.includes(i)}
                             onSelect={() => onSelectEmojis(emoji, i)}
-                            selectEnabled={platform ? true : false}
+                            selectEnabled={!!platform}
                           />
                         ))}
                   </div>
-                  <div
-                    className={`${
-                      platform ? "flex " : "hidden "
-                    } justify-center`}
+                </div>
+
+                <div
+                  className={cn(
+                    "mt-4 justify-center",
+                    platform ? "flex " : "invisible ",
+                  )}
+                >
+                  <button
+                    className="h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
+                    onClick={() => exportEmojis()}
+                    disabled={isExportingStickers}
                   >
                     <img
                       src={`/images/share/export-${
-                        selectedEmojis.length == 0
-                          ? "active.webp"
+                        selectedEmojis.length == 0 || isExportingStickers
+                          ? "pressed.webp"
                           : "active.webp"
                       }`}
                       alt="Export button"
                       className={`h-auto w-40 ${
-                        selectedEmojis.length == 0
+                        selectedEmojis.length == 0 || isExportingStickers
                           ? "cursor-not-allowed"
                           : "cursor-pointer"
                       }`}
-                      onClick={async () => {
-                        if (selectedEmojis.length === 0) {
-                          toast.warning("Select at least one emoji to export!");
-                          return;
-                        }
-
-                        if (platform == "telegram") {
-                          // Check if included stickers are animated or static
-                          const selected = generatedEmojis.filter((_, i) =>
-                            selectedEmojis.includes(i),
-                          );
-
-                          if (
-                            selected.some(
-                              (emoji) => emoji.type !== selectedType,
-                            )
-                          ) {
-                            toast.error(
-                              "Telegram sticker pack cannot include both animated and static stickers!",
-                            );
-                            return;
-                          }
-
-                          await exportStickers(platform);
-                        } else {
-                          await exportStickers(platform);
-                        }
-                      }}
                     />
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -509,8 +524,8 @@ export default function GeneratedWizards({
       </div>
 
       {/* Mobile */}
-      <div className="fixed inset-0 block scale-95 overflow-y-hidden md:hidden">
-        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all md:hidden">
+      <div className="scale-60 block h-[calc(100vh-80px)] flex-1 overflow-y-hidden lg:hidden">
+        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-y-auto overflow-x-clip rounded p-3 text-left align-middle transition-all ">
           <Image
             src="/images/mobile_wizard_background.webp"
             className="absolute h-full w-full rounded-t-md md:h-full md:w-full"
@@ -526,19 +541,19 @@ export default function GeneratedWizards({
 
           <div className="z-2 absolute top-6 flex w-4/5 items-center justify-between px-3">
             <div className="flex items-center space-x-3">
-              <div
+              <button
                 className="flex h-7 w-7 cursor-pointer items-center justify-center rounded border border-[#C1410B] bg-[#FED7AA] text-[#C1410B]"
                 onClick={() => {
                   router.push(`/collections/wizards/${wizard.id}`);
                 }}
               >
                 <ArrowLeftIcon className="h-5 w-5 rounded" />
-              </div>
+              </button>
               <div className="mt-0 text-xl font-semibold">Wizard #{index}</div>
             </div>
 
             <div className="flex items-center gap-5">
-              <div
+              <button
                 onClick={() => {
                   navigator.clipboard.writeText(
                     `https://twoo.expressionz.xyz/?id=${wizard.id}`,
@@ -548,19 +563,19 @@ export default function GeneratedWizards({
                 className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
               >
                 <ion-icon name="share-social"></ion-icon>
-              </div>
-              <div
+              </button>
+              {/* <button
                 onClick={() => {
                   router.push("/");
                 }}
                 className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
               >
                 <ion-icon name="close"></ion-icon>
-              </div>
+              </button> */}
             </div>
           </div>
 
-          <div className="absolute z-[2] mt-5 h-[72vh] w-[75vw] overflow-auto">
+          <div className="absolute z-[2] mt-5 box-border h-[72vh] w-[78vw] overflow-y-auto  pr-3">
             {/* Wizard */}
             <div className="flex flex-col items-center">
               <div className="relative flex h-[50vw] w-[50vw] items-center justify-center">
@@ -576,10 +591,10 @@ export default function GeneratedWizards({
                 />
               </div>
               <div className="mb-5 mt-5 flex flex-col items-center gap-4 md:flex md:gap-4">
-                <div
-                  onClick={() => {
-                    download(`/images/gallery/${index}.webp`, index);
-                  }}
+                <button
+                  onClick={() =>
+                    download(`/images/gallery/${index}.webp`, index)
+                  }
                   className="w-fit cursor-pointer"
                 >
                   <img
@@ -587,7 +602,7 @@ export default function GeneratedWizards({
                     className="w-36"
                     alt="Download button"
                   />
-                </div>
+                </button>
                 {/* <div
                   className="w-fit cursor-pointer"
                   onClick={() => {
@@ -607,15 +622,17 @@ export default function GeneratedWizards({
             <div className="mt-1 flex w-full items-center justify-between px-2">
               <div className="flex items-center justify-between gap-3">
                 {shareIcons.map((messenger, i) => (
-                  <div
+                  <button
                     key={i}
                     className="h-9 w-9 cursor-pointer"
                     onClick={async () => {
                       setSelectedEmojis([]);
                       setSelectedType("");
 
-                      if (platform === messenger.platform)
-                        return setPlatform("");
+                      if (platform === messenger.platform) {
+                        setPlatform(EPlatform.NONE);
+                        return;
+                      }
 
                       setPlatform(messenger.platform);
                     }}
@@ -629,15 +646,15 @@ export default function GeneratedWizards({
                       className="h-full w-full"
                       alt={`${messenger.platform} icon`}
                     />
-                  </div>
+                  </button>
                 ))}
               </div>
-              <div
+              <button
                 onClick={downloadEmojis}
                 className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
               >
                 <ArrowDownIcon className="h-5 w-5" />
-              </div>
+              </button>
             </div>
 
             {/* Background */}
@@ -659,14 +676,14 @@ export default function GeneratedWizards({
                   } inline-block h-4 w-4 transform rounded-full transition-transform`}
                 />
               </Switch>
-              <div className="text-base font-semibold">Background</div>
+              <div className="text-sm font-semibold">Background</div>
             </div>
 
-            <div className="mx-2 mt-2 text-left">{getText()}</div>
+            <div className="mx-2 mt-2 text-left">{getInstruction()}</div>
 
             {/* Generated Emojis */}
             <div className="pb-10">
-              <div className="grid grid-cols-2 place-items-center gap-3 px-2">
+              <div className="mt-4 grid grid-cols-3 place-items-center gap-4 px-2">
                 {hasBg
                   ? generatedEmojis.map((emoji, i) => (
                       <GeneratedItem
@@ -676,7 +693,7 @@ export default function GeneratedWizards({
                         selectedType={selectedType}
                         selected={selectedEmojis.includes(i)}
                         onSelect={() => onSelectEmojis(emoji, i)}
-                        selectEnabled={platform ? true : false}
+                        selectEnabled={!!platform}
                       />
                     ))
                   : generatedEmojisTransparent.map((emoji, i) => (
@@ -687,7 +704,7 @@ export default function GeneratedWizards({
                         selectedType={selectedType}
                         selected={selectedEmojis.includes(i)}
                         onSelect={() => onSelectEmojis(emoji, i)}
-                        selectEnabled={platform ? true : false}
+                        selectEnabled={!!platform}
                       />
                     ))}
               </div>
@@ -698,42 +715,30 @@ export default function GeneratedWizards({
                   mt-5 justify-center
                   `}
               >
-                <img
-                  src={`/images/share/export-${
-                    selectedEmojis.length == 0 ? "active.webp" : "active.webp"
-                  }`}
-                  alt="Export button"
-                  className={`h-auto w-32 ${
-                    selectedEmojis.length == 0
-                      ? "cursor-not-allowed"
-                      : "cursor-pointer"
-                  }`}
-                  onClick={async () => {
-                    if (selectedEmojis.length === 0) {
-                      toast.warning("Select at least one emoji to export!");
-                      return;
-                    }
-
-                    if (platform == "telegram") {
-                      const selected = generatedEmojis.filter((_, i) =>
-                        selectedEmojis.includes(i),
-                      );
-
-                      if (
-                        selected.some((emoji) => emoji.type !== selectedType)
-                      ) {
-                        toast.error(
-                          "Telegram sticker pack cannot include both animated and static stickers!",
-                        );
-                        return;
-                      }
-
-                      await exportStickers(platform);
-                    } else {
-                      await exportStickers(platform);
-                    }
-                  }}
-                />
+                <button
+                  className="relative h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
+                  onClick={() => exportEmojis()}
+                  disabled={isExportingStickers}
+                >
+                  <img
+                    src={`/images/share/export-${
+                      selectedEmojis.length == 0 || isExportingStickers
+                        ? "pressed.webp"
+                        : "active.webp"
+                    }`}
+                    alt="Export button"
+                    className={`h-auto w-32 ${
+                      selectedEmojis.length == 0 || isExportingStickers
+                        ? "cursor-not-allowed"
+                        : "cursor-pointer"
+                    }`}
+                  />
+                  {/* {isExportingStickers && (
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                      <LiaSpinnerSolid className="h-5 w-5 animate-spin" />
+                    </div>
+                  )} */}
+                </button>
               </div>
             </div>
           </div>

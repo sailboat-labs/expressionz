@@ -19,15 +19,12 @@ export default function Project() {
           loading="lazy"
           className="mx-auto my-20 w-4/5 lg:w-3/5"
         />
-        <h2 className="font-presstart mx-4 text-xl font-normal text-yellow lg:mx-0">
+        <h2 className="mx-4 font-presstart text-xl font-normal text-yellow lg:mx-0">
           The project
         </h2>
         <div className="mx-4 my-6 space-y-6 lg:mx-0">
           {projectInfo.map((info, index) => (
-            <div
-              key={index}
-              className="flex flex-row items-center justify-between space-x-5"
-            >
+            <div key={index} className="flex flex-row items-center space-x-5">
               <Image
                 src={info.emojiUrl}
                 alt="Emoji"

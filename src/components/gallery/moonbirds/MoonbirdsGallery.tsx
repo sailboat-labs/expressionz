@@ -5,7 +5,7 @@ import { METADATA } from "@/data/metadata";
 import Moonbird from "./Moonbird";
 import { LazyLoadedDiv } from "../LazyLoadedDiv";
 
-export default function Gallery() {
+export default function MoonbirdsGallery() {
   const router = useRouter();
   const [windowWidth, setWindowWidth] = useState<number>(0);
   let selectedAttributes = (router.query.attributes as string[]) || [];
@@ -104,7 +104,7 @@ export default function Gallery() {
   }, []);
 
   return (
-    <div className="h-screen w-full flex-1  overflow-x-hidden md:overflow-y-auto">
+    <div className="w-full flex-1 overflow-x-hidden  md:h-[calc(100vh-64px)] md:overflow-y-auto">
       <div className="flex justify-center md:justify-start">
         <div className="mb-3 mt-5 w-fit text-3xl text-white">
           Gallery ({gallery.length})
@@ -129,9 +129,13 @@ export default function Gallery() {
                 onClick={() => {
                   const urlParams = new URLSearchParams(window.location.search);
                   urlParams.delete("attributes");
-                  router.push(`/?${urlParams.toString()}`, undefined, {
-                    scroll: false,
-                  });
+                  router.push(
+                    `/collections/moonbirds?${urlParams.toString()}`,
+                    undefined,
+                    {
+                      scroll: false,
+                    },
+                  );
                 }}
                 className="rounded-md bg-red-100 px-2 py-1 text-red-500"
               >
@@ -142,7 +146,7 @@ export default function Gallery() {
         </div>
       )}
 
-      <div className="flex w-fit flex-wrap   gap-5">
+      <div className="flex w-fit flex-wrap justify-center gap-5   md:justify-start">
         {gallery.map((moonbird, index) => (
           <LazyLoadedDiv
             key={index + 1}

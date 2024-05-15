@@ -5,7 +5,7 @@ import PurpleButton from "~/images/buttons/purple-button.webp";
 import BlueButton from "~/images/buttons/blue-button.webp";
 import YellowButton from "~/images/buttons/yellow-btn.webp";
 import DeepVioletButton from "~/images/buttons/deep-purple.webp";
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@/lib/misc.lib";
 
 interface ButtonProps {
   text: string;
@@ -62,7 +62,7 @@ function Button({
     >
       <button onClick={onClick} className="relative" disabled={disabled}>
         <p
-          className={`font-presstart absolute flex h-full w-full items-center justify-center text-xs text-white lg:text-xs ${textStyle}`}
+          className={`absolute flex h-full w-full items-center justify-center font-presstart text-xs text-white lg:text-xs ${textStyle}`}
         >
           {text}
         </p>

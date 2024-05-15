@@ -1,20 +1,18 @@
-import Header from "@/components/shared/Header";
-import Footer from "@/components/shared/Footer";
 import TokenMarquee from "@/components/home/Marquee";
-import Banner from "@/components/home/Banner";
 import UnlockAssets from "@/components/home/UnlockAssets";
 import SelfExpression from "@/components/home/SelfExpression";
 import SeamlessIntegration from "@/components/home/SeamlessIntegration";
 import StartJourney from "@/components/home/StartJourney";
 import Contact from "@/components/home/Contact";
 import Seo from "@/components/shared/Seo";
+import BaseLayout from "@/components/shared/BaseLayout";
+import Banner from "@/components/home/Banner";
 
 export default function Home() {
   return (
     <>
       <Seo title="Home" />
-      <main className="min-h-screen w-screen overflow-x-hidden bg-darkPurple">
-        <Header />
+      <BaseLayout>
         <Banner />
         <TokenMarquee className="mt-12" />
         <UnlockAssets />
@@ -22,8 +20,7 @@ export default function Home() {
         <SeamlessIntegration />
         <StartJourney />
         <Contact />
-        <Footer />
-      </main>
+      </BaseLayout>
     </>
   );
 }

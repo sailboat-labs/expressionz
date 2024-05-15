@@ -1,37 +1,39 @@
 import { uploadStickerToFirebase } from "@/firebase/uploadStickerToFirebase";
 
-import {
-  generateMoonBirdEmojis,
-  generateWizardsEmojis,
-} from "../lib/generateEmojis";
 import { arrayBufferToBase64, randomId } from "@/lib/misc.lib";
-import { EmojiTypes, InputSticker } from "@/types/emoji.type";
-import { emojiMap, moonbirdEmojis, wizardEmojis } from "@/data/emoji.data";
+import {
+  EmojiTypes,
+  InputSticker,
+  TEmojiPackGeneratorPayload,
+} from "@/types/emoji.type";
+import { emojiMap } from "@/data/emoji.data";
 import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 import { saveStickerPackData } from "@/firebase/stickers";
+import { generateMoonBirdEmojis } from "./moonbird.http";
+import { generateWizardEmojis } from "./wizard.http";
 
-export async function createTelegramStickerPack(
-  collection: "wizards" | "moonbirds",
-  tokenId: number,
-  selected: number[],
-  hasBackground: boolean,
-) {
+export async function createTelegramStickerPack({
+  tokenId,
+  collection,
+  selected,
+  hasBackground,
+}: TEmojiPackGeneratorPayload) {
   try {
     const id = (collection === "wizards" ? "W_" : "M_") + randomId();
 
-    const generated = await generateTelegramStickers(
-      collection,
+    const generated = await generateTelegramStickers({
       tokenId,
+      collection,
       selected,
       hasBackground,
-    );
+    });
 
     // console.log("Generated stickers:", generated);
 
     // Upload stickers to firebase
     const packData = await saveStickerToFirebase(
-      tokenId,
+      tokenId as number,
       generated,
       "telegram",
     );
@@ -45,22 +47,22 @@ export async function createTelegramStickerPack(
   }
 }
 
-async function generateTelegramStickers(
-  collection: "wizards" | "moonbirds",
-  tokenId: number,
-  selected: number[],
-  hasBackground: boolean,
-) {
+async function generateTelegramStickers({
+  tokenId,
+  collection,
+  selected,
+  hasBackground,
+}: TEmojiPackGeneratorPayload) {
   const generated: any = [];
 
-  const EMOJIS = collection == "moonbirds" ? moonbirdEmojis : wizardEmojis;
-  const selectedEmojis = EMOJIS.filter((_, index) => selected.includes(index));
+  // const EMOJIS = collection == "moonbirds" ? moonbirdEmojis : wizardEmojis;
+  // const selectedEmojis = EMOJIS.filter((_, index) => selected.includes(index));
 
   const emojis: any[] = [];
   const emojiTypes: string[] = [];
 
-  for (let i = 0; i < selectedEmojis.length; i++) {
-    const selectedEmoji = selectedEmojis[i];
+  for (let i = 0; i < selected.length; i++) {
+    const selectedEmoji = selected[i];
 
     if (collection === "moonbirds") {
       emojiTypes.push(selectedEmoji.emoji_type);
@@ -83,7 +85,7 @@ async function generateTelegramStickers(
   if (collection === "moonbirds") {
     generateCollection = generateMoonBirdEmojis;
   } else {
-    generateCollection = generateWizardsEmojis;
+    generateCollection = generateWizardEmojis;
   }
 
   try {

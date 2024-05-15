@@ -24,8 +24,9 @@ import { createTelegramStickerPack } from "@/http/telegram.http";
 import { cn } from "@/lib/misc.lib";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 import { EPlatform } from "@/types/misc.type";
-import { generateWizards } from "@/http/wizard.http";
+
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
+import { generateWizardEmojis } from "@/http/wizard.http";
 
 type GeneratedWizardsProps = {
   wizard: (typeof GALLERY)[0];
@@ -99,7 +100,7 @@ export default function GeneratedWizards({
     }
 
     try {
-      let images = await generateWizards(
+      let images = await generateWizardEmojis(
         payload,
         (progress: number, total: number) => {
           // setProgress(progress);
@@ -159,14 +160,24 @@ export default function GeneratedWizards({
       },
     });
 
+    const generatedCollection = hasBg
+      ? generatedEmojis
+      : generatedEmojisTransparent;
+
+    const _selectedEmojis: any[] = generatedCollection.filter((_, index) =>
+      selectedEmojis.includes(index),
+    );
+
+    console.log({ _selectedEmojis });
+
     try {
       if (platform === EPlatform.DISCORD) {
-        const id = await createDiscordEmojiPack(
-          "wizards",
-          index - 1,
-          selectedEmojis,
-          hasBg,
-        );
+        const id = await createDiscordEmojiPack({
+          collection: "wizards",
+          hasBackground: hasBg,
+          tokenId: index - 1,
+          selected: _selectedEmojis,
+        });
 
         if (id.length <= 2) throw new Error("Error creating discord pack");
 
@@ -179,12 +190,12 @@ export default function GeneratedWizards({
       /**
        * Generates telegram sticker packs
        */
-      const id = await createTelegramStickerPack(
-        "wizards",
-        index - 1,
-        selectedEmojis,
-        hasBg,
-      );
+      const id = await createTelegramStickerPack({
+        collection: "wizards",
+        hasBackground: hasBg,
+        tokenId: index - 1,
+        selected: _selectedEmojis,
+      });
 
       if (id.length <= 2) throw new Error("Error creating telegram pack");
 

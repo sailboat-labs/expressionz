@@ -22,10 +22,10 @@ import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
 
 import consoleLog from "@/lib/logger";
 import { moonbirdEmojis } from "@/data/emoji.data";
-import { generateMoonBirdEmojis } from "@/lib/generateEmojis";
 import BaseLayout from "@/components/shared/BaseLayout";
 import Link from "next/link";
 import { EPlatform } from "@/types/misc.type";
+import { generateMoonBirdEmojis } from "@/http/moonbird.http";
 
 // const shareIcons = [
 //   {
@@ -207,15 +207,21 @@ export default function MoonbirdGenerated({
     });
 
     try {
-      // consoleLog("Selected emojis " + selectedEmojis.length);
+      const generatedCollection = hasBg
+        ? generatedEmojis
+        : generatedEmojisTransparent;
+
+      const _selectedEmojis: any[] = generatedCollection.filter((_, index) =>
+        selectedEmojis.includes(index),
+      );
 
       if (platform === EPlatform.DISCORD) {
-        const id = await createDiscordEmojiPack(
-          "moonbirds",
-          index,
-          selectedEmojis,
-          hasBg,
-        );
+        const id = await createDiscordEmojiPack({
+          collection: "moonbirds",
+          hasBackground: hasBg,
+          tokenId: index,
+          selected: _selectedEmojis,
+        });
 
         if (!id) throw new Error("Error creating discord pack");
 
@@ -225,12 +231,12 @@ export default function MoonbirdGenerated({
         return;
       }
 
-      const id = await createTelegramStickerPack(
-        "moonbirds",
-        index,
-        selectedEmojis,
-        hasBg,
-      );
+      const id = await createTelegramStickerPack({
+        collection: "moonbirds",
+        hasBackground: hasBg,
+        tokenId: index,
+        selected: _selectedEmojis,
+      });
 
       if (!id) throw new Error("Error creating telegram pack");
 

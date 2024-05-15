@@ -26,7 +26,6 @@ import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 import { EPlatform } from "@/types/misc.type";
 import { generateWizards } from "@/http/wizard.http";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
-import { LiaSpinnerSolid } from "react-icons/lia";
 
 type GeneratedWizardsProps = {
   wizard: (typeof GALLERY)[0];
@@ -499,8 +498,9 @@ export default function GeneratedWizards({
                   )}
                 >
                   <button
-                    className="h-fit w-fit"
+                    className="h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
                     onClick={() => exportEmojis()}
+                    disabled={isExportingStickers}
                   >
                     <img
                       src={`/images/share/export-${

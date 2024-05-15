@@ -88,11 +88,11 @@ async function generateDiscordEmojis(
         ? response.colored
         : response.transparent;
 
-      imagesToIncludeInExport.forEach((emoji: any) => {
+      imagesToIncludeInExport.forEach((emoji) => {
         const base64 = arrayBufferToBase64(emoji.image.data);
         generated.push({
           data: base64,
-          type: "png",
+          type: emoji.type,
           emoji_type: emoji.emoji_type,
         });
       });

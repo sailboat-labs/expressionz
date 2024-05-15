@@ -9,7 +9,6 @@ import { EmojiTypes, InputSticker } from "@/types/emoji.type";
 import { emojiMap, moonbirdEmojis, wizardEmojis } from "@/data/emoji.data";
 import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
-import { saveStickerPackData } from "@/firebase/stickers";
 
 export async function createTelegramStickerPack(
   collection: "wizards" | "moonbirds",
@@ -27,17 +26,17 @@ export async function createTelegramStickerPack(
       hasBackground,
     );
 
-    // console.log("Generated stickers:", generated);
+    console.log("Generated stickers:", generated);
 
     // Upload stickers to firebase
-    const packData = await saveStickerToFirebase(
-      tokenId,
-      generated,
-      "telegram",
-    );
+    // const packData = await saveStickerToFirebase(
+    //   tokenId,
+    //   generated,
+    //   "telegram",
+    // );
 
     // Save pack data to firebase
-    await saveStickerPackData(collection, id, tokenId, packData);
+    // await saveStickerPackData(collection, id, tokenId, packData);
     return id;
   } catch (error) {
     console.error("Error generating telegram stickers", error);
@@ -94,11 +93,11 @@ async function generateTelegramStickers(
         ? response.colored
         : response.transparent;
 
-      imagesToIncludeInExport.forEach((emoji: any) => {
+      imagesToIncludeInExport.forEach((emoji) => {
         const base64 = arrayBufferToBase64(emoji.image.data);
         generated.push({
           data: base64,
-          type: "png",
+          type: emoji.type,
           emoji_type: emoji.emoji_type,
         });
       });

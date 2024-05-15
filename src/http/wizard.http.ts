@@ -17,6 +17,8 @@ export async function generateWizards(
       },
     );
 
+    console.log("Wizards API Response", response);
+
     return {
       colored: response.data.colored ?? [],
       transparent: response.data.transparent ?? [],

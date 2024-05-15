@@ -1,15 +1,13 @@
 import { saveStickerPackData } from "@/firebase/stickers";
 import { uploadStickerToFirebase } from "@/firebase/uploadStickerToFirebase";
 
-import { arrayBufferToBase64, randomId } from "@/lib/misc.lib";
+import { arrayBufferToBase64, gifArrayBufferToBase64, randomId } from "@/lib/misc.lib";
 import { emojiMap, moonbirdEmojis, wizardEmojis } from "@/data/emoji.data";
 import { EmojiTypes, InputSticker } from "@/types/emoji.type";
-import {
-  generateMoonBirdEmojis,
-  generateWizardsEmojis,
-} from "../lib/generateEmojis";
+import { generateMoonBirdEmojis } from "../lib/generateEmojis";
 import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
+import { generateWizards } from "./wizard.http";
 
 export async function createDiscordEmojiPack(
   collection: "wizards" | "moonbirds",
@@ -73,7 +71,7 @@ async function generateDiscordEmojis(
   if (collection === "moonbirds") {
     generateCollection = generateMoonBirdEmojis;
   } else {
-    generateCollection = generateWizardsEmojis;
+    generateCollection = generateWizards;
   }
 
   try {
@@ -89,12 +87,21 @@ async function generateDiscordEmojis(
         : response.transparent;
 
       imagesToIncludeInExport.forEach((emoji: any) => {
-        const base64 = arrayBufferToBase64(emoji.image.data);
-        generated.push({
-          data: base64,
-          type: "png",
-          emoji_type: emoji.emoji_type,
-        });
+        if (emoji.type == "gif") {
+          const base64 = gifArrayBufferToBase64(emoji.image.data);
+          generated.push({
+            data: base64,
+            type: "gif",
+            emoji_type: emoji.emoji_type,
+          });
+        } else {
+          const base64 = arrayBufferToBase64(emoji.image.data);
+          generated.push({
+            data: base64,
+            type: "png",
+            emoji_type: emoji.emoji_type,
+          });
+        }
       });
     }
 

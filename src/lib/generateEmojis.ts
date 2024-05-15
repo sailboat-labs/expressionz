@@ -49,6 +49,8 @@ export async function generateMoonBirdEmojis(
       },
     );
 
+    console.log('Moonbirds API Response', response)
+
     return {
       colored: response.data.colored ?? [],
       transparent: response.data.transparent ?? [],

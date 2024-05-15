@@ -11,7 +11,7 @@ export async function generateEmoji(
     );
 
     const data = await response.json();
-    // console.log("API response:", data);
+    console.log("Moonbirds API response:", data);
 
     const colored = data.colored;
     const transparent = data.transparent;

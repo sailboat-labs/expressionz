@@ -1,6 +1,7 @@
 import JSZip from "jszip";
 
 import { arrayBufferToBase64, gifArrayBufferToBase64 } from "./misc.lib";
+import { TCollection } from "@/types/misc.type";
 
 export async function download(path: string, index: number) {
   const response = await fetch(path);
@@ -24,7 +25,11 @@ export async function downloadPfp(path: string, index: number) {
   URL.revokeObjectURL(url);
 }
 
-export async function downloadImagesAsZip(files: any[], token: number) {
+export async function downloadImagesAsZip(
+  collection: TCollection,
+  files: any[],
+  token: number,
+) {
   const zip = new JSZip();
 
   // Loop over the array of image URLs
@@ -48,7 +53,8 @@ export async function downloadImagesAsZip(files: any[], token: number) {
   const url = URL.createObjectURL(zipBlob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `Wizard of Ord #${token}`;
+  link.download =
+    collection === "wizard" ? `Wizard of Ord #${token}` : `Moonbird #${token}`;
   link.click();
   URL.revokeObjectURL(url);
 }

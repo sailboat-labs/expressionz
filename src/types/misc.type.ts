@@ -11,3 +11,5 @@ export enum EPlatform {
   TELEGRAM = "telegram",
   DISCORD = "discord",
 }
+
+export type TCollection = "wizard" | "moonbird";

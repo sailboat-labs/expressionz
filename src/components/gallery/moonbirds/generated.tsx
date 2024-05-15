@@ -178,13 +178,14 @@ export default function MoonbirdGenerated({
     // If none are selected, download all
     if (selected.length === 0) {
       downloadImagesAsZip(
+        "moonbird",
         hasBg ? generatedEmojis : generatedEmojisTransparent,
-        index,
+        index + 1,
       );
       return;
     }
 
-    downloadImagesAsZip(selected, index);
+    downloadImagesAsZip("moonbird", selected, index + 1);
   }
 
   const onSelectEmojis = (index: number) => {

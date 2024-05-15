@@ -225,12 +225,7 @@ export default function GalleryImage({
             height={1000}
             width={1000}
             alt="Wizard Background"
-            onLoad={() => {
-              console.log("loaded");
-              // toast.success('loaded')
-            }}
             loading="eager"
-            priority
           />
 
           <div className="z-2 absolute top-6 flex w-4/5 items-center justify-between px-3">

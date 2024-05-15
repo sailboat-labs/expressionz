@@ -15,6 +15,7 @@ export async function saveStickerPackData(
 
     await setDoc(ref, { data, pack_id: id, token });
   } catch (error) {
-    console.log("Error adding sticker pack data to firebase", error);
+    // console.log("Error adding sticker pack data to firebase", error);
+    throw error;
   }
 }

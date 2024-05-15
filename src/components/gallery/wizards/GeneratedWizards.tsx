@@ -121,7 +121,6 @@ export default function GeneratedWizards({
     }
   }
 
-
   const isGenerating =
     loading &&
     generatedEmojis.length == 0 &&
@@ -194,6 +193,7 @@ export default function GeneratedWizards({
       setShowDoneModal(true);
     } catch (error: any) {
       console.error("Error exporting stickers", error);
+      toast.dismiss();
       toast.error(error.message);
     } finally {
       toast.dismiss(loadingToastID);

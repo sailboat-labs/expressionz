@@ -19,6 +19,8 @@ export async function createDiscordEmojiPack(
 ) {
   const id = (collection === "wizards" ? "W_" : "M_") + randomId();
 
+   console.log({selected});
+
   const generated = await generateDiscordEmojis(
     collection,
     tokenId,
@@ -42,6 +44,8 @@ async function generateDiscordEmojis(
   hasBackground: boolean,
 ) {
   const generated: any = [];
+
+ 
 
   const EMOJIS = collection == "moonbirds" ? moonbirdEmojis : wizardEmojis;
   const selectedEmojis = EMOJIS.filter((_, index) => selected.includes(index));
@@ -77,11 +81,6 @@ async function generateDiscordEmojis(
   }
 
   try {
-    // const generateCollection =
-    //   collection === "moonbirds"
-    //     ? generateMoonBirdEmojis
-    // : generateWizardsEmojis;
-
     const response = await generateCollection(payload, () => {});
     if (response) {
       const imagesToIncludeInExport = hasBackground
@@ -101,63 +100,8 @@ async function generateDiscordEmojis(
     return generated;
   } catch (error) {
     console.log("Error generating discord emojis", error);
-    return [];
+    throw error;
   }
-
-  // try {
-  //   for await (const emoji of selectedEmojis) {
-  //     if (emoji.type == "gif") {
-  //       const response = await generateGifs(
-  //         tokenId,
-  //         emoji.emoji_type as EmojiTypes,
-  //         "discord",
-  //       );
-
-  //       if (response) {
-  //         const base64 = gifArrayBufferToBase64(
-  //           hasBackground ? response.colored.data : response.transparent.data,
-  //         );
-
-  //         generated.push({
-  //           data: base64,
-  //           type: "gif",
-  //           emoji_type: emoji.emoji_type,
-  //         });
-  //       }
-  //     } else if (emoji.type == "png") {
-  //       const response =
-  //         collection == "moonbirds"
-  //           ? await generateMoonBirdEmojis(
-  //               collection,
-  //               tokenId,
-  //               emoji.emoji_type as EmojiTypes,
-  //             )
-  //           : await generateWizardsEmojis(
-  //               collection,
-  //               tokenId,
-  //               emoji.emoji_type as EmojiTypes,
-  //             );
-
-  //       if (response) {
-  //         const base64 = arrayBufferToBase64(
-  //           hasBackground ? response.colored.data : response.transparent.data,
-  //         );
-  //         generated.push({
-  //           data: base64,
-  //           type: "png",
-  //           emoji_type: emoji.emoji_type,
-  //         });
-  //       }
-  //     }
-  //   }
-
-  //   return generated;
-  // } catch (error) {
-  //   console.log("Error generating discord emojis", error);
-  //   return [];
-  // } finally {
-  //   console.log("Discord emojis generated");
-  // }
 }
 
 async function saveStickerToFirebase(

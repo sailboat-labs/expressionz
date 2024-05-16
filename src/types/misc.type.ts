@@ -11,3 +11,17 @@ export enum EPlatform {
   TELEGRAM = "telegram",
   DISCORD = "discord",
 }
+
+export type TCollection = "wizard" | "moonbird";
+
+export type TGeneratorResponse = {
+  status: string;
+  colored: TGeneratorResponseImage[];
+  transparent: TGeneratorResponseImage[];
+};
+
+export type TGeneratorResponseImage = {
+  image: any;
+  emoji_type: string;
+  type: string;
+};

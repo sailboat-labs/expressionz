@@ -22,10 +22,10 @@ import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
 
 import consoleLog from "@/lib/logger";
 import { moonbirdEmojis } from "@/data/emoji.data";
-import { generateMoonBirdEmojis } from "@/lib/generateEmojis";
 import BaseLayout from "@/components/shared/BaseLayout";
 import Link from "next/link";
 import { EPlatform } from "@/types/misc.type";
+import { generateMoonBirdEmojis } from "@/http/moonbird.http";
 
 // const shareIcons = [
 //   {
@@ -178,13 +178,14 @@ export default function MoonbirdGenerated({
     // If none are selected, download all
     if (selected.length === 0) {
       downloadImagesAsZip(
+        "moonbird",
         hasBg ? generatedEmojis : generatedEmojisTransparent,
-        index,
+        index + 1,
       );
       return;
     }
 
-    downloadImagesAsZip(selected, index);
+    downloadImagesAsZip("moonbird", selected, index + 1);
   }
 
   const onSelectEmojis = (index: number) => {
@@ -197,18 +198,30 @@ export default function MoonbirdGenerated({
 
   async function exportStickers(platform: string) {
     setIsExportingStickers(true);
-    const toastId = toast.loading("Preparing emojis...");
+    const toastId = toast.loading("Preparing emojis...", {
+      unstyled: true,
+      classNames: {
+        toast: "bg-white rounded-md shadow flex items-center gap-2 px-4 py-2",
+        title: "font-pixelify-r text-black",
+      },
+    });
 
     try {
-      // consoleLog("Selected emojis " + selectedEmojis.length);
+      const generatedCollection = hasBg
+        ? generatedEmojis
+        : generatedEmojisTransparent;
+
+      const _selectedEmojis: any[] = generatedCollection.filter((_, index) =>
+        selectedEmojis.includes(index),
+      );
 
       if (platform === EPlatform.DISCORD) {
-        const id = await createDiscordEmojiPack(
-          "moonbirds",
-          index,
-          selectedEmojis,
-          hasBg,
-        );
+        const id = await createDiscordEmojiPack({
+          collection: "moonbirds",
+          hasBackground: hasBg,
+          tokenId: index,
+          selected: _selectedEmojis,
+        });
 
         if (!id) throw new Error("Error creating discord pack");
 
@@ -218,12 +231,12 @@ export default function MoonbirdGenerated({
         return;
       }
 
-      const id = await createTelegramStickerPack(
-        "moonbirds",
-        index,
-        selectedEmojis,
-        hasBg,
-      );
+      const id = await createTelegramStickerPack({
+        collection: "moonbirds",
+        hasBackground: hasBg,
+        tokenId: index,
+        selected: _selectedEmojis,
+      });
 
       if (!id) throw new Error("Error creating telegram pack");
 
@@ -281,7 +294,7 @@ export default function MoonbirdGenerated({
           {[
             <React.Fragment key="left-content">
               {/* LEFT CONTENT */}
-              <div className="z-[2] mr-5 flex flex-col gap-5 md:flex-row">
+              <div className="z-[2] flex flex-col gap-5 md:flex-row">
                 <div className="flex w-full flex-col items-center  gap-5">
                   <div className="flex w-full flex-1 items-center justify-between ">
                     <ThemedIconButton
@@ -328,14 +341,19 @@ export default function MoonbirdGenerated({
                   </div>
 
                   <div className="relative flex w-full flex-col items-center justify-center gap-5 pt-5">
-                    <div className="relative mt-4 flex h-[320px] w-[320px] items-center justify-center lg:h-[21vw] lg:w-[21vw]">
+                    <div
+                      className={cn(
+                        " relative mt-4 flex items-center justify-center",
+                        "h-[320px] max-h-[450px] w-[320px] max-w-[450px]  lg:h-[21vw] lg:w-[21vw]",
+                      )}
+                    >
                       <img
                         src={`/images/moonbirds/tokens/${index}.png`}
                         className="h-[274px] w-[274px] rounded lg:h-[18vw] lg:w-[18vw]"
                       />
                       <img
                         src="/images/moonbird-frame.webp"
-                        className="absolute top-0 rounded"
+                        className="absolute inset-0 h-full w-full"
                       />
                     </div>
                     <div className="mb-5 mt-2 flex flex-col items-center gap-5 md:flex md:gap-4">
@@ -449,7 +467,7 @@ export default function MoonbirdGenerated({
                     />
                     <div className="ml-auto flex items-center gap-5 lg:hidden">
                       {/* Background */}
-                      <div className="mb-2 flex flex-row gap-3">
+                      <div className="sm:mb-2 flex flex-row gap-3">
                         <Switch
                           checked={hasBg}
                           onChange={(checked) => {
@@ -666,7 +684,7 @@ export default function MoonbirdGenerated({
 
       {/* Loading */}
       <MoonbirdsVideoLoader
-        show={loading}
+        show={false}
         progress={progress}
         // total={moonbirdEmojis.length}
         total={totalSizeOfGeneratedImages}

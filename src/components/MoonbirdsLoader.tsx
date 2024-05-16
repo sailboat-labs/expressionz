@@ -1,5 +1,6 @@
 import { cn } from "@/lib/misc.lib";
-import StripedLoader from "./shared/StripedLoader";
+import { useEffect, useRef } from "react";
+import { LiaSpinnerSolid } from "react-icons/lia";
 
 export function LoadingProgress({
   show,
@@ -39,6 +40,14 @@ export default function MoonbirdsVideoLoader({
   progress: number;
   total: number;
 }) {
+  const videoElement = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoElement.current != null && videoElement.current.paused) {
+      videoElement.current.play();
+    }
+  }, []);
+
   // const texts = [
   //   "is generating your emojis...",
   //   "is drawing you a smiley face...",
@@ -67,7 +76,7 @@ export default function MoonbirdsVideoLoader({
     >
       <div className="flex h-full w-full items-center justify-center space-y-5">
         <div className="relative flex  w-11/12 flex-col items-center justify-center rounded-lg    xl:w-1/2">
-          <div className=" absolute top-5 flex w-full items-center justify-center">
+          <div className=" absolute top-2 flex w-full items-center justify-center md:top-5">
             <img
               src="/images/loading-logo.webp"
               alt="loading logo"
@@ -75,6 +84,7 @@ export default function MoonbirdsVideoLoader({
             />
           </div>
           <video
+            ref={videoElement}
             playsInline
             autoPlay
             loop
@@ -94,12 +104,15 @@ export default function MoonbirdsVideoLoader({
 
           <div
             className={cn(
-              "absolute bottom-6 flex w-full flex-col items-center ",
-              "text-xs font-bold text-[#FFD702] lg:text-lg",
+              "absolute bottom-3 flex w-full items-center justify-center gap-2 sm:bottom-6 ",
+              "text-xs text-[#FFD702] lg:text-lg",
             )}
           >
+            <div className="">
+              <LiaSpinnerSolid className="h-5 w-5 animate-spin" />
+            </div>
             Generating emojis...
-            <StripedLoader className="mx-2 max-w-sm" />
+            {/* <StripedLoader className="mx-2 max-w-sm" /> */}
           </div>
           {/* <p className="-translate-y-8 text-center text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
             {texts[current]}

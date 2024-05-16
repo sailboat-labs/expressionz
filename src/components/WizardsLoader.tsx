@@ -1,15 +1,15 @@
 import { cn } from "@/lib/misc.lib";
-import StripedLoader from "./shared/StripedLoader";
+import { useEffect, useRef } from "react";
+import { LiaSpinnerSolid } from "react-icons/lia";
 
-export function WizardsLoader({
-  show,
-  progress,
-  total,
-}: {
-  show: boolean;
-  progress: number;
-  total: number;
-}) {
+export function WizardsLoader({ show }: { show: boolean }) {
+  const videoElement = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoElement.current != null && videoElement.current.paused) {
+      videoElement.current.play();
+    }
+  }, []);
   //   const texts = [
   //     "is generating your emojis...",
   //     "is drawing you a smiley face...",
@@ -47,11 +47,12 @@ export function WizardsLoader({
             />
           </div> */}
           <video
+            ref={videoElement}
             playsInline
             autoPlay
             loop
             muted
-            poster="/images/wizards-loading-poster.webp"
+            // poster="/images/wizards-loading-poster.webp"
             className="h-auto w-full rounded-lg object-cover"
           >
             <source
@@ -70,12 +71,15 @@ export function WizardsLoader({
 
           <div
             className={cn(
-              "absolute bottom-6 flex w-full flex-col items-center ",
-              "text-xs font-bold text-[#FFD702] lg:text-lg",
+              "absolute bottom-3 flex w-full items-center justify-center gap-2 sm:bottom-6 ",
+              "text-xs  text-[#FFD702] lg:text-lg",
+              "",
             )}
           >
+            <div className="">
+              <LiaSpinnerSolid className="h-5 w-5 animate-spin" />
+            </div>
             Generating emojis...
-            <StripedLoader className="mx-2 max-w-sm" />
           </div>
           {/* <p className="-mt-1 flex -translate-y-8 items-center gap-2 text-xs font-bold text-[#FFD702] opacity-90 lg:text-lg">
             {texts[current]}

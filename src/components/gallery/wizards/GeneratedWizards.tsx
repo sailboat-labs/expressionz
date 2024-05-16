@@ -708,7 +708,7 @@ export default function GeneratedWizards({
       />
 
       {/* Loading */}
-      <WizardsLoader show={isGenerating} progress={progress} total={12} />
+      <WizardsLoader show={isGenerating} />
     </div>
   );
 }

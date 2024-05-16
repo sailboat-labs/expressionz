@@ -167,7 +167,7 @@ export default function WizardsGallery() {
   //             : 7;
 
   return (
-    <div className="h-[calc(100vh-64px)] w-full flex-1 overflow-x-hidden  px-2 md:overflow-y-auto">
+    <div className="h-[calc(100vh-64px)] w-full flex-1 overflow-x-hidden  pl-2 md:overflow-y-auto">
       <div className="p  flex">
         <div className="mb-3 mt-5 w-fit text-3xl text-white">
           Gallery ({gallery.length})

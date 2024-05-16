@@ -36,7 +36,7 @@ export default function HomePage() {
           </Link>
         }
       >
-        <div className="font-pixelify relative z-[2] flex w-full">
+        <div className="font-pixelify-r relative z-[2] flex w-full">
           <div className="z-[2] w-full gap-10 md:flex md:flex-row">
             <div className="flex h-fit flex-col gap-5 overflow-hidden md:h-[calc(100vh-64px)] md:px-5 md:pb-5">
               <div
@@ -46,7 +46,11 @@ export default function HomePage() {
                   "md:mt-3",
                 )}
               >
-                <Drawer text="Wizards" logo="/images/logos/twoo-logo.png" />
+                <Drawer
+                  text="Wizards"
+                  logo="/images/logos/twoo-logo.png"
+                  filterBox={<WizardsFilterTraits />}
+                />
                 <input
                   value={router.query.search as string}
                   placeholder="Search for index..."

@@ -18,9 +18,9 @@ function BaseLogo({ showBack = false }) {
   const router = useRouter();
 
   return (
-    <ul className="flex list-none items-center">
-      <li className="flex flex-row items-center">
-        {showBack ? (
+    <div className="flex list-none items-center">
+      <div className="flex flex-row items-center">
+        {showBack && (
           <a
             onClick={() => router.back()}
             className="w-8"
@@ -28,12 +28,10 @@ function BaseLogo({ showBack = false }) {
           >
             <FaArrowLeft className="h-5 w-5" />
           </a>
-        ) : (
-          <div className="w-8" />
         )}
-      </li>
+      </div>
       <Link href={"/"}>Expressionz.xyz</Link>
-    </ul>
+    </div>
   );
 }
 
@@ -53,10 +51,13 @@ function Header({ showBack = false, variant = "base", logo }: THeaderProps) {
         )}
       >
         <div
-          className={cn("m-auto flex h-full  items-center justify-between", {
-            "w-11/12 lg:w-4/5": variant === "base",
-            "px-4": variant === "flexed-minimized",
-          })}
+          className={cn(
+            "m-auto flex h-full items-center  justify-between px-4",
+            {
+              "lg:w-4/5": variant === "base",
+              "": variant === "flexed-minimized",
+            },
+          )}
         >
           {logo ? logo : <BaseLogo showBack={showBack} />}
 

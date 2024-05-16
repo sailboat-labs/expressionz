@@ -11,7 +11,7 @@ function MobileMenu({ show, setShow }: MenuProps) {
   return (
     <nav
       className={`${
-        show ? "fixed flex" : "hidden"
+        show ? "sticky top-0 flex" : "hidden"
       } z-[100] h-screen w-screen bg-darkPurple`}
       style={{ zIndex: 99999 }}
     >

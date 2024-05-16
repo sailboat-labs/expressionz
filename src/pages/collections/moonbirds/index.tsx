@@ -17,7 +17,8 @@ export default function HomePage() {
       <BaseLayout
         hideFooter
         variant="flexed-minimized"
-        childrenClass="md:h-[calc(100vh-64px)] bg-dark"
+        childrenClass="max-h-[calc(100vh-64px)] overflow-y-auto"
+        wrapperClass=" bg-dark"
         logo={
           <Link
             href="/collections"
@@ -38,7 +39,7 @@ export default function HomePage() {
         alt="pixilated night time image"
       /> */}
 
-        <div className="relative z-[2] flex h-full w-full overflow-clip font-pixelify-r">
+        <div className="relative z-[2] flex w-full font-pixelify-r">
           <div className="z-[2] w-full gap-10 md:flex md:flex-row">
             <div className="flex h-fit flex-col gap-5 overflow-hidden md:h-[calc(100vh-64px)] md:px-5 md:pb-5">
               <div

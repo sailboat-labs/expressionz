@@ -294,7 +294,7 @@ export default function MoonbirdGenerated({
           {[
             <React.Fragment key="left-content">
               {/* LEFT CONTENT */}
-              <div className="z-[2] mr-5 flex flex-col gap-5 md:flex-row">
+              <div className="z-[2] flex flex-col gap-5 md:flex-row">
                 <div className="flex w-full flex-col items-center  gap-5">
                   <div className="flex w-full flex-1 items-center justify-between ">
                     <ThemedIconButton

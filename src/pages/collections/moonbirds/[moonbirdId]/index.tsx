@@ -100,7 +100,7 @@ export default function MoonbirdPage() {
                   />
                   <img
                     src="/images/moonbird-frame.webp"
-                    className="absolute top-0 rounded"
+                    className="absolute inset-0 h-full w-full"
                   />
                 </div>
                 <div className="mb-5 mt-2 flex flex-col items-center gap-5 md:flex md:gap-4">

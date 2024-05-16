@@ -9,6 +9,7 @@ import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import Link from "next/link";
 import BaseLayout from "@/components/shared/BaseLayout";
+import { cn } from "@/lib/misc.lib";
 
 export default function MoonbirdPage() {
   const router = useRouter();
@@ -93,7 +94,12 @@ export default function MoonbirdPage() {
                   </div>
                 </div>
 
-                <div className="relative mt-4 flex h-[320px] w-[320px] items-center justify-center lg:h-[21vw] lg:w-[21vw]">
+                <div
+                  className={cn(
+                    " relative mt-4 flex items-center justify-center",
+                    "h-[320px] max-h-[450px] w-[320px] max-w-[450px]  lg:h-[21vw] lg:w-[21vw]",
+                  )}
+                >
                   <img
                     src={`/images/moonbirds/tokens/${index}.png`}
                     className="h-[274px] w-[274px] rounded lg:h-[18vw] lg:w-[18vw]"

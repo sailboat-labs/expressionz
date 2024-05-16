@@ -217,20 +217,15 @@ export default function GalleryImage({
       </div>
 
       {/* Mobile */}
-      <div className="fixed inset-0 block scale-95 overflow-y-hidden lg:hidden">
-        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all ">
+      <div className=" inset-0 block h-[calc(100vh-64px)] w-screen  overflow-y-hidden lg:hidden">
+        <div className="relative flex h-full w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all ">
           <Image
             src="/images/mobile_wizard_background.webp"
             className="absolute h-full w-full rounded-t-md md:h-full md:w-full"
             height={1000}
             width={1000}
             alt="Wizard Background"
-            onLoad={() => {
-              console.log("loaded");
-              // toast.success('loaded')
-            }}
             loading="eager"
-            priority
           />
 
           <div className="z-2 absolute top-6 flex w-4/5 items-center justify-between px-3">
@@ -256,7 +251,7 @@ export default function GalleryImage({
             </div>
           </div>
 
-          <div className="absolute z-[2] h-[70vh] w-[75vw] overflow-auto">
+          <div className="absolute z-[2] h-[60vh] w-[75vw] overflow-auto">
             {/* Wizard */}
             <div className="flex flex-col items-center">
               <div className="relative flex h-[50vw] w-[50vw] items-center justify-center">
@@ -302,7 +297,7 @@ export default function GalleryImage({
                   </span>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid  gap-2">
                 {wizard.meta.attributes.map((attribute, index) => (
                   <div
                     key={attribute.trait_type}

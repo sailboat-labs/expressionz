@@ -11,7 +11,7 @@ const MoonbirdDetailsFrame = forwardRef(
     ref: LegacyRef<HTMLDivElement>,
   ) => {
     return (
-      <div className="box-border flex h-[calc(100vh-64px)] w-screen items-center justify-center p-8">
+      <div className="box-border flex h-[calc(100vh-64px)] w-screen items-center justify-center sm:p-8">
         <div
           ref={ref}
           className={cn(
@@ -28,11 +28,11 @@ const MoonbirdDetailsFrame = forwardRef(
               "grid overflow-y-auto py-12 lg:grid-cols-2 lg:overflow-y-clip lg:py-0",
             )}
           >
-            <div className="box-border w-full px-8 lg:h-[87vh] lg:py-8">
+            <div className="box-border w-full px-4 sm:px-8 lg:h-[87vh] lg:py-8">
               {children[0]}
             </div>
 
-            <div className="box-border w-full px-8 lg:h-[87vh] lg:py-8">
+            <div className="box-border w-full px-4 sm:px-8 lg:h-[87vh] lg:py-8">
               {children[1]}
             </div>
           </div>

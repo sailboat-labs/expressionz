@@ -7,31 +7,45 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { Pixelify_Sans } from "next/font/google";
-import MoonBirdsFilterTraits from "./moonbirds/MoonBirdsFilterTraits";
+import { cn } from "@/lib/misc.lib";
 
-const PixelifySans = Pixelify_Sans({
-  subsets: ["latin"],
-  display: "swap",
-});
-
-type TDrawerProps = { text: string; logo?: string };
+type TDrawerProps = {
+  text: string;
+  logo?: string;
+  theme?: "brown" | "purple";
+  filterBox: React.ReactNode;
+};
 
 export default function Drawer({
   text,
   logo = "/images/moonbirds-logo.webp",
+  theme = "brown",
+  filterBox,
 }: TDrawerProps) {
   return (
     <div className="md:hidden">
       <Sheet>
         <SheetTrigger>
-          <div className=" mt-1 flex h-5 w-5 scale-150 cursor-pointer items-center justify-center rounded border border-orange-700 bg-orange-200 text-orange-700 md:hidden">
+          <div
+            className={cn(
+              "mt-1 flex h-5 w-5 scale-150 cursor-pointer items-center justify-center rounded border  md:hidden",
+              {
+                "border-orange-700 bg-orange-200 text-orange-700":
+                  theme == "brown",
+                "border-violet-700 !bg-violet-200 text-violet-700":
+                  theme == "purple",
+              },
+            )}
+          >
             <ion-icon name="menu-outline"></ion-icon>
           </div>
         </SheetTrigger>
         <SheetContent
           side={"left"}
-          className={` !z-9999 border-r border-orange-400 bg-orange-800 ${PixelifySans.className}`}
+          className={cn(` !z-9999 font-pixelify-r`, {
+            "border-orange-400 bg-orange-800 ": theme == "brown",
+            "border-dark bg-dark ": theme == "purple",
+          })}
         >
           <SheetHeader>
             <SheetTitle className="mb-5">
@@ -48,7 +62,7 @@ export default function Drawer({
               </div>
             </SheetTitle>
             <SheetDescription className="flex w-full">
-              <MoonBirdsFilterTraits />
+              {filterBox}
             </SheetDescription>
           </SheetHeader>
         </SheetContent>

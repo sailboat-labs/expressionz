@@ -684,7 +684,7 @@ export default function MoonbirdGenerated({
 
       {/* Loading */}
       <MoonbirdsVideoLoader
-        show={false}
+        show={loading}
         progress={progress}
         // total={moonbirdEmojis.length}
         total={totalSizeOfGeneratedImages}

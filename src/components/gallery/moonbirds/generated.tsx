@@ -467,7 +467,7 @@ export default function MoonbirdGenerated({
                     />
                     <div className="ml-auto flex items-center gap-5 lg:hidden">
                       {/* Background */}
-                      <div className="mb-2 flex flex-row gap-3">
+                      <div className="sm:mb-2 flex flex-row gap-3">
                         <Switch
                           checked={hasBg}
                           onChange={(checked) => {
@@ -684,7 +684,7 @@ export default function MoonbirdGenerated({
 
       {/* Loading */}
       <MoonbirdsVideoLoader
-        show={loading}
+        show={false}
         progress={progress}
         // total={moonbirdEmojis.length}
         total={totalSizeOfGeneratedImages}

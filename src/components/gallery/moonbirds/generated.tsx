@@ -294,7 +294,7 @@ export default function MoonbirdGenerated({
           {[
             <React.Fragment key="left-content">
               {/* LEFT CONTENT */}
-              <div className="z-[2] mr-5 flex flex-col gap-5 md:flex-row">
+              <div className="z-[2] flex flex-col gap-5 md:flex-row">
                 <div className="flex w-full flex-col items-center  gap-5">
                   <div className="flex w-full flex-1 items-center justify-between ">
                     <ThemedIconButton
@@ -341,14 +341,19 @@ export default function MoonbirdGenerated({
                   </div>
 
                   <div className="relative flex w-full flex-col items-center justify-center gap-5 pt-5">
-                    <div className="relative mt-4 flex h-[320px] w-[320px] items-center justify-center lg:h-[21vw] lg:w-[21vw]">
+                    <div
+                      className={cn(
+                        " relative mt-4 flex items-center justify-center",
+                        "h-[320px] max-h-[450px] w-[320px] max-w-[450px]  lg:h-[21vw] lg:w-[21vw]",
+                      )}
+                    >
                       <img
                         src={`/images/moonbirds/tokens/${index}.png`}
                         className="h-[274px] w-[274px] rounded lg:h-[18vw] lg:w-[18vw]"
                       />
                       <img
                         src="/images/moonbird-frame.webp"
-                        className="absolute top-0 rounded"
+                        className="absolute inset-0 h-full w-full"
                       />
                     </div>
                     <div className="mb-5 mt-2 flex flex-col items-center gap-5 md:flex md:gap-4">
@@ -679,7 +684,7 @@ export default function MoonbirdGenerated({
 
       {/* Loading */}
       <MoonbirdsVideoLoader
-        show={loading}
+        show={false}
         progress={progress}
         // total={moonbirdEmojis.length}
         total={totalSizeOfGeneratedImages}

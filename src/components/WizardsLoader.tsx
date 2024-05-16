@@ -1,7 +1,15 @@
 import { cn } from "@/lib/misc.lib";
+import { useEffect, useRef } from "react";
 import { LiaSpinnerSolid } from "react-icons/lia";
 
 export function WizardsLoader({ show }: { show: boolean }) {
+  const videoElement = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoElement.current != null && videoElement.current.paused) {
+      videoElement.current.play();
+    }
+  }, []);
   //   const texts = [
   //     "is generating your emojis...",
   //     "is drawing you a smiley face...",
@@ -39,6 +47,7 @@ export function WizardsLoader({ show }: { show: boolean }) {
             />
           </div> */}
           <video
+            ref={videoElement}
             playsInline
             autoPlay
             loop

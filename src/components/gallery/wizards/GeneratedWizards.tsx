@@ -24,8 +24,9 @@ import { createTelegramStickerPack } from "@/http/telegram.http";
 import { cn } from "@/lib/misc.lib";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 import { EPlatform } from "@/types/misc.type";
-import { generateWizards } from "@/http/wizard.http";
+
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
+import { generateWizardEmojis } from "@/http/wizard.http";
 
 type GeneratedWizardsProps = {
   wizard: (typeof GALLERY)[0];
@@ -99,7 +100,7 @@ export default function GeneratedWizards({
     }
 
     try {
-      let images = await generateWizards(
+      let images = await generateWizardEmojis(
         payload,
         (progress: number, total: number) => {
           // setProgress(progress);
@@ -120,71 +121,6 @@ export default function GeneratedWizards({
       setLoading(false);
     }
   }
-
-  // async function generate() {
-  //   setLoading(true);
-
-  //   try {
-  //     const _generated: any[] = [];
-  //     const _generatedTransparent: any[] = [];
-
-  //     for await (const emoji of emojis) {
-  //       if (emoji.type == "gif") {
-  //         const response = await generateGifs(
-  //           index - 1,
-  //           emoji.emoji_type as EmojiTypes,
-  //         );
-
-  //         if (response) {
-  //           _generated.push({
-  //             image: response.colored,
-  //             emoji_type: emoji.emoji_type,
-  //             type: "gif",
-  //           });
-
-  //           _generatedTransparent.push({
-  //             image: response.transparent,
-  //             emoji_type: emoji.emoji_type,
-  //             type: "gif",
-  //           });
-  //         }
-  //       } else {
-  //         const response = await generateEmojis(
-  //           index - 1,
-  //           emoji.emoji_type as EmojiTypes,
-  //         );
-
-  //         if (response) {
-  //           _generated.push({
-  //             image: response.colored,
-  //             emoji_type: emoji.emoji_type,
-  //             type: "png",
-  //           });
-
-  //           // const transparentImage = response.transparentImages[0];
-  //           _generatedTransparent.push({
-  //             image: response.transparent,
-  //             emoji_type: emoji.emoji_type,
-  //             type: "png",
-  //           });
-  //         }
-  //       }
-
-  //       setProgress(_generated.length);
-
-  //       setGeneratedEmojis(_generated);
-  //       setGeneratedEmojisTransparent(_generatedTransparent);
-  //     }
-  //     setGeneratedEmojis(_generated);
-  //     setGeneratedEmojisTransparent(_generatedTransparent);
-
-  //     // setSelectedEmojis(Array.from({ length: _generated.length }, (_, i) => i));
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
 
   const isGenerating =
     loading &&
@@ -216,16 +152,32 @@ export default function GeneratedWizards({
 
   async function exportStickers(platform: EPlatform) {
     setIsExportingStickers(true);
-    const loadingToastID = toast.loading("Preparing emojis...");
+    const loadingToastID = toast.loading("Preparing emojis...", {
+      unstyled: true,
+      classNames: {
+        toast: "bg-white rounded-md shadow flex items-center gap-2 px-4 py-2",
+        title: "font-pixelify-r text-black",
+      },
+    });
+
+    const generatedCollection = hasBg
+      ? generatedEmojis
+      : generatedEmojisTransparent;
+
+    const _selectedEmojis: any[] = generatedCollection.filter((_, index) =>
+      selectedEmojis.includes(index),
+    );
+
+    console.log({ _selectedEmojis });
 
     try {
       if (platform === EPlatform.DISCORD) {
-        const id = await createDiscordEmojiPack(
-          "wizards",
-          index - 1,
-          selectedEmojis,
-          hasBg,
-        );
+        const id = await createDiscordEmojiPack({
+          collection: "wizards",
+          hasBackground: hasBg,
+          tokenId: index - 1,
+          selected: _selectedEmojis,
+        });
 
         if (id.length <= 2) throw new Error("Error creating discord pack");
 
@@ -238,12 +190,12 @@ export default function GeneratedWizards({
       /**
        * Generates telegram sticker packs
        */
-      const id = await createTelegramStickerPack(
-        "wizards",
-        index - 1,
-        selectedEmojis,
-        hasBg,
-      );
+      const id = await createTelegramStickerPack({
+        collection: "wizards",
+        hasBackground: hasBg,
+        tokenId: index - 1,
+        selected: _selectedEmojis,
+      });
 
       if (id.length <= 2) throw new Error("Error creating telegram pack");
 
@@ -252,6 +204,7 @@ export default function GeneratedWizards({
       setShowDoneModal(true);
     } catch (error: any) {
       console.error("Error exporting stickers", error);
+      toast.dismiss();
       toast.error(error.message);
     } finally {
       toast.dismiss(loadingToastID);

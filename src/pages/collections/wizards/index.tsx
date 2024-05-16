@@ -4,6 +4,7 @@ import WizardsFilterTraits from "@/components/gallery/wizards/WizardsFilterTrait
 import WizardsGallery from "@/components/gallery/wizards/WizardsGallery";
 import BaseLayout from "@/components/shared/BaseLayout";
 import Seo from "@/components/shared/Seo";
+import { cn } from "@/lib/misc.lib";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -37,23 +38,15 @@ export default function HomePage() {
       >
         <div className="font-pixelify relative z-[2] flex w-full">
           <div className="z-[2] w-full gap-10 md:flex md:flex-row">
-            <div className="flex h-fit flex-col gap-5 overflow-hidden px-5 pb-5 md:h-[calc(100vh-64px)]">
-              <div className="mt-3 flex items-center  text-white">
-                <Drawer text="" />
-
-                {/* <Link
-                href="/collections"
-                className="flex h-full items-center gap-2 font-semibold md:text-2xl"
+            <div className="flex h-fit flex-col gap-5 overflow-hidden md:h-[calc(100vh-64px)] md:px-5 md:pb-5">
+              <div
+                className={cn(
+                  "w-full rounded-lg p-4 md:w-96",
+                  "flex items-center gap-4 md:flex-col md:items-start",
+                  "md:mt-3",
+                )}
               >
-                <img
-                  src="/images/logos/twoo-logo.png"
-                  className="ml-2 h-12 w-12 rounded-full md:h-20 md:w-20"
-                  alt="wizards logo"
-                />
-                The Wizards of Ord
-              </Link> */}
-              </div>
-              <div className="h-full w-full rounded-lg p-4 md:w-96">
+                <Drawer text="Wizards" logo="/images/logos/twoo-logo.png" />
                 <input
                   value={router.query.search as string}
                   placeholder="Search for index..."
@@ -78,9 +71,9 @@ export default function HomePage() {
                     );
                   }}
                 />
-                <div className="mt-5 hidden md:block">
-                  <WizardsFilterTraits />
-                </div>
+              </div>
+              <div className="hidden flex-1 px-4 md:block">
+                <WizardsFilterTraits />
               </div>
             </div>
 

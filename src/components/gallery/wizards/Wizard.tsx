@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export interface IWizard {
   id: string;
@@ -21,19 +21,19 @@ type TWizardProps = {
 };
 
 export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
-  function closeModal() {
-    setIsOpen(false);
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.delete("id");
-    router.push({ search: urlParams.toString() });
-  }
+  // function closeModal() {
+  //   setIsOpen(false);
+  //   const urlParams = new URLSearchParams(window.location.search);
+  //   urlParams.delete("id");
+  //   router.push({ search: urlParams.toString() });
+  // }
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
 
   // async function download(path: string) {
   //   const response = await fetch(path);
@@ -46,15 +46,15 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
   //   URL.revokeObjectURL(url);
   // }
 
-  useEffect(() => {
-    if (router.query.id === wizard.id) {
-      openModal();
-    }
-  }, [router.query.id]);
+  // useEffect(() => {
+  //   if (router.query.id === wizard.id) {
+  //     openModal();
+  //   }
+  // }, [router.query.id]);
 
   return (
     <>
-      <button
+      <motion.button
         onClick={() => {
           router.push(`/collections/wizards/${wizard.id}`);
           // openModal();
@@ -62,6 +62,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
           // urlParams.set("id", wizard.id);
           // router.push({ search: urlParams.toString() });
         }}
+        whileTap={{ scale: 0.9 }}
         className="flex w-full cursor-pointer flex-col items-center p-2  md:ml-0 md:w-[11rem] "
       >
         <div className="bg-black bg-opacity-40 backdrop-blur-md">
@@ -104,7 +105,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
             </button>
           </div>
         </div>
-      </button>
+      </motion.button>
 
       {/* <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>

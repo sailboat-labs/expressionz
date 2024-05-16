@@ -277,7 +277,7 @@ export default function GeneratedWizards({
   }
 
   return (
-    <div className=" flex h-[calc(100vh-64px)]  w-screen items-center justify-center font-pixelify-r text-black">
+    <div className=" flex h-[calc(100vh-64px)]  w-screen items-start justify-center font-pixelify-r text-black md:items-center">
       {/* Desktop */}
       <div className="inset-0 hidden h-full scale-90 items-start justify-center overflow-y-auto lg:flex">
         <div className=" flex h-[calc(100vh-64px)] w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all">
@@ -478,17 +478,14 @@ export default function GeneratedWizards({
       </div>
 
       {/* Mobile */}
-      <div className="scale-60 block h-[calc(100vh-80px)] flex-1 overflow-y-hidden lg:hidden">
-        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-y-auto overflow-x-clip rounded p-3 text-left align-middle transition-all ">
+      <div className="block    flex-1 overflow-y-hidden lg:hidden">
+        <div className="relative flex h-[calc(100vh-64px)]   w-full transform flex-col items-center justify-center gap-3 overflow-y-auto overflow-x-clip rounded p-3 text-left align-middle transition-all ">
           <Image
             src="/images/mobile_wizard_background.webp"
             className="absolute h-full w-full rounded-t-md md:h-full md:w-full"
             height={1000}
             width={1000}
             alt="Wizard Background"
-            onLoad={() => {
-              console.log("loaded");
-            }}
             loading="eager"
           />
 
@@ -528,7 +525,7 @@ export default function GeneratedWizards({
             </div>
           </div>
 
-          <div className="absolute z-[2] mt-5 box-border h-[72vh] w-[78vw] overflow-y-auto  pr-3">
+          <div className="absolute z-[2] mt-5 box-border h-[60vh] w-[78vw] overflow-y-auto  pr-3">
             {/* Wizard */}
             <div className="flex flex-col items-center">
               <div className="relative flex h-[50vw] w-[50vw] items-center justify-center">

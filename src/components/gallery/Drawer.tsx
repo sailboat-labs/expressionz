@@ -22,10 +22,10 @@ export default function Drawer({
   logo = "/images/moonbirds-logo.webp",
 }: TDrawerProps) {
   return (
-    <div className=" md:hidden">
-      <Sheet >
+    <div className="md:hidden">
+      <Sheet>
         <SheetTrigger>
-          <div className=" mt-3 flex h-5 w-5 scale-150 cursor-pointer items-center justify-center rounded border border-orange-700 bg-orange-200 text-orange-700 md:hidden">
+          <div className=" mt-1 flex h-5 w-5 scale-150 cursor-pointer items-center justify-center rounded border border-orange-700 bg-orange-200 text-orange-700 md:hidden">
             <ion-icon name="menu-outline"></ion-icon>
           </div>
         </SheetTrigger>

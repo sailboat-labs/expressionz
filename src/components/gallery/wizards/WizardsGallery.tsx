@@ -167,15 +167,15 @@ export default function WizardsGallery() {
   //             : 7;
 
   return (
-    <div className="h-[calc(100vh-64px)] w-full flex-1  overflow-x-hidden md:overflow-y-auto">
-      <div className="flex justify-center px-2 md:justify-start">
+    <div className="h-[calc(100vh-64px)] w-full flex-1 overflow-x-hidden  px-2 md:overflow-y-auto">
+      <div className="p  flex">
         <div className="mb-3 mt-5 w-fit text-3xl text-white">
           Gallery ({gallery.length})
         </div>
       </div>
 
       {selectedAttributes.length > 0 && (
-        <div className="flex w-screen flex-col justify-center gap-5 overflow-x-auto  px-2 md:justify-start">
+        <div className="flex w-screen flex-col justify-center gap-5 overflow-x-auto   md:justify-start">
           <div className="mb-5 flex gap-2  md:px-0">
             {selectedAttributes.map((attr, index) => (
               <div

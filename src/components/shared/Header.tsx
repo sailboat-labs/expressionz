@@ -38,8 +38,6 @@ function BaseLogo({ showBack = false }) {
 }
 
 function Header({ showBack = false, variant = "base", logo }: THeaderProps) {
-  const router = useRouter();
-
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   return (

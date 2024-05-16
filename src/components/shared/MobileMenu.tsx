@@ -12,7 +12,7 @@ function MobileMenu({ show, setShow }: MenuProps) {
     <nav
       className={`${
         show ? "fixed flex" : "hidden"
-      } z-9999 h-screen w-screen bg-darkPurple`}
+      } z-[100] h-screen w-screen bg-darkPurple`}
       style={{ zIndex: 99999 }}
     >
       <button

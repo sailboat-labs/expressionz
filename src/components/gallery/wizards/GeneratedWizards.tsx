@@ -490,7 +490,6 @@ export default function GeneratedWizards({
               console.log("loaded");
             }}
             loading="eager"
-            priority
           />
 
           <div className="z-2 absolute top-6 flex w-4/5 items-center justify-between px-3">
@@ -708,7 +707,7 @@ export default function GeneratedWizards({
       />
 
       {/* Loading */}
-      <WizardsLoader show={isGenerating} progress={progress} total={12} />
+      <WizardsLoader show={isGenerating} />
     </div>
   );
 }

@@ -35,16 +35,16 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
     setIsOpen(true);
   }
 
-  async function download(path: string) {
-    const response = await fetch(path);
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `wizard_${index}.webp`;
-    link.click();
-    URL.revokeObjectURL(url);
-  }
+  // async function download(path: string) {
+  //   const response = await fetch(path);
+  //   const blob = await response.blob();
+  //   const url = URL.createObjectURL(blob);
+  //   const link = document.createElement("a");
+  //   link.href = url;
+  //   link.download = `wizard_${index}.webp`;
+  //   link.click();
+  //   URL.revokeObjectURL(url);
+  // }
 
   useEffect(() => {
     if (router.query.id === wizard.id) {
@@ -56,7 +56,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
     <>
       <button
         onClick={() => {
-          router.replace(`/collections/wizards/${wizard.id}`);
+          router.push(`/collections/wizards/${wizard.id}`);
           // openModal();
           // const urlParams = new URLSearchParams(window.location.search);
           // urlParams.set("id", wizard.id);

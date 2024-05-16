@@ -67,7 +67,7 @@ export default function MoonbirdsVideoLoader({
     >
       <div className="flex h-full w-full items-center justify-center space-y-5">
         <div className="relative flex  w-11/12 flex-col items-center justify-center rounded-lg    xl:w-1/2">
-          <div className=" absolute top-5 flex w-full items-center justify-center">
+          <div className=" absolute top-2 md:top-5 flex w-full items-center justify-center">
             <img
               src="/images/loading-logo.webp"
               alt="loading logo"

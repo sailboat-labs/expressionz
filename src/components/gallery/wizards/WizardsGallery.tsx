@@ -226,12 +226,9 @@ export default function WizardsGallery() {
         }}
       </AutoSizer> */}
 
-      <div className="flex w-fit flex-wrap  gap-5">
+      <div className="flex w-fit flex-wrap justify-center md:justify-start   lg:gap-5">
         {gallery.map((wizard, index) => (
-          <LazyLoadedDiv
-            key={index + 1}
-            className="items-center justify-center"
-          >
+          <LazyLoadedDiv key={index + 1}>
             <Wizard
               index={Number(wizard.meta.name.split("#")[1])}
               wizard={wizard}

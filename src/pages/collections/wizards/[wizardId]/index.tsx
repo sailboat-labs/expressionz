@@ -29,7 +29,7 @@ export default function WizardPage() {
           >
             <img
               src="/images/logos/twoo-logo.png"
-              className="ml-2 h-12 w-12 rounded-full "
+              className="h-12 w-12 rounded-full "
               alt="moon bird logo"
             />
             Wizards

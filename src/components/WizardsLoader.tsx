@@ -37,7 +37,7 @@ export function WizardsLoader({ show }: { show: boolean }) {
         show ? "left-0 top-0 !z-[99999] flex" : "z-0 hidden",
       )}
     >
-      <div className="flex h-full w-full items-center justify-center space-y-5 ">
+      <div className="flex h-full w-full items-center justify-center space-y-5 px-4">
         <div className="relative mx-auto flex max-w-2xl flex-1 flex-col items-center justify-center rounded-lg   ">
           {/* <div className=" flex w-full translate-y-8 items-center justify-center">
             <img

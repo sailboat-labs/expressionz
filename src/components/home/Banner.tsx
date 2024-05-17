@@ -30,7 +30,7 @@ function Banner() {
           className="h-auto w-3/4 self-end object-contain"
           alt="Mirror moonbird"
         /> */}
-        <div className="mx-auto mt-10 flex w-4/5 flex-col justify-center  lg:w-4/5">
+        <div className="mx-auto mt-10 flex flex-col justify-center px-4  lg:w-4/5">
           <img
             src="/images/logos/logo.webp"
             className="h-auto w-1/2 object-contain"

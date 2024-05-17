@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/misc.lib";
 import { TFilterTrait } from "@/types/misc.type";
 import { Disclosure } from "@headlessui/react";
@@ -61,7 +60,7 @@ export default function FilterTraits({
 
   return (
     <div className="h-full w-full overflow-auto">
-      <div className="mx-auto flex max-h-[70vh] w-full max-w-md flex-col gap-2 overflow-auto rounded bg-purple-200 bg-opacity-20 p-2 backdrop-blur">
+      <div className="mx-auto flex max-h-[80vh] w-full max-w-md flex-col gap-2 overflow-auto rounded bg-purple-200 bg-opacity-20 p-2 backdrop-blur">
         {Object.keys(filterTraits).map((key) => (
           <Disclosure key={key}>
             {({ open }) => (

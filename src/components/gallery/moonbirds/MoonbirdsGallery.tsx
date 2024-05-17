@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { METADATA } from "@/data/metadata";
 import Moonbird from "./Moonbird";
 import { LazyLoadedDiv } from "../LazyLoadedDiv";
+import { cn } from "@/lib/misc.lib";
 
 export default function MoonbirdsGallery() {
   const router = useRouter();
@@ -105,11 +106,14 @@ export default function MoonbirdsGallery() {
 
   return (
     <div className="w-full flex-1 overflow-x-hidden  md:h-[calc(100vh-64px)] md:overflow-y-auto">
-      <div className="flex justify-center md:justify-start">
-        <div className="mb-3 mt-5 w-fit text-3xl text-white">
-          Gallery ({gallery.length})
-        </div>
-      </div>
+      <h1
+        className={cn(
+          "mx-4 flex md:mx-2",
+          "mb-3 w-fit text-3xl text-white md:mt-5",
+        )}
+      >
+        Gallery ({gallery.length})
+      </h1>
 
       {selectedAttributes.length > 0 && (
         <div className="flex w-screen flex-col justify-center gap-5 overflow-x-auto md:ml-5 md:justify-start">

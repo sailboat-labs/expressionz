@@ -29,7 +29,7 @@ export default function WizardPage() {
           >
             <img
               src="/images/logos/twoo-logo.png"
-              className="ml-2 h-12 w-12 rounded-full "
+              className="h-12 w-12 rounded-full "
               alt="moon bird logo"
             />
             Wizards
@@ -43,18 +43,6 @@ export default function WizardPage() {
           />
         )}
       </BaseLayout>
-      {/* <main className="flex h-screen w-full flex-1 items-center justify-center overflow-hidden font-pixelify-r">
-        <img
-          src="/images/background.png"
-          className="fixed z-[1] h-screen w-screen object-cover"
-        />
-        {wizard && (
-          <GalleryImage
-            wizard={wizard}
-            index={Number(wizard?.meta?.name?.split("#")[1])}
-          />
-        )}
-      </main> */}
     </>
   );
 }

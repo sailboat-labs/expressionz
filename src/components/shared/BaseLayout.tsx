@@ -22,7 +22,15 @@ const BaseLayout = ({
   return (
     <main className={cn("flex min-h-screen flex-col", wrapperClass)}>
       <Header showBack={showBack} variant={variant} logo={logo} />
-      <div className={cn("box-border flex-1", childrenClass)}>{children}</div>
+      <div
+        className={cn(
+          "box-border flex-1",
+          hideFooter ? "max-h-[calc(100vh-64px)]": "flex-1",
+          childrenClass,
+        )}
+      >
+        {children}
+      </div>
       {!hideFooter && <Footer />}
     </main>
   );

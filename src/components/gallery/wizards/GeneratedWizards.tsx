@@ -278,7 +278,7 @@ export default function GeneratedWizards({
   }
 
   return (
-    <div className=" flex h-[calc(100vh-64px)]  w-screen items-center justify-center font-pixelify-r text-black">
+    <div className=" flex h-[calc(100vh-64px)]  w-screen items-start justify-center font-pixelify-r text-black md:items-center">
       {/* Desktop */}
       <div className="inset-0 hidden h-full scale-90 items-start justify-center overflow-y-auto lg:flex">
         <div className=" flex h-[calc(100vh-64px)] w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all">

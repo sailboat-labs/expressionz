@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 
+import { IoCopyOutline } from "react-icons/io5";
+
 import { GALLERY } from "@/data/gallery";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/misc.lib";
@@ -191,25 +193,29 @@ export default function GalleryImage({
                   <div className="font-pixelify-b font-bold text-[#3E1600]">
                     Inscription ID
                   </div>
-                  <div className="mt-1 flex gap-2">
-                    <button
+
+                  <div className="mt-3">
+                    <motion.button
                       onClick={() => {
                         navigator.clipboard.writeText(wizard.id);
                         toast.success("Copied to clipboard");
                       }}
-                      className="w-fit cursor-pointer rounded-md px-2 text-xs text-orange-500 transition-all"
+                      className={cn(
+                        "w-full cursor-pointer rounded-md  text-base transition-all focus:text-orange-800 active:text-orange-800",
+                        "mt-3 flex flex-nowrap items-center gap-2",
+                      )}
+                      whileTap={{
+                        scale: 0.8,
+                      }}
                     >
-                      {/* Copy */}
-                      <img src="/images/copy.webp" className="h-6 w-6" />
-                    </button>
-                    <div className="hidden text-lg font-normal uppercase md:block">{`#${wizard.id.slice(
-                      0,
-                      20,
-                    )}...${wizard.id.slice(
-                      wizard.id.length - 5,
-                      wizard.id.length,
-                    )}`}</div>
+                      {/* <img src="/images/copy.webp" className="h-6 w-6" /> */}
+                      <IoCopyOutline className="h-5 w-5" />
+                      <p className="block  flex-1 truncate uppercase sm:max-w-xs">
+                        #{wizard.id}
+                      </p>
+                    </motion.button>
                   </div>
+                 
                 </div>
               </div>
             </div>
@@ -339,23 +345,25 @@ export default function GalleryImage({
                 </button>
               </div>
             </div>
-            <div className="mt-3 flex items-center gap-2">
-              <button
+            <div className="mt-3">
+              <motion.button
                 onClick={() => {
                   navigator.clipboard.writeText(wizard.id);
                   toast.success("Copied to clipboard");
                 }}
-                className="w-fit cursor-pointer rounded-md px-2 text-lg text-orange-500 transition-all"
+                className={cn(
+                  "w-full cursor-pointer rounded-md  text-base transition-all active:text-orange-800",
+                  "mt-3 flex flex-nowrap items-center gap-2",
+                )}
+                whileTap={{
+                  scale: 0.8,
+                }}
               >
-                <img src="/images/copy.webp" className="h-6 w-6" />
-              </button>
-              <div className="block text-lg font-semibold uppercase lg:hidden">{`#${wizard.id.slice(
-                0,
-                15,
-              )}...${wizard.id.slice(
-                wizard.id.length - 5,
-                wizard.id.length,
-              )}`}</div>
+                <IoCopyOutline className="h-5 w-5" />
+                <p className="block  flex-1 truncate uppercase sm:max-w-lg">
+                  #{wizard.id}
+                </p>
+              </motion.button>
             </div>
           </div>
         </div>

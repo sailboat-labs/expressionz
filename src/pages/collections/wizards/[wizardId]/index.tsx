@@ -14,6 +14,10 @@ export default function WizardPage() {
   return (
     <>
       <Seo title={`${wizard?.meta.name}`} />
+      <img
+        src="/images/background.png"
+        className="fixed z-[1] h-screen w-screen object-cover"
+      />
       <BaseLayout
         hideFooter
         variant="flexed-minimized"

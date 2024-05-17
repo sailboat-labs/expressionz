@@ -27,6 +27,7 @@ import { EPlatform } from "@/types/misc.type";
 
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import { generateWizardEmojis } from "@/http/wizard.http";
+import ScrollTokenFrame from "@/components/shared/ScrollTokenFrame";
 
 type GeneratedWizardsProps = {
   wizard: (typeof GALLERY)[0];
@@ -477,19 +478,9 @@ export default function GeneratedWizards({
         </div>
       </div>
 
-      {/* Mobile */}
-      <div className="scale-60 block h-[calc(100vh-80px)] flex-1 overflow-y-hidden lg:hidden">
-        <div className="relative flex h-[100vh] w-full transform flex-col items-center justify-center gap-3 overflow-y-auto overflow-x-clip rounded p-3 text-left align-middle transition-all ">
-          <Image
-            src="/images/mobile_wizard_background.webp"
-            className="absolute h-full w-full rounded-t-md md:h-full md:w-full"
-            height={1000}
-            width={1000}
-            alt="Wizard Background"
-            loading="eager"
-          />
-
-          <div className="z-2 absolute top-6 flex w-4/5 items-center justify-between px-3">
+      <ScrollTokenFrame
+        renderHeaderContent={() => (
+          <div className="flex items-center justify-between px-2">
             <div className="flex items-center space-x-3">
               <button
                 className="flex h-7 w-7 cursor-pointer items-center justify-center rounded border border-[#C1410B] bg-[#FED7AA] text-[#C1410B]"
@@ -506,7 +497,8 @@ export default function GeneratedWizards({
               <button
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    window.location.origin + `/collections/wizards/${wizard.id}`
+                    window.location.origin +
+                      `/collections/wizards/${wizard.id}`,
                   );
                   toast.success("Copied link to clipboard");
                 }}
@@ -524,36 +516,36 @@ export default function GeneratedWizards({
               </button> */}
             </div>
           </div>
-
-          <div className="absolute z-[2] mt-5 box-border h-[72vh] w-[78vw] overflow-y-auto  pr-3">
-            {/* Wizard */}
-            <div className="flex flex-col items-center">
-              <div className="relative flex h-[50vw] w-[50vw] items-center justify-center">
+        )}
+        wrapperClass="!h-[calc(100vh-64px)] w-screen lg:hidden"
+      >
+        <div className="box-border overflow-y-auto">
+          {/* Wizard */}
+          <div className="flex flex-col items-center">
+            <div className="relative flex h-[50vw] w-[50vw] items-center justify-center">
+              <img
+                src={`/images/gallery/${index}.webp`}
+                className="h-[45vw] w-[45vw] rounded"
+                alt={`Wizard ${index} image`}
+              />
+              <img
+                src="/images/frame.webp"
+                className="absolute top-0 rounded"
+                alt="Wizard frame"
+              />
+            </div>
+            <div className="mb-5 mt-5 flex flex-col items-center gap-4 md:flex md:gap-4">
+              <button
+                onClick={() => download(`/images/gallery/${index}.webp`, index)}
+                className="w-fit cursor-pointer"
+              >
                 <img
-                  src={`/images/gallery/${index}.webp`}
-                  className="h-[45vw] w-[45vw] rounded"
-                  alt={`Wizard ${index} image`}
+                  src="/images/download_pfp.webp"
+                  className="w-36"
+                  alt="Download button"
                 />
-                <img
-                  src="/images/frame.webp"
-                  className="absolute top-0 rounded"
-                  alt="Wizard frame"
-                />
-              </div>
-              <div className="mb-5 mt-5 flex flex-col items-center gap-4 md:flex md:gap-4">
-                <button
-                  onClick={() =>
-                    download(`/images/gallery/${index}.webp`, index)
-                  }
-                  className="w-fit cursor-pointer"
-                >
-                  <img
-                    src="/images/download_pfp.webp"
-                    className="w-36"
-                    alt="Download button"
-                  />
-                </button>
-                {/* <div
+              </button>
+              {/* <div
                   className="w-fit cursor-pointer"
                   onClick={() => {
                     router.push(`${wizard.id}/generated`);
@@ -565,135 +557,135 @@ export default function GeneratedWizards({
                     alt="Generate button disabled"
                   />
                 </div> */}
-              </div>
             </div>
+          </div>
 
-            {/* Share and download icons */}
-            <div className="mt-1 flex w-full items-center justify-between px-2">
-              <div className="flex items-center justify-between gap-3">
-                {shareIcons.map((messenger, i) => (
-                  <button
-                    key={i}
-                    className="h-9 w-9 cursor-pointer"
-                    onClick={async () => {
-                      setSelectedEmojis([]);
-                      setSelectedType("");
+          {/* Share and download icons */}
+          <div className="mt-5 flex w-full items-center justify-between">
+            <div className="flex items-center justify-between gap-3">
+              {shareIcons.map((messenger, i) => (
+                <button
+                  key={i}
+                  className="h-9 w-9 cursor-pointer"
+                  onClick={async () => {
+                    setSelectedEmojis([]);
+                    setSelectedType("");
 
-                      if (platform === messenger.platform) {
-                        setPlatform(EPlatform.NONE);
-                        return;
-                      }
+                    if (platform === messenger.platform) {
+                      setPlatform(EPlatform.NONE);
+                      return;
+                    }
 
-                      setPlatform(messenger.platform);
-                    }}
-                  >
-                    <img
-                      src={
-                        platform == messenger.platform
-                          ? messenger.active
-                          : messenger.inactive
-                      }
-                      className="h-full w-full"
-                      alt={`${messenger.platform} icon`}
-                    />
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={downloadEmojis}
-                className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
-              >
-                <ArrowDownIcon className="h-5 w-5" />
-              </button>
+                    setPlatform(messenger.platform);
+                  }}
+                >
+                  <img
+                    src={
+                      platform == messenger.platform
+                        ? messenger.active
+                        : messenger.inactive
+                    }
+                    className="h-full w-full"
+                    alt={`${messenger.platform} icon`}
+                  />
+                </button>
+              ))}
             </div>
+            <button
+              onClick={downloadEmojis}
+              className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
+            >
+              <ArrowDownIcon className="h-5 w-5" />
+            </button>
+          </div>
 
-            {/* Background */}
-            <div className="mx-2 mt-4 flex flex-row gap-3">
-              <Switch
-                checked={hasBg}
-                onChange={(checked) => {
-                  setHasBg(checked);
-                }}
+          {/* Background */}
+          <div className=" mt-4 flex flex-row gap-3">
+            <Switch
+              checked={hasBg}
+              onChange={(checked) => {
+                setHasBg(checked);
+              }}
+              className={`${
+                hasBg ? "bg-[#C1410B]" : "bg-[#FED7AA]"
+              } relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[#C1410B] transition-colors`}
+            >
+              <span
                 className={`${
-                  hasBg ? "bg-[#C1410B]" : "bg-[#FED7AA]"
-                } relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[#C1410B] transition-colors`}
-              >
-                <span
-                  className={`${
-                    hasBg
-                      ? "translate-x-6 bg-[#FED7AA]"
-                      : "translate-x-1 bg-[#C1410B]"
-                  } inline-block h-4 w-4 transform rounded-full transition-transform`}
-                />
-              </Switch>
-              <div className="text-sm font-semibold">Background</div>
+                  hasBg
+                    ? "translate-x-6 bg-[#FED7AA]"
+                    : "translate-x-1 bg-[#C1410B]"
+                } inline-block h-4 w-4 transform rounded-full transition-transform`}
+              />
+            </Switch>
+            <div className="text-sm font-semibold">Background</div>
+          </div>
+
+          <div className="mt-2 text-left">{getInstruction()}</div>
+
+          {/* Generated Emojis */}
+          <div className="pb-5">
+            <div className="mt-4 grid grid-cols-3 place-items-center gap-4">
+              {hasBg
+                ? generatedEmojis.map((emoji, i) => (
+                    <GeneratedItem
+                      key={i}
+                      item={emoji}
+                      platform={platform}
+                      selectedType={selectedType}
+                      selected={selectedEmojis.includes(i)}
+                      onSelect={() => onSelectEmojis(emoji, i)}
+                      selectEnabled={!!platform}
+                    />
+                  ))
+                : generatedEmojisTransparent.map((emoji, i) => (
+                    <GeneratedItem
+                      key={i}
+                      item={emoji}
+                      platform={platform}
+                      selectedType={selectedType}
+                      selected={selectedEmojis.includes(i)}
+                      onSelect={() => onSelectEmojis(emoji, i)}
+                      selectEnabled={!!platform}
+                    />
+                  ))}
             </div>
 
-            <div className="mx-2 mt-2 text-left">{getInstruction()}</div>
-
-            {/* Generated Emojis */}
-            <div className="pb-10">
-              <div className="mt-4 grid grid-cols-3 place-items-center gap-4 px-2">
-                {hasBg
-                  ? generatedEmojis.map((emoji, i) => (
-                      <GeneratedItem
-                        key={i}
-                        item={emoji}
-                        platform={platform}
-                        selectedType={selectedType}
-                        selected={selectedEmojis.includes(i)}
-                        onSelect={() => onSelectEmojis(emoji, i)}
-                        selectEnabled={!!platform}
-                      />
-                    ))
-                  : generatedEmojisTransparent.map((emoji, i) => (
-                      <GeneratedItem
-                        key={i}
-                        item={emoji}
-                        platform={platform}
-                        selectedType={selectedType}
-                        selected={selectedEmojis.includes(i)}
-                        onSelect={() => onSelectEmojis(emoji, i)}
-                        selectEnabled={!!platform}
-                      />
-                    ))}
-              </div>
-
-              <div
-                className={`
+            <div
+              className={`
                   ${platform ? "flex" : "hidden"}
                   mt-5 justify-center
                   `}
+            >
+              <button
+                className="relative h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
+                onClick={() => exportEmojis()}
+                disabled={isExportingStickers}
               >
-                <button
-                  className="relative h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
-                  onClick={() => exportEmojis()}
-                  disabled={isExportingStickers}
-                >
-                  <img
-                    src={`/images/share/export-${
-                      selectedEmojis.length == 0 || isExportingStickers
-                        ? "pressed.webp"
-                        : "active.webp"
-                    }`}
-                    alt="Export button"
-                    className={`h-auto w-32 ${
-                      selectedEmojis.length == 0 || isExportingStickers
-                        ? "cursor-not-allowed"
-                        : "cursor-pointer"
-                    }`}
-                  />
-                  {/* {isExportingStickers && (
+                <img
+                  src={`/images/share/export-${
+                    selectedEmojis.length == 0 || isExportingStickers
+                      ? "pressed.webp"
+                      : "active.webp"
+                  }`}
+                  alt="Export button"
+                  className={`h-auto w-32 ${
+                    selectedEmojis.length == 0 || isExportingStickers
+                      ? "cursor-not-allowed"
+                      : "cursor-pointer"
+                  }`}
+                />
+                {/* {isExportingStickers && (
                     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                       <LiaSpinnerSolid className="h-5 w-5 animate-spin" />
                     </div>
                   )} */}
-                </button>
-              </div>
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      </ScrollTokenFrame>
+      
 
       {/* Done Modal */}
       <DoneModal

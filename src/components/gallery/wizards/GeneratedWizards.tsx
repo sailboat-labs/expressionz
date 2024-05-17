@@ -388,7 +388,7 @@ export default function GeneratedWizards({
                     <ThemedIconButton
                       variant="gold"
                       onClick={() =>
-                        router.replace(`/collections/wizards/${index}`)
+                        router.replace(`/collections/wizards/${wizard.id}`)
                       }
                       icon={<Cross1Icon className="h-5 w-5" />}
                     />
@@ -486,9 +486,6 @@ export default function GeneratedWizards({
             height={1000}
             width={1000}
             alt="Wizard Background"
-            onLoad={() => {
-              console.log("loaded");
-            }}
             loading="eager"
           />
 
@@ -509,7 +506,7 @@ export default function GeneratedWizards({
               <button
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `https://twoo.expressionz.xyz/?id=${wizard.id}`,
+                    window.location.origin + `/collections/wizards/${wizard.id}`
                   );
                   toast.success("Copied link to clipboard");
                 }}
@@ -535,7 +532,7 @@ export default function GeneratedWizards({
                 <img
                   src={`/images/gallery/${index}.webp`}
                   className="h-[45vw] w-[45vw] rounded"
-                  alt={`Wizzard ${index} image`}
+                  alt={`Wizard ${index} image`}
                 />
                 <img
                   src="/images/frame.webp"

@@ -76,33 +76,28 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
           />
         </div>
         <div className="flex w-[40vw] justify-between rounded-b-md bg-orange-100 p-2 md:w-full">
-          <div className="t text-black">#{index}</div>
+          <div className="text-black">#{index}</div>
           <div className="flex h-fit items-center gap-3">
-            <button
-              onClick={() => {
-                window.open(
-                  `https://ordinals.com/inscription/${wizard.id}`,
-                  "_blank",
-                );
-              }}
-              className="cursor-pointer rounded-full border-2 border-black p-1"
+            <a
+              href={`https://ordinals.com/inscription/${wizard.id}`}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-block cursor-pointer rounded-full border-2 border-black p-1"
             >
               <div className="h-2 w-2 rounded-full bg-black"></div>
-            </button>
-            <button
-              onClick={() => {
-                window.open(
-                  `https://magiceden.io/ordinals/item-details/${wizard.id}`,
-                  "_blank",
-                );
-              }}
+            </a>
+            <a
+              href={`https://magiceden.io/ordinals/item-details/${wizard.id}`}
+              target="_blank"
+              className="inline-block cursor-pointer "
+              rel="noreferrer noopener"
             >
               <img
                 className="h-5 w-5 cursor-pointer rounded-md"
                 src="/images/logos/MELOGO.png"
                 alt="me logo"
               />
-            </button>
+            </a>
           </div>
         </div>
       </motion.button>

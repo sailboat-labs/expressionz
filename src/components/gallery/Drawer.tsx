@@ -37,7 +37,7 @@ export default function Drawer({
               },
             )}
           >
-            <ion-icon name="menu-outline"></ion-icon>
+            <ion-icon name="menu-outline" role="icon"></ion-icon>
           </div>
         </SheetTrigger>
         <SheetContent
@@ -61,7 +61,7 @@ export default function Drawer({
                 </div>
               </div>
             </SheetTitle>
-            <SheetDescription className="flex w-full">
+            <SheetDescription asChild className="flex w-full">
               {filterBox}
             </SheetDescription>
           </SheetHeader>

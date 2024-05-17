@@ -106,7 +106,12 @@ export default function MoonbirdsGallery() {
 
   return (
     <div className="w-full flex-1 overflow-x-hidden  md:h-[calc(100vh-64px)] md:overflow-y-auto">
-      <h1 className={cn("mx-4 flex", "mb-3 w-fit text-3xl text-white md:mt-5")}>
+      <h1
+        className={cn(
+          "mx-4 flex md:mx-2",
+          "mb-3 w-fit text-3xl text-white md:mt-5",
+        )}
+      >
         Gallery ({gallery.length})
       </h1>
 

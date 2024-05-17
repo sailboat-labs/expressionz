@@ -318,7 +318,11 @@ export default function MoonbirdGenerated({
                       />
                       <ThemedIconButton
                         className="text-2xl font-semibold"
-                        onClick={() => router.replace("/collections/moonbirds")}
+                        onClick={() =>
+                          router.replace(
+                            `/collections/moonbirds/${moonbird.id}`,
+                          )
+                        }
                         variant="violet"
                         icon={<ion-icon name="close"></ion-icon>}
                       />
@@ -467,7 +471,7 @@ export default function MoonbirdGenerated({
                     />
                     <div className="ml-auto flex items-center gap-5 lg:hidden">
                       {/* Background */}
-                      <div className="sm:mb-2 flex flex-row gap-3">
+                      <div className="flex flex-row gap-3 sm:mb-2">
                         <Switch
                           checked={hasBg}
                           onChange={(checked) => {
@@ -527,7 +531,9 @@ export default function MoonbirdGenerated({
                     />
                     <ThemedIconButton
                       className="text-2xl font-semibold"
-                      onClick={() => router.replace("/collections/moonbirds")}
+                      onClick={() =>
+                        router.replace(`/collections/moonbirds/${moonbird.id}`)
+                      }
                       variant="violet"
                       icon={<ion-icon name="close"></ion-icon>}
                     />
@@ -684,7 +690,7 @@ export default function MoonbirdGenerated({
 
       {/* Loading */}
       <MoonbirdsVideoLoader
-        show={false}
+        show={loading}
         progress={progress}
         // total={moonbirdEmojis.length}
         total={totalSizeOfGeneratedImages}

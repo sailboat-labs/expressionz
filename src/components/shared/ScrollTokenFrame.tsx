@@ -53,7 +53,7 @@ const ScrollTokenFrame = ({
             </div>
           </div>
 
-          <div className="h-[calc(80vh-140px)] flex-1 bg-[#FBAF68]">
+          <div className="h-[calc(80vh-140px)] flex-1 bg-[#FAD8B9]">
             <div
               className={cn(
                 "h-full",

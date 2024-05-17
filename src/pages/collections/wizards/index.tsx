@@ -29,7 +29,7 @@ export default function HomePage() {
           >
             <img
               src="/images/logos/twoo-logo.png"
-              className="h-12 w-12 rounded-full "
+              className="h-10 w-10 rounded-full md:h-12 md:w-12 "
               alt="moon bird logo"
             />
             Wizards

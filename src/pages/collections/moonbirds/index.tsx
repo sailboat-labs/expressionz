@@ -21,11 +21,11 @@ export default function HomePage() {
         logo={
           <Link
             href="/collections"
-            className="flex items-center gap-2 text-base font-semibold"
+            className="flex items-center gap-x-3 text-base font-semibold"
           >
             <img
               src="/images/moonbirds-logo.webp"
-              className="ml-2 h-12 w-12 rounded-full "
+              className="-ml-1 h-10 w-10 rounded-full md:h-12 md:w-12 "
               alt="moon bird logo"
             />
             Moonbirds

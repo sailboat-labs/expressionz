@@ -318,11 +318,7 @@ export default function MoonbirdGenerated({
                       />
                       <ThemedIconButton
                         className="text-2xl font-semibold"
-                        onClick={() =>
-                          router.replace(
-                            `/collections/moonbirds/${moonbird.id}`,
-                          )
-                        }
+                        onClick={() => router.replace("/collections/moonbirds")}
                         variant="violet"
                         icon={<ion-icon name="close"></ion-icon>}
                       />
@@ -353,11 +349,13 @@ export default function MoonbirdGenerated({
                     >
                       <img
                         src={`/images/moonbirds/tokens/${index}.png`}
-                        className="h-[274px] w-[274px] rounded lg:h-[18vw] lg:w-[18vw]"
+                        className="h-[290px] w-[290px] rounded lg:h-[18vw] lg:w-[18vw]"
+                        alt="token image"
                       />
                       <img
                         src="/images/moonbird-frame.webp"
                         className="absolute inset-0 h-full w-full"
+                        alt="frame"
                       />
                     </div>
                     <div className="mb-5 mt-2 flex flex-col items-center gap-5 md:flex md:gap-4">
@@ -373,6 +371,7 @@ export default function MoonbirdGenerated({
                         <img
                           src="/images/buttons/download_pfp.webp"
                           className="w-40"
+                          alt="download icon"
                         />
                       </div>
                     </div>
@@ -531,9 +530,7 @@ export default function MoonbirdGenerated({
                     />
                     <ThemedIconButton
                       className="text-2xl font-semibold"
-                      onClick={() =>
-                        router.replace(`/collections/moonbirds/${moonbird.id}`)
-                      }
+                      onClick={() => router.replace("/collections/moonbirds")}
                       variant="violet"
                       icon={<ion-icon name="close"></ion-icon>}
                     />
@@ -690,7 +687,7 @@ export default function MoonbirdGenerated({
 
       {/* Loading */}
       <MoonbirdsVideoLoader
-        show={loading}
+        show={false}
         progress={progress}
         // total={moonbirdEmojis.length}
         total={totalSizeOfGeneratedImages}

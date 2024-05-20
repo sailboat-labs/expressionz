@@ -102,7 +102,7 @@ export default function MoonbirdPage() {
                 >
                   <img
                     src={`/images/moonbirds/tokens/${index}.png`}
-                    className="h-[290px] w-[290px] rounded lg:h-[18vw] lg:w-[18vw]"
+                    className="absolute inset-0 h-full w-full scale-90"
                   />
                   <img
                     src="/images/moonbird-frame.webp"

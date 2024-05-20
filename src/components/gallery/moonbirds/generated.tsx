@@ -349,15 +349,14 @@ export default function MoonbirdGenerated({
                     >
                       <img
                         src={`/images/moonbirds/tokens/${index}.png`}
-                        className="h-[290px] w-[290px] rounded lg:h-[18vw] lg:w-[18vw]"
-                        alt="token image"
+                        className="absolute inset-0 h-full w-full scale-90"
                       />
                       <img
                         src="/images/moonbird-frame.webp"
                         className="absolute inset-0 h-full w-full"
-                        alt="frame"
                       />
                     </div>
+
                     <div className="mb-5 mt-2 flex flex-col items-center gap-5 md:flex md:gap-4">
                       <div
                         onClick={() => {

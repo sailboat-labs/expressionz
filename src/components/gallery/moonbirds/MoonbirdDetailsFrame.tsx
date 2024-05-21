@@ -24,15 +24,15 @@ const MoonbirdDetailsFrame = forwardRef(
         >
           <div
             className={cn(
-              "relative z-20 h-[calc(100%-32px)] w-[calc(100%-16px)]  divide-[#BDBCFF] divide-opacity-80 lg:divide-x-8",
+              "relative z-20 h-[calc(100%-32px)] w-[calc(100%-12px)]  divide-[#BDBCFF] divide-opacity-80 lg:divide-x-8",
               "grid overflow-y-auto py-12 lg:grid-cols-2 lg:overflow-y-clip lg:py-0",
             )}
           >
-            <div className="box-border w-full px-4 sm:px-8 lg:h-[87vh] lg:py-8">
+            <div className="box-border w-full px-2 sm:px-8 lg:h-[87vh] lg:py-8">
               {children[0]}
             </div>
 
-            <div className="box-border w-full px-4 sm:px-8 lg:h-[87vh] lg:py-8">
+            <div className="box-border w-full px-2 sm:px-8 lg:h-[87vh] lg:py-8">
               {children[1]}
             </div>
           </div>

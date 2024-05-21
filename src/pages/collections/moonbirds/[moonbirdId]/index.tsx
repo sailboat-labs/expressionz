@@ -61,7 +61,7 @@ export default function MoonbirdPage() {
           {[
             <React.Fragment key="left-item">
               {/* LEFT CONTENT */}
-              <div className="flex w-full flex-col items-center justify-center gap-5 pt-5">
+              <div className="flex w-full flex-col items-center justify-center gap-5 lg:pt-5">
                 <div className="flex w-full flex-1 items-center justify-between ">
                   <ThemedIconButton
                     className="text-2xl font-semibold"
@@ -102,7 +102,7 @@ export default function MoonbirdPage() {
                 >
                   <img
                     src={`/images/moonbirds/tokens/${index}.png`}
-                    className="h-[274px] w-[274px] rounded lg:h-[18vw] lg:w-[18vw]"
+                    className="absolute inset-0 h-full w-full scale-90"
                   />
                   <img
                     src="/images/moonbird-frame.webp"
@@ -140,7 +140,7 @@ export default function MoonbirdPage() {
             </React.Fragment>,
             <React.Fragment key="right-item">
               {/* RIGHT CONTENT */}
-              <div className="mt-5  flex flex-col gap-2 sm:pr-5 font-pixelify-r">
+              <div className="mt-5  flex flex-col gap-2 font-pixelify-r sm:pr-5">
                 <div className="z-[2] mb-3 flex h-fit items-center justify-between">
                   <div className="flex w-full items-center justify-between">
                     <span className="font-pixelify-b  text-white  md:text-lg xl:text-2xl">

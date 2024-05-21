@@ -1,29 +1,42 @@
-import Image from "next/image";
-import { useRouter } from "next/router";
-
-import TwitterLogo from "~/images/logos/twitter.webp";
+import { FaXTwitter } from "react-icons/fa6";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 function Footer() {
-  const router = useRouter();
-
   return (
     <footer
       id="footer"
       className="bottom-0 z-0 flex h-[150px] w-full items-center bg-darkGrey"
     >
       <div className="m-auto flex h-20 w-11/12 items-center justify-center lg:m-auto lg:w-4/5 lg:flex-row lg:justify-between lg:space-y-0 3xl:h-24">
-        <img
-          src="/images/logos/logo.webp"
-          alt="Logo"
-          className="h-auto w-32 object-contain lg:w-60 3xl:w-60"
-        />
-        <div className="hidden font-presstart text-sm text-white lg:flex">
-          <Image
-            src={TwitterLogo}
-            alt="Twitter Logo"
-            className="h-auto w-6 lg:w-9 3xl:w-9"
+        <Link href="/">
+          <motion.img
+            src="/images/logos/logo.webp"
+            alt="Logo"
+            className="h-auto w-32 object-contain lg:w-60 3xl:w-60"
+            whileHover={{
+              scale: 1.05,
+            }}
+            whileTap={{
+              scale: 1,
+            }}
           />
-        </div>
+        </Link>
+
+        <motion.a
+          href="https://twitter.com/Expressionz_xyz"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden font-presstart text-sm text-white lg:flex"
+          whileHover={{
+            scale: 1.1,
+          }}
+          whileTap={{
+            scale: 1,
+          }}
+        >
+          <FaXTwitter className="h-8 w-8" />
+        </motion.a>
       </div>
     </footer>
   );

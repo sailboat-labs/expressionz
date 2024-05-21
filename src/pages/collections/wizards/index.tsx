@@ -4,6 +4,7 @@ import WizardsFilterTraits from "@/components/gallery/wizards/WizardsFilterTrait
 import WizardsGallery from "@/components/gallery/wizards/WizardsGallery";
 import BaseLayout from "@/components/shared/BaseLayout";
 import Seo from "@/components/shared/Seo";
+import { cn } from "@/lib/misc.lib";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -28,36 +29,32 @@ export default function HomePage() {
           >
             <img
               src="/images/logos/twoo-logo.png"
-              className="ml-2 h-12 w-12 rounded-full "
+              className="h-10 w-10 rounded-full md:h-12 md:w-12 "
               alt="moon bird logo"
             />
             Wizards
           </Link>
         }
       >
-        <div className="font-pixelify relative z-[2] flex w-full">
-          <div className="z-[2] w-full gap-10 md:flex md:flex-row">
-            <div className="flex h-fit flex-col gap-5 overflow-hidden px-5 pb-5 md:h-[calc(100vh-64px)]">
-              <div className="mt-3 flex items-center  text-white">
-                <Drawer text="" />
-
-                {/* <Link
-                href="/collections"
-                className="flex h-full items-center gap-2 font-semibold md:text-2xl"
+        <div className="relative z-[2] flex w-full font-pixelify-r">
+          <div className="z-[2] w-full gap-5 md:flex md:flex-row lg:gap-10">
+            <div className="flex h-fit flex-col gap-5 overflow-hidden md:h-[calc(100vh-64px)] md:px-5 md:pb-5">
+              <div
+                className={cn(
+                  "w-full rounded-lg p-4 md:w-72 lg:w-96",
+                  "flex items-center gap-4 md:flex-col md:items-start",
+                  "md:mt-3",
+                )}
               >
-                <img
-                  src="/images/logos/twoo-logo.png"
-                  className="ml-2 h-12 w-12 rounded-full md:h-20 md:w-20"
-                  alt="wizards logo"
+                <Drawer
+                  text="Wizards"
+                  logo="/images/logos/twoo-logo.png"
+                  filterBox={<WizardsFilterTraits />}
                 />
-                The Wizards of Ord
-              </Link> */}
-              </div>
-              <div className="h-full w-full rounded-lg p-4 md:w-96">
                 <input
                   value={router.query.search as string}
                   placeholder="Search for index..."
-                  className="w-full rounded-md border border-gray-200 px-5"
+                  className="w-full rounded-md border border-gray-200 px-5 text-black"
                   onChange={(e) => {
                     const search = e.target.value;
                     const urlParams = new URLSearchParams(
@@ -78,9 +75,9 @@ export default function HomePage() {
                     );
                   }}
                 />
-                <div className="mt-5 hidden md:block">
-                  <WizardsFilterTraits />
-                </div>
+              </div>
+              <div className="hidden flex-1 px-4 md:block">
+                <WizardsFilterTraits />
               </div>
             </div>
 

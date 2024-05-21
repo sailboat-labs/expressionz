@@ -8,7 +8,7 @@ function AboutUs() {
   return (
     <>
       <Seo title="About Us" />
-      <BaseLayout>
+      <BaseLayout wrapperClass="font-presstart">
         <Project />
         <Team />
         <Contact />

@@ -7,9 +7,8 @@ import {
   ArrowLeftIcon,
   Cross1Icon,
 } from "@radix-ui/react-icons";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { emojis, shareIcons } from "@/lib/data";
@@ -28,6 +27,7 @@ import { EPlatform } from "@/types/misc.type";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import { generateWizardEmojis } from "@/http/wizard.http";
 import ScrollTokenFrame from "@/components/shared/ScrollTokenFrame";
+import useElementHeightMonitor from "@/hooks/useElementHeightMonitor";
 
 type GeneratedWizardsProps = {
   wizard: (typeof GALLERY)[0];
@@ -54,14 +54,16 @@ export default function GeneratedWizards({
 
   const [hasBg, setHasBg] = useState(true);
 
-  // For progress bar
-  const [progress, setProgress] = useState(0);
-
   const [platform, setPlatform] = useState<EPlatform>(EPlatform.NONE);
 
   const [packId, setPackId] = useState<string>("ABCDEFGHIJKL");
 
   const [showDoneModal, setShowDoneModal] = useState(false);
+
+  const wrapperElement = useRef<HTMLDivElement>(null);
+  const generatedWizardsWrapperHeight = useElementHeightMonitor(
+    wrapperElement.current,
+  );
 
   useEffect(() => {
     generateWizardsCollection();
@@ -418,8 +420,18 @@ export default function GeneratedWizards({
                   <div className="text-base font-semibold">Background</div>
                 </div>
 
-                <div className="flex-1 overflow-y-auto overflow-x-clip">
-                  <div className="grid gap-4 pt-4  md:grid-cols-3">
+                <div
+                  className="flex-1 overflow-y-auto overflow-x-clip"
+                  ref={wrapperElement}
+                >
+                  <div
+                    className={cn("grid grid-cols-5 gap-4 pt-4", {
+                      "grid-cols-4":
+                        generatedWizardsWrapperHeight - 20 >= 120 * 3 + 32,
+                      "grid-cols-3":
+                        generatedWizardsWrapperHeight - 20 >= 160 * 3 + 32,
+                    })}
+                  >
                     {hasBg
                       ? generatedEmojis.map((emoji, i) => (
                           <GeneratedItem
@@ -685,7 +697,6 @@ export default function GeneratedWizards({
           </div>
         </div>
       </ScrollTokenFrame>
-      
 
       {/* Done Modal */}
       <DoneModal

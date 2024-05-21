@@ -14,6 +14,8 @@ export type THeaderProps = {
   logo?: React.ReactNode;
 };
 
+const COLLECTION_SUBMENU_VISIBLE_ON_PAGES = ["/", "/about-us"];
+
 function BaseLogo({ showBack = false }) {
   const router = useRouter();
 
@@ -37,6 +39,7 @@ function BaseLogo({ showBack = false }) {
 
 function Header({ showBack = false, variant = "base", logo }: THeaderProps) {
   const [showMenu, setShowMenu] = useState<boolean>(false);
+  const router = useRouter();
 
   return (
     <>
@@ -62,7 +65,9 @@ function Header({ showBack = false, variant = "base", logo }: THeaderProps) {
           {logo ? logo : <BaseLogo showBack={showBack} />}
 
           <div className="hidden font-presstart lg:flex lg:space-x-8">
-            <Collections />
+            {COLLECTION_SUBMENU_VISIBLE_ON_PAGES.includes(router.pathname) && (
+              <Collections />
+            )}
             <Link
               href="/about-us"
               className="hover:text-yellow active:text-yellow"

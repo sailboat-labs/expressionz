@@ -61,9 +61,7 @@ export default function GeneratedWizards({
   const [showDoneModal, setShowDoneModal] = useState(false);
 
   const wrapperElement = useRef<HTMLDivElement>(null);
-  const generatedWizardsWrapperHeight = useElementHeightMonitor(
-    wrapperElement.current,
-  );
+  const gridWrapperHeight = useElementHeightMonitor(wrapperElement.current);
 
   useEffect(() => {
     generateWizardsCollection();
@@ -279,6 +277,23 @@ export default function GeneratedWizards({
     }
   }
 
+  const gridClasses = (() => {
+    const GRID_GAP = 16; /**16 pixels == gap-4 */
+    const availableHeight = gridWrapperHeight - 16; /** 16 pixels */
+    /**
+     * 3x3 grid rows height - 140px
+     * 4x3 grid rows height - 110px
+     */
+    const is3ColumnGrid = availableHeight >= 160 * 3 + 32;
+    const is4ColumnGrid = availableHeight >= 120 * 3 + 32;
+
+    return cn("grid grid-cols-5 gap-4 pt-4 ", {
+      "grid-cols-4": is4ColumnGrid,
+      "grid-cols-3 ": is3ColumnGrid,
+      "max-w-[360px]": is3ColumnGrid && availableHeight < 500
+    });
+  })();
+
   return (
     <div className=" flex h-[calc(100vh-64px)]  w-screen items-start justify-center font-pixelify-r text-black md:items-center">
       {/* Desktop */}
@@ -424,14 +439,7 @@ export default function GeneratedWizards({
                   className="flex-1 overflow-y-auto overflow-x-clip"
                   ref={wrapperElement}
                 >
-                  <div
-                    className={cn("grid grid-cols-5 gap-4 pt-4", {
-                      "grid-cols-4":
-                        generatedWizardsWrapperHeight - 20 >= 120 * 3 + 32,
-                      "grid-cols-3":
-                        generatedWizardsWrapperHeight - 20 >= 160 * 3 + 32,
-                    })}
-                  >
+                  <div className={gridClasses}>
                     {hasBg
                       ? generatedEmojis.map((emoji, i) => (
                           <GeneratedItem

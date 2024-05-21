@@ -289,7 +289,7 @@ export default function GeneratedWizards({
     const is3ColumnGrid =
       availableHeight >=
       160 * EXPECTED_NUMBER_OF_ROWS + GRID_GAP * GRID_GAPS_INCLUDED;
-      
+
     const is4ColumnGrid =
       availableHeight >=
       120 * EXPECTED_NUMBER_OF_ROWS + GRID_GAP * GRID_GAPS_INCLUDED;
@@ -297,7 +297,7 @@ export default function GeneratedWizards({
     return cn("grid grid-cols-5 gap-4 pt-4 ", {
       "grid-cols-4": is4ColumnGrid,
       "grid-cols-3 ": is3ColumnGrid,
-      "max-w-[360px]": is3ColumnGrid && availableHeight < 500
+      "max-w-[360px]": is3ColumnGrid && availableHeight < 500,
     });
   })();
 
@@ -442,10 +442,7 @@ export default function GeneratedWizards({
                   <div className="text-base font-semibold">Background</div>
                 </div>
 
-                <div
-                  className="flex-1 overflow-y-auto overflow-x-clip"
-                  ref={wrapperElement}
-                >
+                <div className="overflow--clip flex-1" ref={wrapperElement}>
                   <div className={gridClasses}>
                     {hasBg
                       ? generatedEmojis.map((emoji, i) => (

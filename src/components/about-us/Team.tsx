@@ -4,7 +4,7 @@ export default function Team() {
   return (
     <section>
       <div className="">
-        <h2 className="font-presstart mx-5 mb-10 w-full text-center text-xl font-normal text-[#22AFFF] lg:mx-auto lg:w-3/5 lg:text-left">
+        <h2 className="mx-5 mb-10 w-full text-center font-presstart text-xl font-normal text-[#22AFFF] lg:mx-auto lg:w-3/5 lg:text-left">
           The team
         </h2>
         <div className="mx-auto w-11/12 space-y-10 lg:w-3/5 lg:space-y-11">
@@ -22,10 +22,10 @@ export default function Team() {
                 loading="lazy"
               />
               <div className="flex flex-col space-y-4">
-                <h2 className="mx-4 text-center text-sm font-normal text-white lg:mx-0 lg:text-left lg:text-sm">
+                <h2 className="mx-4 text-center text-xl font-bold text-white lg:mx-0 lg:text-left">
                   {info.heading}
                 </h2>
-                <p className="mx-4 text-justify text-xs leading-relaxed tracking-wide text-white lg:mx-0">
+                <p className="mx-4 text-justify text-xs font-thin leading-relaxed tracking-wide text-white lg:mx-0">
                   {info.description}
                 </p>
               </div>
@@ -44,7 +44,7 @@ export default function Team() {
                   alt="Team Info"
                   loading="lazy"
                 />
-                <p className="font-presstart text-center text-xs text-black">
+                <p className="text-center font-presstart text-xs text-black">
                   {info.role}
                 </p>
               </div>
@@ -61,7 +61,7 @@ const teamInfo = [
     imageUrl: "/images/about-us/girl.webp",
     heading: (
       <>
-        <span className="text-lg text-yellow">a girl </span>
+        <span className=" text-yellow">A girl </span>
         project management
       </>
     ),
@@ -79,8 +79,7 @@ const teamInfo = [
     imageUrl: "/images/about-us/mark.webp",
     heading: (
       <>
-        <span className="text-lg text-yellow">Mark</span> resourcing and
-        advising
+        <span className=" text-yellow">Mark</span> resourcing and advising
       </>
     ),
     description: (

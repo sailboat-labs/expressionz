@@ -280,12 +280,19 @@ export default function GeneratedWizards({
   const gridClasses = (() => {
     const GRID_GAP = 16; /**16 pixels == gap-4 */
     const availableHeight = gridWrapperHeight - 16; /** 16 pixels */
+    const GRID_GAPS_INCLUDED = 2;
+    const EXPECTED_NUMBER_OF_ROWS = 3;
     /**
      * 3x3 grid rows height - 140px
      * 4x3 grid rows height - 110px
      */
-    const is3ColumnGrid = availableHeight >= 160 * 3 + 32;
-    const is4ColumnGrid = availableHeight >= 120 * 3 + 32;
+    const is3ColumnGrid =
+      availableHeight >=
+      160 * EXPECTED_NUMBER_OF_ROWS + GRID_GAP * GRID_GAPS_INCLUDED;
+      
+    const is4ColumnGrid =
+      availableHeight >=
+      120 * EXPECTED_NUMBER_OF_ROWS + GRID_GAP * GRID_GAPS_INCLUDED;
 
     return cn("grid grid-cols-5 gap-4 pt-4 ", {
       "grid-cols-4": is4ColumnGrid,

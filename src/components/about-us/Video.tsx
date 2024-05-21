@@ -1,6 +1,4 @@
-import React from "react";
 import Modal from "./Modal";
-import { isMobile } from "react-device-detect";
 
 interface VideoProps {
   show: boolean;
@@ -13,19 +11,26 @@ const Video = ({ onClose, src, show = false }: VideoProps) => {
 
   return (
     <Modal onClose={onClose}>
-      <iframe
+      <video
+        src={src}
+        className="w-full max-w-5xl px-4"
+        autoPlay
+        playsInline
+        loop
+      ></video>
+      {/* <iframe
         style={{
           width: isMobile ? "90vw" : "80vw",
           height: isMobile ? "36vh" : "62vh",
           margin: "0 1em",
           objectFit: "contain",
         }}
+        className="h-fit w-fit"
         src={src}
         title="YouTube video player"
-        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-      ></iframe>
+      ></iframe> */}
     </Modal>
   );
 };

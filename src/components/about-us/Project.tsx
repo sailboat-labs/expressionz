@@ -6,6 +6,7 @@ import Image from "next/image";
 import AboutText from "~/images/about-us/text.webp";
 import VideoPoster from "~/images/about-us/video.webp";
 import { isMobile } from "react-device-detect";
+import Link from "next/link";
 
 export default function Project() {
   const [showVideo, setShowVideo] = useState<boolean>(false);
@@ -24,7 +25,7 @@ export default function Project() {
         </h2>
         <div className="mx-4 my-6 space-y-6 lg:mx-0">
           {projectInfo.map((info, index) => (
-            <div key={index} className="flex flex-row items-center space-x-5">
+            <div key={index} className="flex flex-row items-start space-x-5">
               <Image
                 src={info.emojiUrl}
                 alt="Emoji"
@@ -32,7 +33,7 @@ export default function Project() {
                 height={36}
                 className="h-auto w-9"
               />
-              <p className="text-xs leading-relaxed tracking-wide text-white">
+              <p className="text-xs !font-thin leading-relaxed tracking-wide text-white">
                 {info.text}
               </p>
             </div>
@@ -73,13 +74,13 @@ export default function Project() {
             </div>
           </div>
           <div className="mt-5 flex justify-center">
-            <button className="">
+            <Link href="/collections">
               <img
                 src="/images/buttons/try-it-now.webp"
                 className="w-40 3xl:w-60"
                 alt="Try it now"
               />
-            </button>
+            </Link>
           </div>
         </div>
       </div>

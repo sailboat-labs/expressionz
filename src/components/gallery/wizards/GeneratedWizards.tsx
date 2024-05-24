@@ -442,9 +442,10 @@ export default function GeneratedWizards({
                   <div className="text-base font-semibold">Background</div>
                 </div>
 
-
                 <div className="flex-1 overflow-clip" ref={wrapperElement}>
-                  <div className={gridClasses}>
+                  <div className={"grid grid-cols-3 gap-4"} style={{
+                    maxWidth: gridWrapperHeight - 66
+                  }}>
                     {hasBg
                       ? generatedEmojis.map((emoji, i) => (
                           <GeneratedItem

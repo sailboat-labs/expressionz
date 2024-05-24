@@ -9,9 +9,10 @@ import Collections from "./CollectionsDropdown";
 import { cn } from "@/lib/misc.lib";
 
 export type THeaderProps = {
-  variant?: "base" | "flexed-minimized";
+  variant?: "base" | "flexed-minimized" | "logo";
   showBack?: boolean;
   logo?: React.ReactNode;
+  transparentBackground?: boolean;
 };
 
 const COLLECTION_SUBMENU_VISIBLE_ON_PAGES = ["/", "/about-us"];
@@ -37,7 +38,12 @@ function BaseLogo({ showBack = false }) {
   );
 }
 
-function Header({ showBack = false, variant = "base", logo }: THeaderProps) {
+function Header({
+  showBack = false,
+  variant = "base",
+  logo,
+  transparentBackground = false,
+}: THeaderProps) {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const router = useRouter();
 
@@ -46,10 +52,11 @@ function Header({ showBack = false, variant = "base", logo }: THeaderProps) {
       <MobileMenu show={showMenu} setShow={setShowMenu} />
       <nav
         className={cn(
-          "sticky top-0 !z-[100] h-16 bg-darkGrey font-presstart",
+          "sticky top-0 !z-[100] h-16  font-presstart",
           "py-[10px] text-xs text-white  3xl:text-sm",
           {
             "3xl:h-20": variant === "base",
+            "bg-darkGrey": !transparentBackground,
           },
         )}
       >
@@ -64,17 +71,20 @@ function Header({ showBack = false, variant = "base", logo }: THeaderProps) {
         >
           {logo ? logo : <BaseLogo showBack={showBack} />}
 
-          <div className="hidden font-presstart lg:flex lg:space-x-8">
-            {COLLECTION_SUBMENU_VISIBLE_ON_PAGES.includes(router.pathname) && (
-              <Collections />
-            )}
-            <Link
-              href="/about-us"
-              className="hover:text-yellow active:text-yellow"
-            >
-              About Us
-            </Link>
-          </div>
+          {variant != "logo" && (
+            <div className="hidden font-presstart lg:flex lg:space-x-8">
+              {COLLECTION_SUBMENU_VISIBLE_ON_PAGES.includes(
+                router.pathname,
+              ) && <Collections />}
+              <Link
+                href="/about-us"
+                className="hover:text-yellow active:text-yellow"
+              >
+                About Us
+              </Link>
+            </div>
+          )}
+
           <div className="flex lg:hidden">
             <IoMenu
               className="h-8 w-8"

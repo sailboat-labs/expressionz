@@ -20,7 +20,7 @@ export default function HomePage() {
       />
       <BaseLayout
         hideFooter
-        variant="flexed-minimized"
+        variant="logo"
         childrenClass="md:h-[calc(100vh-64px)] !font-pixelify-r"
         logo={
           <Link
@@ -38,7 +38,7 @@ export default function HomePage() {
       >
         <div className="relative z-[2] flex w-full font-pixelify-r">
           <div className="z-[2] w-full gap-5 md:flex md:flex-row lg:gap-10">
-            <div className="flex h-fit flex-col gap-5 overflow-hidden md:h-[calc(100vh-64px)] md:px-5 md:pb-5">
+            <div className="flex h-fit flex-col gap-5 overflow-hidden md:h-[calc(100vh-64px)] md:pb-5">
               <div
                 className={cn(
                   "w-full rounded-lg p-4 md:w-72 lg:w-96",

@@ -442,7 +442,8 @@ export default function GeneratedWizards({
                   <div className="text-base font-semibold">Background</div>
                 </div>
 
-                <div className="overflow--clip flex-1" ref={wrapperElement}>
+
+                <div className="flex-1 overflow-clip" ref={wrapperElement}>
                   <div className={gridClasses}>
                     {hasBg
                       ? generatedEmojis.map((emoji, i) => (

@@ -20,7 +20,8 @@ export default function WizardPage() {
       />
       <BaseLayout
         hideFooter
-        variant="flexed-minimized"
+        variant="logo"
+        transparentBackground
         childrenClass="h-[calc(100vh-64px)] flex  w-full flex-1 items-center justify-center overflow-hidden font-pixelify-r"
         logo={
           <Link

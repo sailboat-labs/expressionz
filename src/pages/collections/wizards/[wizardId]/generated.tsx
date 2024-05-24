@@ -21,8 +21,9 @@ function Generated() {
 
       <BaseLayout
         hideFooter
-        variant="flexed-minimized"
+        variant="logo"
         wrapperClass="relative z-[10]"
+        transparentBackground
         childrenClass="h-[calc(100vh-64px)] flex  w-full items-center justify-center overflow-hidden font-pixelify-r"
         logo={
           <Link

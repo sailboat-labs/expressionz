@@ -26,7 +26,7 @@ export default function MoonbirdPage() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `moonbird_${index}.webp`;
+    link.download = `moonbird_${index + 1}.webp`;
     link.click();
     URL.revokeObjectURL(url);
   }

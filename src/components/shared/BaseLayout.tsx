@@ -7,6 +7,7 @@ type TBaseLayout = {
   children: React.ReactNode;
   hideFooter?: boolean;
   childrenClass?: string;
+  transparentBackground?: boolean;
   wrapperClass?: string;
 };
 
@@ -15,17 +16,23 @@ const BaseLayout = ({
   hideFooter = false,
   showBack = false,
   variant = "base",
+  transparentBackground,
   logo,
   childrenClass,
   wrapperClass,
 }: TBaseLayout & THeaderProps) => {
   return (
     <main className={cn("flex min-h-screen flex-col", wrapperClass)}>
-      <Header showBack={showBack} variant={variant} logo={logo} />
+      <Header
+        transparentBackground={transparentBackground}
+        showBack={showBack}
+        variant={variant}
+        logo={logo}
+      />
       <div
         className={cn(
           "box-border flex-1",
-          hideFooter ? "max-h-[calc(100vh-64px)]": "flex-1",
+          hideFooter ? "max-h-[calc(100vh-64px)]" : "flex-1",
           childrenClass,
         )}
       >

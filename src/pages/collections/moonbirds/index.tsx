@@ -35,7 +35,7 @@ export default function HomePage() {
         <div className="flex w-full   font-pixelify-r">
           <div className=" w-full gap-10 md:flex md:flex-row">
             <div className="pb-5 md:h-[calc(100vh-64px)] md:overflow-hidden md:px-5">
-              <div className="h-full w-full rounded-lg p-4 md:w-96">
+              <div className="h-full w-full rounded-lg p-4 md:w-96 md:px-0">
                 <div className="sticky top-0 flex items-center gap-4 text-white md:mt-5">
                   <Drawer
                     text="Moonbirds"
@@ -68,7 +68,7 @@ export default function HomePage() {
                   />
                 </div>
 
-                <div className="mt-5 hidden flex-1 px-4 md:block">
+                <div className="mt-5 hidden flex-1 px-4 md:block md:px-0">
                   <MoonBirdsFilterTraits />
                 </div>
               </div>

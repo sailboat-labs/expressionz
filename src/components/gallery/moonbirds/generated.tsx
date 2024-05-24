@@ -362,7 +362,7 @@ export default function MoonbirdGenerated({
                         onClick={() => {
                           downloadPfp(
                             `/images/moonbirds/tokens/${index}.png`,
-                            index,
+                            index + 1,
                           );
                         }}
                         className="w-fit cursor-pointer"
@@ -686,7 +686,7 @@ export default function MoonbirdGenerated({
 
       {/* Loading */}
       <MoonbirdsVideoLoader
-        show={false}
+        show={loading}
         progress={progress}
         // total={moonbirdEmojis.length}
         total={totalSizeOfGeneratedImages}

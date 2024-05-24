@@ -443,9 +443,12 @@ export default function GeneratedWizards({
                 </div>
 
                 <div className="flex-1 overflow-clip" ref={wrapperElement}>
-                  <div className={"grid grid-cols-3 gap-4"} style={{
-                    maxWidth: gridWrapperHeight - 66
-                  }}>
+                  <div
+                    className={"mx-auto grid grid-cols-3 gap-4"}
+                    style={{
+                      maxWidth: gridWrapperHeight - 66,
+                    }}
+                  >
                     {hasBg
                       ? generatedEmojis.map((emoji, i) => (
                           <GeneratedItem

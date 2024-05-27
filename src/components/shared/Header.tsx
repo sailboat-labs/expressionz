@@ -49,7 +49,9 @@ function Header({
 
   return (
     <>
-      <MobileMenu show={showMenu} setShow={setShowMenu} />
+      {!router.pathname.startsWith("/collections/wizards") && (
+        <MobileMenu show={showMenu} setShow={setShowMenu} />
+      )}
       <nav
         className={cn(
           "sticky top-0 !z-[100] h-16  font-presstart",
@@ -85,12 +87,14 @@ function Header({
             </div>
           )}
 
-          <div className="flex lg:hidden">
-            <IoMenu
-              className="h-8 w-8"
-              onClick={() => setShowMenu(!showMenu)}
-            />
-          </div>
+          {!router.pathname.startsWith("/collections/wizards") && (
+            <div className="flex lg:hidden">
+              <IoMenu
+                className="h-8 w-8"
+                onClick={() => setShowMenu(!showMenu)}
+              />
+            </div>
+          )}
         </div>
       </nav>
     </>

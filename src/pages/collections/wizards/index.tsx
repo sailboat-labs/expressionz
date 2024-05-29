@@ -3,8 +3,8 @@ import Drawer from "@/components/gallery/Drawer";
 import WizardsFilterTraits from "@/components/gallery/wizards/WizardsFilterTraits";
 import WizardsGallery from "@/components/gallery/wizards/WizardsGallery";
 import BaseLayout from "@/components/shared/BaseLayout";
-import Seo from "@/components/shared/Seo";
 import { cn } from "@/lib/misc.lib";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -13,7 +13,10 @@ export default function HomePage() {
 
   return (
     <>
-      <Seo title="TWOO" />
+      {/* <Seo title="TWOO" /> */}
+      <Head>
+        <title>TWOO</title>
+      </Head>
       <img
         src="/images/background.webp"
         className="fixed z-[1] h-screen w-screen object-cover"

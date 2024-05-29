@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sheet";
 
 import { cn } from "@/lib/misc.lib";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 type TDrawerProps = {
   text: string;
@@ -26,7 +27,7 @@ export default function Drawer({
     <div className="md:hidden">
       <Sheet>
         <SheetTrigger>
-          <div
+          <span
             className={cn(
               "mt-1 flex h-5 w-5 scale-150 cursor-pointer items-center justify-center rounded border  md:hidden",
               {
@@ -37,8 +38,8 @@ export default function Drawer({
               },
             )}
           >
-            <ion-icon name="menu-outline" role="icon"></ion-icon>
-          </div>
+            <HamburgerMenuIcon className="h-3 w-3" />
+          </span>
         </SheetTrigger>
         <SheetContent
           side={"left"}

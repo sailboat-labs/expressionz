@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 const useElementHeightMonitor = (element: HTMLElement | null) => {
-  const [height, setHeight] = useState(0);
+  const [height, setHeight] = useState(element?.clientHeight ?? 0);
 
   useEffect(() => {
-    if (element == null) return;
+    // if (element == null) return;
 
-    setHeight(element.clientHeight ?? 0);
+    setHeight(element?.clientHeight ?? 0);
 
     function handleWindowResize(evt: UIEvent) {
       if (element == null) return;

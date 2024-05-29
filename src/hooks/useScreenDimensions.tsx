@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 
 // Define a custom hook for getting the screen width
-function useScreenWidth() {
+function useScreenDimensions() {
   const [screenWidth, setScreenWidth] = useState<number>(0);
+  const [screenHeight, setScreenHeight] = useState<number>(0);
 
   useEffect(() => {
+    setScreenWidth(window.innerWidth);
+    setScreenHeight(window.innerHeight);
+
     function updateScreenWidth() {
       setScreenWidth(window.innerWidth);
+      setScreenHeight(window.innerHeight);
     }
 
     window.addEventListener("resize", updateScreenWidth);
@@ -16,7 +21,7 @@ function useScreenWidth() {
     };
   }, []);
 
-  return screenWidth;
+  return { screenWidth, screenHeight };
 }
 
-export default useScreenWidth;
+export default useScreenDimensions;

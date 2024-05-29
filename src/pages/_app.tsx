@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import "@rainbow-me/rainbowkit/styles.css";
+// import "@rainbow-me/rainbowkit/styles.css";
 import { Toaster } from "sonner";
 
 import type { AppProps } from "next/app";

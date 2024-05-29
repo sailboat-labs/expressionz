@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 // Define a custom hook for getting the screen width
 function useScreenWidth() {
-  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState<number>(0);
 
   useEffect(() => {
     function updateScreenWidth() {

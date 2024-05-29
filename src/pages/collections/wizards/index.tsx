@@ -13,7 +13,6 @@ export default function HomePage() {
 
   return (
     <>
-      {/* <Seo title="TWOO" /> */}
       <Head>
         <title>TWOO</title>
       </Head>

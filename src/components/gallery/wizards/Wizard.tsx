@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 
@@ -66,7 +65,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
         className="flex w-full cursor-pointer flex-col items-center p-2  md:ml-0 md:w-[11rem] "
       >
         <div className="bg-black bg-opacity-40 backdrop-blur-md">
-          <Image
+          <img
             height={2000}
             width={2000}
             alt="wizard image"

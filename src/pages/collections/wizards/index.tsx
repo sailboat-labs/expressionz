@@ -3,9 +3,8 @@ import Drawer from "@/components/gallery/Drawer";
 import WizardsFilterTraits from "@/components/gallery/wizards/WizardsFilterTraits";
 import WizardsGallery from "@/components/gallery/wizards/WizardsGallery";
 import BaseLayout from "@/components/shared/BaseLayout";
-import Seo from "@/components/shared/Seo";
 import { cn } from "@/lib/misc.lib";
-import Link from "next/link";
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 export default function HomePage() {
@@ -13,7 +12,9 @@ export default function HomePage() {
 
   return (
     <>
-      <Seo title="TWOO" />
+      <Head>
+        <title>TWOO</title>
+      </Head>
       <img
         src="/images/background.webp"
         className="fixed z-[1] h-screen w-screen object-cover"
@@ -23,17 +24,14 @@ export default function HomePage() {
         variant="logo"
         childrenClass="md:h-[calc(100vh-64px)] !font-pixelify-r"
         logo={
-          <Link
-            href="/collections"
-            className="flex items-center gap-2 text-base font-semibold"
-          >
+          <span className="flex items-center gap-2 text-base font-semibold">
             <img
               src="/images/logos/twoo-logo.png"
               className="h-10 w-10 rounded-full md:h-12 md:w-12 "
               alt="moon bird logo"
             />
             Wizards
-          </Link>
+          </span>
         }
       >
         <div className="relative z-[2] flex w-full font-pixelify-r">

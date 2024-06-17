@@ -15,7 +15,7 @@ import { emojis, shareIcons } from "@/lib/data";
 import { download, downloadImagesAsZip } from "@/lib/download.lib";
 
 import { GALLERY } from "@/data/gallery";
-import GeneratedItem from "@/components/shared/GeneratedItem";
+import GeneratedItem from "@/components/shared/GeneratedWizardItem";
 import DoneModal from "@/components/shared/DoneModal";
 import { WizardsLoader } from "@/components/WizardsLoader";
 import { createDiscordEmojiPack } from "@/http/discord.http";
@@ -55,6 +55,7 @@ export default function GeneratedWizards({
   const [hasBg, setHasBg] = useState(true);
 
   const [platform, setPlatform] = useState<EPlatform>(EPlatform.NONE);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const [packId, setPackId] = useState<string>("ABCDEFGHIJKL");
 
@@ -134,6 +135,10 @@ export default function GeneratedWizards({
     //   return;
     // }
 
+    setPlatform(EPlatform.NONE);
+
+    setIsDownloading(true);
+
     const selected = hasBg
       ? generatedEmojis.filter((_, i) => selectedEmojis.includes(i))
       : generatedEmojisTransparent.filter((_, i) => selectedEmojis.includes(i));
@@ -148,7 +153,12 @@ export default function GeneratedWizards({
       return;
     }
 
-    downloadImagesAsZip("wizard", selected, index);
+    await downloadImagesAsZip("wizard", selected, index);
+
+    setIsDownloading(false);
+    setPlatform(EPlatform.NONE);
+    setSelectedEmojis([]);
+    setSelectedType("");
   }
 
   async function exportStickers(platform: EPlatform) {
@@ -371,45 +381,68 @@ export default function GeneratedWizards({
             </div>
 
             <div className="h-full w-1/2 flex-1">
-              <div className=" flex h-full flex-col gap-2 pl-0 pr-3 lg:gap-1">
-                <div className="z-[2] mb-3 mt-8 flex h-fit items-center justify-between gap-4 2xl:gap-10">
-                  <div className="flex items-center gap-2">
-                    {shareIcons.map((messenger, i) => (
+              <div className=" flex h-full flex-col gap-2 pl-0 pr-3 lg:gap-0">
+                {/* Step 1 */}
+                <div className="z-[2] -mt-3 mb-2 flex h-fit items-center justify-between gap-4 2xl:gap-10">
+                  <div className="flex flex-1 flex-col items-center">
+                    <div className="flex-1 text-xl font-bold">
+                      Export your emojis
+                    </div>
+                    <div className="mb-1.5 mt-0.5">1. Pick where to export</div>
+                    <div className="flex items-center gap-2">
+                      {shareIcons.map((messenger, i) => (
+                        <ThemedIconButton
+                          key={i}
+                          wrapperClass="h-9 w-9"
+                          onClick={async () => {
+                            setSelectedEmojis([]);
+                            setSelectedType("");
+                            setIsDownloading(false);
+
+                            if (platform === messenger.platform)
+                              return setPlatform(EPlatform.NONE);
+
+                            setPlatform(messenger.platform);
+                          }}
+                          icon={
+                            <img
+                              src={
+                                platform == messenger.platform
+                                  ? messenger.active
+                                  : messenger.inactive
+                              }
+                              // className="h-full w-full"
+                              className={`${platform == messenger.platform ? "scale-110" : ""} h-full w-full`}
+                              alt={`${messenger.platform} icon`}
+                            />
+                          }
+                        />
+                      ))}
                       <ThemedIconButton
-                        key={i}
-                        wrapperClass="h-9 w-9"
-                        onClick={async () => {
+                        // onClick={downloadEmojis}
+                        onClick={() => {
                           setSelectedEmojis([]);
                           setSelectedType("");
-
-                          if (platform === messenger.platform)
-                            return setPlatform(EPlatform.NONE);
-
-                          setPlatform(messenger.platform);
+                          setPlatform(EPlatform.NONE);
+                          setIsDownloading(!isDownloading);
                         }}
+                        wrapperClass="h-9 w-9"
                         icon={
                           <img
                             src={
-                              platform == messenger.platform
-                                ? messenger.active
-                                : messenger.inactive
+                              isDownloading
+                                ? "/images/share/download-active.webp"
+                                : "/images/share/download-inactive.webp"
                             }
-                            className="h-full w-full"
-                            alt={`${messenger.platform} icon`}
+                            className={`${isDownloading ? "scale-110 " : " "} h-full w-full`}
+                            alt={`Download icon`}
                           />
                         }
                       />
-                    ))}
+                    </div>
                   </div>
 
-                  <div className=" flex-1">{getInstruction()}</div>
-
                   <div className="flex items-center gap-2">
-                    <ThemedIconButton
-                      onClick={downloadEmojis}
-                      variant="gold"
-                      icon={<ArrowDownIcon className="h-5 w-5" />}
-                    />
                     <ThemedIconButton
                       variant="gold"
                       onClick={() =>
@@ -420,28 +453,15 @@ export default function GeneratedWizards({
                   </div>
                 </div>
 
-                {/* Background */}
-                <div className="flex flex-row gap-3">
-                  <Switch
-                    checked={hasBg}
-                    onChange={(checked) => {
-                      setHasBg(checked);
-                    }}
-                    className={`${
-                      hasBg ? "bg-[#C1410B]" : "bg-[#FED7AA]"
-                    } relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[#C1410B] transition-colors`}
-                  >
-                    <span
-                      className={`${
-                        hasBg
-                          ? "translate-x-6 bg-[#FED7AA]"
-                          : "translate-x-1 bg-[#C1410B]"
-                      } inline-block h-4 w-4 transform rounded-full transition-transform`}
-                    />
-                  </Switch>
-                  <div className="text-base font-semibold">Background</div>
+                {/* Step 2 */}
+                <div className="mb-1">
+                  2. Pick your emojis{" "}
+                  {platform == EPlatform.TELEGRAM && (
+                    <span className="ml-2">
+                      (static or animated for Telegram)
+                    </span>
+                  )}
                 </div>
-
                 <div className="flex-1 overflow-clip" ref={wrapperElement}>
                   <div
                     className={"mx-auto grid grid-cols-3 gap-4"}
@@ -458,7 +478,7 @@ export default function GeneratedWizards({
                             platform={platform}
                             selected={selectedEmojis.includes(i)}
                             onSelect={() => onSelectEmojis(emoji, i)}
-                            selectEnabled={!!platform}
+                            selectEnabled={!!platform || isDownloading}
                           />
                         ))
                       : generatedEmojisTransparent.map((emoji, i) => (
@@ -475,31 +495,63 @@ export default function GeneratedWizards({
                   </div>
                 </div>
 
+                {/* Step 3 */}
                 <div
+                  style={{
+                    maxWidth: gridWrapperHeight,
+                  }}
                   className={cn(
-                    "mt-4 justify-center",
-                    platform ? "flex " : "invisible ",
+                    "mx-auto mt-3 flex h-12 w-full items-center justify-between",
                   )}
                 >
-                  <button
-                    className="h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
-                    onClick={() => exportEmojis()}
-                    disabled={isExportingStickers}
-                  >
-                    <img
-                      src={`/images/share/export-${
-                        selectedEmojis.length == 0 || isExportingStickers
-                          ? "pressed.webp"
-                          : "active.webp"
-                      }`}
-                      alt="Export button"
-                      className={`h-auto w-40 ${
-                        selectedEmojis.length == 0 || isExportingStickers
-                          ? "cursor-not-allowed"
-                          : "cursor-pointer"
-                      }`}
-                    />
-                  </button>
+                  {platform || isDownloading ? (
+                    <button
+                      className="h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
+                      onClick={() => {
+                        if (isDownloading) return downloadEmojis();
+
+                        exportEmojis();
+                      }}
+                      disabled={isExportingStickers}
+                    >
+                      <img
+                        src={`/images/share/export-${
+                          selectedEmojis.length == 0 || isExportingStickers
+                            ? "pressed.webp"
+                            : "active.webp"
+                        }`}
+                        alt="Export button"
+                        className={`h-auto w-36 ${
+                          selectedEmojis.length == 0 || isExportingStickers
+                            ? "cursor-not-allowed"
+                            : "cursor-pointer"
+                        }`}
+                      />
+                    </button>
+                  ) : (
+                    <div />
+                  )}
+                  {/* Background */}
+                  <div className="flex flex-row items-center gap-1">
+                    <Switch
+                      checked={hasBg}
+                      onChange={(checked) => {
+                        setHasBg(checked);
+                      }}
+                      className={`${
+                        hasBg ? "bg-[#C1410B]" : "bg-[#FED7AA]"
+                      } relative inline-flex h-5 w-9 items-center rounded-full border-2 border-[#C1410B] transition-colors`}
+                    >
+                      <span
+                        className={`${
+                          hasBg
+                            ? "translate-x-4 bg-[#FED7AA]"
+                            : "translate-x-0 bg-[#C1410B]"
+                        } inline-block h-4 w-4 transform rounded-full transition-transform`}
+                      />
+                    </Switch>
+                    <div className="text-base font-semibold">Background</div>
+                  </div>
                 </div>
               </div>
             </div>

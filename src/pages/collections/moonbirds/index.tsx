@@ -16,49 +16,36 @@ export default function HomePage() {
       <BaseLayout
         hideFooter
         variant="flexed-minimized"
-        childrenClass="md:h-[calc(100vh-64px)]"
+        childrenClass="max-h-[calc(100vh-64px)] overflow-y-auto"
+        wrapperClass=" bg-dark"
         logo={
           <Link
             href="/collections"
-            className="flex items-center gap-2 text-base font-semibold"
+            className="flex items-center gap-x-3 text-base font-semibold"
           >
             <img
               src="/images/moonbirds-logo.webp"
-              className="ml-2 h-12 w-12 rounded-full "
+              className="-ml-1 h-10 w-10 rounded-full md:h-12 md:w-12 "
               alt="moon bird logo"
             />
             Moonbirds
           </Link>
         }
       >
-        <div className=" bg-dark">
-          {/* <img
-        src="/images/background.webp"
-        className="fixed z-[1] h-screen w-screen object-cover"
-        alt="pixilated night time image"
-      /> */}
-          <div className="flex w-full font-pixelify-r">
-            <div className="z-[2] w-full gap-10 md:flex md:flex-row">
-              <div className="flex h-fit flex-col gap-5 overflow-hidden px-5 pb-5 md:h-[calc(100vh-64px)]">
-                <div className=" flex items-center gap-2 text-white">
-                  <Drawer text="Moonbirds" />
-                  {/* <Link
-                    href="/collections"
-                    className="flex items-center gap-2 font-semibold md:text-2xl"
-                  >
-                    <img
-                      src="/images/moonbirds-logo.webp"
-                      className="ml-2 h-12 w-12 rounded-full md:h-20 md:w-20"
-                      alt="moon bird logo"
-                    />
-                    Moonbirds
-                  </Link> */}
-                </div>
-                <div className="h-full w-full rounded-lg p-4 md:w-96">
+        <div className="flex w-full   font-pixelify-r">
+          <div className=" w-full gap-10 md:flex md:flex-row">
+            <div className="pb-5 md:h-[calc(100vh-64px)] md:overflow-hidden md:px-5">
+              <div className="h-full w-full rounded-lg p-4 md:w-96 md:px-0">
+                <div className="sticky top-0 flex items-center gap-4 text-white md:mt-5">
+                  <Drawer
+                    text="Moonbirds"
+                    filterBox={<MoonBirdsFilterTraits />}
+                    theme="purple"
+                  />
                   <input
                     value={router.query.search as string}
                     placeholder="Search for index..."
-                    className="w-full rounded-md border border-gray-200 px-5 text-black"
+                    className="flex-1 rounded-md border border-gray-200 px-5 text-black"
                     onChange={(e) => {
                       const search = e.target.value;
                       const urlParams = new URLSearchParams(
@@ -79,14 +66,15 @@ export default function HomePage() {
                       );
                     }}
                   />
-                  <div className="mt-5 hidden md:block">
-                    <MoonBirdsFilterTraits />
-                  </div>
+                </div>
+
+                <div className="mt-5 hidden flex-1 px-4 md:block md:px-0">
+                  <MoonBirdsFilterTraits />
                 </div>
               </div>
-
-              <MoonbirdsGallery />
             </div>
+
+            <MoonbirdsGallery />
           </div>
         </div>
       </BaseLayout>

@@ -1,7 +1,8 @@
+import { TGeneratorResponse } from "@/types/misc.type";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 import axios from "axios";
 
-export async function generateWizards(
+export async function generateWizardEmojis(
   payload: TWizardGeneratorAPIPayload,
   handleProgress: (loaded: number, total: number) => void,
 ) {
@@ -16,18 +17,21 @@ export async function generateWizards(
         },
       },
     );
+    let { colored, transparent } = response.data as TGeneratorResponse;
 
     console.log("Wizards API Response", response);
 
     return {
-      colored: response.data.colored ?? [],
-      transparent: response.data.transparent ?? [],
+      colored,
+      transparent,
     };
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error;
   }
 }
+
+
 
 // export async function generateWizardsEmojis(
 //   payload: TWizardGeneratorAPIPayload,

@@ -9,6 +9,7 @@ import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import Link from "next/link";
 import BaseLayout from "@/components/shared/BaseLayout";
+import { cn } from "@/lib/misc.lib";
 
 export default function MoonbirdPage() {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function MoonbirdPage() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `moonbird_${index}.webp`;
+    link.download = `moonbird_${index + 1}.webp`;
     link.click();
     URL.revokeObjectURL(url);
   }
@@ -60,7 +61,7 @@ export default function MoonbirdPage() {
           {[
             <React.Fragment key="left-item">
               {/* LEFT CONTENT */}
-              <div className="flex w-full flex-col items-center justify-center gap-5 pt-5">
+              <div className="flex w-full flex-col items-center justify-center gap-5 lg:pt-5">
                 <div className="flex w-full flex-1 items-center justify-between ">
                   <ThemedIconButton
                     className="text-2xl font-semibold"
@@ -93,14 +94,19 @@ export default function MoonbirdPage() {
                   </div>
                 </div>
 
-                <div className="relative mt-4 flex h-[320px] w-[320px] items-center justify-center lg:h-[21vw] lg:w-[21vw]">
+                <div
+                  className={cn(
+                    " relative mt-4 flex items-center justify-center",
+                    "h-[320px] max-h-[450px] w-[320px] max-w-[450px]  lg:h-[21vw] lg:w-[21vw]",
+                  )}
+                >
                   <img
                     src={`/images/moonbirds/tokens/${index}.png`}
-                    className="h-[274px] w-[274px] rounded lg:h-[18vw] lg:w-[18vw]"
+                    className="absolute inset-0 h-full w-full scale-90"
                   />
                   <img
                     src="/images/moonbird-frame.webp"
-                    className="absolute top-0 rounded"
+                    className="absolute inset-0 h-full w-full"
                   />
                 </div>
                 <div className="mb-5 mt-2 flex flex-col items-center gap-5 md:flex md:gap-4">
@@ -134,7 +140,7 @@ export default function MoonbirdPage() {
             </React.Fragment>,
             <React.Fragment key="right-item">
               {/* RIGHT CONTENT */}
-              <div className="mt-5  flex flex-col gap-2 pr-5 font-pixelify-r">
+              <div className="mt-5  flex flex-col gap-2 font-pixelify-r sm:pr-5">
                 <div className="z-[2] mb-3 flex h-fit items-center justify-between">
                   <div className="flex w-full items-center justify-between">
                     <span className="font-pixelify-b  text-white  md:text-lg xl:text-2xl">

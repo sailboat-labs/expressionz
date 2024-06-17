@@ -15,7 +15,7 @@ import { emojis, shareIcons } from "@/lib/data";
 import { download, downloadImagesAsZip } from "@/lib/download.lib";
 
 import { GALLERY } from "@/data/gallery";
-import GeneratedItem from "@/components/shared/GeneratedWizardItem";
+import GeneratedItem from "@/components/shared/GeneratedItem";
 import DoneModal from "@/components/shared/DoneModal";
 import { WizardsLoader } from "@/components/WizardsLoader";
 import { createDiscordEmojiPack } from "@/http/discord.http";

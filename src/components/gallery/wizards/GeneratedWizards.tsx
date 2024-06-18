@@ -646,7 +646,7 @@ export default function GeneratedWizards({
 
           {/* Share and download icons */}
           <div className="flex w-full items-center justify-between">
-            <div className="my-5 flex items-center justify-between gap-3">
+            <div className="my-5 flex items-center justify-between gap-3 pl-1">
               {shareIcons.map((messenger, i) => (
                 <ThemedIconButton
                   key={i}

@@ -641,47 +641,69 @@ export default function GeneratedWizards({
             </div>
           </div>
 
+          <div className="mt-5 text-xl font-bold">Export your emojis</div>
+          <div className="mt-0.5">1. Pick where to export</div>
+
           {/* Share and download icons */}
-          <div className="mt-5 flex w-full items-center justify-between">
-            <div className="flex items-center justify-between gap-3">
+          <div className="flex w-full items-center justify-between">
+            <div className="my-5 flex items-center justify-between gap-3">
               {shareIcons.map((messenger, i) => (
-                <button
+                <ThemedIconButton
                   key={i}
-                  className="h-9 w-9 cursor-pointer"
+                  wrapperClass="h-9 w-9"
                   onClick={async () => {
                     setSelectedEmojis([]);
                     setSelectedType("");
+                    setIsDownloading(false);
 
-                    if (platform === messenger.platform) {
-                      setPlatform(EPlatform.NONE);
-                      return;
-                    }
+                    if (platform === messenger.platform)
+                      return setPlatform(EPlatform.NONE);
 
                     setPlatform(messenger.platform);
                   }}
-                >
+                  icon={
+                    <img
+                      src={
+                        platform == messenger.platform
+                          ? messenger.active
+                          : messenger.inactive
+                      }
+                      // className="h-full w-full"
+                      className={`${platform == messenger.platform ? "scale-110" : ""} h-full w-full`}
+                      alt={`${messenger.platform} icon`}
+                    />
+                  }
+                />
+              ))}
+              <ThemedIconButton
+                // onClick={downloadEmojis}
+                onClick={() => {
+                  setSelectedEmojis([]);
+                  setSelectedType("");
+                  setPlatform(EPlatform.NONE);
+                  setIsDownloading(!isDownloading);
+                }}
+                wrapperClass="h-9 w-9"
+                icon={
                   <img
                     src={
-                      platform == messenger.platform
-                        ? messenger.active
-                        : messenger.inactive
+                      isDownloading
+                        ? "/images/share/download-active.webp"
+                        : "/images/share/download-inactive.webp"
                     }
-                    className="h-full w-full"
-                    alt={`${messenger.platform} icon`}
+                    className={`${isDownloading ? "scale-110 " : " "} h-full w-full`}
+                    alt={`Download icon`}
                   />
-                </button>
-              ))}
+                }
+              />
             </div>
-            <button
-              onClick={downloadEmojis}
-              className="ml-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 border-orange-700 bg-orange-200 text-orange-700"
-            >
-              <ArrowDownIcon className="h-5 w-5" />
-            </button>
           </div>
 
+          {/* Step 2 */}
+          <div className="mb-1 mt-3">2. Pick your emojis</div>
+
           {/* Background */}
-          <div className=" mt-4 flex flex-row gap-3">
+          <div className="mb-2 mt-4 flex flex-row gap-3">
             <Switch
               checked={hasBg}
               onChange={(checked) => {
@@ -702,8 +724,6 @@ export default function GeneratedWizards({
             <div className="text-sm font-semibold">Background</div>
           </div>
 
-          <div className="mt-2 text-left">{getInstruction()}</div>
-
           {/* Generated Emojis */}
           <div className="pb-5">
             <div className="mt-4 grid grid-cols-3 place-items-center gap-4">
@@ -716,7 +736,7 @@ export default function GeneratedWizards({
                       selectedType={selectedType}
                       selected={selectedEmojis.includes(i)}
                       onSelect={() => onSelectEmojis(emoji, i)}
-                      selectEnabled={!!platform}
+                      selectEnabled={!!platform || isDownloading}
                     />
                   ))
                 : generatedEmojisTransparent.map((emoji, i) => (
@@ -727,20 +747,24 @@ export default function GeneratedWizards({
                       selectedType={selectedType}
                       selected={selectedEmojis.includes(i)}
                       onSelect={() => onSelectEmojis(emoji, i)}
-                      selectEnabled={!!platform}
+                      selectEnabled={!!platform || isDownloading}
                     />
                   ))}
             </div>
 
             <div
               className={`
-                  ${platform ? "flex" : "hidden"}
+                  ${platform || isDownloading ? "flex" : "hidden"}
                   mt-5 justify-center
                   `}
             >
               <button
                 className="relative h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
-                onClick={() => exportEmojis()}
+                onClick={() => {
+                  if (isDownloading) return downloadEmojis();
+
+                  exportEmojis();
+                }}
                 disabled={isExportingStickers}
               >
                 <img
@@ -756,11 +780,6 @@ export default function GeneratedWizards({
                       : "cursor-pointer"
                   }`}
                 />
-                {/* {isExportingStickers && (
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                      <LiaSpinnerSolid className="h-5 w-5 animate-spin" />
-                    </div>
-                  )} */}
               </button>
             </div>
           </div>

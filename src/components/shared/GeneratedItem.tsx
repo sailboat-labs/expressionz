@@ -22,22 +22,6 @@ export default function GeneratedItem({
   platform: string;
   selectEnabled: boolean;
 }) {
-  // useEffect(() => {
-  //   getSource();
-  // }, [item]);
-
-  // const [src, setSrc] = useState("");
-
-  // const getSource = () => {
-  //   if (item.type === "gif") {
-  //     const src = gifArrayBufferToBase64(item.image?.data ?? []);
-  //     setSrc(src);
-  //   } else {
-  //     const src = arrayBufferToBase64(item.image?.data ?? []);
-  //     setSrc(src);
-  //   }
-  // };
-
   const src =
     item.type === "gif"
       ? gifArrayBufferToBase64(item.image?.data ?? [])
@@ -45,11 +29,20 @@ export default function GeneratedItem({
 
   return (
     <motion.div
-      whileHover={{ scale: platform == "" ? 1 : 1.05 }}
+      whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 1 }}
-      className={cn("h-fit w-fit pt-5 text-white", {
-        " cursor-pointer": platform !== "",
-      })}
+      className={cn(
+        "h-fit w-fit pt-5 text-white ",
+        `${!selectEnabled ? "opacity-60" : "opacity-100"}`,
+        `${
+          platform == "telegram" && selectedType && item.type !== selectedType
+            ? "opacity-60"
+            : ""
+        }`,
+        {
+          " cursor-pointer": platform !== "",
+        },
+      )}
     >
       <div
         className="relative "
@@ -69,49 +62,44 @@ export default function GeneratedItem({
             />
           </div>
         </div>
-        {/* Option to select */}
-        <div
-          className={`
-            ${selectEnabled ? "invisible " : "hidden "}
-            absolute left-0 top-0 z-50 
-          `}
-        >
-          <input
-            type="checkbox"
-            name="selected"
-            id="selected"
-            // className="h-4 w-4"
-            checked={selected}
-            onChange={() => onSelect()}
-          />
-        </div>
-        <div className="relative h-fit w-fit overflow-clip rounded-md ">
+
+        <div className="relative h-full w-full overflow-clip rounded-md ">
           <Image
             src={src}
             alt="Generated emoji"
-            className="h-full w-full  object-cover"
+            className={`${selected ? "p-0.5" : ""} h-full w-full object-cover rounded-md`}
             width={176}
             height={176}
           />
-          <div
-            className={cn("absolute inset-0 bg-black bg-opacity-0", {
-              "bg-opacity-50": platform !== "" && !selected,
+          <Image
+            src="/images/frame.webp"
+            alt="Wizard frame"
+            className={cn("absolute top-0 hidden rounded ", {
+              " flex": selected,
             })}
-          ></div>
+            width={180}
+            height={180}
+          />
         </div>
 
-        {/* Grey overlay  */}
-        {platform == "telegram" && (
-          <div
-            className={`absolute top-0 h-full w-full rounded-md bg-black bg-opacity-50 object-cover ${
-              selectedType
-                ? item.type === selectedType
-                  ? "hidden"
-                  : "flex"
-                : "hidden"
-            }`}
-          ></div>
-        )}
+        {/* <div className="relative h-fit w-fit overflow-clip rounded-md ">
+          <Image
+            src={src}
+            alt="Generated emoji"
+            className="h-full w-full object-cover"
+            width={176}
+            height={176}
+          />
+          <Image
+            src="/images/frame.webp"
+            alt="Wizard frame"
+            className={cn("absolute top-0 hidden rounded ", {
+              " flex": selected,
+            })}
+            width={180}
+            height={180}
+          />
+        </div> */}
       </div>
     </motion.div>
   );

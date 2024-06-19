@@ -700,7 +700,12 @@ export default function GeneratedWizards({
           </div>
 
           {/* Step 2 */}
-          <div className="mb-1 mt-3">2. Pick your emojis</div>
+          <div className="mb-1 mt-3">
+            2. Pick your emojis{" "}
+            {platform == EPlatform.TELEGRAM && (
+              <span className="ml-2">(static or animated for Telegram)</span>
+            )}
+          </div>
 
           {/* Background */}
           <div className="mb-2 mt-4 flex flex-row gap-3">

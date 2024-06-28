@@ -13,7 +13,7 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 type TDrawerProps = {
   text: string;
   logo?: string;
-  theme?: "brown" | "purple";
+  theme?: string;
   filterBox: React.ReactNode;
 };
 

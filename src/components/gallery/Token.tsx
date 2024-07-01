@@ -41,7 +41,7 @@ export default function Token({
     <>
       <motion.button
         onClick={() => {
-          router.push(`/collections/tokens/${token.id}`);
+          router.push(`/collections/${collection}/${token.id}`);
         }}
         whileTap={{ scale: 0.9 }}
         className="flex w-full cursor-pointer flex-col items-center p-2  md:ml-0 md:w-[11rem] "
@@ -80,7 +80,7 @@ export default function Token({
               >
                 <img
                   className="h-5 w-5 cursor-pointer rounded-md"
-                  src="/images/logos/MELOGO.png"
+                  src="/images/melogo.webp"
                   alt="ME logo"
                 />
               </a>

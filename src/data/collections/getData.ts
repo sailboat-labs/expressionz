@@ -10,7 +10,6 @@ export function getCollectionInfo(collection: string) {
         collectionId: collection,
         title: "Moonbirds",
         collectionName: "Moonbirds",
-        logo: "/images/moonbirds-logo.webp",
         theme: "violet",
         background: "",
         imageType: "png",
@@ -19,6 +18,8 @@ export function getCollectionInfo(collection: string) {
         showMagicEden: true,
         showOrdinals: true,
         showTokenNumber: true,
+        renderScroll: false,
+        showInscription: true,
       };
 
     default:
@@ -27,14 +28,15 @@ export function getCollectionInfo(collection: string) {
         title: "TWOO",
         theme: "orange",
         collectionName: "Wizards",
-        logo: "/images/logos/twoo-logo.png",
-        background: "/images/background.webp",
+        background: "/images/collections/wizards/background.webp",
         imageType: "webp",
         gallery: WIZARDS,
         filterTraits: WIZARDS_FILTER_TRAITS,
         showMagicEden: true,
         showOrdinals: true,
         showTokenNumber: true,
+        renderScroll: true,
+        showInscription: false,
       };
   }
 }

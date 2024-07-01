@@ -49,7 +49,7 @@ export default function GalleryPage() {
         logo={
           <span className="flex items-center gap-2 text-base font-semibold">
             <img
-              src={collectionInfo.logo}
+              src={`/images/collections/${collectionInfo.collectionId}/logo.webp`}
               className="h-10 w-10 rounded-full md:h-12 md:w-12 "
               alt="collection logo"
             />

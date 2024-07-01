@@ -144,7 +144,7 @@ export default function GalleryImage({
                       >
                         <img
                           className="h-8 w-8 cursor-pointer rounded-md"
-                          src="/images/MELOGO.png"
+                          src="/images/melogo.webp"
                         />
                       </button>
                       <button
@@ -215,7 +215,6 @@ export default function GalleryImage({
                       </p>
                     </motion.button>
                   </div>
-                 
                 </div>
               </div>
             </div>
@@ -340,7 +339,7 @@ export default function GalleryImage({
                 >
                   <img
                     className="h-8 w-8 cursor-pointer rounded-md"
-                    src="/images/MELOGO.png"
+                    src="/images/melogo.webp"
                   />
                 </button>
               </div>
@@ -498,7 +497,7 @@ export default function GalleryImage({
                   >
                     <img
                       className="h-8 w-8 cursor-pointer rounded-md"
-                      src="/images/MELOGO.png"
+                      src="/images/melogo.webp"
                     />
                   </button>
                 </div>

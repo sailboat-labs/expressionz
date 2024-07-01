@@ -15,11 +15,11 @@ export function getCollectionInfo(collection: string) {
         imageType: "png",
         gallery: MOONBIRDS,
         filterTraits: MOONBIRD_FILTER_TRAITS,
-        showMagicEden: true,
-        showOrdinals: true,
+        showMagicEden: false,
+        showOrdinals: false,
         showTokenNumber: true,
         renderScroll: false,
-        showInscription: true,
+        showInscription: false,
       };
 
     default:
@@ -36,7 +36,7 @@ export function getCollectionInfo(collection: string) {
         showOrdinals: true,
         showTokenNumber: true,
         renderScroll: true,
-        showInscription: false,
+        showInscription: true,
       };
   }
 }

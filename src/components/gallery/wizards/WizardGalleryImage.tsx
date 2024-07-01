@@ -102,7 +102,9 @@ export default function GalleryImage({
                       <button
                         className="w-fit cursor-pointer"
                         onClick={() => {
-                          router.push(`/collections/wizards/${wizard.id}/generated`);
+                          router.push(
+                            `/collections/wizards/${wizard.id}/generated`,
+                          );
                         }}
                       >
                         <img
@@ -253,18 +255,18 @@ export default function GalleryImage({
           <div className="flex flex-col items-center">
             <div className="relative flex h-[50vw] w-[50vw] items-center justify-center">
               <img
-                src={`/images/collection/wizards/tokens/${index}.webp`}
+                src={`/images/collections/wizards/tokens/${index}.webp`}
                 className="h-[45vw] w-[45vw] rounded"
               />
               <img
-                src="/images/collection/wizards/token-frame.webp"
+                src="/images/collections/wizards/token-frame.webp"
                 className="absolute top-0 rounded"
               />
             </div>
             <div className="mb-5 mt-10 flex flex-col items-center gap-5 md:flex md:gap-4">
               <button
                 onClick={() => {
-                  download(`/images/collection/wizards/tokens/${index}.webp`);
+                  download(`/images/collections/wizards/tokens/${index}.webp`);
                 }}
                 className="w-fit cursor-pointer"
               >
@@ -276,7 +278,10 @@ export default function GalleryImage({
                   router.push(`${wizard.id}/generated`);
                 }}
               >
-                <img src="/images/buttons/generate-btn.webp" className="w-44" />
+                <img
+                  src="/images/collections/wizards/generate-btn.webp"
+                  className="w-44"
+                />
               </button>
             </div>
           </div>
@@ -335,7 +340,7 @@ export default function GalleryImage({
                 >
                   <img
                     className="h-8 w-8 cursor-pointer rounded-md"
-                    src="/images/MELOGO.png"
+                    src="/images/melogo.webp"
                   />
                 </button>
               </div>

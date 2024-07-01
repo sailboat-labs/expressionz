@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import FilterTraits from "@/components/gallery/filter_traits";
 import Gallery from "@/components/gallery/Gallery";
 
-export default function Gallery() {
+export default function GalleryPage() {
   const router = useRouter();
   const { collectionId } = router.query;
 

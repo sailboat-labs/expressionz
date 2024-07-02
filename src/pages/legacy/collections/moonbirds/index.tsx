@@ -24,7 +24,7 @@ export default function HomePage() {
             className="flex items-center gap-x-3 text-base font-semibold"
           >
             <img
-              src="/images/moonbirds-logo.webp"
+              src="/images/collections/moonbirds/logo.webp"
               className="-ml-1 h-10 w-10 rounded-full md:h-12 md:w-12 "
               alt="moon bird logo"
             />

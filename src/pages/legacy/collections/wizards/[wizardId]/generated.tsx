@@ -15,7 +15,7 @@ function Generated() {
     <>
       <Seo title="Emojis" />
       <img
-        src="/images/background.png"
+        src="/images/collections/wizards/background.webp"
         className="fixed z-[1] h-screen w-screen object-cover"
       />
 

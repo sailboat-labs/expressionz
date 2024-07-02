@@ -37,7 +37,7 @@ export default function Moonbird({
         width={2000}
         alt="moonbird image"
         loading="lazy"
-        src={`/images/moonbirds/tokens/${index}.png`}
+        src={`/images/collections/moonbirds/tokens/${index}.png`}
         className="w-[40vw] rounded-md object-contain md:h-[10rem] md:w-[12rem]"
       />
       {/* <div className="flex w-[40vw] items-center justify-between rounded-b-md bg-orange-100 p-2 md:w-full">

@@ -16,7 +16,7 @@ export default function HomePage() {
         <title>TWOO</title>
       </Head>
       <img
-        src="/images/background.webp"
+        src="/images/collections/wizards/background.webp"
         className="fixed z-[1] h-screen w-screen object-cover"
       />
       <BaseLayout

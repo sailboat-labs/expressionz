@@ -70,7 +70,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
             width={2000}
             alt="wizard image"
             loading="lazy"
-            src={`/images/gallery/${index}.webp`}
+            src={`/images/collections/wizards/tokens/${index}.webp`}
             className="w-[40vw] rounded-t-md  object-contain md:h-[10rem] md:w-[12rem]"
           />
         </div>

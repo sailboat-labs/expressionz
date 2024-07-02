@@ -15,7 +15,7 @@ export default function WizardPage() {
     <>
       <Seo title={`${wizard?.meta.name}`} />
       <img
-        src="/images/background.png"
+        src="/images/collections/wizards/background.webp"
         className="fixed z-[1] h-screen w-screen object-cover"
       />
       <BaseLayout

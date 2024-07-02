@@ -70,7 +70,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
             width={2000}
             alt="wizard image"
             loading="lazy"
-            src={`/images/gallery/${index}.webp`}
+            src={`/images/collections/wizards/tokens/${index}.webp`}
             className="w-[40vw] rounded-t-md  object-contain md:h-[10rem] md:w-[12rem]"
           />
         </div>
@@ -93,7 +93,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
             >
               <img
                 className="h-5 w-5 cursor-pointer rounded-md"
-                src="/images/logos/MELOGO.png"
+                src="/images/logos/melogo.webp"
                 alt="me logo"
               />
             </a>
@@ -215,7 +215,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
                                 >
                                   <img
                                     className="h-8 w-8 cursor-pointer rounded-md"
-                                    src="/images/MELOGO.png"
+                                    src="/images/melogo.webp"
                                   />
                                 </button>
                               </div>
@@ -309,7 +309,7 @@ export default function Wizard({ wizard, index }: Readonly<TWizardProps>) {
                             >
                               <img
                                 className="h-8 w-8 cursor-pointer rounded-md"
-                                src="/images/MELOGO.png"
+                                src="/images/melogo.webp"
                                 alt="me logo"
                               />
                             </button>

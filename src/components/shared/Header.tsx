@@ -9,7 +9,7 @@ import Collections from "./CollectionsDropdown";
 import { cn } from "@/lib/misc.lib";
 
 export type THeaderProps = {
-  variant?: "base" | "flexed-minimized" | "logo";
+  variant?: string;
   showBack?: boolean;
   logo?: React.ReactNode;
   transparentBackground?: boolean;

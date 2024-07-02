@@ -51,7 +51,7 @@ export default function GalleryImage({
       <div className=" inset-0 hidden scale-90 items-center justify-center overflow-y-auto lg:flex">
         <div className=" hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
           <Image
-            src="/images/desktop_wizard_background.webp"
+            src="/images/collections/wizards/desktop-bg.webp"
             className="absolute h-[40vw] w-[40vw] rounded-t-md md:h-full md:w-full"
             height={2000}
             width={2000}
@@ -80,18 +80,20 @@ export default function GalleryImage({
 
                     <div className="relative flex h-[18vw] w-[18vw] items-center justify-center">
                       <img
-                        src={`/images/gallery/${index}.webp`}
+                        src={`/images/collections/wizards/tokens/${index}.webp`}
                         className=" h-[15vw] w-[15vw] rounded"
                       />
                       <img
-                        src="/images/frame.webp"
+                        src="/images/collections/wizards/token-frame.webp"
                         className="absolute top-0 rounded"
                       />
                     </div>
                     <div className="mb-5 mt-2 flex flex-col items-center gap-5 md:flex md:gap-4">
                       <button
                         onClick={() => {
-                          download(`/images/gallery/${index}.webp`);
+                          download(
+                            `/images/collection/wizards/tokens/${index}.webp`,
+                          );
                         }}
                         className="w-fit cursor-pointer"
                       >
@@ -100,12 +102,13 @@ export default function GalleryImage({
                       <button
                         className="w-fit cursor-pointer"
                         onClick={() => {
-                          router.push(`${wizard.id}/generated`);
+                          router.push(
+                            `/collections/wizards/${wizard.id}/generated`,
+                          );
                         }}
                       >
                         <img
                           src="/images/buttons/generate-btn.webp"
-                          // src="/images/generate-btn.webp"
                           className="w-48"
                         />
                       </button>
@@ -144,7 +147,7 @@ export default function GalleryImage({
                       >
                         <img
                           className="h-8 w-8 cursor-pointer rounded-md"
-                          src="/images/MELOGO.png"
+                          src="/images/melogo.webp"
                         />
                       </button>
                       <button
@@ -208,14 +211,12 @@ export default function GalleryImage({
                         scale: 0.8,
                       }}
                     >
-                      {/* <img src="/images/copy.webp" className="h-6 w-6" /> */}
                       <IoCopyOutline className="h-5 w-5" />
                       <p className="block  flex-1 truncate uppercase sm:max-w-xs">
                         #{wizard.id}
                       </p>
                     </motion.button>
                   </div>
-                 
                 </div>
               </div>
             </div>
@@ -254,18 +255,18 @@ export default function GalleryImage({
           <div className="flex flex-col items-center">
             <div className="relative flex h-[50vw] w-[50vw] items-center justify-center">
               <img
-                src={`/images/gallery/${index}.webp`}
+                src={`/images/collections/wizards/tokens/${index}.webp`}
                 className="h-[45vw] w-[45vw] rounded"
               />
               <img
-                src="/images/frame.webp"
+                src="/images/collections/wizards/token-frame.webp"
                 className="absolute top-0 rounded"
               />
             </div>
             <div className="mb-5 mt-10 flex flex-col items-center gap-5 md:flex md:gap-4">
               <button
                 onClick={() => {
-                  download(`/images/gallery/${index}.webp`);
+                  download(`/images/collections/wizards/tokens/${index}.webp`);
                 }}
                 className="w-fit cursor-pointer"
               >
@@ -278,8 +279,7 @@ export default function GalleryImage({
                 }}
               >
                 <img
-                  src="/images/buttons/generate-btn.webp"
-                  // src="/images/generate-btn.webp"
+                  src="/images/collections/wizards/generate-btn.webp"
                   className="w-44"
                 />
               </button>
@@ -340,7 +340,7 @@ export default function GalleryImage({
                 >
                   <img
                     className="h-8 w-8 cursor-pointer rounded-md"
-                    src="/images/MELOGO.png"
+                    src="/images/melogo.webp"
                   />
                 </button>
               </div>
@@ -368,164 +368,6 @@ export default function GalleryImage({
           </div>
         </div>
       </ScrollTokenFrame>
-      {/* Mobile */}
-      {/* <div className=" inset-0 block h-[calc(100vh-64px)] w-screen  overflow-y-hidden lg:hidden">
-        <div className="relative flex h-full w-full transform flex-col items-center justify-center gap-3 overflow-auto rounded p-3 text-left align-middle transition-all ">
-          <Image
-            src="/images/mobile_wizard_background.webp"
-            className="absolute h-full w-full rounded-t-md md:h-full md:w-full"
-            height={1000}
-            width={1000}
-            alt="Wizard Background"
-            loading="eager"
-          />
-
-          <div className="z-2 absolute top-6 flex w-4/5 items-center justify-between px-3">
-            <div className="mt-0 text-xl font-semibold">Wizard #{index}</div>
-            <div className="flex items-center gap-5">
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(
-                    `https://twoo.expressionz.xyz/?id=${wizard.id}`,
-                  );
-                  toast.success("Copied link to clipboard");
-                }}
-                className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
-              >
-                <ion-icon name="share-social"></ion-icon>
-              </button>
-              <button
-                onClick={() => goToPreviousPage()}
-                className="ml-1 flex  h-5 w-5 scale-150 cursor-pointer items-center justify-center  rounded border border-orange-700 bg-orange-200 text-orange-700"
-              >
-                <ion-icon name="close"></ion-icon>
-              </button>
-            </div>
-          </div>
-
-          <div className="absolute z-[2] h-[60vh] w-[75vw] overflow-auto">
-
-            <div className="flex flex-col items-center">
-              <div className="relative flex h-[50vw] w-[50vw] items-center justify-center">
-                <img
-                  src={`/images/gallery/${index}.webp`}
-                  className="h-[45vw] w-[45vw] rounded"
-                />
-                <img
-                  src="/images/frame.webp"
-                  className="absolute top-0 rounded"
-                />
-              </div>
-              <div className="mb-5 mt-10 flex flex-col items-center gap-5 md:flex md:gap-4">
-                <button
-                  onClick={() => {
-                    download(`/images/gallery/${index}.webp`);
-                  }}
-                  className="w-fit cursor-pointer"
-                >
-                  <img src="/images/download_pfp.webp" className="w-44" />
-                </button>
-                <button
-                  className="w-fit cursor-pointer"
-                  onClick={() => {
-                    router.push(`${wizard.id}/generated`);
-                  }}
-                >
-                  <img
-                    src="/images/buttons/generate-btn.webp"
-                    // src="/images/generate-btn.webp"
-                    className="w-44"
-                  />
-                </button>
-              </div>
-            </div>
-
-
-            <div className="mt-5 flex flex-col gap-2 px-5">
-              <div className="z-[2] mb-3 flex h-fit items-center justify-between gap-3">
-                <div className="flex w-full items-center justify-between">
-                  <span className="text-xl font-bold text-[#3E1600]">
-                    Traits
-                  </span>
-                </div>
-              </div>
-              <div className="grid  gap-2">
-                {wizard.meta.attributes.map((attribute, index) => (
-                  <div
-                    key={attribute.trait_type}
-                    className="flex gap-2 rounded-md bg-white bg-opacity-40 p-2"
-                  >
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white">
-                      <img
-                        src={`/images/attribute-icons/${attribute.trait_type}.webp`}
-                        className="h-8 w-8 object-contain"
-                      />
-                    </div>
-
-                    <div className="flex-1">
-                      <div className={cn("")}>{attribute.trait_type}</div>
-                      <div className=" font-bold">{attribute.value}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-
-            <div className="mt-5 px-5">
-              <div className="flex items-center justify-between">
-                <span className="text-xl font-bold">Inscription ID</span>
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => {
-                      window.open(
-                        `https://ordinals.com/inscription/${wizard.id}`,
-                        "_blank",
-                      );
-                    }}
-                    className="cursor-pointer rounded-full border-2 border-black p-1"
-                  >
-                    <div className="h-5 w-5 rounded-full bg-black"></div>
-                  </button>
-                  <button
-                    className="h-fit w-fit"
-                    onClick={() => {
-                      window.open(
-                        `https://magiceden.io/ordinals/item-details/${wizard.id}`,
-                        "_blank",
-                      );
-                    }}
-                  >
-                    <img
-                      className="h-8 w-8 cursor-pointer rounded-md"
-                      src="/images/MELOGO.png"
-                    />
-                  </button>
-                </div>
-              </div>
-              <div className="mt-3 flex items-center gap-2">
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(wizard.id);
-                    toast.success("Copied to clipboard");
-                  }}
-                  className="w-fit cursor-pointer rounded-md px-2 text-lg text-orange-500 transition-all"
-                >
-
-                  <img src="/images/copy.webp" className="h-6 w-6" />
-                </button>
-                <div className="block text-lg font-semibold uppercase lg:hidden">{`#${wizard.id.slice(
-                  0,
-                  15,
-                )}...${wizard.id.slice(
-                  wizard.id.length - 5,
-                  wizard.id.length,
-                )}`}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 }

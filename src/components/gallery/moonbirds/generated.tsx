@@ -278,11 +278,11 @@ export default function MoonbirdGenerated({
         wrapperClass="bg-dark"
         logo={
           <Link
-            href={`/collections/moonbirds/${moonbird.id}`}
+            href={`/legacy/collections/moonbirds/${moonbird.id}`}
             className="flex items-center gap-2 text-base font-semibold"
           >
             <img
-              src="/images/moonbirds-logo.webp"
+              src="/images/collections/moonbirds/logo.webp"
               className="ml-2 h-12 w-12 rounded-full "
               alt="moon bird logo"
             />
@@ -348,11 +348,11 @@ export default function MoonbirdGenerated({
                       )}
                     >
                       <img
-                        src={`/images/moonbirds/tokens/${index}.png`}
+                        src={`/images/collections/moonbirds/tokens/${index}.png`}
                         className="absolute inset-0 h-full w-full scale-90"
                       />
                       <img
-                        src="/images/moonbird-frame.webp"
+                        src="/images/collections/moonbirds/token-frame.webp"
                         className="absolute inset-0 h-full w-full"
                       />
                     </div>

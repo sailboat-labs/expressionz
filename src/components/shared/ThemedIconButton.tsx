@@ -7,7 +7,7 @@ type TThemedIconButtonProps = {
   icon: React.ReactNode;
   theme?: TIconButtonTheme;
   wrapperClass?: string;
-  variant?: "violet" | "gold" | "custom";
+  variant?: string;
 } & Omit<ComponentPropsWithoutRef<"button">, "children">;
 
 type TIconButtonTheme = {
@@ -42,6 +42,9 @@ const ThemedIconButton = ({
             "border-2 border-[#BDBCFF] bg-[#6765A7] text-white",
           ],
           variant === "gold" && [
+            "border-2 border-orange-700 bg-orange-200 text-orange-700",
+          ],
+          variant === "orange" && [
             "border-2 border-orange-700 bg-orange-200 text-orange-700",
           ],
           className,

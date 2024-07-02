@@ -92,7 +92,8 @@ export default function GalleryImage({
                             ${theme == "orange" && " text-black"}
                         `}
                       >
-                        {collection} #{index}
+                        {collection} #
+                        {collection.toLowerCase() == "wizards" ? index : index + 1}
                       </div>
                     </div>
 

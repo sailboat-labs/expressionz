@@ -72,7 +72,7 @@ export default function GeneratedItem({
             height={176}
           />
           <Image
-            src="/images/frame.webp"
+            src="/images/collections/wizards/token-frame.webp"
             alt="Wizard frame"
             className={cn("absolute top-0 hidden rounded ", {
               " flex": selected,
@@ -81,25 +81,6 @@ export default function GeneratedItem({
             height={180}
           />
         </div>
-
-        {/* <div className="relative h-fit w-fit overflow-clip rounded-md ">
-          <Image
-            src={src}
-            alt="Generated emoji"
-            className="h-full w-full object-cover"
-            width={176}
-            height={176}
-          />
-          <Image
-            src="/images/frame.webp"
-            alt="Wizard frame"
-            className={cn("absolute top-0 hidden rounded ", {
-              " flex": selected,
-            })}
-            width={180}
-            height={180}
-          />
-        </div> */}
       </div>
     </motion.div>
   );

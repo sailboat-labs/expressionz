@@ -59,7 +59,11 @@ export default function Token({
         <div
           className={`flex w-[40vw] justify-between rounded-b-md p-2 md:w-full ${theme == "violet" && " bg-violet-200"} ${theme == "orange" && " bg-orange-100"}`}
         >
-          {showTokenNumber && <div className="text-black">#{index}</div>}
+          {showTokenNumber && (
+            <div className="text-black">
+              #{collection == "wizards" ? index : index + 1}
+            </div>
+          )}
           <div className="flex h-fit items-center gap-3">
             {showOrdinals && (
               <a

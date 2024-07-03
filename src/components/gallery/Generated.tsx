@@ -438,6 +438,7 @@ export default function GeneratedGalleryImage({
                               ? EPlatform.NONE
                               : EPlatform.TELEGRAM,
                           );
+                          setIsDownloading(false);
                         }}
                         variant={theme}
                         icon={<BiLogoTelegram className="h-6 w-6" />}
@@ -460,6 +461,7 @@ export default function GeneratedGalleryImage({
                               ? EPlatform.NONE
                               : EPlatform.DISCORD,
                           );
+                          setIsDownloading(false);
                         }}
                         variant={theme}
                         icon={<FaDiscord className="h-6 w-6" />}

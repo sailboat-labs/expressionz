@@ -114,7 +114,7 @@ export default function WizardsGallery() {
                   const urlParams = new URLSearchParams(window.location.search);
                   urlParams.delete("attributes");
                   router.push(
-                    `/collections/wizards?${urlParams.toString()}`,
+                    `/wizards?${urlParams.toString()}`,
                     undefined,
                     {
                       scroll: false,

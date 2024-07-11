@@ -32,13 +32,13 @@ export default function GalleryImage({
   }
 
   function goToPreviousPage() {
-    router.replace(`/collections/wizards/`);
+    router.replace(`/wizards/`);
   }
 
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        router.replace("/collections/wizards");
+        router.replace("/wizards");
       }
     }
     window.addEventListener("keydown", handleEscape);
@@ -215,7 +215,7 @@ export default function GalleryImage({
                       </p>
                     </motion.button>
                   </div>
-                 
+
                 </div>
               </div>
             </div>
@@ -231,7 +231,7 @@ export default function GalleryImage({
               <button
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `${window.location.origin}/collections/wizards/${wizard.id}`,
+                    `${window.location.origin}/wizards/${wizard.id}`,
                   );
                   toast.success("Copied link to clipboard");
                 }}

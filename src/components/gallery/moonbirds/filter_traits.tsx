@@ -37,7 +37,7 @@ export default function FilterTraits({
 
         if (typeof selectedAttributes === "string") {
           urlParams.delete("attributes");
-          router.replace(`/collections/${collection}/?${urlParams.toString()}`);
+          router.replace(`/${collection}/?${urlParams.toString()}`);
           return;
         }
 
@@ -49,7 +49,7 @@ export default function FilterTraits({
       }
 
       router.replace(
-        `/collections/${collection}/?${urlParams.toString()}`,
+        `/${collection}/?${urlParams.toString()}`,
         undefined,
         {
           scroll: false,

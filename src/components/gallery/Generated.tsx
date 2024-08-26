@@ -189,7 +189,11 @@ export default function GeneratedGalleryImage({
       return;
     }
 
-    await downloadImagesAsZip("wizard", selected, index);
+    await downloadImagesAsZip(
+      "wizard",
+      selected,
+      collection.toLocaleLowerCase() === "wizards" ? index : index + 1,
+    );
 
     setIsDownloading(false);
     setPlatform(EPlatform.NONE);
@@ -393,7 +397,7 @@ export default function GeneratedGalleryImage({
                           const url = URL.createObjectURL(blob);
                           const link = document.createElement("a");
                           link.href = url;
-                          link.download = `${collectionId}_${index}.webp`;
+                          link.download = `${collectionId}_${collection.toLowerCase() == "wizards" ? index : index + 1}.webp`;
                           link.click();
                           URL.revokeObjectURL(url);
                         }}

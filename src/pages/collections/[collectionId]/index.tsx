@@ -7,6 +7,7 @@ import { getCollectionInfo } from "@/data/collections/getData";
 import { useEffect, useState } from "react";
 import FilterTraits from "@/components/gallery/filter_traits";
 import Gallery from "@/components/gallery/Gallery";
+import Link from "next/link";
 
 export default function GalleryPage() {
   const router = useRouter();
@@ -44,17 +45,19 @@ export default function GalleryPage() {
       />
       <BaseLayout
         hideFooter
-        variant="logo"
+        variant={collectionId === "moonbirds" ? "base" : "logo"}
         childrenClass="md:h-[calc(100vh-64px)] !font-pixelify-r"
         logo={
-          <span className="flex items-center gap-2 text-base font-semibold">
-            <img
-              src={`/images/collections/${collectionInfo.collectionId}/logo.webp`}
-              className="h-10 w-10 rounded-full md:h-12 md:w-12 "
-              alt="collection logo"
-            />
-            {collectionInfo.collectionName}
-          </span>
+          <Link href="/">
+            <span className="flex items-center gap-2 text-base font-semibold">
+              <img
+                src={`/images/collections/${collectionInfo.collectionId}/logo.webp`}
+                className="h-10 w-10 rounded-full md:h-12 md:w-12 "
+                alt="collection logo"
+              />
+              {collectionInfo.collectionName}
+            </span>
+          </Link>
         }
       >
         <div className="relative z-[2] flex w-full font-pixelify-r">

@@ -15,7 +15,11 @@ export type THeaderProps = {
   transparentBackground?: boolean;
 };
 
-const COLLECTION_SUBMENU_VISIBLE_ON_PAGES = ["/", "/about-us"];
+const COLLECTION_SUBMENU_VISIBLE_ON_PAGES = [
+  "/",
+  "/collections/moonbirds",
+  "/about-us",
+];
 
 function BaseLogo({ showBack = false }) {
   const router = useRouter();
@@ -49,7 +53,7 @@ function Header({
 
   return (
     <>
-      {!router.pathname.startsWith("/collections/wizards") && (
+      {!router.asPath.startsWith("/collections/wizards") && (
         <MobileMenu show={showMenu} setShow={setShowMenu} />
       )}
       <nav
@@ -66,7 +70,7 @@ function Header({
           className={cn(
             "m-auto flex h-full items-center  justify-between px-4",
             {
-              "lg:w-4/5": variant === "base",
+              "px-4": variant === "base",
               "": variant === "flexed-minimized",
             },
           )}
@@ -75,9 +79,10 @@ function Header({
 
           {variant != "logo" && (
             <div className="hidden font-presstart lg:flex lg:space-x-8">
-              {COLLECTION_SUBMENU_VISIBLE_ON_PAGES.includes(
-                router.pathname,
-              ) && <Collections />}
+              <Link href="/">Home</Link>
+              {COLLECTION_SUBMENU_VISIBLE_ON_PAGES.includes(router.asPath) && (
+                <Collections />
+              )}
               <Link
                 href="/about-us"
                 className="hover:text-yellow active:text-yellow"

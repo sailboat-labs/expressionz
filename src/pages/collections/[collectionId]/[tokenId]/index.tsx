@@ -87,6 +87,4 @@ export default function TokenPage() {
       </BaseLayout>
     </>
   );
-
-  return null;
 }

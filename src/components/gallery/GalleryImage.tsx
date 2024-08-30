@@ -60,7 +60,10 @@ export default function GalleryImage({
         <div className=" hidden h-screen w-[80rem] transform flex-col-reverse items-center justify-center gap-3 overflow-hidden rounded p-3 text-left align-middle transition-all md:flex">
           <Image
             src={`/images/collections/${collectionId}/desktop-bg.webp`}
-            className="absolute h-[40vw] w-[40vw] rounded-t-md object-contain md:h-full md:w-full"
+            className={cn(
+              "absolute h-[40vw] w-[40vw] rounded-t-md object-contain md:h-full md:w-full",
+              (collectionId as string) === "moonbirds" && ["-translate-y-20"],
+            )}
             height={2000}
             width={2000}
             alt="Collection Background"
@@ -93,7 +96,9 @@ export default function GalleryImage({
                         `}
                       >
                         {collection} #
-                        {collection.toLowerCase() == "wizards" ? index : index + 1}
+                        {collection.toLowerCase() == "wizards"
+                          ? index
+                          : index + 1}
                       </div>
                     </div>
 

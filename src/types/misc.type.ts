@@ -12,7 +12,7 @@ export enum EPlatform {
   DISCORD = "discord",
 }
 
-export type TCollection = "wizard" | "moonbird";
+export type TCollection = "wizards" | "moonbirds";
 
 export type TGeneratorResponse = {
   status: string;

@@ -12,7 +12,7 @@ import { createDiscordEmojiPack } from "@/http/discord.http";
 import { createTelegramStickerPack } from "@/http/telegram.http";
 import { cn } from "@/lib/misc.lib";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
-import { EPlatform } from "@/types/misc.type";
+import { EPlatform, TCollection } from "@/types/misc.type";
 import { generateWizardEmojis } from "@/http/wizard.http";
 import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import useElementHeightMonitor from "@/hooks/useElementHeightMonitor";
@@ -182,7 +182,7 @@ export default function GeneratedGalleryImage({
     // If none are selected, download all
     if (selected.length === 0) {
       downloadImagesAsZip(
-        "wizard",
+        collection as TCollection,
         hasBg ? generatedEmojis : generatedEmojisTransparent,
         index,
       );
@@ -190,7 +190,7 @@ export default function GeneratedGalleryImage({
     }
 
     await downloadImagesAsZip(
-      "wizard",
+      collection as TCollection,
       selected,
       collection.toLocaleLowerCase() === "wizards" ? index : index + 1,
     );

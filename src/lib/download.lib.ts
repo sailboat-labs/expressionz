@@ -54,7 +54,7 @@ export async function downloadImagesAsZip(
   const link = document.createElement("a");
   link.href = url;
   link.download =
-    collection === "wizard" ? `Wizard of Ord #${token}` : `Moonbird #${token}`;
+    collection === "wizards" ? `Wizard of Ord #${token}` : `Moonbird #${token}`;
   link.click();
   URL.revokeObjectURL(url);
 }

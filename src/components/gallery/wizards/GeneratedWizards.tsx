@@ -146,14 +146,14 @@ export default function GeneratedWizards({
     // If none are selected, download all
     if (selected.length === 0) {
       downloadImagesAsZip(
-        "wizard",
+        "wizards",
         hasBg ? generatedEmojis : generatedEmojisTransparent,
         index,
       );
       return;
     }
 
-    await downloadImagesAsZip("wizard", selected, index);
+    await downloadImagesAsZip("wizards", selected, index);
 
     setIsDownloading(false);
     setPlatform(EPlatform.NONE);

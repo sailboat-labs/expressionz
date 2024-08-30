@@ -14,7 +14,7 @@ function MobileMenu({ show, setShow }: MenuProps) {
       className={cn(
         `z-9999 h-screen w-screen bg-darkPurple`,
         "transition-all duration-500",
-        "absolute top-0 flex lg:hidden",
+        "fixed top-0 flex lg:hidden",
       )}
       style={{
         clipPath: show

@@ -92,7 +92,7 @@ function Header({
             </div>
           )}
 
-          {!router.pathname.startsWith("/collections/wizards") && (
+          {!router.asPath.startsWith("/collections/wizards") && (
             <div className="flex lg:hidden">
               <IoMenu
                 className="h-8 w-8"

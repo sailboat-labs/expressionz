@@ -182,7 +182,7 @@ export default function GeneratedGalleryImage({
     // If none are selected, download all
     if (selected.length === 0) {
       downloadImagesAsZip(
-        collection as TCollection,
+        collection.toLowerCase() as TCollection,
         hasBg ? generatedEmojis : generatedEmojisTransparent,
         index,
       );
@@ -190,7 +190,7 @@ export default function GeneratedGalleryImage({
     }
 
     await downloadImagesAsZip(
-      collection as TCollection,
+      collection.toLowerCase() as TCollection,
       selected,
       collection.toLocaleLowerCase() === "wizards" ? index : index + 1,
     );

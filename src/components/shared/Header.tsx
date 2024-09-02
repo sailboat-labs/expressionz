@@ -79,7 +79,6 @@ function Header({
 
           {variant != "logo" && (
             <div className="hidden font-presstart lg:flex lg:space-x-8">
-              <Link href="/">Home</Link>
               {COLLECTION_SUBMENU_VISIBLE_ON_PAGES.includes(router.asPath) && (
                 <Collections />
               )}

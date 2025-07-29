@@ -1,6 +1,7 @@
+import axios from "axios";
+
 import { TGeneratorResponse } from "@/types/misc.type";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
-import axios from "axios";
 
 export async function generateWizardEmojis(
   payload: TWizardGeneratorAPIPayload,
@@ -17,7 +18,7 @@ export async function generateWizardEmojis(
         },
       },
     );
-    let { colored, transparent } = response.data as TGeneratorResponse;
+    const { colored, transparent } = response.data as TGeneratorResponse;
 
     return {
       colored,

@@ -1,6 +1,8 @@
-import { GALLERY } from "@/data/gallery";
-import { useMemo } from "react";
 import { useRouter } from "next/router";
+import { useMemo } from "react";
+
+import { GALLERY } from "@/data/gallery";
+
 import Wizard from "./Wizard";
 import { LazyLoadedDiv } from "../LazyLoadedDiv";
 

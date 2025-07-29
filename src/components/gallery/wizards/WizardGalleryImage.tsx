@@ -1,15 +1,16 @@
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { IoCopyOutline } from "react-icons/io5";
 import { toast } from "sonner";
 
-import { IoCopyOutline } from "react-icons/io5";
+import { cn } from "@/lib/misc.lib";
+
+import { GALLERY } from "@/data/gallery";
 
 import ScrollTokenFrame from "@/components/shared/ScrollTokenFrame";
-import { GALLERY } from "@/data/gallery";
-import { cn } from "@/lib/misc.lib";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 export default function GalleryImage({
   wizard,

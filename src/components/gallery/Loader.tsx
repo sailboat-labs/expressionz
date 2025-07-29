@@ -1,5 +1,5 @@
-import { progress } from "framer-motion";
 import React from "react";
+
 import MoonbirdsVideoLoader from "../MoonbirdsLoader";
 import { WizardsLoader } from "../WizardsLoader";
 

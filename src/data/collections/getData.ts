@@ -1,4 +1,5 @@
 import { MOONBIRD_FILTER_TRAITS } from "@/components/gallery/filterTraits";
+
 import { MOONBIRDS } from "./moonbirds";
 import { WIZARDS } from "./wizards";
 import { WIZARDS_FILTER_TRAITS } from "../wizards-filter-traits";

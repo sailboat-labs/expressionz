@@ -1,31 +1,35 @@
-import React, { useEffect, useState } from "react";
-import GeneratedItem from "@/components/shared/GeneratedItem";
-import DoneModal from "@/components/shared/DoneModal";
-import { toast } from "sonner";
-import { motion } from "framer-motion";
-import { useRouter } from "next/router";
-import { METADATA } from "@/data/metadata";
+import { Switch } from "@headlessui/react";
 import { ArrowDownIcon, ArrowLeftIcon } from "@radix-ui/react-icons";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { BiLogoTelegram } from "react-icons/bi";
+import { FaDiscord } from "react-icons/fa";
+import { toast } from "sonner";
+
 import { downloadImagesAsZip, downloadPfp } from "@/lib/download.lib";
+import consoleLog from "@/lib/logger";
+import { cn } from "@/lib/misc.lib";
+
+import { moonbirdEmojis } from "@/data/emoji.data";
+import { METADATA } from "@/data/metadata";
+
+import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
+import BaseLayout from "@/components/shared/BaseLayout";
+import DoneModal from "@/components/shared/DoneModal";
+import GeneratedItem from "@/components/shared/GeneratedItem";
+import Seo from "@/components/shared/Seo";
+import ThemedIconButton from "@/components/shared/ThemedIconButton";
 
 import { createDiscordEmojiPack } from "@/http/discord.http";
-import { createTelegramStickerPack } from "@/http/telegram.http";
-import { FaDiscord } from "react-icons/fa";
-import { BiLogoTelegram } from "react-icons/bi";
-import Seo from "@/components/shared/Seo";
-import MoonbirdDetailsFrame from "./MoonbirdDetailsFrame";
-import ThemedIconButton from "@/components/shared/ThemedIconButton";
-import { cn } from "@/lib/misc.lib";
-import { Switch } from "@headlessui/react";
-import MoonbirdsVideoLoader from "@/components/MoonbirdsLoader";
-import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
-
-import consoleLog from "@/lib/logger";
-import { moonbirdEmojis } from "@/data/emoji.data";
-import BaseLayout from "@/components/shared/BaseLayout";
-import Link from "next/link";
-import { EPlatform } from "@/types/misc.type";
 import { generateMoonBirdEmojis } from "@/http/moonbird.http";
+import { createTelegramStickerPack } from "@/http/telegram.http";
+
+import MoonbirdDetailsFrame from "./MoonbirdDetailsFrame";
+
+import { EPlatform } from "@/types/misc.type";
+import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
 
 // const shareIcons = [
 //   {
@@ -149,7 +153,7 @@ export default function MoonbirdGenerated({
         payload.emojiTypes.push(emoji.emoji_type);
       }
 
-      let images = await generateMoonBirdEmojis(
+      const images = await generateMoonBirdEmojis(
         payload,
         (progress: number, total: number) => {
           setProgress(progress);
@@ -259,7 +263,7 @@ export default function MoonbirdGenerated({
       return;
     }
 
-    let selectedIndices = [];
+    const selectedIndices = [];
     for (let i = 0; i < generatedEmojis.length; i++) {
       selectedIndices[i] = i;
     }
@@ -475,7 +479,7 @@ export default function MoonbirdGenerated({
                           onChange={(checked) => {
                             setHasBg(checked);
                           }}
-                          className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors`}
+                          className="relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors"
                         >
                           <span
                             className={cn(
@@ -499,7 +503,7 @@ export default function MoonbirdGenerated({
                           checked={allEmojisSelected}
                           disabled={platform === ""}
                           onChange={(checked) => selectAll()}
-                          className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors`}
+                          className="relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors"
                         >
                           <span
                             className={cn(
@@ -559,7 +563,7 @@ export default function MoonbirdGenerated({
                       onChange={(checked) => {
                         setHasBg(checked);
                       }}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors`}
+                      className="relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors"
                     >
                       <span
                         className={cn(
@@ -584,7 +588,7 @@ export default function MoonbirdGenerated({
                       checked={allEmojisSelected}
                       disabled={platform === ""}
                       onChange={(checked) => selectAll()}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors`}
+                      className="relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors"
                     >
                       <span
                         className={cn(

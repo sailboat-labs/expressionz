@@ -1,5 +1,6 @@
-import { cn } from "@/lib/misc.lib";
 import { ReactNode } from "react";
+
+import { cn } from "@/lib/misc.lib";
 
 type TScrollTokenFrameProps = {
   wrapperClass?: string;

@@ -1,8 +1,10 @@
-import { cn } from "@/lib/misc.lib";
-import { TFilterTrait } from "@/types/misc.type";
 import { Disclosure } from "@headlessui/react";
 import { useRouter } from "next/router";
 import { ChangeEvent } from "react";
+
+import { cn } from "@/lib/misc.lib";
+
+import { TFilterTrait } from "@/types/misc.type";
 
 type TFilterTraitsProps = {
   filterTraits: TFilterTrait;

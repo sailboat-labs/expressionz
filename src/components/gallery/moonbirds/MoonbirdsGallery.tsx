@@ -1,10 +1,12 @@
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 
+import { cn } from "@/lib/misc.lib";
+
 import { METADATA } from "@/data/metadata";
+
 import Moonbird from "./Moonbird";
 import { LazyLoadedDiv } from "../LazyLoadedDiv";
-import { cn } from "@/lib/misc.lib";
 
 export default function MoonbirdsGallery() {
   const router = useRouter();

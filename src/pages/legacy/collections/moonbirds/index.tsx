@@ -1,11 +1,11 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 import Drawer from "@/components/gallery/Drawer";
 import MoonBirdsFilterTraits from "@/components/gallery/moonbirds/MoonBirdsFilterTraits";
 import MoonbirdsGallery from "@/components/gallery/moonbirds/MoonbirdsGallery";
 import BaseLayout from "@/components/shared/BaseLayout";
-
 import Seo from "@/components/shared/Seo";
-import Link from "next/link";
-import { useRouter } from "next/router";
 
 export default function HomePage() {
   const router = useRouter();

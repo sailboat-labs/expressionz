@@ -1,11 +1,12 @@
 import Image from "next/image";
 
+import { cn } from "@/lib/misc.lib";
+
+import BlueButton from "~/images/buttons/blue-button.webp";
+import DeepVioletButton from "~/images/buttons/deep-purple.webp";
 import GrayButton from "~/images/buttons/gray-button.webp";
 import PurpleButton from "~/images/buttons/purple-button.webp";
-import BlueButton from "~/images/buttons/blue-button.webp";
 import YellowButton from "~/images/buttons/yellow-btn.webp";
-import DeepVioletButton from "~/images/buttons/deep-purple.webp";
-import { cn } from "@/lib/misc.lib";
 
 interface ButtonProps {
   text: string;

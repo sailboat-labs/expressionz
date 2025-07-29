@@ -1,17 +1,20 @@
+import { arrayBufferToBase64, randomId } from "@/lib/misc.lib";
+
+import { emojiMap } from "@/data/emoji.data";
+
+import { saveStickerPackData } from "@/firebase/stickers";
 import { uploadStickerToFirebase } from "@/firebase/uploadStickerToFirebase";
 
-import { arrayBufferToBase64, randomId } from "@/lib/misc.lib";
+import { generateMoonBirdEmojis } from "./moonbird.http";
+import { generateWizardEmojis } from "./wizard.http";
+
 import {
   EmojiTypes,
   InputSticker,
   TEmojiPackGeneratorPayload,
 } from "@/types/emoji.type";
-import { emojiMap } from "@/data/emoji.data";
 import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
-import { saveStickerPackData } from "@/firebase/stickers";
-import { generateMoonBirdEmojis } from "./moonbird.http";
-import { generateWizardEmojis } from "./wizard.http";
 
 export async function createTelegramStickerPack({
   tokenId,

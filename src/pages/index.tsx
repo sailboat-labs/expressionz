@@ -1,12 +1,12 @@
-import TokenMarquee from "@/components/home/Marquee";
-import UnlockAssets from "@/components/home/UnlockAssets";
-import SelfExpression from "@/components/home/SelfExpression";
-import SeamlessIntegration from "@/components/home/SeamlessIntegration";
-import StartJourney from "@/components/home/StartJourney";
-import Contact from "@/components/home/Contact";
-import Seo from "@/components/shared/Seo";
-import BaseLayout from "@/components/shared/BaseLayout";
 import Banner from "@/components/home/Banner";
+import Contact from "@/components/home/Contact";
+import TokenMarquee from "@/components/home/Marquee";
+import SeamlessIntegration from "@/components/home/SeamlessIntegration";
+import SelfExpression from "@/components/home/SelfExpression";
+import StartJourney from "@/components/home/StartJourney";
+import UnlockAssets from "@/components/home/UnlockAssets";
+import BaseLayout from "@/components/shared/BaseLayout";
+import Seo from "@/components/shared/Seo";
 
 export default function Home() {
   return (

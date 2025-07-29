@@ -1,5 +1,6 @@
+import { forwardRef,LegacyRef } from "react";
+
 import { cn } from "@/lib/misc.lib";
-import { LegacyRef, forwardRef } from "react";
 
 type TMoonbirdDetailsFrameProps = {
   children: [React.ReactNode, React.ReactNode];

@@ -1,11 +1,12 @@
-import Drawer from "@/components/gallery/Drawer";
+import Head from "next/head";
+import { useRouter } from "next/router";
 
+import { cn } from "@/lib/misc.lib";
+
+import Drawer from "@/components/gallery/Drawer";
 import WizardsFilterTraits from "@/components/gallery/wizards/WizardsFilterTraits";
 import WizardsGallery from "@/components/gallery/wizards/WizardsGallery";
 import BaseLayout from "@/components/shared/BaseLayout";
-import { cn } from "@/lib/misc.lib";
-import Head from "next/head";
-import { useRouter } from "next/router";
 
 export default function HomePage() {
   const router = useRouter();

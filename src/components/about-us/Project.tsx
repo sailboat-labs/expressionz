@@ -1,12 +1,13 @@
-import { useState } from "react";
-import Video from "./Video";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { isMobile } from "react-device-detect";
+
+import Video from "./Video";
 
 // Images
 import AboutText from "~/images/about-us/text.webp";
 import VideoPoster from "~/images/about-us/video.webp";
-import { isMobile } from "react-device-detect";
-import Link from "next/link";
 
 export default function Project() {
   const [showVideo, setShowVideo] = useState<boolean>(false);

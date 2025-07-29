@@ -1,8 +1,8 @@
-import "@/styles/globals.css";
+import type { AppProps } from "next/app";
 // import "@rainbow-me/rainbowkit/styles.css";
 import { Toaster } from "sonner";
 
-import type { AppProps } from "next/app";
+import "@/styles/globals.css";
 
 // const wagmiConfig = getDefaultConfig({
 //   appName: "expressions",

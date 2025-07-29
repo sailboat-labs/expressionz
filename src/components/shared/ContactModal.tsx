@@ -1,7 +1,7 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { Dispatch, SetStateAction, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { toast } from "sonner";
-import { AnimatePresence, motion } from "framer-motion";
 
 export default function ContactModal({
   show,

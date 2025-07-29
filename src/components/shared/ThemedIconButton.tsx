@@ -1,6 +1,7 @@
 import clsx from "clsx";
-import React, { ComponentPropsWithoutRef } from "react";
 import { motion } from "framer-motion";
+import React, { ComponentPropsWithoutRef } from "react";
+
 import { cn } from "@/lib/misc.lib";
 
 type TThemedIconButtonProps = {

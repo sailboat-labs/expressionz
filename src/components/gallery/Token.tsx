@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 export interface IToken {
   id: string;

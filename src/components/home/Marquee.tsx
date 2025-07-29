@@ -1,6 +1,7 @@
-import { cn } from "@/lib/misc.lib";
 import { ComponentPropsWithoutRef } from "react";
 import Marquee from "react-fast-marquee";
+
+import { cn } from "@/lib/misc.lib";
 
 type TTokenMarqueeProps = ComponentPropsWithoutRef<"section">;
 

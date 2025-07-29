@@ -1,8 +1,10 @@
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+import { cn } from "@/lib/misc.lib";
+
 import BaseLayout from "@/components/shared/BaseLayout";
 import Seo from "@/components/shared/Seo";
-import { cn } from "@/lib/misc.lib";
-import Link from "next/link";
-import { motion } from "framer-motion";
 
 const CollectionsPage = () => {
   return (

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect,useState } from "react";
 
 // Define a custom hook for getting the screen width
 function useScreenWidth() {

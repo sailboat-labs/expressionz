@@ -1,33 +1,34 @@
 /* eslint-disable no-console */
 /* eslint-disable @next/next/no-img-element */
 import { Switch } from "@headlessui/react";
-import { motion } from "framer-motion";
 import {
-  ArrowDownIcon,
   ArrowLeftIcon,
   Cross1Icon,
 } from "@radix-ui/react-icons";
+import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { emojis, shareIcons } from "@/lib/data";
 import { download, downloadImagesAsZip } from "@/lib/download.lib";
+import { cn } from "@/lib/misc.lib";
+import useElementHeightMonitor from "@/hooks/useElementHeightMonitor";
 
 import { GALLERY } from "@/data/gallery";
-import GeneratedItem from "@/components/shared/GeneratedItem";
+
 import DoneModal from "@/components/shared/DoneModal";
+import GeneratedItem from "@/components/shared/GeneratedItem";
+import ScrollTokenFrame from "@/components/shared/ScrollTokenFrame";
+import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import { WizardsLoader } from "@/components/WizardsLoader";
+
 import { createDiscordEmojiPack } from "@/http/discord.http";
 import { createTelegramStickerPack } from "@/http/telegram.http";
-import { cn } from "@/lib/misc.lib";
-import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
-import { EPlatform } from "@/types/misc.type";
-
-import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import { generateWizardEmojis } from "@/http/wizard.http";
-import ScrollTokenFrame from "@/components/shared/ScrollTokenFrame";
-import useElementHeightMonitor from "@/hooks/useElementHeightMonitor";
+
+import { EPlatform } from "@/types/misc.type";
+import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 
 type GeneratedWizardsProps = {
   wizard: (typeof GALLERY)[0];
@@ -102,7 +103,7 @@ export default function GeneratedWizards({
     }
 
     try {
-      let images = await generateWizardEmojis(
+      const images = await generateWizardEmojis(
         payload,
         (progress: number, total: number) => {
           // setProgress(progress);
@@ -435,7 +436,7 @@ export default function GeneratedWizards({
                                 : "/images/share/download-inactive.webp"
                             }
                             className={`${isDownloading ? "scale-110 " : " "} h-full w-full`}
-                            alt={`Download icon`}
+                            alt="Download icon"
                           />
                         }
                       />
@@ -464,7 +465,7 @@ export default function GeneratedWizards({
                 </div>
                 <div className="flex-1 overflow-clip" ref={wrapperElement}>
                   <div
-                    className={"mx-auto grid grid-cols-3 gap-4"}
+                    className="mx-auto grid grid-cols-3 gap-4"
                     style={{
                       maxWidth: gridWrapperHeight - 66,
                     }}
@@ -692,7 +693,7 @@ export default function GeneratedWizards({
                         : "/images/share/download-inactive.webp"
                     }
                     className={`${isDownloading ? "scale-110 " : " "} h-full w-full`}
-                    alt={`Download icon`}
+                    alt="Download icon"
                   />
                 }
               />

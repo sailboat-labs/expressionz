@@ -1,3 +1,7 @@
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+
+import { cn } from "@/lib/misc.lib";
+
 import {
   Sheet,
   SheetContent,
@@ -6,9 +10,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
-import { cn } from "@/lib/misc.lib";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 type TDrawerProps = {
   text: string;
@@ -42,7 +43,7 @@ export default function Drawer({
           </span>
         </SheetTrigger>
         <SheetContent
-          side={"left"}
+          side="left"
           className={cn(` !z-9999 font-pixelify-r`, {
             "border-orange-400 bg-orange-800 ": theme == "brown",
             "border-dark bg-dark ": theme == "purple",

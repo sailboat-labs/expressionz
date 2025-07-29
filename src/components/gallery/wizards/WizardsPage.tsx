@@ -1,10 +1,11 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { GALLERY } from "@/data/gallery";
+
 import GalleryImage from "@/components/gallery/wizards/WizardGalleryImage";
-import Seo from "@/components/shared/Seo";
 import BaseLayout from "@/components/shared/BaseLayout";
-import Link from "next/link";
+import Seo from "@/components/shared/Seo";
 
 export default function WizardPage() {
   const router = useRouter();

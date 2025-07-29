@@ -1,7 +1,7 @@
-import { EmojiTypes } from "@/types/emoji.type";
+import axios from "axios";
+
 import { TGeneratorResponse } from "@/types/misc.type";
 import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
-import axios from "axios";
 
 
 /**
@@ -29,7 +29,7 @@ export async function generateMoonBirdEmojis(
       },
     );
 
-    let { colored, transparent } = response.data as TGeneratorResponse;
+    const { colored, transparent } = response.data as TGeneratorResponse;
 
     return {
       colored,

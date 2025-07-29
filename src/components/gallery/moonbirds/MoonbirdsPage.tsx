@@ -1,14 +1,17 @@
-import { useRouter } from "next/router";
-import { METADATA } from "@/data/metadata";
-import Seo from "@/components/shared/Seo";
-import MoonbirdDetailsFrame from "@/components/gallery/moonbirds/MoonbirdDetailsFrame";
-import { toast } from "sonner";
-import React, { useMemo } from "react";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import ThemedIconButton from "@/components/shared/ThemedIconButton";
 import Link from "next/link";
-import BaseLayout from "@/components/shared/BaseLayout";
+import { useRouter } from "next/router";
+import React, { useMemo } from "react";
+import { toast } from "sonner";
+
 import { cn } from "@/lib/misc.lib";
+
+import { METADATA } from "@/data/metadata";
+
+import MoonbirdDetailsFrame from "@/components/gallery/moonbirds/MoonbirdDetailsFrame";
+import BaseLayout from "@/components/shared/BaseLayout";
+import Seo from "@/components/shared/Seo";
+import ThemedIconButton from "@/components/shared/ThemedIconButton";
 
 export default function MoonbirdPage() {
   const router = useRouter();
@@ -44,7 +47,7 @@ export default function MoonbirdPage() {
         wrapperClass="bg-dark"
         logo={
           <Link
-            href={`/collections/moonbirds`}
+            href="/collections/moonbirds"
             className="flex items-center gap-2 text-base font-semibold"
           >
             <img

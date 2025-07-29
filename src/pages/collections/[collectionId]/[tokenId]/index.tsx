@@ -1,14 +1,16 @@
-import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getCollectionInfo } from "@/data/collections/getData";
 import { isMobile } from "react-device-detect";
+
+import { getCollectionInfo } from "@/data/collections/getData";
+
+import GalleryImage from "@/components/gallery/GalleryImage";
 import MoonbirdPage from "@/components/gallery/moonbirds/MoonbirdsPage";
 import WizardPage from "@/components/gallery/wizards/WizardsPage";
-import GalleryImage from "@/components/gallery/GalleryImage";
-import Seo from "@/components/shared/Seo";
 import BaseLayout from "@/components/shared/BaseLayout";
-import Link from "next/link";
+import Seo from "@/components/shared/Seo";
 
 export default function TokenPage() {
   const router = useRouter();

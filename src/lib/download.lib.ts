@@ -1,6 +1,7 @@
 import JSZip from "jszip";
 
 import { arrayBufferToBase64, gifArrayBufferToBase64 } from "./misc.lib";
+
 import { TCollection } from "@/types/misc.type";
 
 export async function download(path: string, index: number) {

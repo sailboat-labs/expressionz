@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 import {
@@ -5,7 +6,6 @@ import {
   cn,
   gifArrayBufferToBase64,
 } from "@/lib/misc.lib";
-import { motion } from "framer-motion";
 
 export default function GeneratedItem({
   item,

@@ -1,5 +1,6 @@
-import { useMemo } from "react";
 import { useRouter } from "next/router";
+import { useMemo } from "react";
+
 import { LazyLoadedDiv } from "./LazyLoadedDiv";
 import Token from "./Token";
 

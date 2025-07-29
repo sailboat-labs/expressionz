@@ -1,32 +1,38 @@
 /* eslint-disable no-console */
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from "next/router";
-import { motion } from "framer-motion";
 import { Switch } from "@headlessui/react";
 import { ArrowLeftIcon, Cross1Icon } from "@radix-ui/react-icons";
-import { useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
-import { emojis } from "@/lib/data";
-import { downloadImagesAsZip } from "@/lib/download.lib";
-import { createDiscordEmojiPack } from "@/http/discord.http";
-import { createTelegramStickerPack } from "@/http/telegram.http";
-import { cn } from "@/lib/misc.lib";
-import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
-import { EPlatform, TCollection } from "@/types/misc.type";
-import { generateWizardEmojis } from "@/http/wizard.http";
-import ThemedIconButton from "@/components/shared/ThemedIconButton";
-import useElementHeightMonitor from "@/hooks/useElementHeightMonitor";
-import GeneratedItem from "@/components/shared/GeneratedItem";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { moonbirdEmojis } from "@/data/emoji.data";
-import { generateMoonBirdEmojis } from "@/http/moonbird.http";
-import consoleLog from "@/lib/logger";
-import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
-import Loader from "./Loader";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { BiLogoTelegram } from "react-icons/bi";
 import { FaDiscord } from "react-icons/fa6";
 import { LiaDownloadSolid } from "react-icons/lia";
+import { toast } from "sonner";
+
+import { emojis } from "@/lib/data";
+import { downloadImagesAsZip } from "@/lib/download.lib";
+import consoleLog from "@/lib/logger";
+import { cn } from "@/lib/misc.lib";
+import useElementHeightMonitor from "@/hooks/useElementHeightMonitor";
+
+import { moonbirdEmojis } from "@/data/emoji.data";
+
+import GeneratedItem from "@/components/shared/GeneratedItem";
+import ThemedIconButton from "@/components/shared/ThemedIconButton";
+
+import { createDiscordEmojiPack } from "@/http/discord.http";
+import { generateMoonBirdEmojis } from "@/http/moonbird.http";
+import { createTelegramStickerPack } from "@/http/telegram.http";
+import { generateWizardEmojis } from "@/http/wizard.http";
+
+import Loader from "./Loader";
 import DoneModal from "../shared/DoneModal";
+
+import { EPlatform, TCollection } from "@/types/misc.type";
+import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
+import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
 
 export default function GeneratedGalleryImage({
   index,
@@ -119,7 +125,7 @@ export default function GeneratedGalleryImage({
     }
 
     try {
-      let images = await generateWizardEmojis(
+      const images = await generateWizardEmojis(
         payload,
         (progress: number, total: number) => {
           // setProgress(progress);
@@ -154,7 +160,7 @@ export default function GeneratedGalleryImage({
         payload.emojiTypes.push(emoji.emoji_type);
       }
 
-      let images = await generateMoonBirdEmojis(
+      const images = await generateMoonBirdEmojis(
         payload,
         (progress: number, total: number) => {
           setProgress(progress);

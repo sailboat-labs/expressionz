@@ -1,6 +1,7 @@
-import { useContext, useRef } from "react";
-import { AccordionContext } from "./Accordion";
 import { AnimatePresence, motion } from "framer-motion";
+import { useContext, useRef } from "react";
+
+import { AccordionContext } from "./Accordion";
 
 export interface AccordionItemProps {
   index: number;

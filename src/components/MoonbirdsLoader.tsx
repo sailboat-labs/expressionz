@@ -1,6 +1,7 @@
-import { cn } from "@/lib/misc.lib";
 import { useEffect, useRef } from "react";
 import { LiaSpinnerSolid } from "react-icons/lia";
+
+import { cn } from "@/lib/misc.lib";
 
 export function LoadingProgress({
   show,

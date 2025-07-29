@@ -1,10 +1,11 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { GALLERY } from "@/data/gallery";
+
 import GeneratedWizards from "@/components/gallery/wizards/GeneratedWizards";
-import Seo from "@/components/shared/Seo";
-import Link from "next/link";
 import BaseLayout from "@/components/shared/BaseLayout";
+import Seo from "@/components/shared/Seo";
 
 function Generated() {
   const router = useRouter();

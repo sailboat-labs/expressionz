@@ -1,6 +1,7 @@
-import { cn } from "@/lib/misc.lib";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ComponentPropsWithoutRef } from "react";
+
+import { cn } from "@/lib/misc.lib";
 
 type IconButtonVariants = VariantProps<typeof buttonClasses>;
 type IconButtonProps = IconButtonVariants &

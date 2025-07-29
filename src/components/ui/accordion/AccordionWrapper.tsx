@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { AccordionContext } from "./Accordion";
 
 interface AccordionProps {

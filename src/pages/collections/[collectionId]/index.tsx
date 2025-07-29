@@ -1,13 +1,16 @@
-import Drawer from "@/components/gallery/Drawer";
-import BaseLayout from "@/components/shared/BaseLayout";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { cn } from "@/lib/misc.lib";
-import { getCollectionInfo } from "@/data/collections/getData";
 import { useEffect, useState } from "react";
+
+import { cn } from "@/lib/misc.lib";
+
+import { getCollectionInfo } from "@/data/collections/getData";
+
+import Drawer from "@/components/gallery/Drawer";
 import FilterTraits from "@/components/gallery/filter_traits";
 import Gallery from "@/components/gallery/Gallery";
-import Link from "next/link";
+import BaseLayout from "@/components/shared/BaseLayout";
 
 export default function GalleryPage() {
   const router = useRouter();

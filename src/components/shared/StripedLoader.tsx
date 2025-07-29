@@ -1,5 +1,6 @@
-import { cn } from "@/lib/misc.lib";
 import { ComponentPropsWithoutRef } from "react";
+
+import { cn } from "@/lib/misc.lib";
 
 const StripedLoader = ({
   className,

@@ -1,6 +1,7 @@
-import React from "react";
 import Link from "next/link";
+import React from "react";
 import { FaXmark } from "react-icons/fa6";
+
 import { cn } from "@/lib/misc.lib";
 
 interface MenuProps {

@@ -1,18 +1,20 @@
+import { arrayBufferToBase64, randomId } from "@/lib/misc.lib";
+
+import { emojiMap } from "@/data/emoji.data";
+
 import { saveStickerPackData } from "@/firebase/stickers";
 import { uploadStickerToFirebase } from "@/firebase/uploadStickerToFirebase";
 
-import { arrayBufferToBase64, randomId } from "@/lib/misc.lib";
-import { emojiMap } from "@/data/emoji.data";
+import { generateMoonBirdEmojis } from "./moonbird.http";
+import { generateWizardEmojis } from "./wizard.http";
+
 import {
   EmojiTypes,
   InputSticker,
   TEmojiPackGeneratorPayload,
 } from "@/types/emoji.type";
-
 import { TMoonBirdGeneratorAPIPayload } from "@/types/moonbird.type";
 import { TWizardGeneratorAPIPayload } from "@/types/wizard.type";
-import { generateWizardEmojis } from "./wizard.http";
-import { generateMoonBirdEmojis } from "./moonbird.http";
 
 export async function createDiscordEmojiPack({
   tokenId,

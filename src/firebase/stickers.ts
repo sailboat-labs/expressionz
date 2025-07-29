@@ -1,6 +1,7 @@
 import { doc, setDoc } from "firebase/firestore";
 
 import { firestore } from "./config";
+
 import { InputSticker } from "@/types/emoji.type";
 
 export async function saveStickerPackData(

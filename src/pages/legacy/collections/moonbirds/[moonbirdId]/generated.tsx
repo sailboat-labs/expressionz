@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 
 import { METADATA } from "@/data/metadata";
+
 import MoonbirdGenerated from "@/components/gallery/moonbirds/generated";
 
 export default function MoonbirdPage() {

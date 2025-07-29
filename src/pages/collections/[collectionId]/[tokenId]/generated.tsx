@@ -1,14 +1,16 @@
+import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getCollectionInfo } from "@/data/collections/getData";
 import { isMobile } from "react-device-detect";
-import Head from "next/head";
+
+import { getCollectionInfo } from "@/data/collections/getData";
+
 import GeneratedGalleryImage from "@/components/gallery/Generated";
-import Seo from "@/components/shared/Seo";
-import BaseLayout from "@/components/shared/BaseLayout";
-import Link from "next/link";
 import GeneratedMoonbirdPage from "@/components/gallery/moonbirds/GeneratedMoonbirdsPage";
 import GeneratedWizardsPage from "@/components/gallery/wizards/GeneratedWizardsPage";
+import BaseLayout from "@/components/shared/BaseLayout";
+import Seo from "@/components/shared/Seo";
 
 export default function GeneratedPage() {
   const router = useRouter();

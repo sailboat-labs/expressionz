@@ -1,6 +1,6 @@
-import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import { ArrowRightIcon,CopyIcon } from "@radix-ui/react-icons";
+import { Dispatch, SetStateAction } from "react";
 import { toast } from "sonner";
-import { CopyIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 
 export default function DoneModal({
   show,

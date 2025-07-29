@@ -1,12 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
-import MobileMenu from "./MobileMenu";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
-import Collections from "./CollectionsDropdown";
+
 import { cn } from "@/lib/misc.lib";
+
+import Collections from "./CollectionsDropdown";
+import MobileMenu from "./MobileMenu";
 
 export type THeaderProps = {
   variant?: string;
@@ -37,7 +39,7 @@ function BaseLogo({ showBack = false }) {
           </a>
         )}
       </div>
-      <Link href={"/"}>Expressionz.xyz</Link>
+      <Link href="/">Expressionz.xyz</Link>
     </div>
   );
 }

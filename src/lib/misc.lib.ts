@@ -25,7 +25,7 @@ export function randomId() {
 
   for (let i = 1; i < 10; i++) {
     // Avoid consecutive underscores
-    let nextCharacter = characters.charAt(
+    const nextCharacter = characters.charAt(
       Math.floor(Math.random() * characters.length),
     );
     // while (nextCharacter === '_' && result.charAt(i - 1) === '_') {

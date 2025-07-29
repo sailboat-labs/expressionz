@@ -1,7 +1,9 @@
 import React from "react";
-import Header, { THeaderProps } from "./Header";
-import Footer from "./Footer";
+
 import { cn } from "@/lib/misc.lib";
+
+import Footer from "./Footer";
+import Header, { THeaderProps } from "./Header";
 
 type TBaseLayout = {
   children: React.ReactNode;

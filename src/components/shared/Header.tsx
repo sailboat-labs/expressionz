@@ -20,6 +20,7 @@ export type THeaderProps = {
 const COLLECTION_SUBMENU_VISIBLE_ON_PAGES = [
   "/",
   "/collections/moonbirds",
+  "/collections/wizards",
   "/about-us",
 ];
 
@@ -61,9 +62,8 @@ function Header({
       <nav
         className={cn(
           "sticky top-0 !z-[100] h-16  font-presstart",
-          "py-[10px] text-xs text-white  3xl:text-sm",
+          "py-[10px] text-xs text-white  3xl:h-20 3xl:text-sm",
           {
-            "3xl:h-20": variant === "base",
             "bg-darkGrey": !transparentBackground,
           },
         )}
@@ -79,7 +79,8 @@ function Header({
         >
           {logo ? logo : <BaseLogo showBack={showBack} />}
 
-          {variant != "logo" && (
+          {(variant !== "logo" ||
+            router.asPath.startsWith("/collections/wizards")) && (
             <div className="hidden font-presstart lg:flex lg:space-x-8">
               {COLLECTION_SUBMENU_VISIBLE_ON_PAGES.includes(router.asPath) && (
                 <Collections />

@@ -76,7 +76,7 @@ export default function Gallery({
 
       //Filter gallery to ensure that for every different trait, all selected traits are present
       selectedAttributes.forEach((attr) => {
-        const [trait_type, value] = attr.split(":");
+        const [trait_type] = attr.split(":");
 
         _gallery = _gallery.filter((wizard) => {
           const attributes = wizard.meta.attributes;
@@ -87,22 +87,36 @@ export default function Gallery({
         });
       });
 
-      //Filter search
+      // Filter search by token name OR any attribute value
       if (router.query.search) {
-        const search = router.query.search as string;
-        _gallery = _gallery.filter((wizard) =>
-          wizard.meta.name.toLowerCase().includes(search.toLowerCase()),
-        );
+        const search = (router.query.search as string).toLowerCase();
+        _gallery = _gallery.filter((wizard) => {
+          const nameIncludesQuery = wizard.meta.name
+            .toLowerCase()
+            .includes(search);
+          const attributeValueIncludesQuery = wizard.meta.attributes.some(
+            (attribute) =>
+              (attribute.value ?? "").toLowerCase().includes(search),
+          );
+          return nameIncludesQuery || attributeValueIncludesQuery;
+        });
       }
 
       return _gallery;
     } else if (router.query.search) {
-      const search = router.query.search as string;
-      _gallery = _gallery.filter((wizard) =>
-        wizard.meta.name.toLowerCase().includes(search.toLowerCase()),
-      );
+      const search = (router.query.search as string).toLowerCase();
+      _gallery = _gallery.filter((wizard) => {
+        const nameIncludesQuery = wizard.meta.name
+          .toLowerCase()
+          .includes(search);
+        const attributeValueIncludesQuery = wizard.meta.attributes.some(
+          (attribute) => (attribute.value ?? "").toLowerCase().includes(search),
+        );
+        return nameIncludesQuery || attributeValueIncludesQuery;
+      });
       return _gallery;
     } else {
+      console.log("Gallery", _gallery);
       return _gallery;
     }
   }, [

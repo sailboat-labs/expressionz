@@ -17,6 +17,7 @@ export default function GalleryPage() {
   const { collectionId } = router.query;
 
   const [collectionInfo, setCollectionInfo] = useState<any>();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     if (!collectionId) return;
@@ -24,6 +25,32 @@ export default function GalleryPage() {
     const _collectionInfo = getCollectionInfo(collectionId as string);
     setCollectionInfo(_collectionInfo);
   }, [collectionId]);
+
+  // Keep local input state in sync with the URL on navigation
+  useEffect(() => {
+    if (!router.isReady) return;
+    const q =
+      typeof router.query.search === "string" ? router.query.search : "";
+    setSearch(q);
+  }, [router.isReady, router.query.search]);
+
+  // Debounce URL updates from local input to avoid lag and re-renders
+  useEffect(() => {
+    if (!router.isReady) return;
+    const handle = setTimeout(() => {
+      const basePath = router.asPath.split("?")[0];
+      const urlParams = new URLSearchParams(window.location.search);
+      if (search) urlParams.set("search", search);
+      else urlParams.delete("search");
+
+      const qs = urlParams.toString();
+      const next = qs ? `${basePath}?${qs}` : basePath;
+      if (next !== router.asPath) {
+        router.replace(next, undefined, { scroll: false, shallow: true });
+      }
+    }, 250);
+    return () => clearTimeout(handle);
+  }, [search, router.isReady]);
 
   if (!collectionInfo)
     return (
@@ -84,28 +111,10 @@ export default function GalleryPage() {
                   }
                 />
                 <input
-                  value={router.query.search as string}
+                  value={search}
                   placeholder="Search for index..."
                   className="w-full rounded-md border border-gray-200 px-5 text-black"
-                  onChange={(e) => {
-                    const search = e.target.value;
-                    const urlParams = new URLSearchParams(
-                      window.location.search,
-                    );
-                    if (search) {
-                      urlParams.set("search", search);
-                    } else {
-                      urlParams.delete("search");
-                    }
-
-                    router.replace(
-                      { search: urlParams.toString() },
-                      undefined,
-                      {
-                        scroll: false,
-                      },
-                    );
-                  }}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
               <div className="hidden flex-1 px-4 md:block">

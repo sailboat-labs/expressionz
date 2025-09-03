@@ -476,8 +476,8 @@ export default function MoonbirdGenerated({
                       <div className="flex flex-row gap-3 sm:mb-2">
                         <Switch
                           checked={hasBg}
-                          onChange={(checked) => {
-                            setHasBg(checked);
+                          onChange={(isChecked) => {
+                            setHasBg(isChecked);
                           }}
                           className="relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors"
                         >
@@ -502,7 +502,7 @@ export default function MoonbirdGenerated({
                         <Switch
                           checked={allEmojisSelected}
                           disabled={platform === ""}
-                          onChange={(checked) => selectAll()}
+                          onChange={() => selectAll()}
                           className="relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors"
                         >
                           <span
@@ -560,8 +560,8 @@ export default function MoonbirdGenerated({
                   <div className="mb-2 flex flex-row gap-3">
                     <Switch
                       checked={hasBg}
-                      onChange={(checked) => {
-                        setHasBg(checked);
+                      onChange={(isChecked) => {
+                        setHasBg(isChecked);
                       }}
                       className="relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF] !bg-[#BDBCFF] transition-colors"
                     >
@@ -587,7 +587,7 @@ export default function MoonbirdGenerated({
                     <Switch
                       checked={allEmojisSelected}
                       disabled={platform === ""}
-                      onChange={(checked) => selectAll()}
+                      onChange={() => selectAll()}
                       className="relative inline-flex h-6 w-11 items-center rounded-full border-2 !border-[#BDBCFF]  !bg-[#BDBCFF] transition-colors"
                     >
                       <span
@@ -621,7 +621,7 @@ export default function MoonbirdGenerated({
                           platform={platform}
                           selected={selectedEmojis.includes(i)}
                           onSelect={() => onSelectEmojis(i)}
-                          selectEnabled={platform ? true : false}
+                          selectEnabled
                         />
                       ))
                     : generatedEmojisTransparent.map((emoji, i) => (
@@ -632,7 +632,7 @@ export default function MoonbirdGenerated({
                           selectedType="png"
                           selected={selectedEmojis.includes(i)}
                           onSelect={() => onSelectEmojis(i)}
-                          selectEnabled={platform ? true : false}
+                          selectEnabled
                         />
                       ))}
                 </div>

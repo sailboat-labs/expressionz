@@ -361,7 +361,7 @@ export default function GeneratedGalleryImage({
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 1 }}
                         className={`
-                            absolute left-0 top-0 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2 
+                            absolute left-0 top-0 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded border-2
                             ${theme == "violet" && " border-violet-200 text-violet-200"}
                             ${theme == "orange" && " border-[#C1410B] text-[#C1410B]"}
                             `}
@@ -440,9 +440,6 @@ export default function GeneratedGalleryImage({
                             collectionId == "wizards",
                         })}
                         onClick={() => {
-                          if (platform === "") {
-                            setSelectedEmojis([]);
-                          }
                           setPlatform(
                             platform === EPlatform.TELEGRAM
                               ? EPlatform.NONE
@@ -463,9 +460,6 @@ export default function GeneratedGalleryImage({
                             collectionId == "wizards",
                         })}
                         onClick={() => {
-                          if (platform === "") {
-                            setSelectedEmojis([]);
-                          }
                           setPlatform(
                             platform === EPlatform.DISCORD
                               ? EPlatform.NONE
@@ -485,8 +479,6 @@ export default function GeneratedGalleryImage({
                         })}
                         variant={theme}
                         onClick={() => {
-                          setSelectedEmojis([]);
-                          setSelectedType("");
                           setPlatform(EPlatform.NONE);
                           setIsDownloading(!isDownloading);
                         }}
@@ -551,7 +543,7 @@ export default function GeneratedGalleryImage({
                             selectedType={selectedType}
                             selected={selectedEmojis.includes(i)}
                             onSelect={() => onSelectEmojis(emoji, i)}
-                            selectEnabled={!!platform}
+                            selectEnabled={!!platform || isDownloading}
                           />
                         ))}
                   </div>

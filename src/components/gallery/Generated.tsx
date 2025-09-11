@@ -101,6 +101,15 @@ export default function GeneratedGalleryImage({
     }
   }, [collectionId]);
 
+  // Default to Download mode for Moonbirds
+  useEffect(() => {
+    if (!collectionId) return;
+    if (collectionId == "moonbirds") {
+      setPlatform(EPlatform.NONE);
+      setIsDownloading(true);
+    }
+  }, [collectionId]);
+
   function goToPreviousPage() {
     router.replace(`/collections/${collectionId}`);
   }
@@ -430,46 +439,50 @@ export default function GeneratedGalleryImage({
                     </div>
                     <div className="mb-1.5 mt-0.5">1. Pick where to export</div>
                     <div className="flex items-center gap-2">
-                      <ThemedIconButton
-                        className={cn("text-2xl font-semibold", {
-                          "!scale-110 !border-transparent !bg-yellow !text-black":
-                            platform == EPlatform.TELEGRAM &&
-                            collectionId == "moonbirds",
-                          "!scale-110 !border-transparent !bg-[#C1410B] !text-[#FED7AA]":
-                            platform == EPlatform.TELEGRAM &&
-                            collectionId == "wizards",
-                        })}
-                        onClick={() => {
-                          setPlatform(
-                            platform === EPlatform.TELEGRAM
-                              ? EPlatform.NONE
-                              : EPlatform.TELEGRAM,
-                          );
-                          setIsDownloading(false);
-                        }}
-                        variant={theme}
-                        icon={<BiLogoTelegram className="h-6 w-6" />}
-                      />
-                      <ThemedIconButton
-                        className={cn("text-2xl font-semibold", {
-                          "!scale-110 !border-transparent !bg-yellow !text-black":
-                            platform == EPlatform.DISCORD &&
-                            collectionId == "moonbirds",
-                          "!scale-110 !border-transparent !bg-[#C1410B] !text-[#FED7AA]":
-                            platform == EPlatform.DISCORD &&
-                            collectionId == "wizards",
-                        })}
-                        onClick={() => {
-                          setPlatform(
-                            platform === EPlatform.DISCORD
-                              ? EPlatform.NONE
-                              : EPlatform.DISCORD,
-                          );
-                          setIsDownloading(false);
-                        }}
-                        variant={theme}
-                        icon={<FaDiscord className="h-6 w-6" />}
-                      />
+                      {collectionId !== "moonbirds" && (
+                        <>
+                          <ThemedIconButton
+                            className={cn("text-2xl font-semibold", {
+                              "!scale-110 !border-transparent !bg-yellow !text-black":
+                                platform == EPlatform.TELEGRAM &&
+                                collectionId == "moonbirds",
+                              "!scale-110 !border-transparent !bg-[#C1410B] !text-[#FED7AA]":
+                                platform == EPlatform.TELEGRAM &&
+                                collectionId == "wizards",
+                            })}
+                            onClick={() => {
+                              setPlatform(
+                                platform === EPlatform.TELEGRAM
+                                  ? EPlatform.NONE
+                                  : EPlatform.TELEGRAM,
+                              );
+                              setIsDownloading(false);
+                            }}
+                            variant={theme}
+                            icon={<BiLogoTelegram className="h-6 w-6" />}
+                          />
+                          <ThemedIconButton
+                            className={cn("text-2xl font-semibold", {
+                              "!scale-110 !border-transparent !bg-yellow !text-black":
+                                platform == EPlatform.DISCORD &&
+                                collectionId == "moonbirds",
+                              "!scale-110 !border-transparent !bg-[#C1410B] !text-[#FED7AA]":
+                                platform == EPlatform.DISCORD &&
+                                collectionId == "wizards",
+                            })}
+                            onClick={() => {
+                              setPlatform(
+                                platform === EPlatform.DISCORD
+                                  ? EPlatform.NONE
+                                  : EPlatform.DISCORD,
+                              );
+                              setIsDownloading(false);
+                            }}
+                            variant={theme}
+                            icon={<FaDiscord className="h-6 w-6" />}
+                          />
+                        </>
+                      )}
                       <ThemedIconButton
                         className={cn("text-2xl font-semibold", {
                           "!scale-110 !border-transparent !bg-yellow !text-black":

@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { BiLogoTelegram } from "react-icons/bi";
-import { FaDiscord } from "react-icons/fa6";
-import { LiaDownloadSolid } from "react-icons/lia";
+// import { BiLogoTelegram } from "react-icons/bi";
+// import { FaDiscord } from "react-icons/fa6";
+// import { LiaDownloadSolid } from "react-icons/lia";
 import { toast } from "sonner";
 
 import { emojis } from "@/lib/data";
@@ -210,7 +210,8 @@ export default function GeneratedGalleryImage({
       collection.toLocaleLowerCase() === "wizards" ? index : index + 1,
     );
 
-    setIsDownloading(false);
+    // Keep Download mode active and platform as None so the button stays visible
+    setIsDownloading(true);
     setPlatform(EPlatform.NONE);
     setSelectedEmojis([]);
     setSelectedType("");
@@ -573,7 +574,14 @@ export default function GeneratedGalleryImage({
                   )}
                 >
                   {platform || isDownloading ? (
-                    <button
+                    <motion.button
+                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.03 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
                       className="h-fit w-fit disabled:cursor-not-allowed disabled:opacity-80"
                       onClick={() => {
                         if (isDownloading) return downloadEmojis();
@@ -583,19 +591,15 @@ export default function GeneratedGalleryImage({
                       disabled={isExportingStickers}
                     >
                       <img
-                        src={`/images/share/export-${
-                          selectedEmojis.length == 0 || isExportingStickers
-                            ? "pressed.webp"
-                            : "active.webp"
-                        }`}
+                        src="/images/share/download-new.png"
                         alt="Export button"
                         className={`h-auto w-36 ${
-                          selectedEmojis.length == 0 || isExportingStickers
+                          isExportingStickers
                             ? "cursor-not-allowed"
                             : "cursor-pointer"
                         }`}
                       />
-                    </button>
+                    </motion.button>
                   ) : (
                     <div />
                   )}

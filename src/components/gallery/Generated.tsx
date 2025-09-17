@@ -433,7 +433,7 @@ export default function GeneratedGalleryImage({
               <div className=" flex h-full flex-col gap-2 pl-0 pr-3 lg:gap-0">
                 {/* Step 1 */}
                 <div className="z-[2] -mt-3 mb-2 flex h-fit items-center justify-between gap-4 2xl:gap-10">
-                  <div className="flex flex-1 flex-col items-center">
+                  {/* <div className="flex flex-1 flex-col items-center">
                     <div className="flex-1 text-xl font-bold">
                       Export your emojis
                     </div>
@@ -499,8 +499,9 @@ export default function GeneratedGalleryImage({
                       />
                     </div>
                   </div>
+                  */}
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex w-full items-center justify-end gap-2">
                     <ThemedIconButton
                       variant={theme}
                       onClick={goToPreviousPage}
@@ -511,7 +512,7 @@ export default function GeneratedGalleryImage({
 
                 {/* Step 2 */}
                 <div className="mb-1">
-                  2. Pick your emojis{" "}
+                  Pick your emojis{" "}
                   {platform == EPlatform.TELEGRAM && (
                     <span className="ml-2">
                       (static or animated for Telegram)
